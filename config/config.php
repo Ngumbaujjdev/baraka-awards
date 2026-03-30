@@ -7,10 +7,10 @@ $isLive  = str_contains($_host, 'dfa.tuqiohub.africa');
 // default = also live (any other host routes to production)
 
 // ─── Site ──────────────────────────────────────────────────────────────────
-define("SITE_URL", $isLocal ? "http://localhost/digitalyfit" : "https://dfa.tuqiohub.africa");
+define("SITE_URL", $isLocal ? "http://localhost/digitalyfit" : "https://digitallyfitawards.tuqiohub.africa");
 define("SITE_NAME",   "Digitally Fit Awards");
 define("ADMIN_EMAIL", "info@dfa.tuqiohub.africa");
-define("SITE_PHONE",  "+254757140682");
+define("SITE_PHONE",  "+254709000838");
 
 // ─── Social ────────────────────────────────────────────────────────────────
 define("SOCIAL_FACEBOOK",  "#"); // TODO: add DFA Facebook URL
