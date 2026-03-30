@@ -3,7 +3,7 @@ include 'config/config.php';
 include 'libs/App.php';
 
 // Resolve event slug — default to Digitally Fit Awards Gala 2026
-$eventSlug = $_GET['event'] ?? 'mema-gala-2026';
+$eventSlug = $_GET['event'] ?? 'dfa-gala-2026';
 
 // Fetch event details (for dates/status)
 $eventResp    = tuqio_api('/api/public/events/' . urlencode($eventSlug));
@@ -217,7 +217,7 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
                 <?php if ($voteOpens): ?>
                 <div class="info-row"><i class="fas fa-vote-yea"></i><div><strong>Voting opens</strong><br><?= date('d M Y', $voteOpens) ?><?= $voteCloses ? ' &ndash; '.date('d M Y', $voteCloses) : '' ?></div></div>
                 <?php endif; ?>
-                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>September 16, 2026 &mdash; Nairobi</div></div>
+                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>December 5, 2026 &mdash; Villa Rosa Kempinski, Nairobi</div></div>
             </div>
 
             <!-- Quick links -->

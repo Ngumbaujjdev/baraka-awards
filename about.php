@@ -1,7 +1,7 @@
 <?php
 include 'config/config.php';
 include 'libs/App.php';
-$galaAbout     = tuqio_api('/api/public/events/mema-gala-2026');
+$galaAbout     = tuqio_api('/api/public/events/dfa-gala-2026');
 $aboutSponsors = $galaAbout['sponsors'] ?? [];
 ?>
 <!DOCTYPE html>
@@ -208,7 +208,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <div class="form-back-drop"></div>
 <?php include 'includes/hidden-bar.php'; ?>
 
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/awards.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -223,31 +223,31 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- ── Mission ─────────────────────────────────────────────── -->
 <div class="about-split wow fadeIn">
-    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);"></div>
+    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/event-poster.jpeg);"></div>
     <div class="split-content">
         <div>
             <div class="split-label">Who We Are</div>
-            <h2 class="split-heading">Celebrating Digital Excellence in East Africa</h2>
-            <p class="split-text">The Digitally Fit Awards is East Africa's premier digital excellence awards ceremony — honouring individuals and organisations who have demonstrated outstanding achievement across 300+ digital categories.</p>
-            <p class="split-text">Our mission is to elevate the digital ecosystem by giving its innovators, creators, and entrepreneurs a platform for genuine, community-driven recognition. Every nomination, vote, and category exists to celebrate the people driving digital transformation.</p>
-            <p class="split-text">Our vision is to become the leading voice for digital excellence across Africa — an annual celebration that the entire continent looks to as the benchmark for innovation and impact. Organised by KEOnline.</p>
+            <h2 class="split-heading">Celebrating Digital Excellence across East Africa</h2>
+            <p class="split-text">The Digitally Fit Awards (DFA) is East Africa's premier recognition platform for digital pioneers. We celebrate the brands, individuals, and organizations that have transformed the regional digital landscape through innovation and impactful online presence.</p>
+            <p class="split-text">Founded on the principle that digital "fitness" is the gold standard for modern success, DFA provides a community-driven stage where excellence is recognized through public voting and expert evaluation.</p>
+            <p class="split-text">Our events bring together the brightest minds in tech, marketing, and business to network and celebrate the power of digital transformation. Organised by Oracom Group and powered by KEOnline.</p>
             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="margin-top:8px;">
-                <span class="btn-title">View Award Categories →</span>
+                <span class="btn-title">View All Awards →</span>
             </a>
         </div>
     </div>
 </div>
 
 <!-- ── Stats ────────────────────────────────────────────────── -->
-<section class="about-counter" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
+<section class="about-counter" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/nairobi-event-view.png);">
     <div class="auto-container">
         <div class="row">
             <?php
             $statsArr = [
                 ['300+',    'Award Categories',  'fa-trophy'],
-                ['2026',    'Inaugural Edition',  'fa-star'],
-                ['E.Africa','Coverage Region',    'fa-map-marker-alt'],
-                ['KEOnline','Organised By',        'fa-building'],
+                ['KE',      'East Africa Region','fa-map-marker-alt'],
+                ['1M+',     'Annual reach',      'fa-signal'],
+                ['Oracom',  'Partnerships',      'fa-building'],
             ];
             foreach ($statsArr as $idx => [$n,$l,$i]): ?>
             <div class="col-md-3 col-sm-6 counter-col wow zoomIn" data-wow-delay="<?= $idx * 150 ?>ms">
@@ -266,28 +266,28 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
         <div class="text-center mb-5">
             <span class="pre-tag">Your Journey</span>
             <h2 class="section-heading">How It Works</h2>
-            <p class="section-sub">Three simple steps to participate in Digitally Fit Awards 2026.</p>
+            <p class="section-sub">A simple three-step process to digital recognition.</p>
         </div>
         <div class="row align-items-start">
             <div class="col-md-4 wow fadeInUp">
                 <div class="step-wrap">
                     <div class="step-num">1</div>
-                    <h5>Browse the Nominees</h5>
-                    <p>Explore all categories and the digital achievers shortlisted for Digitally Fit Awards 2026. Find your favourites across 300+ award categories.</p>
+                    <h5>Nominations</h5>
+                    <p>Brands and individuals are nominated across various categories for their outstanding digital footprint and impact.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.15s">
                 <div class="step-wrap">
                     <div class="step-num">2</div>
-                    <h5>Cast Your Vote</h5>
-                    <p>Buy a vote bundle, pay via M-Pesa or card, and back your favourite nominee. Every vote counts toward the final result.</p>
+                    <h5>Voting Phase</h5>
+                    <p>The shortlisted nominees enter a public voting phase where their fans and customers cast their votes through our secure platform.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="step-wrap">
                     <div class="step-num">3</div>
-                    <h5>Track the Leaderboard</h5>
-                    <p>Follow live vote counts as they update in real time. See who is leading your favourite category going into Gala Night.</p>
+                    <h5>Gala Night</h5>
+                    <p>Winners are announced at a star-studded gala ceremony, celebrating the best of digital fitness in the region.</p>
                 </div>
             </div>
         </div>

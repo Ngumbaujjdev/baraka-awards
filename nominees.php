@@ -3,7 +3,7 @@ include 'config/config.php';
 include 'libs/App.php';
 
 // ── Resolve which event to show ─────────────────────────
-$activeSlug = $_GET['event'] ?? 'mema-gala-2026';
+$activeSlug = $_GET['event'] ?? 'dfa-gala-2026';
 
 $response   = $activeSlug ? tuqio_api('/api/public/events/' . $activeSlug . '/nominees') : [];
 $event      = $response['event'] ?? [];
@@ -140,7 +140,7 @@ $globalIdx = 0;
 .countdown-box { background: rgba(255,255,255,0.18); border-radius: 8px; padding: 10px 14px; min-width: 52px; }
 .countdown-box .num { font-size: 1.6rem; font-weight: 800; display: block; line-height: 1; }
 .countdown-box .lbl { font-size: .62rem; text-transform: uppercase; letter-spacing: 1px; opacity: .7; }
-.countdown-closed { font-size: .92rem; opacity: .88; }
+.countdown-closed { font-size: .92rem; opacity: .88; color: #fff; margin: 0; }
 /* Modal */
 /* Event selector */
 .event-selector { margin-bottom: 28px; }

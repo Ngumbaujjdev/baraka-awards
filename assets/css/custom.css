@@ -6,8 +6,8 @@
     --dfa-primary:      #0a0a0a;   /* Black  (was navy var(--dfa-primary)) */
     --dfa-primary-2:    #1a1a1a;   /* Slightly lighter black (was var(--dfa-primary-2)) */
     --dfa-primary-dark: #000000;   /* Darkest (was var(--dfa-primary-dark)) */
-    --dfa-gold:         var(--dfa-gold);   /* Gold accent */
-    --dfa-gold-dark:    var(--dfa-gold-dark);   /* Gold hover */
+    --dfa-gold:         #BF9E44;   /* Gold accent */
+    --dfa-gold-dark:    #a0852f;   /* Gold hover */
     --dfa-gold-rgb:     190,155,63;/* Gold as RGB for rgba() */
     --dfa-done:         var(--dfa-gold);   /* Completion/done state (was green) */
 }
@@ -199,9 +199,9 @@ i.fa, i.fas, i.fab, i.far {
 }
 
 /* ── Slide background images ── */
-.slide-bg-1 { background-image: url("../mema-slides/slide-1.webp"); }
-.slide-bg-2 { background-image: url("../mema-slides/slide-2.webp"); }
-.slide-bg-3 { background-image: url("../mema-slides/slide-3.webp"); }
+.slide-bg-1 { background-image: url("../images/digitaly-fit-gallery/slide-1.jpg"); }
+.slide-bg-2 { background-image: url("../../2025-gallery-digitaly-event/slide-2.webp"); }
+.slide-bg-3 { background-image: url("../../2025-gallery-digitaly-event/slide-3.jpg"); }
 
 /* ── Reduce banner overlay opacity so images show through ── */
 .banner-section .slide-item:before { opacity: 0.55 !important; }
@@ -248,6 +248,9 @@ i.fa, i.fas, i.fab, i.far {
 .blog-readmore:hover { color: var(--dfa-gold-dark); }
 
 /* ── Blog share row ── */
+/* ── Placeholder Thumb for empty images ── */
+.placeholder-thumb { height:200px;background:linear-gradient(135deg,var(--dfa-primary),var(--dfa-primary-2));display:flex;align-items:center;justify-content:center; }
+.placeholder-thumb i { font-size:2.5rem;color:rgba(255,255,255,.3); }
 .blog-share-row { margin-top: 36px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
 .blog-share-label { font-size: .82rem; color: #888; font-weight: 600; }
 .share-btn { display: inline-flex; width: 32px; height: 32px; border-radius: 50%; color: #fff; align-items: center; justify-content: center; font-size: .8rem; text-decoration: none; margin: 0 3px; }
@@ -494,7 +497,7 @@ i.fa, i.fas, i.fab, i.far {
 .table-card .tc-info h4 { font-weight: 800; color: var(--dfa-primary); margin-bottom: 4px; font-size: 1.05rem; }
 .table-card .tc-info p { color: #666; font-size: .88rem; margin-bottom: 0; }
 .table-card .tc-price-block { text-align: right; flex-shrink: 0; }
-.table-card .tc-price-block .price { font-size: 1.4rem; font-weight: 900; color: var(--dfa-primary); }
+.table-card .tc-price-block .price { font-size: 1.4rem; font-weight: 900; color: var(--dfa-gold); }
 .table-card .tc-price-block .per { font-size: .75rem; color: #999; }
 
 /* ── Tickets section heading ── */

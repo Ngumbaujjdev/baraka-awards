@@ -2,7 +2,7 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$galaResp  = tuqio_api('/api/public/events/mema-gala-2026');
+$galaResp  = tuqio_api('/api/public/events/dfa-gala-2026');
 $galaEvent = $galaResp['data'] ?? $galaResp ?? [];
 $tickets   = $galaEvent['ticket_types'] ?? [];
 
@@ -63,7 +63,7 @@ function ticket_status($t) {
 <?php include 'includes/hidden-bar.php'; ?>
 
 <!-- Page Title -->
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/awards.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -81,12 +81,12 @@ function ticket_status($t) {
 
         <!-- Event Intro Banner -->
         <div class="tix-intro">
-            <h2>Digitally Fit Awards Gala 2026 &mdash; September 16, Nairobi</h2>
-            <p>Join us for East Africa's premier digital excellence awards night. An unforgettable evening of music, worship, and celebration.</p>
+            <h2>Digitally Fit Awards Gala &mdash; Join the Celebration</h2>
+            <p>Experience East Africa's premier digital excellence awards night. Celebrate the pioneers and innovators of the regional digital landscape.</p>
             <div class="tix-meta">
-                <span><i class="flaticon-calendar"></i> Tuesday, 16 September 2026</span>
-                <span><i class="flaticon-clock-1"></i> Doors open 5:00 PM</span>
-                <span><i class="flaticon-location"></i> Radisson Blu Hotel, Nairobi</span>
+                <span><i class="flaticon-calendar"></i> Event Date: Coming Soon</span>
+                <span><i class="flaticon-clock-1"></i> Venue: To be announced</span>
+                <span><i class="flaticon-location"></i> Nairobi, Kenya</span>
             </div>
         </div>
 
@@ -144,7 +144,7 @@ function ticket_status($t) {
                             <div class="tc-sale-info">Offer ends: <span><?= $saleEnd ?></span></div>
                             <?php endif; ?>
                             <?php if ($status === 'available'): ?>
-                            <a href="<?= SITE_URL ?>/checkout?slug=mema-gala-2026" class="btn-buy">Buy Ticket →</a>
+                            <a href="<?= SITE_URL ?>/checkout?slug=dfa-gala-2026" class="btn-buy">Buy Ticket →</a>
                             <?php elseif ($status === 'sold_out'): ?>
                             <span class="btn-buy btn-sold">Sold Out</span>
                             <?php else: ?>
@@ -193,7 +193,7 @@ function ticket_status($t) {
                             <div class="per">per table</div>
                             <div style="margin-top:12px;">
                                 <?php if ($status === 'available'): ?>
-                                <a href="<?= SITE_URL ?>/checkout?slug=mema-gala-2026" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
+                                <a href="<?= SITE_URL ?>/checkout?slug=dfa-gala-2026" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
                                 <?php elseif ($status === 'sold_out'): ?>
                                 <span class="btn-buy btn-sold" style="display:inline-block;padding:10px 20px;">Sold Out</span>
                                 <?php else: ?>

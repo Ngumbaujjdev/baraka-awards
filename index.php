@@ -12,13 +12,13 @@ $blogResp   = tuqio_api('/api/public/blog');
 $blogPosts  = array_slice($blogResp['data'] ?? [], 0, 3);
 
 // Digitally Fit Awards Gala 2026 — schedule + sponsors
-$galaResp      = tuqio_api('/api/public/events/mema-gala-2026');
+$galaResp      = tuqio_api('/api/public/events/dfa-gala-2026');
 $galaEvent     = $galaResp['event'] ?? [];          // API returns { event:{...}, schedule_days:[...] }
 $scheduleDays  = $galaResp['schedule_days'] ?? [];  // at root, not inside event
 $galaSponsors  = $galaResp['sponsors'] ?? [];
 
 // Nominee categories (dynamic — scales to 100+)
-$nomResp       = tuqio_api('/api/public/events/mema-gala-2026/nominees');
+$nomResp       = tuqio_api('/api/public/events/dfa-gala-2026/nominees');
 $allCategories = $nomResp['categories'] ?? [];
 $displayCats   = array_slice($allCategories, 0, 10);  // show first 10 on homepage
 
@@ -146,9 +146,9 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
                         <span class="title animate-1">Nominations Open</span>
 
-                        <h2 class="animate-2">Nominate Your <br>Favourite Artist</h2>
+                        <h2 class="animate-2">Nominate a <br>Digital Champion</h2>
 
-                        <div class="text animate-3">Nominations are open. 300+ categories open for public nomination — have your say</div>
+                        <div class="text animate-3">Nominations are open. 10 categories celebrating Kenya's digital leaders — nominate now, free of charge</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-two"><span class="btn-title">Nominate Now</span></a>
@@ -173,7 +173,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
                         <h2 class="animate-2">The Stage is Set. <br>The Vote is Yours.</h2>
 
-                        <div class="text animate-3">Voting opens August 1, 2026. September 16 — Digitally Fit Awards Gala Night, Nairobi. Get your tickets now</div>
+                        <div class="text animate-3">Voting opens October 20, 2026. December 5 — Digitally Fit Awards Gala Night, Villa Rosa Kempinski, Nairobi. Get your tickets now</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">Vote Now</span></a>
@@ -198,7 +198,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 $_galaPhase  = $galaEvent['current_phase'] ?? '';
 $_galaBanner = !empty($galaEvent['banner_image']) ? API_STORAGE . $galaEvent['banner_image']
              : (!empty($galaEvent['thumbnail_image']) ? API_STORAGE . $galaEvent['thumbnail_image'] : '');
-$_galaDate   = !empty($galaEvent['start_date']) ? date('d M Y', strtotime($galaEvent['start_date'])) : 'September 16, 2026';
+$_galaDate   = !empty($galaEvent['start_date']) ? date('d M Y', strtotime($galaEvent['start_date'])) : 'December 5, 2026';
 $_phaseLabels = ['voting'=>'Voting Open','on_sale'=>'Tickets On Sale','nomination'=>'Nominations Open','upcoming'=>'Coming Soon'];
 $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
 ?>
@@ -239,7 +239,7 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
             </div>
             <!-- Right: Event Details -->
             <div class="col-lg-6 col-md-12 wow fadeInRight" style="padding-left:40px;margin-bottom:30px;">
-                <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Nairobi · September 16, 2026</span>
+                <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Villa Rosa Kempinski, Nairobi · December 5, 2026</span>
                 <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026') ?></h3>
                 <?php if (!empty($galaEvent['tagline'])): ?>
                 <p style="font-size:1.05rem;color:#be9b3f;font-style:italic;margin-bottom:14px;"><?= htmlspecialchars($galaEvent['tagline']) ?></p>
@@ -294,7 +294,7 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
                     <?php else: ?>
                     <a href="<?= SITE_URL ?>/tickets" class="theme-btn btn-style-one"><span class="btn-title">Get Tickets</span></a>
                     <?php endif; ?>
-                    <a href="<?= SITE_URL ?>/event-detail?slug=mema-gala-2026" class="theme-btn btn-style-two"><span class="btn-title">Full Event Details →</span></a>
+                    <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-two"><span class="btn-title">Full Event Details →</span></a>
                 </div>
             </div>
         </div>
@@ -358,22 +358,22 @@ $_catsJson = json_encode(array_map(fn($c) => [
         <!-- Footer CTAs -->
         <div class="text-center" style="margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
             <?php if ($_promotedCount > 0): ?>
-            <a href="<?= SITE_URL ?>/nominees?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
+            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
                 <span class="btn-title">Vote Now &rarr;</span>
             </a>
             <?php endif; ?>
             <?php if ($_collectingCount > 0): ?>
             <?php if ($_promotedCount > 0): ?>
-            <a href="<?= SITE_URL ?>/nominate?event=mema-gala-2026" class="theme-btn btn-style-two btn-ghost">
+            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-two btn-ghost">
                 <span class="btn-title">Submit a Nomination</span>
             </a>
             <?php else: ?>
-            <a href="<?= SITE_URL ?>/nominate?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
+            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
                 <span class="btn-title">Submit a Nomination</span>
             </a>
             <?php endif; ?>
             <?php endif; ?>
-            <a href="<?= SITE_URL ?>/categories?event=mema-gala-2026" class="theme-btn btn-style-two btn-ghost">
+            <a href="<?= SITE_URL ?>/categories?event=dfa-gala-2026" class="theme-btn btn-style-two btn-ghost">
                 <span class="btn-title">Browse All <?= $_totalCats ?> Categories &rarr;</span>
             </a>
         </div>
@@ -384,8 +384,8 @@ $_catsJson = json_encode(array_map(fn($c) => [
 (function(){
     var CATS       = <?= $_catsJson ?>;
     var PAGE_SIZE  = 5;
-    var nomUrl     = '<?= SITE_URL ?>/nominate?event=mema-gala-2026';
-    var nomineesUrl= '<?= SITE_URL ?>/nominees?event=mema-gala-2026';
+    var nomUrl     = '<?= SITE_URL ?>/nominate?event=dfa-gala-2026';
+    var nomineesUrl= '<?= SITE_URL ?>/nominees?event=dfa-gala-2026';
     var isVoting   = <?= $_votingIsOpen ? 'true' : 'false' ?>;
     var filtered   = CATS.slice();
     var currentPage= 1;
@@ -543,7 +543,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
         <?php endforeach; ?>
         </div>
         <div class="text-center" style="margin-top:16px;">
-            <a href="<?= SITE_URL ?>/event-detail?slug=mema-gala-2026" class="theme-btn btn-style-two">
+            <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-two">
                 <span class="btn-title">View Full Ticket Details &rarr;</span>
             </a>
         </div>
@@ -591,7 +591,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                         <div class="icon"><span class="flaticon-trophy-1"></span></div>
                     </div>
                     <h4>3. Celebrate the Winners</h4>
-                    <p>Join us at the Digitally Fit Awards Gala in Nairobi on September 16, 2026 — a landmark celebration of innovation, creativity, and digital excellence in East Africa.</p>
+                    <p>Join us at the Digitally Fit Awards Gala on December 5, 2026 at the Villa Rosa Kempinski Nairobi — a landmark celebration of innovation, creativity, and digital excellence in East Africa.</p>
                     <a href="<?= SITE_URL ?>/tickets" class="read-more">Get Tickets <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -607,7 +607,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
 <section class="schedule-section" style="background:#f9fafb;padding:80px 0;">
     <div class="auto-container">
         <div class="sec-title text-center">
-            <span class="sub-title">September 16, 2026 &mdash; Nairobi</span>
+            <span class="sub-title">December 5, 2026 &mdash; Villa Rosa Kempinski, Nairobi</span>
             <h2>Gala Evening Programme</h2>
             <span class="divider"></span>
         </div>
@@ -665,7 +665,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
         </div>
         <?php endforeach; ?>
         <div class="text-center" style="margin-top:32px;">
-            <a href="<?= SITE_URL ?>/event-detail?slug=mema-gala-2026" class="theme-btn btn-style-one">
+            <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-one">
                 <span class="btn-title">Full Event Details</span>
             </a>
         </div>
@@ -695,17 +695,21 @@ $_catsJson = json_encode(array_map(fn($c) => [
                         <?php endif; ?>
                         <figure class="image">
                             <a href="<?= SITE_URL ?>/blog-single?slug=<?= urlencode($post['slug']) ?>">
-                                <img src="<?= htmlspecialchars($post['featured_image'] ?? SITE_URL.'/assets/slides/event.webp') ?>"
+                                <?php if (!empty($post['featured_image']) && $post['featured_image'] !== 'null'): ?>
+                                <img src="<?= htmlspecialchars($post['featured_image']) ?>"
                                      alt="<?= htmlspecialchars($post['title']) ?>"
-                                     onerror="this.src='<?= SITE_URL ?>/assets/slides/event.webp'"
+                                     onerror="this.parentElement.innerHTML='<div class=\'placeholder-thumb\'><i class=\'fas fa-newspaper\'></i></div>'"
                                      class="news-thumb-img">
+                                <?php else: ?>
+                                <div class="placeholder-thumb"><i class="fas fa-newspaper"></i></div>
+                                <?php endif; ?>
                             </a>
                         </figure>
                     </div>
                     <div class="lower-content">
                         <div class="author">
                             <figure class="thumb">
-                                <img src="<?= SITE_URL ?>/assets/images/logo/mema-logo-dark.svg" alt="Digitally Fit Awards">
+                                <img src="<?= SITE_URL ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" style="background:#be9b3f; object-fit:contain; border-radius:50%; padding:2px;">
                             </figure>
                             <h5 class="name"><?= htmlspecialchars($post['author']['name'] ?? 'Digitally Fit Awards') ?></h5>
                         </div>

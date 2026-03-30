@@ -175,7 +175,7 @@ include 'libs/App.php';
 <div class="form-back-drop"></div>
 <?php include 'includes/hidden-bar.php'; ?>
 
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/slides/kenya-breadcrump.webp);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/slide-2.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -243,7 +243,7 @@ include 'libs/App.php';
                         <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <div class="ci-label">Location</div>
-                            <div class="ci-value">Nairobi, Kenya</div>
+                            <div class="ci-value">Westlands Business Park, 8th Floor<br>Westlands, Nairobi, Kenya</div>
                         </div>
                     </div>
                     <div class="ci-row">

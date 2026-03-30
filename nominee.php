@@ -3,7 +3,7 @@ include 'config/config.php';
 include 'libs/App.php';
 
 $nomineeSlug = trim($_GET['slug'] ?? '');
-$eventSlug   = trim($_GET['event'] ?? 'mema-gala-2026');
+$eventSlug   = trim($_GET['event'] ?? 'dfa-gala-2026');
 
 $resp    = tuqio_api('/api/public/events/' . urlencode($eventSlug) . '/nominees/' . urlencode($nomineeSlug));
 $nominee = $resp['nominee']  ?? null;

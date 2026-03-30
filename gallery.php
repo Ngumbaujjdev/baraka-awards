@@ -2,7 +2,7 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$resp   = tuqio_api('/api/public/events/mema-gala-2026/gallery');
+$resp   = tuqio_api('/api/public/events/dfa-gala-2026/gallery');
 $photos = $resp['photos'] ?? [];
 ?>
 <!DOCTYPE html>
@@ -117,7 +117,7 @@ $photos = $resp['photos'] ?? [];
 <div class="form-back-drop"></div>
 <?php include 'includes/hidden-bar.php'; ?>
 
-<section class="page-title has-bg-image" style="background-image:url(<?= SITE_URL ?>/assets/slides/kenya-breadcrump.webp);">
+<section class="page-title has-bg-image" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/nairobi-event-view.png);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -162,15 +162,57 @@ $photos = $resp['photos'] ?? [];
         </div>
 
         <?php else: ?>
-        <div class="text-center" style="padding:80px 0;">
-            <i class="fas fa-images" style="font-size:3rem;color:#ddd;display:block;margin-bottom:20px;"></i>
-            <h4 style="color:#0a0a0a;font-weight:700;margin-bottom:10px;">No Photos Yet</h4>
-            <p style="color:#999;margin-bottom:28px;">Event photos will appear here after each event.</p>
-            <a href="<?= SITE_URL ?>/events" class="theme-btn btn-style-one">
-                <span class="btn-title">Browse Events</span>
-            </a>
-        </div>
+        <!-- 2025 DFA Highlights — static local images -->
         <?php endif; ?>
+
+        <!-- ── 2025 Gala Highlights ─────────────────────────────────── -->
+        <div style="margin-top:<?= !empty($photos) ? '60px' : '0' ?>;">
+            <div class="sec-title text-center" style="margin-bottom:36px;">
+                <span class="title">Behind the Lens</span>
+                <h2>2025 DFA Highlights</h2>
+                <div class="separator"><span></span></div>
+                <div class="text" style="max-width:580px;margin:0 auto;color:#666;">
+                    A glimpse into the moments that made the Digitally Fit Awards 2025 an unforgettable celebration of Kenya's digital excellence.
+                </div>
+            </div>
+            <?php
+            $highlights = [
+                ['alphonce-ceo.webp',    'CEO Alphonce Mbola — Oracom Group',          'Oracom Group CEO addresses Kenya\'s digital leaders at the 2025 DFA event.'],
+                ['award-2.webp',         'Award Presentation Moment',                   'A proud moment as a DFA winner receives their award on stage.'],
+                ['awarding-time.webp',   'Awarding the Digital Champions',              'Award presentations during the Digitally Fit Awards 2025 gala evening.'],
+                ['ceo-awarding.webp',    'CEO Presenting an Award',                     'The CEO of Oracom Group presents an award to a deserving digital champion.'],
+                ['ceo-waving.webp',      'DFA Leadership',                              'DFA leadership acknowledges the audience during the gala ceremony.'],
+                ['event-lookup.webp',    'A Night to Remember',                         'Guests enjoying the Digitally Fit Awards gala at the venue.'],
+                ['gala-moment.webp',     'Gala Highlights',                             'A memorable moment captured at the 2025 DFA Gala evening.'],
+                ['speaker.webp',         'Keynote Speaker',                             'An inspiring keynote address at the Digitally Fit Awards 2025.'],
+                ['team.webp',            'The DFA Team',                                'The Digitally Fit Awards team — the people behind the celebrations.'],
+                ['event-overview.webp',  'Full House at DFA 2025',                      'An overview of the Digitally Fit Awards 2025 venue packed with Kenya\'s digital leaders.'],
+            ];
+            ?>
+            <div class="row gallery-items">
+                <?php foreach ($highlights as [$file, $title, $caption]): ?>
+                <div class="gallery-block col-lg-3 col-md-4 col-sm-6">
+                    <div class="image-box">
+                        <figure class="image">
+                            <a href="<?= SITE_URL ?>/2025-gallery-digitaly-event/<?= $file ?>"
+                               data-fancybox="highlights-2025"
+                               data-caption="<?= htmlspecialchars($caption) ?>">
+                                <img src="<?= SITE_URL ?>/2025-gallery-digitaly-event/<?= $file ?>"
+                                     alt="<?= htmlspecialchars($title) ?>"
+                                     loading="lazy"
+                                     onerror="this.closest('.gallery-block').style.display='none'">
+                            </a>
+                        </figure>
+                        <div class="overlay-box">
+                            <div class="icon"><span class="flaticon-zoom-1"></span></div>
+                            <h3><a href="<?= SITE_URL ?>/2025-gallery-digitaly-event/<?= $file ?>"
+                                   data-fancybox="highlights-2025"><?= htmlspecialchars($title) ?></a></h3>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
 
     </div>
 </section>
