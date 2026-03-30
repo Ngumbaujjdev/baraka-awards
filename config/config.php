@@ -7,7 +7,7 @@ $isLive  = str_contains($_host, 'dfa.tuqiohub.africa');
 // default = also live (any other host routes to production)
 
 // ─── Site ──────────────────────────────────────────────────────────────────
-define("SITE_URL", $isLocal ? "http://localhost/dfa-frontend/public" : "https://dfa.tuqiohub.africa");
+define("SITE_URL", $isLocal ? "http://localhost/digitalyfit" : "https://dfa.tuqiohub.africa");
 define("SITE_NAME",   "Digitally Fit Awards");
 define("ADMIN_EMAIL", "info@dfa.tuqiohub.africa");
 define("SITE_PHONE",  "+254757140682");
@@ -21,7 +21,7 @@ define("SOCIAL_TIKTOK",    "#"); // TODO: add DFA TikTok URL
 
 // ─── OG image ──────────────────────────────────────────────────────────────
 define("OG_IMAGE", $isLocal
-    ? "http://localhost/dfa-frontend/public/assets/images/og/dfa-og.webp"
+    ? "http://localhost/digitalyfit/assets/images/og/dfa-og.webp"
     : "https://dfa.tuqiohub.africa/assets/images/og/dfa-og.webp");
 
 // ─── API ────────────────────────────────────────────────────────────────────
