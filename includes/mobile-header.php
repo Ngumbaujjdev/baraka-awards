@@ -1,6 +1,6 @@
 <div class="mobile-header">
 
-            <div class="logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:55px; width:auto;"></a></div>
+            <div class="logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" height="55" width="auto" style="max-height:55px;"></a></div>
 
 
 
@@ -44,7 +44,7 @@
 
                 <div class="upper-box">
 
-                    <div class="nav-logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:55px; width:auto;"></a></div>
+                    <div class="nav-logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" height="55" width="auto" style="max-height:55px;"></a></div>
 
                     <div class="close-btn"><i class="icon flaticon-close"></i></div>
 
