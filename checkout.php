@@ -50,13 +50,13 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
     display:flex;align-items:stretch;
 }
 .tt-card:not(.sold-out):not(.coming-soon):not(.sale-ended):hover {
-    border-color:#053732;box-shadow:0 2px 12px rgba(5,55,50,0.07);
+    border-color:#0a0a0a;box-shadow:0 2px 12px rgba(5,55,50,0.07);
 }
 .tt-card.selected { border-color:#be9b3f;box-shadow:0 2px 12px rgba(190,155,63,0.1); }
 .tt-card.sold-out,.tt-card.coming-soon,.tt-card.sale-ended { opacity:.5; }
 /* Card body */
 .tt-body { flex:1;padding:16px 18px;min-width:0; }
-.tt-name { font-size:.97rem;font-weight:800;color:#053732;margin-bottom:3px; }
+.tt-name { font-size:.97rem;font-weight:800;color:#0a0a0a;margin-bottom:3px; }
 .tt-desc { font-size:.8rem;color:#888;margin-bottom:7px;line-height:1.4; }
 /* Badges row */
 .tt-badges { display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px; }
@@ -79,7 +79,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 .tt-price-block { text-align:right; }
 .tt-price { font-size:1.1rem;font-weight:800;color:#be9b3f;display:block; }
 .tt-orig  { font-size:.75rem;color:#bbb;text-decoration:line-through;display:block;margin-top:2px; }
-.tt-save  { font-size:.67rem;font-weight:700;color:#059669;display:inline-block;margin-top:3px; }
+.tt-save  { font-size:.67rem;font-weight:700;color:#a0822f;display:inline-block;margin-top:3px; }
 /* Qty stepper */
 .tt-qty { display:flex;align-items:center;gap:7px;margin-top:10px; }
 .qty-btn {
@@ -89,14 +89,14 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 }
 .qty-btn:hover:not(:disabled) { border-color:#be9b3f;color:#be9b3f; }
 .qty-btn:disabled { opacity:.3;cursor:default; }
-.qty-val { font-size:.97rem;font-weight:800;color:#053732;min-width:20px;text-align:center; }
+.qty-val { font-size:.97rem;font-weight:800;color:#0a0a0a;min-width:20px;text-align:center; }
 .qty-sold-out,.qty-coming-soon,.qty-sale-ended {
     font-size:.7rem;font-weight:600;color:#aaa;text-align:center;line-height:1.4;
 }
 
 /* Buyer form */
 .buyer-form { background:#fff;border-radius:14px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.07);margin-top:28px; }
-.buyer-form label { font-weight:600;font-size:.88rem;color:#053732;margin-bottom:6px;display:block; }
+.buyer-form label { font-weight:600;font-size:.88rem;color:#0a0a0a;margin-bottom:6px;display:block; }
 .buyer-form input,.buyer-form select {
     width:100%;border:2px solid #eee;border-radius:8px;padding:10px 14px;font-size:.9rem;color:#333;
     transition:border-color .2s;background:#fafafa;
@@ -107,13 +107,13 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 .promo-row { display:flex;gap:8px; }
 .promo-row input { flex:1; }
 .promo-btn {
-    padding:10px 20px;border-radius:8px;border:2px solid #053732;background:#053732;
+    padding:10px 20px;border-radius:8px;border:2px solid #0a0a0a;background:#0a0a0a;
     color:#fff;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;
 }
-.promo-btn:hover { background:#0a5c50; }
+.promo-btn:hover { background:#1a1a1a; }
 
 /* Order summary sidebar */
-.order-summary { background:linear-gradient(160deg,#053732,#0a5c50);border-radius:14px;padding:28px;color:#fff;position:sticky;top:100px; }
+.order-summary { background:linear-gradient(160deg,#0a0a0a,#1a1a1a);border-radius:14px;padding:28px;color:#fff;position:sticky;top:100px; }
 .order-summary h5 { font-weight:800;font-size:1rem;letter-spacing:.5px;margin-bottom:18px;text-transform:uppercase; }
 .os-event-name { font-size:.95rem;font-weight:700;margin-bottom:4px; }
 .os-meta { font-size:.78rem;opacity:.7;margin-bottom:20px; }
@@ -138,7 +138,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 
 /* Promo applied badge */
 .promo-applied { display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.15);
-    color:#059669;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-top:8px; }
+    color:#a0822f;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-top:8px; }
 
 /* intl-tel-input */
 .buyer-form .iti { width:100%; }
@@ -185,7 +185,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
             <!-- LEFT: ticket selector + buyer form -->
             <div class="col-lg-7 col-md-12">
 
-                <h3 style="font-size:1.3rem;font-weight:800;color:#053732;margin-bottom:6px;">
+                <h3 style="font-size:1.3rem;font-weight:800;color:#0a0a0a;margin-bottom:6px;">
                     <i class="fas fa-ticket-alt" style="color:#be9b3f;margin-right:8px;"></i>
                     Select Your Tickets
                 </h3>
@@ -246,7 +246,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
                         <div class="tt-benefits">
                             <?php foreach (array_slice($tt['benefits'], 0, 4) as $b): ?>
                             <span class="tt-benefit-chip">
-                                <i class="fas fa-check" style="color:#10b981;margin-right:3px;font-size:.65rem;"></i><?= htmlspecialchars($b) ?>
+                                <i class="fas fa-check" style="color:#be9b3f;margin-right:3px;font-size:.65rem;"></i><?= htmlspecialchars($b) ?>
                             </span>
                             <?php endforeach; ?>
                         </div>
@@ -291,7 +291,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 
                 <!-- Buyer Details Form -->
                 <div class="buyer-form">
-                    <h4 style="font-size:1rem;font-weight:800;color:#053732;margin-bottom:20px;">
+                    <h4 style="font-size:1rem;font-weight:800;color:#0a0a0a;margin-bottom:20px;">
                         <i class="fas fa-user-circle" style="color:#be9b3f;margin-right:8px;"></i>Your Details
                     </h4>
                     <div class="row">
@@ -350,7 +350,7 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
                     <div id="payConfirmModal" onclick="if(event.target===this)Checkout.closeConfirm()"
                          style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
                         <div style="background:#fff;border-radius:16px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;">
-                            <div style="background:linear-gradient(135deg,#053732,#0a5c50);padding:20px 24px;color:#fff;">
+                            <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:20px 24px;color:#fff;">
                                 <div style="font-size:1rem;font-weight:800;margin-bottom:2px;">Confirm Your Order</div>
                                 <div style="font-size:.78rem;opacity:.75;">Please review before paying</div>
                             </div>
@@ -389,21 +389,21 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
                     <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
                         <i class="fas fa-ticket-alt" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">Instant Ticket Delivery</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">Instant Ticket Delivery</div>
                             <div style="font-size:.75rem;color:#888;">PDF tickets sent to your email immediately after payment</div>
                         </div>
                     </div>
                     <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
                         <i class="fas fa-qrcode" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">QR Code Entry</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">QR Code Entry</div>
                             <div style="font-size:.75rem;color:#888;">Unique QR code per ticket for fast check-in at the venue</div>
                         </div>
                     </div>
                     <div style="display:flex;gap:12px;align-items:flex-start;">
                         <i class="fas fa-headset" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">24/7 Support</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">24/7 Support</div>
                             <div style="font-size:.75rem;color:#888;">Questions? We're here to help via email or chat</div>
                         </div>
                     </div>
@@ -525,7 +525,7 @@ window.Checkout = (function () {
 
         let html = lines.join('');
         if (promoDiscount > 0) {
-            html += `<div class="os-line" style="color:#10b981;">
+            html += `<div class="os-line" style="color:#be9b3f;">
                 <span><i class="fas fa-tag" style="margin-right:5px;"></i>Promo discount</span>
                 <span>− ${fmt(promoDiscount)} ${currency}</span>
             </div>`;
@@ -606,7 +606,7 @@ window.Checkout = (function () {
             const required = af.required || ['name'];
 
             html += `<div class="attendee-section" style="margin-bottom:20px;background:#f9f9fc;border-radius:12px;padding:18px 20px;">`;
-            html += `<h5 style="font-size:.9rem;font-weight:800;color:#053732;margin-bottom:14px;">
+            html += `<h5 style="font-size:.9rem;font-weight:800;color:#0a0a0a;margin-bottom:14px;">
                 <i class="fas fa-users" style="color:#be9b3f;margin-right:8px;"></i>
                 Attendee Details — ${escHtml(t.name)}
             </h5>`;
@@ -774,7 +774,7 @@ window.Checkout = (function () {
         // Build modal body
         const methodLabel = method === 'mpesa'
             ? '<span style="color:#2e7d32;font-weight:700;"><i class="fas fa-mobile-alt" style="margin-right:5px;"></i>M-Pesa</span>'
-            : '<span style="color:#053732;font-weight:700;"><i class="fas fa-credit-card" style="margin-right:5px;"></i>Card</span>';
+            : '<span style="color:#0a0a0a;font-weight:700;"><i class="fas fa-credit-card" style="margin-right:5px;"></i>Card</span>';
 
         let linesHtml = '';
         for (const [id, qty] of Object.entries(quantities)) {
@@ -783,7 +783,7 @@ window.Checkout = (function () {
                 if (t) {
                     linesHtml += `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f5;">
                         <span style="color:#888;">${escHtml(t.name)} × ${qty}</span>
-                        <span style="font-weight:600;color:#053732;">${fmt(t.price * qty)} ${escHtml(t.currency || 'KES')}</span>
+                        <span style="font-weight:600;color:#0a0a0a;">${fmt(t.price * qty)} ${escHtml(t.currency || 'KES')}</span>
                     </div>`;
                 }
             }
@@ -791,8 +791,8 @@ window.Checkout = (function () {
         let promoHtml = '';
         if (promoDiscount > 0) {
             promoHtml = `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f5;">
-                <span style="color:#10b981;"><i class="fas fa-tag" style="margin-right:4px;"></i>Promo</span>
-                <span style="font-weight:600;color:#10b981;">− ${fmt(promoDiscount)} ${currency}</span>
+                <span style="color:#be9b3f;"><i class="fas fa-tag" style="margin-right:4px;"></i>Promo</span>
+                <span style="font-weight:600;color:#be9b3f;">− ${fmt(promoDiscount)} ${currency}</span>
             </div>`;
         }
 
@@ -801,18 +801,18 @@ window.Checkout = (function () {
                 ${linesHtml}${promoHtml}
                 <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Name</span>
-                    <span style="font-weight:600;color:#053732;">${escHtml(name)}</span>
+                    <span style="font-weight:600;color:#0a0a0a;">${escHtml(name)}</span>
                 </div>
                 ${phone ? `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Phone</span>
-                    <span style="font-weight:600;color:#053732;">${escHtml(phone)}</span>
+                    <span style="font-weight:600;color:#0a0a0a;">${escHtml(phone)}</span>
                 </div>` : ''}
                 <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Pay via</span>
                     <span>${methodLabel}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:1rem;">
-                    <span style="font-weight:800;color:#053732;">Total</span>
+                    <span style="font-weight:800;color:#0a0a0a;">Total</span>
                     <span style="font-weight:900;color:#be9b3f;font-size:1.1rem;">${fmt(currentTotal)} ${currency}</span>
                 </div>
             </div>`;

@@ -1,12 +1,12 @@
-<footer class="main-footer" style="background:linear-gradient(160deg,#032620 0%,#053732 40%,#0a5c50 100%);color:#ddd;position:relative;">
+<footer class="main-footer" style="background:linear-gradient(160deg,#000000 0%,#0d0d0d 40%,#1a1a1a 100%);color:#ddd;position:relative;">
 
     <!-- Top accent line -->
-    <div style="height:4px;background:linear-gradient(90deg,#be9b3f,#053732,#be9b3f);width:100%;position:relative;z-index:3;"></div>
+    <div style="height:4px;background:linear-gradient(90deg,#BF9E44,#0d0d0d,#BF9E44);width:100%;position:relative;z-index:3;"></div>
 
     <!-- Static dot-grid overlay -->
-    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.55;background-image:radial-gradient(circle,rgba(190,155,63,0.18) 1px,transparent 1px);background-size:28px 28px;"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.55;background-image:radial-gradient(circle,rgba(191,158,68,0.18) 1px,transparent 1px);background-size:28px 28px;"></div>
     <!-- Diagonal gold accent strip top-left -->
-    <div style="position:absolute;top:0;left:0;width:260px;height:260px;pointer-events:none;z-index:0;background:linear-gradient(135deg,rgba(190,155,63,0.12) 0%,transparent 60%);"></div>
+    <div style="position:absolute;top:0;left:0;width:260px;height:260px;pointer-events:none;z-index:0;background:linear-gradient(135deg,rgba(191,158,68,0.12) 0%,transparent 60%);"></div>
 
     <!-- Widgets Section -->
     <div class="widgets-section" style="padding:70px 0 40px;position:relative;z-index:2;">
@@ -18,12 +18,12 @@
                     <div class="footer-widget about-widget">
                         <div class="logo" style="margin-bottom:20px;">
                             <a href="<?php echo SITE_URL; ?>/">
-                                <img src="<?php echo SITE_URL; ?>/assets/images/logo/mema-logo-white.svg"
+                                <img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo-white.svg"
                                      alt="Digitally Fit Awards" style="max-height:70px;width:auto;">
                             </a>
                         </div>
                         <p style="color:rgba(255,255,255,0.72);font-size:0.95rem;line-height:1.8;margin-bottom:20px;">
-                            Digitally Fit Awards celebrates outstanding gospel music talent across Kenya and Africa.
+                            Celebrating digital excellence across East Africa. Organised by KEOnline — recognising outstanding achievements in 300+ digital categories.
                         </p>
                         <ul class="social-icon-two" style="list-style:none;padding:0;display:flex;gap:10px;flex-wrap:wrap;">
                             <?php
@@ -37,9 +37,9 @@
                             foreach ($socials as [$icon,$href]): ?>
                             <li>
                                 <a href="<?php echo $href; ?>" target="_blank"
-                                   style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.1);color:#be9b3f;font-size:16px;text-decoration:none;transition:all .3s;"
-                                   onmouseover="this.style.background='#be9b3f';this.style.color='#fff';"
-                                   onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='#be9b3f';">
+                                   style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.1);color:#BF9E44;font-size:16px;text-decoration:none;transition:all .3s;"
+                                   onmouseover="this.style.background='#BF9E44';this.style.color='#fff';"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='#BF9E44';">
                                     <i class="<?php echo $icon; ?>"></i>
                                 </a>
                             </li>
@@ -51,7 +51,7 @@
                 <!-- Col 2: Quick Links -->
                 <div class="footer-column col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-5 mb-lg-0">
                     <div class="footer-widget">
-                        <h2 class="widget-title" style="color:#be9b3f;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(190,155,63,0.4);">Quick Links</h2>
+                        <h2 class="widget-title" style="color:#BF9E44;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(191,158,68,0.4);">Quick Links</h2>
                         <ul style="list-style:none;padding:0;margin:0;">
                             <?php
                             $links = [
@@ -68,7 +68,7 @@
                             <li style="margin-bottom:10px;">
                                 <a href="<?php echo $href; ?>"
                                    style="color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.95rem;transition:color .3s;"
-                                   onmouseover="this.style.color='#be9b3f';"
+                                   onmouseover="this.style.color='#BF9E44';"
                                    onmouseout="this.style.color='rgba(255,255,255,0.75)';">→ <?php echo $label; ?></a>
                             </li>
                             <?php endforeach; ?>
@@ -79,7 +79,7 @@
                 <!-- Col 3: Get Involved -->
                 <div class="footer-column col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-5 mb-lg-0">
                     <div class="footer-widget">
-                        <h2 class="widget-title" style="color:#be9b3f;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(190,155,63,0.4);">Get Involved</h2>
+                        <h2 class="widget-title" style="color:#BF9E44;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(191,158,68,0.4);">Get Involved</h2>
                         <ul style="list-style:none;padding:0;margin:0;">
                             <?php
                             $orgLinks = [
@@ -94,15 +94,15 @@
                             <li style="margin-bottom:10px;">
                                 <a href="<?php echo $href; ?>"
                                    style="color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.95rem;transition:color .3s;"
-                                   onmouseover="this.style.color='#be9b3f';"
+                                   onmouseover="this.style.color='#BF9E44';"
                                    onmouseout="this.style.color='rgba(255,255,255,0.75)';">→ <?php echo $label; ?></a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
 
                         <!-- CTA block -->
-                        <div style="margin-top:24px;background:rgba(190,155,63,0.15);border:1px solid rgba(190,155,63,0.3);border-radius:8px;padding:16px;text-align:center;">
-                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">MEMA Gala 2026 — September 16, Nairobi. Be there.</p>
+                        <div style="margin-top:24px;background:rgba(191,158,68,0.15);border:1px solid rgba(191,158,68,0.3);border-radius:8px;padding:16px;text-align:center;">
+                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">Digitally Fit Awards 2026 — The premier digital excellence gala.</p>
                             <a href="<?php echo SITE_URL; ?>/tickets"
                                class="theme-btn btn-style-one"
                                style="font-size:.8rem;padding:8px 18px;">
@@ -115,37 +115,37 @@
                 <!-- Col 4: Contact -->
                 <div class="footer-column col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="footer-widget contact-widget">
-                        <h2 class="widget-title" style="color:#be9b3f;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(190,155,63,0.4);">Get in Touch</h2>
+                        <h2 class="widget-title" style="color:#BF9E44;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(191,158,68,0.4);">Get in Touch</h2>
                         <ul style="list-style:none;padding:0;margin:0;">
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
-                                <span style="color:#be9b3f;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-location"></i></span>
+                                <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-location"></i></span>
                                 <div>
                                     <span style="color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.6;">Nairobi, Kenya</span><br>
                                     <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Head Office</span>
                                 </div>
                             </li>
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
-                                <span style="color:#be9b3f;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-email-1"></i></span>
+                                <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-email-1"></i></span>
                                 <div>
                                     <a href="mailto:<?= ADMIN_EMAIL ?>"
                                        style="color:rgba(255,255,255,0.75);font-size:.9rem;text-decoration:none;"
-                                       onmouseover="this.style.color='#be9b3f';"
+                                       onmouseover="this.style.color='#BF9E44';"
                                        onmouseout="this.style.color='rgba(255,255,255,0.75)';"><?= ADMIN_EMAIL ?></a><br>
                                     <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Email Us</span>
                                 </div>
                             </li>
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
-                                <span style="color:#be9b3f;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-call-1"></i></span>
+                                <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-call-1"></i></span>
                                 <div>
                                     <a href="tel:<?= SITE_PHONE ?>"
                                        style="color:rgba(255,255,255,0.75);font-size:.9rem;text-decoration:none;"
-                                       onmouseover="this.style.color='#be9b3f';"
+                                       onmouseover="this.style.color='#BF9E44';"
                                        onmouseout="this.style.color='rgba(255,255,255,0.75)';"><?= SITE_PHONE ?></a><br>
                                     <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Call Us</span>
                                 </div>
                             </li>
                             <li style="display:flex;gap:14px;align-items:flex-start;">
-                                <span style="color:#be9b3f;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-alarm-clock-1"></i></span>
+                                <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-alarm-clock-1"></i></span>
                                 <div>
                                     <span style="color:rgba(255,255,255,0.75);font-size:.9rem;">Mon – Fri: 9am – 6pm</span><br>
                                     <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Working Hours</span>

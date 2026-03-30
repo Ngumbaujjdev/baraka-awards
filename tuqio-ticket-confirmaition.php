@@ -20,7 +20,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Booking Confirmed | Tuqio Hub</title>
+<title>Booking Confirmed | Digitally Fit Awards</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -39,7 +39,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 }
 .confirm-icon {
     width:80px;height:80px;border-radius:50%;
-    background:linear-gradient(135deg,#10b981,#059669);
+    background:linear-gradient(135deg,#be9b3f,#a0822f);
     display:flex;align-items:center;justify-content:center;
     font-size:2.2rem;color:#fff;margin:0 auto 20px;
     box-shadow:0 8px 30px rgba(16,185,129,.4);
@@ -199,7 +199,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                             </div>
                             <?php endif; ?>
                             <div style="margin-top:12px;">
-                                <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#059669;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;">
+                                <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#a0822f;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;">
                                     <i class="fas fa-circle" style="font-size:.45rem;"></i> Valid
                                 </span>
                             </div>
@@ -348,10 +348,10 @@ $hasFull  = !empty($purchase) && !empty($event);
                             <i class="fas fa-info-circle" style="color:#ed1c24;margin-right:6px;"></i>What's Next
                         </div>
                         <div style="font-size:.8rem;color:#555;line-height:1.7;">
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
-                            <div><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
+                            <div><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
                         </div>
                     </div>
 
@@ -395,7 +395,7 @@ window.Confirm = {
         const ics = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'PRODID:-//Tuqio Hub//EN',
+            'PRODID:-//Digitally Fit Awards//EN',
             'CALSCALE:GREGORIAN',
             'METHOD:PUBLISH',
             'BEGIN:VEVENT',
@@ -405,7 +405,7 @@ window.Confirm = {
             'DTEND:' + dtEnd,
             'SUMMARY:' + eventName,
             'LOCATION:' + venue,
-            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Tuqio Hub.',
+            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Digitally Fit Awards.',
             'STATUS:CONFIRMED',
             'END:VEVENT',
             'END:VCALENDAR'

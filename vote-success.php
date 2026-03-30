@@ -52,7 +52,7 @@ if ($nominee && !empty($nominee['id'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
 .vote-hero {
-    background:linear-gradient(135deg,#053732,#0a5c50);
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     padding:70px 0 60px;text-align:center;color:#fff;
 }
 .vote-icon {
@@ -78,12 +78,12 @@ if ($nominee && !empty($nominee['id'])) {
 }
 .nc-img { width:100%;height:220px;object-fit:cover; }
 .nc-img-placeholder {
-    width:100%;height:220px;background:linear-gradient(135deg,#053732,#0a5c50);
+    width:100%;height:220px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     display:flex;align-items:center;justify-content:center;font-size:4rem;color:rgba(255,255,255,.3);
 }
 .nc-body { padding:24px 28px; }
 .nc-category { font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:#be9b3f;font-weight:700;margin-bottom:8px; }
-.nc-name { font-size:1.3rem;font-weight:900;color:#053732;margin-bottom:4px; }
+.nc-name { font-size:1.3rem;font-weight:900;color:#0a0a0a;margin-bottom:4px; }
 .nc-subtitle { font-size:.85rem;color:#888;margin-bottom:16px; }
 .nc-votes-row { display:flex;align-items:center;gap:12px;padding:14px;background:#f9f9fb;border-radius:10px;margin-top:14px; }
 .nc-votes-num { font-size:1.6rem;font-weight:900;color:#be9b3f; }
@@ -93,8 +93,8 @@ if ($nominee && !empty($nominee['id'])) {
 .ab { display:block;padding:14px;border-radius:10px;font-size:.92rem;font-weight:700;text-align:center;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s; }
 .ab:hover { opacity:.9; }
 .ab-primary { background:linear-gradient(135deg,#be9b3f,#a0822f);color:#fff; }
-.ab-navy    { background:#053732;color:#fff; }
-.ab-outline { background:#fff;color:#053732;border:2px solid #053732; }
+.ab-navy    { background:#0a0a0a;color:#fff; }
+.ab-outline { background:#fff;color:#0a0a0a;border:2px solid #0a0a0a; }
 
 .vs-share-list { display:flex;flex-direction:column;gap:9px;max-width:480px;margin:0 auto; }
 .vs-share-btn {
@@ -110,7 +110,7 @@ if ($nominee && !empty($nominee['id'])) {
 .vs-share-tw { background:#000;color:#fff; }
 .vs-share-li { background:#0077b5;color:#fff; }
 .vs-copy     { background:#f0f0f0;color:#333;border:1px solid #e0e0e0; }
-.vs-copy-ok  { display:none;color:#059669;font-size:.78rem;text-align:center;margin-top:4px;font-weight:700; }
+.vs-copy-ok  { display:none;color:#a0822f;font-size:.78rem;text-align:center;margin-top:4px;font-weight:700; }
 </style>
 </head>
 <body>
@@ -324,7 +324,7 @@ function vsShowOk(el, msg) {
 
 // Confetti
 (function() {
-    var colors = ['#be9b3f','#053732','#f59e0b','#10b981','#3b82f6','#fff'];
+    var colors = ['#be9b3f','#0a0a0a','#f59e0b','#be9b3f','#3b82f6','#fff'];
     var style  = document.createElement('style');
     style.textContent = '.cf{position:fixed;top:-20px;animation:cfFall linear forwards;pointer-events:none;z-index:9999}' +
         '@keyframes cfFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}';

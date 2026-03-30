@@ -62,7 +62,7 @@ $venue     = implode(', ', array_filter([$event['venue_name'] ?? '', $event['ven
 $banner    = !empty($event['banner_image'])    ? API_STORAGE . $event['banner_image']    : (SITE_URL . '/assets/slides/event.webp');
 $thumbnail = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_image'] : $banner;
 
-$initialsColors = ['#be9b3f', '#053732', '#0a5c50', '#6c757d'];
+$initialsColors = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
 $nomIdx = 0;
 ?>
 <!DOCTYPE html>
@@ -100,7 +100,7 @@ $nomIdx = 0;
     font-size:1.1rem; font-weight:800; color:#fff;
 }
 .nom-info { flex:1; min-width:0; }
-.nom-info .nom-name { font-weight:700; color:#053732; font-size:.92rem; line-height:1.3; }
+.nom-info .nom-name { font-weight:700; color:#0a0a0a; font-size:.92rem; line-height:1.3; }
 .nom-info .nom-cat  { font-size:.75rem; color:#888; }
 .nom-info .nom-votes { font-size:.75rem; color:#be9b3f; font-weight:600; }
 .nom-pick-check {
@@ -123,12 +123,12 @@ $nomIdx = 0;
     background:#f59e0b; color:#fff; font-size:.64rem; font-weight:800;
     padding:2px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:.5px;
 }
-.bundle-card .bc-left .bc-name  { font-weight:700; color:#053732; font-size:.95rem; margin-bottom:2px; }
+.bundle-card .bc-left .bc-name  { font-weight:700; color:#0a0a0a; font-size:.95rem; margin-bottom:2px; }
 .bundle-card .bc-left .bc-votes { font-size:.8rem; color:#888; }
 .bundle-card .bc-right { text-align:right; flex-shrink:0; }
 .bundle-card .bc-price { font-size:1.15rem; font-weight:800; color:#be9b3f; }
 .bundle-card .bc-orig  { font-size:.75rem; color:#aaa; text-decoration:line-through; }
-.bundle-card .bc-save  { font-size:.72rem; color:#10b981; font-weight:600; margin-left:6px; }
+.bundle-card .bc-save  { font-size:.72rem; color:#be9b3f; font-weight:600; margin-left:6px; }
 .bundle-pick-check {
     width:22px; height:22px; border-radius:50%; border:2px solid #eee;
     display:flex; align-items:center; justify-content:center;
@@ -139,7 +139,7 @@ $nomIdx = 0;
 
 /* Voter form */
 .voter-form { background:#fff; border-radius:14px; padding:28px 32px; box-shadow:0 4px 24px rgba(0,0,0,.07); margin-top:28px; }
-.voter-form label { font-weight:600; font-size:.88rem; color:#053732; margin-bottom:6px; display:block; }
+.voter-form label { font-weight:600; font-size:.88rem; color:#0a0a0a; margin-bottom:6px; display:block; }
 .voter-form input {
     width:100%; border:2px solid #eee; border-radius:8px; padding:10px 14px;
     font-size:.9rem; color:#333; background:#fafafa; transition:border-color .2s;
@@ -147,7 +147,7 @@ $nomIdx = 0;
 .voter-form input:focus { border-color:#be9b3f; outline:none; background:#fff; box-shadow:0 0 0 3px rgba(190,155,63,.08); }
 
 /* Summary sidebar */
-.order-summary { background:linear-gradient(160deg,#053732,#0a5c50); border-radius:14px; padding:28px; color:#fff; position:sticky; top:100px; }
+.order-summary { background:linear-gradient(160deg,#0a0a0a,#1a1a1a); border-radius:14px; padding:28px; color:#fff; position:sticky; top:100px; }
 .order-summary h5 { font-weight:800; font-size:1rem; letter-spacing:.5px; margin-bottom:18px; text-transform:uppercase; }
 .os-event-name { font-size:.95rem; font-weight:700; margin-bottom:4px; }
 .os-meta { font-size:.78rem; opacity:.7; margin-bottom:20px; }
@@ -186,10 +186,10 @@ $nomIdx = 0;
 .cat-tab-btns { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
 .cat-tab-btn  {
     padding:6px 14px; border-radius:20px; border:2px solid #eee;
-    font-size:.8rem; font-weight:700; cursor:pointer; background:#fafafa; color:#053732;
+    font-size:.8rem; font-weight:700; cursor:pointer; background:#fafafa; color:#0a0a0a;
     transition:all .2s;
 }
-.cat-tab-btn.active { background:#053732; border-color:#053732; color:#fff; }
+.cat-tab-btn.active { background:#0a0a0a; border-color:#0a0a0a; color:#fff; }
 .cat-tab-btn:hover:not(.active) { border-color:#be9b3f; color:#be9b3f; }
 
 /* ── Step progress headers ────────────────────────────────── */
@@ -200,9 +200,9 @@ $nomIdx = 0;
     font-size:.88rem; font-weight:800; transition:background .25s,color .25s;
     background:#be9b3f; color:#fff;
 }
-.step-num.done     { background:#10b981; }
+.step-num.done     { background:#be9b3f; }
 .step-num.upcoming { background:#e9ecef; color:#aaa; }
-.step-hdr-title { font-size:.98rem; font-weight:800; color:#053732; line-height:1.2; }
+.step-hdr-title { font-size:.98rem; font-weight:800; color:#0a0a0a; line-height:1.2; }
 .step-hdr-sub   { font-size:.74rem; color:#aaa; margin-top:2px; }
 
 /* Voter form step hint */
@@ -215,7 +215,7 @@ $nomIdx = 0;
 /* ── Mobile sticky pay bar ────────────────────────────────── */
 .mob-pay-bar {
     display:none; position:fixed; bottom:0; left:0; right:0; z-index:9990;
-    background:#053732; padding:12px 16px 18px;
+    background:#0a0a0a; padding:12px 16px 18px;
     box-shadow:0 -4px 24px rgba(0,0,0,.3);
 }
 @media (max-width:991px) { .mob-pay-bar.show { display:block; } }
@@ -261,7 +261,7 @@ body.mob-pay-on { padding-bottom:120px !important; }
             <div class="col-lg-7 col-md-12">
 
                 <!-- Step 1: Select nominee -->
-                <h3 style="font-size:1.3rem;font-weight:800;color:#053732;margin-bottom:6px;">
+                <h3 style="font-size:1.3rem;font-weight:800;color:#0a0a0a;margin-bottom:6px;">
                     <i class="fas fa-vote-yea" style="color:#be9b3f;margin-right:8px;"></i>
                     <?= empty($preNominee) ? 'Vote Now' : 'Voting for' ?>
                 </h3>
@@ -408,7 +408,7 @@ body.mob-pay-on { padding-bottom:120px !important; }
                                onfocus="this.style.borderColor='#be9b3f';this.previousElementSibling.style.borderColor='#be9b3f';"
                                onblur="this.style.borderColor='#eee';this.previousElementSibling.style.borderColor='#eee';">
                     </div>
-                    <div id="customVotePreview" style="display:none;margin-top:10px;padding:10px 14px;background:#f0fdf4;border-radius:8px;font-size:.85rem;color:#053732;"></div>
+                    <div id="customVotePreview" style="display:none;margin-top:10px;padding:10px 14px;background:#f0fdf4;border-radius:8px;font-size:.85rem;color:#0a0a0a;"></div>
                     <div style="margin-top:8px;font-size:.74rem;color:#aaa;">Rate: <?= number_format($pricePerVote, 2) ?> KES per vote (best available rate) &middot; Min <?= number_format($minCustomAmt, 0) ?> KES</div>
                 </div>
                 <?php endif; ?>
@@ -474,7 +474,7 @@ body.mob-pay-on { padding-bottom:120px !important; }
                     <div id="payConfirmModal" onclick="if(event.target===this)VotePage.closeConfirm()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
                         <div style="background:#fff;border-radius:16px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;">
                             <!-- Header -->
-                            <div style="background:linear-gradient(135deg,#053732,#0a5c50);padding:20px 24px;color:#fff;">
+                            <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:20px 24px;color:#fff;">
                                 <div style="font-size:1rem;font-weight:800;margin-bottom:2px;">Confirm Your Vote</div>
                                 <div style="font-size:.78rem;opacity:.75;">Please review before paying</div>
                             </div>
@@ -505,21 +505,21 @@ body.mob-pay-on { padding-bottom:120px !important; }
                     <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
                         <i class="fas fa-bolt" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">Votes Applied Instantly</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">Votes Applied Instantly</div>
                             <div style="font-size:.75rem;color:#888;">Your votes are credited immediately after payment confirmation</div>
                         </div>
                     </div>
                     <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
                         <i class="fas fa-chart-bar" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">Live Vote Counts</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">Live Vote Counts</div>
                             <div style="font-size:.75rem;color:#888;">Watch the leaderboard update in real time on the nominees page</div>
                         </div>
                     </div>
                     <div style="display:flex;gap:12px;align-items:flex-start;">
                         <i class="fas fa-redo" style="color:#be9b3f;font-size:1.1rem;margin-top:2px;flex-shrink:0;"></i>
                         <div>
-                            <div style="font-size:.83rem;font-weight:700;color:#053732;">Vote Multiple Times</div>
+                            <div style="font-size:.83rem;font-weight:700;color:#0a0a0a;">Vote Multiple Times</div>
                             <div style="font-size:.75rem;color:#888;">Buy additional vote packages to keep your favourite in the lead</div>
                         </div>
                     </div>
@@ -771,7 +771,7 @@ window.VotePage = (function () {
         // Update inline preview
         if (preview) {
             preview.style.display = '';
-            let html = `<i class="fas fa-check-circle" style="color:#10b981;margin-right:6px;"></i>`
+            let html = `<i class="fas fa-check-circle" style="color:#be9b3f;margin-right:6px;"></i>`
                 + `KES ${fmt(amt)} = <strong>${fmt(votes)} votes</strong> at ${PRICE_PER_VOTE} KES/vote`;
             if (amt > MPESA_LIMIT) {
                 html += `<div style="margin-top:8px;padding:8px 10px;background:#fff3cd;border-radius:6px;color:#856404;font-size:.8rem;">`
@@ -945,32 +945,32 @@ window.VotePage = (function () {
         const fmt = n => Number(n).toLocaleString('en-KE', {minimumFractionDigits:0, maximumFractionDigits:0});
         const methodLabel = method === 'mpesa'
             ? '<span style="color:#2e7d32;font-weight:700;"><i class="fas fa-mobile-alt" style="margin-right:5px;"></i>M-Pesa</span>'
-            : '<span style="color:#053732;font-weight:700;"><i class="fas fa-credit-card" style="margin-right:5px;"></i>Card</span>';
+            : '<span style="color:#0a0a0a;font-weight:700;"><i class="fas fa-credit-card" style="margin-right:5px;"></i>Card</span>';
 
         document.getElementById('payConfirmBody').innerHTML = `
             <div style="display:flex;flex-direction:column;gap:10px;font-size:.88rem;">
                 <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Voting for</span>
-                    <span style="font-weight:700;color:#053732;text-align:right;max-width:60%;">${escHtml(selectedNomineeName)}</span>
+                    <span style="font-weight:700;color:#0a0a0a;text-align:right;max-width:60%;">${escHtml(selectedNomineeName)}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Votes</span>
-                    <span style="font-weight:700;color:#053732;">${fmt(selectedBundleVotes)} votes</span>
+                    <span style="font-weight:700;color:#0a0a0a;">${fmt(selectedBundleVotes)} votes</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Name</span>
-                    <span style="font-weight:600;color:#053732;">${escHtml(name)}</span>
+                    <span style="font-weight:600;color:#0a0a0a;">${escHtml(name)}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Phone</span>
-                    <span style="font-weight:600;color:#053732;">${escHtml(phone)}</span>
+                    <span style="font-weight:600;color:#0a0a0a;">${escHtml(phone)}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f5;">
                     <span style="color:#888;">Pay via</span>
                     <span>${methodLabel}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:1rem;">
-                    <span style="font-weight:800;color:#053732;">Total</span>
+                    <span style="font-weight:800;color:#0a0a0a;">Total</span>
                     <span style="font-weight:900;color:#be9b3f;font-size:1.1rem;">${fmt(selectedBundlePrice)} KES</span>
                 </div>
             </div>`;

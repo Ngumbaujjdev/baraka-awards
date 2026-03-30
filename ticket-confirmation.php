@@ -32,14 +32,14 @@ $hasFull  = !empty($purchase) && !empty($event);
 <style>
 /* ── Confirmation styles ─────────────────────────────── */
 .confirm-hero {
-    background:linear-gradient(135deg,#053732,#0a5c50);
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     padding:60px 0 50px;
     text-align:center;
     color:#fff;
 }
 .confirm-icon {
     width:80px;height:80px;border-radius:50%;
-    background:linear-gradient(135deg,#10b981,#059669);
+    background:linear-gradient(135deg,#be9b3f,#a0822f);
     display:flex;align-items:center;justify-content:center;
     font-size:2.2rem;color:#fff;margin:0 auto 20px;
     box-shadow:0 8px 30px rgba(16,185,129,.4);
@@ -57,7 +57,7 @@ $hasFull  = !empty($purchase) && !empty($event);
     margin-bottom:20px;overflow:hidden;
 }
 .ticket-card-header {
-    background:linear-gradient(135deg,#053732,#0a5c50);
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     padding:16px 24px;display:flex;align-items:center;gap:14px;
 }
 .ticket-number-badge {
@@ -68,7 +68,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 .tc-row { display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:.87rem; }
 .tc-row:last-child { border-bottom:none; }
 .tc-label { color:#aaa;font-weight:600;min-width:90px;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;padding-top:1px; }
-.tc-val   { color:#053732;font-weight:700;flex:1; }
+.tc-val   { color:#0a0a0a;font-weight:700;flex:1; }
 
 .action-card {
     background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.07);
@@ -81,8 +81,8 @@ $hasFull  = !empty($purchase) && !empty($event);
 }
 .action-btn:hover { opacity:.9;transform:translateY(-1px); }
 .btn-download { background:linear-gradient(135deg,#be9b3f,#a0822f);color:#fff; }
-.btn-outline   { background:#fff;color:#053732;border:2px solid #053732; }
-.btn-share     { background:#053732;color:#fff; }
+.btn-outline   { background:#fff;color:#0a0a0a;border:2px solid #0a0a0a; }
+.btn-share     { background:#0a0a0a;color:#fff; }
 
 .email-note {
     background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;
@@ -91,7 +91,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 }
 
 /* Summary sidebar */
-.summary-sidebar { background:linear-gradient(160deg,#053732,#0a5c50);border-radius:14px;padding:28px;color:#fff;position:sticky;top:100px; }
+.summary-sidebar { background:linear-gradient(160deg,#0a0a0a,#1a1a1a);border-radius:14px;padding:28px;color:#fff;position:sticky;top:100px; }
 .ss-line { display:flex;justify-content:space-between;font-size:.85rem;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1); }
 .ss-line.total { font-weight:800;font-size:1.05rem;border-top:2px solid rgba(255,255,255,.2);padding-top:12px;margin-top:4px;border-bottom:none; }
 </style>
@@ -145,7 +145,7 @@ $hasFull  = !empty($purchase) && !empty($event);
             <div class="row align-items-start">
                 <!-- LEFT: ticket list -->
                 <div class="col-lg-7 col-md-12">
-                    <h4 style="font-size:1.1rem;font-weight:800;color:#053732;margin-bottom:20px;">
+                    <h4 style="font-size:1.1rem;font-weight:800;color:#0a0a0a;margin-bottom:20px;">
                         <i class="fas fa-ticket-alt" style="color:#be9b3f;margin-right:8px;"></i>
                         Your Ticket<?= count($tickets) !== 1 ? 's' : '' ?>
                         <?php if ($hasFull): ?>
@@ -217,7 +217,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                                 </div>
                                 <?php endif; ?>
                                 <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
-                                    <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#059669;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;width:fit-content;">
+                                    <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#a0822f;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;width:fit-content;">
                                         <i class="fas fa-circle" style="font-size:.45rem;"></i> Valid
                                     </span>
                                     <div style="display:flex;flex-wrap:wrap;gap:7px;">
@@ -233,7 +233,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                                             <i class="fab fa-whatsapp"></i> Share
                                         </a>
                                         <button onclick="copyTicketLink(this, <?= json_encode($tkDownloadUrl) ?>)"
-                                                style="display:inline-flex;align-items:center;gap:6px;background:#f5f5f5;color:#053732;border:1px solid #ddd;border-radius:7px;padding:7px 12px;font-size:.76rem;font-weight:700;cursor:pointer;">
+                                                style="display:inline-flex;align-items:center;gap:6px;background:#f5f5f5;color:#0a0a0a;border:1px solid #ddd;border-radius:7px;padding:7px 12px;font-size:.76rem;font-weight:700;cursor:pointer;">
                                             <i class="fas fa-copy"></i> Copy
                                         </button>
                                     </div>
@@ -264,7 +264,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 
                     <!-- Actions -->
                     <div class="action-card">
-                        <h5 style="font-size:.9rem;font-weight:800;color:#053732;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">
+                        <h5 style="font-size:.9rem;font-weight:800;color:#0a0a0a;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">
                             <i class="fas fa-bolt" style="color:#be9b3f;margin-right:6px;"></i>Actions
                         </h5>
                         <div style="display:flex;flex-wrap:wrap;gap:10px;">
@@ -300,7 +300,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                                    style="font-size:.78rem;padding:6px 14px;border-radius:6px;background:#4285f4;color:#fff;text-decoration:none;font-weight:600;">
                                     <i class="fab fa-google" style="margin-right:4px;"></i>Google Calendar
                                 </a>
-                                <button onclick="Confirm.downloadIcs()" style="font-size:.78rem;padding:6px 14px;border-radius:6px;background:#053732;color:#fff;border:none;cursor:pointer;font-weight:600;">
+                                <button onclick="Confirm.downloadIcs()" style="font-size:.78rem;padding:6px 14px;border-radius:6px;background:#0a0a0a;color:#fff;border:none;cursor:pointer;font-weight:600;">
                                     <i class="fas fa-calendar-plus" style="margin-right:4px;"></i>Download .ics
                                 </button>
                             </div>
@@ -380,14 +380,14 @@ $hasFull  = !empty($purchase) && !empty($event);
 
                     <!-- What to expect -->
                     <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-top:20px;">
-                        <div style="font-size:.85rem;font-weight:800;color:#053732;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;">
+                        <div style="font-size:.85rem;font-weight:800;color:#0a0a0a;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;">
                             <i class="fas fa-info-circle" style="color:#be9b3f;margin-right:6px;"></i>What's Next
                         </div>
                         <div style="font-size:.8rem;color:#555;line-height:1.7;">
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
-                            <div><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
+                            <div><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
                         </div>
                     </div>
 
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
         text:         <?= json_encode($tk['barcode']) ?>,
         width:        90,
         height:       90,
-        colorDark:    '#053732',
+        colorDark:    '#0a0a0a',
         colorLight:   '#ffffff',
         correctLevel: QRCode.CorrectLevel.H,
     });
@@ -464,7 +464,7 @@ window.Confirm = {
 
         const dtStart  = icsDate(startDate, startTime);
         const dtEnd    = icsDate(endDate, endTime);
-        const uid      = 'mema-' + orderNum + '@memaawards.com';
+        const uid      = 'mema-' + orderNum + '@digitallyfitawards.com';
 
         const ics = [
             'BEGIN:VCALENDAR',

@@ -6,9 +6,7 @@ $resp      = tuqio_api('/api/public/events');
 $allEvents = $resp['data'] ?? [];
 $today     = date('Y-m-d');
 
-$allEvents = array_values(array_filter($allEvents, fn($e) =>
-    str_contains(strtolower($e['slug'] ?? ''), 'mema')
-));
+// All events from this API are DFA events — no filtering needed
 
 $upcoming = [];
 $past     = [];
@@ -46,7 +44,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta name="keywords" content="Kenya events, upcoming events Nairobi, award ceremonies Kenya, conferences Kenya, Digitally Fit Awards events">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/events.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/events.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Upcoming Events | Digitally Fit Awards">
@@ -60,13 +58,13 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/events.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/events.php">
 <meta property="og:description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Upcoming Events | Digitally Fit Awards">
 <meta name="twitter:description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -77,17 +75,17 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Events","item":"https://mema.memaawards.africa/events.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Events","item":"https://dfa.tuqiohub.africa/events.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Digitally Fit Awards","url":"https://mema.memaawards.africa/events.php","description":"Browse all upcoming and past events on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/events.php","description":"Browse all upcoming and past events on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -129,7 +127,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 .event-block .date-badge span { display: block; font-size: .68rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
 .event-block .voting-badge {
     position: absolute; top: 16px; right: 16px;
-    background: #053732; color: #fff; border-radius: 20px;
+    background: #0a0a0a; color: #fff; border-radius: 20px;
     padding: 4px 12px; font-size: .72rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 1px;
 }
@@ -143,7 +141,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 .event-block .event-meta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; }
 .event-block .event-meta span { font-size: .82rem; color: #777; }
 .event-block .event-meta span i { color: #be9b3f; margin-right: 4px; }
-.event-block h3 { font-size: 1.3rem; color: #053732; margin-bottom: 8px; font-weight: 700; line-height: 1.3; }
+.event-block h3 { font-size: 1.3rem; color: #0a0a0a; margin-bottom: 8px; font-weight: 700; line-height: 1.3; }
 .event-block h3 a { color: inherit; text-decoration: none; }
 .event-block h3 a:hover { color: #be9b3f; }
 .event-block .tagline { color: #555; font-size: .91rem; line-height: 1.65; margin-bottom: 18px; flex-grow: 1; }
@@ -157,7 +155,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
     border: 2px solid #eee; background: #fff; color: #555; cursor: pointer;
     transition: all .2s; white-space: nowrap;
 }
-.filter-tab.active, .filter-tab:hover { background: #be9b3f; border-color: #be9b3f; color: #fff; }
+.filter-tab.active, .filter-tab:hover { background: #BF9E44; border-color: #BF9E44; color: #fff; }
 .events-search-wrap { flex-grow: 1; min-width: 180px; position: relative; }
 .events-search-wrap input {
     width: 100%; padding: 10px 40px 10px 14px;
@@ -218,7 +216,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
     </div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>MEMA Events</h1>
+            <h1>DFA Events</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>Events</li>
@@ -273,11 +271,11 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
                     <!-- Host CTA -->
                     <div class="sidebar-widget" style="margin-bottom:40px;">
-                        <div style="background:linear-gradient(135deg,#053732,#be9b3f);border-radius:8px;padding:30px;text-align:center;color:#fff;">
+                        <div style="background:linear-gradient(135deg,#0a0a0a,#be9b3f);border-radius:8px;padding:30px;text-align:center;color:#fff;">
                             <h5 style="margin-bottom:10px;">Host Your Event</h5>
                             <p style="font-size:.9rem;margin-bottom:20px;">Use Tuqio to manage nominations, voting, ticketing, and polls for your next event.</p>
                             <a href="<?= SITE_URL ?>/become-organizer" class="theme-btn btn-style-two"
-                               style="background:#fff;color:#053732;border-color:#fff;">
+                               style="background:#fff;color:#0a0a0a;border-color:#fff;">
                                 <span class="btn-title">Get Started</span>
                             </a>
                         </div>
@@ -291,7 +289,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
                             <?php foreach ($sidebarUpcoming as $e): ?>
                             <article class="post">
                                 <div class="post-inner">
-                                    <figure class="post-thumb" style="background:linear-gradient(135deg,#053732,#0a5c50);height:110px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+                                    <figure class="post-thumb" style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);height:110px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
                                         <i class="fas fa-calendar-alt" style="font-size:1.8rem;color:rgba(255,255,255,0.22);flex-shrink:0;"></i>
                                         <?php
                                         $thumbSrc = !empty($e['banner_image']) ? API_STORAGE . $e['banner_image']
@@ -359,7 +357,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <script>
 function tuqioImgErr(el) {
     el.onerror = null;
-    el.parentElement.innerHTML = '<div style="height:100%;min-height:210px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
+    el.parentElement.innerHTML = '<div style="height:100%;min-height:210px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
 }
 (function () {
     var DATA   = <?= $jsData ?>;
@@ -408,12 +406,12 @@ function tuqioImgErr(el) {
         var isVirtual = !!e.is_virtual;
         var fmt       = e.event_format || 'in-person';
         var img       = imgSrc(e);
-        var GRAD      = '<div style="height:100%;min-height:210px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
+        var GRAD      = '<div style="height:100%;min-height:210px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
         var link      = DATA.siteUrl + '/event-detail?slug=' + encodeURIComponent(slug);
 
         var fmtBadge = '';
         if (isVirtual) {
-            fmtBadge = '<div class="format-badge" style="background:#053732;"><i class="fas fa-video" style="margin-right:4px;"></i>Virtual</div>';
+            fmtBadge = '<div class="format-badge" style="background:#0a0a0a;"><i class="fas fa-video" style="margin-right:4px;"></i>Virtual</div>';
         } else if (fmt === 'hybrid') {
             fmtBadge = '<div class="format-badge" style="background:#8b5cf6;"><i class="fas fa-layer-group" style="margin-right:4px;"></i>Hybrid</div>';
         }

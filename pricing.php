@@ -13,7 +13,7 @@ include 'libs/App.php';
 <meta name="keywords" content="Digitally Fit Awards pricing, event ticketing fees Kenya, voting platform pricing, event management cost Kenya, affordable ticketing platform">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/pricing">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/pricing">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Pricing | Digitally Fit Awards">
@@ -27,13 +27,13 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/pricing">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/pricing">
 <meta property="og:description" content="Simple, transparent pricing for Digitally Fit Awards. Pay only when you earn — 5% on ticketing and from 20% on voting.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Pricing | Digitally Fit Awards — Transparent Event Platform Fees">
 <meta name="twitter:description" content="Simple, transparent pricing for Digitally Fit Awards. Pay only when you earn — 5% on ticketing and from 20% on voting.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -44,12 +44,12 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://mema.memaawards.africa/about"},{"@type":"ListItem","position":3,"name":"Pricing","item":"https://mema.memaawards.africa/pricing"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://dfa.tuqiohub.africa/about"},{"@type":"ListItem","position":3,"name":"Pricing","item":"https://dfa.tuqiohub.africa/pricing"}]}
 </script>
 
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@ include 'libs/App.php';
 .pricing-intro h2 {
     font-size: 2rem;
     font-weight: 800;
-    color: #053732;
+    color: #0a0a0a;
     line-height: 1.25;
     margin-bottom: 14px;
 }
@@ -143,7 +143,7 @@ include 'libs/App.php';
     font-size: 1.3rem;
     margin-bottom: 18px;
 }
-.plan-icon.navy { background: rgba(5,55,50,0.1); color: #053732; }
+.plan-icon.navy { background: rgba(5,55,50,0.1); color: #0a0a0a; }
 .plan-icon.red  { background: rgba(190,155,63,0.1); color: #be9b3f; }
 
 .plan-name {
@@ -157,7 +157,7 @@ include 'libs/App.php';
 .plan-title {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #053732;
+    color: #0a0a0a;
     margin-bottom: 8px;
 }
 .plan-price {
@@ -218,7 +218,7 @@ include 'libs/App.php';
 }
 .plan-features li .chk.navy-chk {
     background: rgba(5,55,50,0.1);
-    color: #053732;
+    color: #0a0a0a;
 }
 
 /* Voting tiers */
@@ -247,11 +247,11 @@ include 'libs/App.php';
     border-bottom: 1px solid #eee;
 }
 .voting-tiers tr:last-child td { border-bottom: none; }
-.voting-tiers td:last-child { text-align: right; font-weight: 700; color: #053732; }
+.voting-tiers td:last-child { text-align: right; font-weight: 700; color: #0a0a0a; }
 
 /* Enterprise banner */
 .enterprise-banner {
-    background: linear-gradient(135deg, #053732 0%, #0a5c50 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     border-radius: 18px;
     padding: 48px 40px;
     color: #fff;
@@ -294,7 +294,7 @@ include 'libs/App.php';
 /* How it works */
 .how-section { padding: 72px 0 60px; }
 .how-section .sec-header { text-align: center; margin-bottom: 50px; }
-.how-section .sec-header h2 { font-size: 1.75rem; font-weight: 800; color: #053732; }
+.how-section .sec-header h2 { font-size: 1.75rem; font-weight: 800; color: #0a0a0a; }
 .how-section .sec-header p { color: #666; font-size: .95rem; }
 
 .step-card {
@@ -315,13 +315,13 @@ include 'libs/App.php';
     margin: 0 auto 18px;
     box-shadow: 0 6px 18px rgba(190,155,63,0.3);
 }
-.step-card h5 { font-size: 1rem; font-weight: 700; color: #053732; margin-bottom: 8px; }
+.step-card h5 { font-size: 1rem; font-weight: 700; color: #0a0a0a; margin-bottom: 8px; }
 .step-card p  { font-size: .88rem; color: #666; line-height: 1.6; }
 
 /* FAQ mini */
 .pricing-faq { padding: 60px 0; background: #f9fafb; }
 .pricing-faq .sec-header { text-align: center; margin-bottom: 40px; }
-.pricing-faq .sec-header h2 { font-size: 1.6rem; font-weight: 800; color: #053732; }
+.pricing-faq .sec-header h2 { font-size: 1.6rem; font-weight: 800; color: #0a0a0a; }
 
 .pfaq-item {
     background: #fff;
@@ -334,7 +334,7 @@ include 'libs/App.php';
     padding: 18px 22px;
     font-size: .92rem;
     font-weight: 600;
-    color: #053732;
+    color: #0a0a0a;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -358,7 +358,7 @@ include 'libs/App.php';
 /* CTA bottom */
 .pricing-cta {
     padding: 72px 0;
-    background: linear-gradient(135deg, #032620 0%, #053732 50%, #0a5c50 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #0a0a0a 50%, #1a1a1a 100%);
     text-align: center;
     color: #fff;
 }

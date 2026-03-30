@@ -2,7 +2,7 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-// Resolve event slug — default to MEMA Gala 2026
+// Resolve event slug — default to Digitally Fit Awards Gala 2026
 $eventSlug = $_GET['event'] ?? 'mema-gala-2026';
 
 // Fetch event details (for dates/status)
@@ -45,7 +45,7 @@ $catsJson  = json_encode(array_map(fn($c) => [
     'count'  => count($c['nominees'] ?? []),
 ], $allCategories));
 
-$eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
+$eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +67,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
 <style>
 /* ── Page-scoped styles ─────────────────────────────── */
-.cats-hero { background: linear-gradient(160deg,#032620 0%,#053732 100%); padding: 80px 0; }
+.cats-hero { background: linear-gradient(160deg,#0a0a0a 0%,#0a0a0a 100%); padding: 80px 0; }
 .cat-card-wrap { margin-bottom: 24px; }
 .cat-card-inner {
     background: #fff; border: 1px solid rgba(190,155,63,.2);
@@ -81,9 +81,9 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 .cat-img-area { height: 130px; overflow: hidden; position: relative; }
 .cat-img-area img { width:100%; height:100%; object-fit:cover; }
 .cat-img-overlay { position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(5,55,50,.7)); }
-.cat-img-placeholder { height:130px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center; }
+.cat-img-placeholder { height:130px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center; }
 .cat-body { padding: 15px; }
-.cat-name { color:#053732;font-weight:700;font-size:.9rem;line-height:1.35;margin:0 0 6px; }
+.cat-name { color:#0a0a0a;font-weight:700;font-size:.9rem;line-height:1.35;margin:0 0 6px; }
 .cat-desc { color:#555;font-size:.77rem;line-height:1.5;margin-bottom:10px; }
 .cat-footer { display:flex;align-items:center;justify-content:space-between; }
 .cat-count { font-size:.7rem;color:#888; }
@@ -98,7 +98,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 }
 .cats-sidebar .info-row { display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:#444;margin-bottom:10px; }
 .cats-sidebar .info-row i { color:#be9b3f;width:16px;margin-top:2px;flex-shrink:0; }
-.cats-sidebar .info-row strong { color:#053732; }
+.cats-sidebar .info-row strong { color:#0a0a0a; }
 /* Search */
 .cat-search-wrap { max-width:480px;margin:0 auto 32px;position:relative; }
 .cat-search-wrap input { width:100%;padding:13px 46px 13px 20px;border:none;border-radius:30px;font-size:.9rem;color:#333;box-shadow:0 4px 22px rgba(0,0,0,.22);outline:none; }
@@ -107,7 +107,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 #catsPagination { display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:24px 0 0; }
 /* Modal */
 #catsModal .modal-content { border-radius:16px;overflow:hidden;border:none; }
-#catsModalImg { height:230px;background:linear-gradient(135deg,#053732,#0a5c50);position:relative; }
+#catsModalImg { height:230px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);position:relative; }
 #catsModalImg img { width:100%;height:100%;object-fit:cover; }
 #catsModalPlaceholder { position:absolute;inset:0;display:flex;align-items:center;justify-content:center; }
 </style>
@@ -151,7 +151,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
         <?php if (empty($allCategories)): ?>
         <div class="text-center" style="padding:80px 0;">
             <i class="fas fa-trophy" style="font-size:3rem;color:#be9b3f;opacity:.3;"></i>
-            <h4 style="margin-top:20px;color:#053732;">Categories Coming Soon</h4>
+            <h4 style="margin-top:20px;color:#0a0a0a;">Categories Coming Soon</h4>
             <p class="text-muted">Categories for <?= htmlspecialchars($eventName) ?> will be published soon.</p>
         </div>
         <?php else: ?>
@@ -159,7 +159,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
         <!-- Stats + search header -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
             <div>
-                <h4 style="color:#053732;font-weight:800;margin:0;"><?= $totalCats ?> Award <?= $totalCats === 1 ? 'Category' : 'Categories' ?></h4>
+                <h4 style="color:#0a0a0a;font-weight:800;margin:0;"><?= $totalCats ?> Award <?= $totalCats === 1 ? 'Category' : 'Categories' ?></h4>
                 <p style="color:#888;font-size:.85rem;margin:0;"><?= htmlspecialchars($eventName) ?></p>
             </div>
             <div style="position:relative;min-width:240px;">
@@ -192,7 +192,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 
             <!-- Action CTA -->
             <div class="sidebar-info-card">
-                <h6 style="font-weight:800;color:#053732;margin-bottom:14px;"><i class="fas fa-info-circle" style="color:#be9b3f;margin-right:6px;"></i>Get Involved</h6>
+                <h6 style="font-weight:800;color:#0a0a0a;margin-bottom:14px;"><i class="fas fa-info-circle" style="color:#be9b3f;margin-right:6px;"></i>Get Involved</h6>
                 <?php if ($nomOpen): ?>
                 <div class="info-row"><i class="fas fa-pen-nib"></i><div><strong>Nominations open</strong><br>Submit a nomination for any category below.</div></div>
                 <a href="<?= SITE_URL ?>/nominate?event=<?= urlencode($eventSlug) ?>" class="theme-btn btn-style-one" style="display:block;text-align:center;font-size:.82rem;margin-top:10px;">
@@ -210,7 +210,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
 
             <!-- Key dates -->
             <div class="sidebar-info-card">
-                <h6 style="font-weight:800;color:#053732;margin-bottom:14px;"><i class="fas fa-calendar-alt" style="color:#be9b3f;margin-right:6px;"></i>Key Dates</h6>
+                <h6 style="font-weight:800;color:#0a0a0a;margin-bottom:14px;"><i class="fas fa-calendar-alt" style="color:#be9b3f;margin-right:6px;"></i>Key Dates</h6>
                 <?php if ($nomStart): ?>
                 <div class="info-row"><i class="fas fa-pen-nib"></i><div><strong>Nominations</strong><br><?= date('d M Y', strtotime($nomStart)) ?><?= $nomEnd ? ' &ndash; '.date('d M Y', strtotime($nomEnd)) : '' ?></div></div>
                 <?php endif; ?>
@@ -263,7 +263,7 @@ $eventName = $galaEvent['name'] ?? 'MEMA Gala 2026';
       </div>
       <div class="modal-body" style="padding:26px;">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-          <h5 id="catsModalName" style="font-weight:800;color:#053732;margin:0;line-height:1.3;"></h5>
+          <h5 id="catsModalName" style="font-weight:800;color:#0a0a0a;margin:0;line-height:1.3;"></h5>
           <span id="catsModalBadge" style="font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap;margin-left:12px;margin-top:3px;"></span>
         </div>
         <p id="catsModalDesc" style="color:#555;font-size:.9rem;line-height:1.75;margin-bottom:14px;"></p>

@@ -61,13 +61,13 @@ $sponsorsByTier = [];
 foreach ($sponsors as $s) { $sponsorsByTier[$s['tier'] ?? 'partner'][] = $s; }
 
 // ── Initials colors palette ──────────────────────────────────────────────────
-$initialsColors = ['#be9b3f', '#053732', '#0a5c50', '#6c757d'];
+$initialsColors = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
 $globalIdx = 0;
 
 // ── Phase badge ──────────────────────────────────────────────────────────────
 $phaseBadge = [
     'voting'     => ['Voting Open',       '#be9b3f'],
-    'on_sale'    => ['Tickets On Sale',   '#10b981'],
+    'on_sale'    => ['Tickets On Sale',   '#be9b3f'],
     'nomination' => ['Nominations Open',  '#f59e0b'],
     'review'     => ['Under Review',      '#8b5cf6'],
     'event_day'  => ['Event Day!',        '#8b5cf6'],
@@ -126,7 +126,7 @@ $seoDesc  = htmlspecialchars(strip_tags($event['tagline'] ?? $event['short_descr
 $seoDesc  = mb_strimwidth($seoDesc, 0, 160, '...');
 $seoSlug  = urlencode($slug);
 $seoImg   = !empty($event['banner_image']) ? API_STORAGE . $event['banner_image'] : OG_IMAGE;
-$seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
+$seoUrl   = 'https://dfa.tuqiohub.africa/event-detail.php?slug=' . $seoSlug;
 ?>
 
 <!-- SEO -->
@@ -155,7 +155,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="<?= $seoTitle ?> | Digitally Fit Awards">
 <meta name="twitter:description" content="<?= $seoDesc ?>">
 <meta name="twitter:image" content="<?= $seoImg ?>">
@@ -166,17 +166,17 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Events","item":"https://mema.memaawards.africa/events.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($event['name'] ?? '') ?>","item":"<?= $seoUrl ?>"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Events","item":"https://dfa.tuqiohub.africa/events.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($event['name'] ?? '') ?>","item":"<?= $seoUrl ?>"}]}
 </script>
 
 <!-- JSON-LD: Event -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Event","name":"<?= addslashes($event['name'] ?? '') ?>","url":"<?= $seoUrl ?>","description":"<?= addslashes($seoDesc) ?>","image":"<?= $seoImg ?>","startDate":"<?= $event['start_date'] ?? '' ?>","endDate":"<?= $event['end_date'] ?? $event['start_date'] ?? '' ?>","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"<?= addslashes($event['venue_name'] ?? 'Nairobi, Kenya') ?>","address":{"@type":"PostalAddress","addressLocality":"<?= addslashes($event['venue_city'] ?? 'Nairobi') ?>","addressCountry":"KE"}},"organizer":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa"}}
+{"@context":"https://schema.org","@type":"Event","name":"<?= addslashes($event['name'] ?? '') ?>","url":"<?= $seoUrl ?>","description":"<?= addslashes($seoDesc) ?>","image":"<?= $seoImg ?>","startDate":"<?= $event['start_date'] ?? '' ?>","endDate":"<?= $event['end_date'] ?? $event['start_date'] ?? '' ?>","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"<?= addslashes($event['venue_name'] ?? 'Nairobi, Kenya') ?>","address":{"@type":"PostalAddress","addressLocality":"<?= addslashes($event['venue_city'] ?? 'Nairobi') ?>","addressCountry":"KE"}},"organizer":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -244,7 +244,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
     margin: 0 auto 12px; flex-shrink: 0;
 }
 .nom-name {
-    font-size: .88rem; font-weight: 700; color: #053732;
+    font-size: .88rem; font-weight: 700; color: #0a0a0a;
     margin-bottom: 4px; line-height: 1.3;
 }
 .nom-subtitle { font-size: .76rem; color: #be9b3f; margin-bottom: 4px; line-height: 1.3; }
@@ -261,7 +261,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
     border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;
     margin-bottom: 18px;
 }
-.nom-cat-title { font-size: 1.05rem; font-weight: 700; color: #053732; margin: 0; }
+.nom-cat-title { font-size: 1.05rem; font-weight: 700; color: #0a0a0a; margin: 0; }
 .nom-cat-count { font-size: .78rem; color: #aaa; font-weight: 400; }
 /* ── No results state ─────────────────────────────────── */
 .nom-no-results { text-align: center; padding: 40px 0; color: #aaa; display: none; }
@@ -269,7 +269,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
 /* ── Select2 brand overrides ───────────────────────────── */
 .select2-container--default .select2-results__option--highlighted {
-    background-color: #053732 !important;
+    background-color: #0a0a0a !important;
     color: #fff !important;
 }
 .select2-container--default .select2-search--dropdown .select2-search__field:focus {
@@ -283,7 +283,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 }
 .select2-container--default .select2-results__option--selected {
     background: rgba(5,55,50,.06);
-    color: #053732;
+    color: #0a0a0a;
     font-weight: 600;
 }
 </style>
@@ -303,7 +303,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 <?php include 'includes/hidden-bar.php'; ?>
 
 <!-- ── Page Title / Breadcrumb ───────────────────────────────────────────── -->
-<section class="page-title" style="background-color:#053732;">
+<section class="page-title" style="background-color:#0a0a0a;">
     <div class="auto-container">
         <div class="title-outer">
             <h1><?= htmlspecialchars($event['name']) ?></h1>
@@ -371,7 +371,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                     <img src="<?= htmlspecialchars($banner) ?>"
                          alt="<?= htmlspecialchars($event['name']) ?>"
                          style="width:100%;max-height:420px;object-fit:cover;display:block;"
-                         onerror="this.outerHTML='<div style=\'width:100%;height:420px;border-radius:12px;background:linear-gradient(135deg,#053732 0%,#0a5c50 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-ticket-alt\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
+                         onerror="this.outerHTML='<div style=\'width:100%;height:420px;border-radius:12px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-ticket-alt\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
                     <div style="position:absolute;top:16px;left:16px;">
                         <span style="background:<?= $phaseBadge[1] ?>;color:#fff;font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.8px;"><?= $phaseBadge[0] ?></span>
                     </div>
@@ -477,14 +477,14 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
                         <?php if (!empty($event['terms_conditions'])): ?>
                         <div style="margin-top:28px;background:#f9fafb;border-left:4px solid #e0e0e0;padding:16px 20px;border-radius:0 8px 8px 0;">
-                            <h6 style="color:#053732;font-weight:700;margin-bottom:8px;"><i class="fas fa-file-alt me-2" style="color:#aaa;"></i>Terms & Conditions</h6>
+                            <h6 style="color:#0a0a0a;font-weight:700;margin-bottom:8px;"><i class="fas fa-file-alt me-2" style="color:#aaa;"></i>Terms & Conditions</h6>
                             <div style="font-size:.82rem;color:#666;line-height:1.7;"><?= nl2br(htmlspecialchars($event['terms_conditions'])) ?></div>
                         </div>
                         <?php endif; ?>
 
                         <?php if (!empty($sponsors)): ?>
                         <div style="margin-top:40px;">
-                            <h5 style="font-weight:700;color:#053732;margin-bottom:20px;">Our Sponsors &amp; Partners</h5>
+                            <h5 style="font-weight:700;color:#0a0a0a;margin-bottom:20px;">Our Sponsors &amp; Partners</h5>
                             <?php foreach ($sponsorsByTier as $tier => $tierSponsors): ?>
                             <div class="tier-label"><?= htmlspecialchars(ucfirst($tier)) ?></div>
                             <div class="row mb-4">
@@ -831,11 +831,11 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                             <?php if ($showNominateCta): ?>
                             <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
                                 <a href="<?= SITE_URL ?>/nominate.php?event=<?= urlencode($slug) ?>&category=<?= $catId ?>"
-                                   style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;background:#053732;color:#fff;font-size:.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+                                   style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;background:#0a0a0a;color:#fff;font-size:.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
                                     <i class="fas fa-user-plus"></i> Nominate Someone
                                 </a>
                                 <a href="<?= SITE_URL ?>/nominate.php?event=<?= urlencode($slug) ?>&category=<?= $catId ?>&mode=self"
-                                   style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;border:2px solid #053732;background:transparent;color:#053732;font-size:.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+                                   style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;border:2px solid #0a0a0a;background:transparent;color:#0a0a0a;font-size:.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
                                     <i class="fas fa-user"></i> Nominate Myself
                                 </a>
                             </div>
@@ -920,7 +920,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                             <?php if (!empty($tt['benefits'])): ?>
                             <ul style="list-style:none;padding:0;margin:10px 0 0;font-size:.79rem;color:#555;">
                                 <?php foreach ($tt['benefits'] as $b): ?>
-                                <li style="margin-bottom:4px;"><i class="fas fa-check" style="color:#10b981;margin-right:6px;font-size:.68rem;"></i><?= htmlspecialchars($b) ?></li>
+                                <li style="margin-bottom:4px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:6px;font-size:.68rem;"></i><?= htmlspecialchars($b) ?></li>
                                 <?php endforeach; ?>
                             </ul>
                             <?php endif; ?>
@@ -946,7 +946,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                             <div class="card" style="border:1px solid #f0f0f0;border-radius:8px;margin-bottom:8px;">
                                 <div class="card-header" style="background:#fafafa;border:none;padding:0;">
                                     <button class="btn btn-link w-100 text-left font-weight-bold"
-                                            style="color:#053732;font-size:.93rem;text-decoration:none;padding:14px 20px;"
+                                            style="color:#0a0a0a;font-size:.93rem;text-decoration:none;padding:14px 20px;"
                                             data-toggle="collapse" data-target="#faq-c-<?= $fi ?>">
                                         <?= htmlspecialchars($faq['question']) ?>
                                     </button>
@@ -971,7 +971,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
                     <!-- Event Info Card -->
                     <div class="event-info-card">
-                        <h5 style="font-weight:700;color:#053732;margin-bottom:20px;font-size:1rem;">Event Info</h5>
+                        <h5 style="font-weight:700;color:#0a0a0a;margin-bottom:20px;font-size:1rem;">Event Info</h5>
 
                         <div class="info-row">
                             <i class="fas fa-calendar-alt info-icon"></i>
@@ -1034,7 +1034,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                             <i class="fas fa-vote-yea info-icon"></i>
                             <div>
                                 <span class="info-label">Voting</span>
-                                <span class="info-value" style="color:<?= $isVotingOpen ? '#10b981' : ($votingClosed ? '#6c757d' : '#be9b3f') ?>;">
+                                <span class="info-value" style="color:<?= $isVotingOpen ? '#be9b3f' : ($votingClosed ? '#6c757d' : '#be9b3f') ?>;">
                                     <?= $isVotingOpen ? 'Currently Open' : ($votingClosed ? 'Closed' : ($votingNotYet ? 'Not Yet Open' : 'N/A')) ?>
                                 </span>
                                 <?php if ($votingOpensTs || $votingClosesTs): ?>
@@ -1053,7 +1053,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                             <i class="fas fa-user-plus info-icon"></i>
                             <div>
                                 <span class="info-label">Registration</span>
-                                <span class="info-value" style="color:<?= $isRegOpen ? '#10b981' : ($regClosed ? '#6c757d' : '#f59e0b') ?>;">
+                                <span class="info-value" style="color:<?= $isRegOpen ? '#be9b3f' : ($regClosed ? '#6c757d' : '#f59e0b') ?>;">
                                     <?= $isRegOpen ? 'Open' : ($regClosed ? 'Closed' : 'Not Yet Open') ?>
                                 </span>
                                 <?php if ($regClosesTs && $isRegOpen): ?>
@@ -1068,7 +1068,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
 
                     <!-- Virtual Join CTA -->
                     <?php if ($isVirtual && !empty($virtualUrl)): ?>
-                    <div style="background:linear-gradient(135deg,#053732,#0a5c50);border-radius:12px;padding:24px;text-align:center;color:#fff;margin-bottom:24px;">
+                    <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:12px;padding:24px;text-align:center;color:#fff;margin-bottom:24px;">
                         <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:8px;">Virtual Event</div>
                         <h5 style="font-weight:800;margin-bottom:16px;"><?= htmlspecialchars($event['name']) ?></h5>
                         <a href="<?= htmlspecialchars($virtualUrl) ?>" target="_blank"
@@ -1081,7 +1081,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                     <!-- Ticket CTA (lifecycle-aware) -->
                     <?php if ($hasTicketing): ?>
                     <?php if ($anyTicketOnSale): ?>
-                    <div style="background:linear-gradient(135deg,#053732,#0a5c50);border-radius:12px;padding:26px;text-align:center;color:#fff;margin-bottom:24px;" id="tickets">
+                    <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:12px;padding:26px;text-align:center;color:#fff;margin-bottom:24px;" id="tickets">
                         <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:8px;">Get Your Ticket</div>
                         <h5 style="font-weight:800;margin-bottom:16px;"><?= htmlspecialchars($event['name']) ?></h5>
                         <a href="<?= SITE_URL ?>/checkout?slug=<?= urlencode($slug) ?>"
@@ -1129,14 +1129,14 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                     <!-- Registration CTA -->
                     <?php if ($hasRegistration): ?>
                     <?php if ($isRegOpen): ?>
-                    <div style="background:linear-gradient(135deg,#059669,#10b981);border-radius:12px;padding:26px;text-align:center;color:#fff;margin-bottom:24px;">
+                    <div style="background:linear-gradient(135deg,#a0822f,#be9b3f);border-radius:12px;padding:26px;text-align:center;color:#fff;margin-bottom:24px;">
                         <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:8px;">Registration Open</div>
                         <h5 style="font-weight:800;margin-bottom:8px;">Secure Your Spot</h5>
                         <?php if ($regClosesTs): ?>
                         <p style="font-size:.82rem;opacity:.88;margin-bottom:16px;">Registration closes <?= date('d M Y', $regClosesTs) ?>.</p>
                         <?php endif; ?>
                         <a href="<?= API_BASE ?>/events/<?= urlencode($slug) ?>/register" target="_blank"
-                           class="theme-btn btn-style-two" style="display:block;text-align:center;background:#fff;color:#059669;border-color:#fff;">
+                           class="theme-btn btn-style-two" style="display:block;text-align:center;background:#fff;color:#a0822f;border-color:#fff;">
                             <span class="btn-title"><i class="fas fa-user-plus me-2"></i> Register Now</span>
                         </a>
                     </div>
@@ -1207,7 +1207,7 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
         <div class="modal-content" style="border-radius:14px;border:none;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.18);">
 
             <!-- Header -->
-            <div class="modal-header" style="background:linear-gradient(135deg,#053732 0%,#0a5c50 100%);padding:18px 22px;border:none;">
+            <div class="modal-header" style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);padding:18px 22px;border:none;">
                 <div>
                     <span id="modal-nom-cat" style="font-size:.7rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.8px;font-weight:700;"></span>
                     <h5 class="modal-title" id="modal-nom-name" style="margin:3px 0 0;font-weight:800;color:#fff;line-height:1.2;font-size:1.15rem;"></h5>
@@ -1236,12 +1236,12 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                         <!-- Voting code -->
                         <div id="modal-nom-code-wrap" style="display:none;margin-bottom:6px;">
                             <span style="font-size:.7rem;color:#999;text-transform:uppercase;letter-spacing:.5px;">Code</span><br>
-                            <span id="modal-nom-code" style="font-family:monospace;font-size:.9rem;font-weight:700;color:#053732;background:#f0eeff;padding:2px 8px;border-radius:5px;"></span>
+                            <span id="modal-nom-code" style="font-family:monospace;font-size:.9rem;font-weight:700;color:#0a0a0a;background:#f0eeff;padding:2px 8px;border-radius:5px;"></span>
                         </div>
                         <!-- Votes pill -->
                         <div id="modal-nom-votes-wrap" style="display:inline-flex;align-items:center;gap:6px;background:rgba(5,55,50,.06);padding:5px 12px;border-radius:20px;">
-                            <i class="fas fa-poll" style="color:#053732;font-size:.8rem;"></i>
-                            <span id="modal-nom-votes" style="font-size:.82rem;font-weight:700;color:#053732;"></span>
+                            <i class="fas fa-poll" style="color:#0a0a0a;font-size:.8rem;"></i>
+                            <span id="modal-nom-votes" style="font-size:.82rem;font-weight:700;color:#0a0a0a;"></span>
                         </div>
                     </div>
                 </div>
@@ -1257,11 +1257,11 @@ $seoUrl   = 'https://mema.memaawards.africa/event-detail.php?slug=' . $seoSlug;
                     <p style="font-size:.75rem;color:#aaa;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin:0 0 8px;">Contact</p>
                     <div style="display:flex;flex-direction:column;gap:6px;">
                         <div id="modal-nom-email-row" style="display:none;align-items:center;gap:8px;">
-                            <i class="fas fa-envelope" style="color:#053732;font-size:.8rem;width:16px;text-align:center;"></i>
-                            <a id="modal-nom-email" href="#" style="font-size:.85rem;color:#053732;text-decoration:none;"></a>
+                            <i class="fas fa-envelope" style="color:#0a0a0a;font-size:.8rem;width:16px;text-align:center;"></i>
+                            <a id="modal-nom-email" href="#" style="font-size:.85rem;color:#0a0a0a;text-decoration:none;"></a>
                         </div>
                         <div id="modal-nom-phone-row" style="display:none;align-items:center;gap:8px;">
-                            <i class="fas fa-phone" style="color:#053732;font-size:.8rem;width:16px;text-align:center;"></i>
+                            <i class="fas fa-phone" style="color:#0a0a0a;font-size:.8rem;width:16px;text-align:center;"></i>
                             <span id="modal-nom-phone" style="font-size:.85rem;color:#444;"></span>
                         </div>
                     </div>
@@ -1408,7 +1408,7 @@ $(document).ready(function() {
             linkedin:  { icon:'fab fa-linkedin-in',   color:'#0a66c2', label:'LinkedIn' },
             youtube:   { icon:'fab fa-youtube',       color:'#ff0000', label:'YouTube'  },
             tiktok:    { icon:'fab fa-tiktok',        color:'#010101', label:'TikTok'   },
-            website:   { icon:'fas fa-globe',         color:'#053732', label:'Website'  }
+            website:   { icon:'fas fa-globe',         color:'#0a0a0a', label:'Website'  }
         };
         var $socialContainer = $('#modal-nom-socials').empty();
         var hasSocials = false;

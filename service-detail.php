@@ -17,7 +17,7 @@ $services = [
             'Post-event analytics and downloadable reports',
         ],
         'image' => 'event.webp',
-        'color' => '#053732',
+        'color' => '#0a0a0a',
     ],
     'awards-nominations' => [
         'icon'     => 'fa-award',
@@ -49,7 +49,7 @@ $services = [
             'Revenue and sales reports for organizers',
         ],
         'image' => 'slide-1.webp',
-        'color' => '#053732',
+        'color' => '#0a0a0a',
     ],
     'live-polls' => [
         'icon'     => 'fa-poll',
@@ -81,7 +81,7 @@ $services = [
             'Gallery export for post-event reports',
         ],
         'image' => 'slide-3.webp',
-        'color' => '#053732',
+        'color' => '#0a0a0a',
     ],
     'analytics' => [
         'icon'     => 'fa-chart-bar',
@@ -175,9 +175,9 @@ $otherServices = array_filter($services, fn($k) => $k !== $id, ARRAY_FILTER_USE_
     display: flex; align-items: center; justify-content: center;
     font-size: 1.3rem; color: #be9b3f; margin: 0 auto 14px;
 }
-.service-card h6 { font-weight: 700; color: #053732; margin: 0; font-size: .9rem; }
-.service-cta { padding: 70px 0; background: linear-gradient(135deg, #032620, #053732); }
-.section-heading { font-size: 2rem; font-weight: 800; color: #053732; }
+.service-card h6 { font-weight: 700; color: #0a0a0a; margin: 0; font-size: .9rem; }
+.service-cta { padding: 70px 0; background: linear-gradient(135deg, #0a0a0a, #0a0a0a); }
+.section-heading { font-size: 2rem; font-weight: 800; color: #0a0a0a; }
 </style>
 </head>
 <body>

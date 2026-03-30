@@ -43,7 +43,7 @@ $seoPostDesc  = htmlspecialchars(strip_tags($post['excerpt'] ?? mb_substr($post[
 $seoPostDesc  = mb_strimwidth($seoPostDesc, 0, 160, '...');
 $seoPostImg   = !empty($featImg) ? API_STORAGE . $featImg : OG_IMAGE;
 $seoPostSlug  = urlencode($post['slug'] ?? '');
-$seoPostUrl   = 'https://mema.memaawards.africa/blog-single.php?slug=' . $seoPostSlug;
+$seoPostUrl   = 'https://dfa.tuqiohub.africa/blog-single.php?slug=' . $seoPostSlug;
 $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 ?>
 
@@ -74,7 +74,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="<?= $seoPostTitle ?> | Digitally Fit Awards">
 <meta name="twitter:description" content="<?= $seoPostDesc ?>">
 <meta name="twitter:image" content="<?= $seoPostImg ?>">
@@ -85,17 +85,17 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://mema.memaawards.africa/blog.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($post['title'] ?? '') ?>","item":"<?= $seoPostUrl ?>"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dfa.tuqiohub.africa/blog.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($post['title'] ?? '') ?>","item":"<?= $seoPostUrl ?>"}]}
 </script>
 
 <!-- JSON-LD: Article -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Digitally Fit Awards') ?>"},"publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa"}}
+{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Digitally Fit Awards') ?>"},"publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -109,14 +109,14 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
 .post-content { font-size:.97rem;line-height:1.9;color:#444; }
-.post-content h2,.post-content h3 { color:#053732;font-weight:700;margin:28px 0 14px; }
+.post-content h2,.post-content h3 { color:#0a0a0a;font-weight:700;margin:28px 0 14px; }
 .post-content img { max-width:100%;border-radius:8px;margin:20px 0; }
 .post-content a { color:#be9b3f; }
 
 /* Sidebar widgets */
 .sidebar .sidebar-widget { margin-bottom:36px; }
 .sidebar .sidebar-title {
-    font-size:1rem;font-weight:700;color:#053732;text-transform:uppercase;
+    font-size:1rem;font-weight:700;color:#0a0a0a;text-transform:uppercase;
     letter-spacing:1.5px;padding-bottom:12px;border-bottom:2px solid #be9b3f;
     margin-bottom:20px;
 }
@@ -160,11 +160,11 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 }
 .author-block .author-image img { width:100%;height:100%;object-fit:cover; }
 .author-block .author-image.no-img {
-    background:linear-gradient(135deg,#053732,#0a5c50);
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     display:flex;align-items:center;justify-content:center;
 }
 .author-block .author-image.no-img i { font-size:1.8rem;color:rgba(255,255,255,.7); }
-.author-block h5 { font-size:.95rem;font-weight:700;color:#053732;margin-bottom:6px; }
+.author-block h5 { font-size:.95rem;font-weight:700;color:#0a0a0a;margin-bottom:6px; }
 .author-block p { font-size:.8rem;color:#888;margin-bottom:0; }
 
 /* Recent posts */
@@ -176,14 +176,14 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 }
 .sidebar-widget .post .post-thumb img { width:100%;height:100%;object-fit:cover; }
 .sidebar-widget .post .post-thumb.no-img {
-    background:linear-gradient(135deg,#053732,#0a5c50);
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
     display:flex;align-items:center;justify-content:center;border-radius:6px;
 }
 .sidebar-widget .post .post-thumb.no-img i { font-size:1.1rem;color:rgba(255,255,255,.5); }
 .sidebar-widget .post .post-info { font-size:.72rem;color:#999;margin-bottom:4px; }
 .sidebar-widget .post .post-info i { color:#be9b3f;margin-right:3px; }
 .sidebar-widget .post h6 { margin:0;font-size:.82rem;font-weight:600;line-height:1.35; }
-.sidebar-widget .post h6 a { color:#053732;text-decoration:none; }
+.sidebar-widget .post h6 a { color:#0a0a0a;text-decoration:none; }
 .sidebar-widget .post h6 a:hover { color:#be9b3f; }
 
 /* Tags */
@@ -264,9 +264,9 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
                     <img src="<?= htmlspecialchars($featImg) ?>"
                          alt="<?= htmlspecialchars($post['title']) ?>"
                          style="width:100%;border-radius:10px;object-fit:cover;max-height:420px;"
-                         onerror="this.outerHTML='<div style=\'width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#053732 0%,#0a5c50 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-newspaper\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
+                         onerror="this.outerHTML='<div style=\'width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-newspaper\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
                     <?php else: ?>
-                    <div style="width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#053732 0%,#0a5c50 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+                    <div style="width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
                         <i class="fas fa-newspaper" style="font-size:3rem;color:rgba(255,255,255,.35);"></i>
                         <span style="color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;">Digitally Fit Awards</span>
                     </div>

@@ -44,7 +44,7 @@
         <ul class="contact-list-one">
             <li><i class="flaticon-location"></i> Nairobi, Kenya <strong>Head Office</strong></li>
             <li><i class="flaticon-alarm-clock-1"></i> Monday – Friday, 9am – 6pm <strong>Working Hours</strong></li>
-            <li><i class="flaticon-email-1"></i> <a href="mailto:info@memaawards.co.ke">info@memaawards.co.ke</a> <strong>Email Us</strong></li>
+            <li><i class="flaticon-email-1"></i> <a href="mailto:info@dfa.tuqiohub.africa">info@dfa.tuqiohub.africa</a> <strong>Email Us</strong></li>
         </ul>
 
     </div>
@@ -67,7 +67,7 @@
         btn.querySelector('.btn-title').textContent = 'Sending…';
         feedback.style.display = 'none';
 
-        fetch('<?php echo defined("API_BASE") ? API_BASE : "https://platform.mema.memaawards.africa"; ?>/api/public/contact', {
+        fetch('<?php echo defined("API_BASE") ? API_BASE : "https://dfaplatform.tuqiohub.africa"; ?>/api/public/contact', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: params

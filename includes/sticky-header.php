@@ -8,7 +8,7 @@
 
                     <div class="logo-box">
 
-                        <div class="logo"><a href="./"><img src="<?php echo SITE_URL; ?>/assets/images/logo/mema-logo-dark.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
+                        <div class="logo"><a href="./"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
 
                         <div class="upper-right">
 

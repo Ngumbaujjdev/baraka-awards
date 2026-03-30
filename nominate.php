@@ -65,7 +65,7 @@ if ($categoryParam !== '') {
 <meta name="keywords" content="nominate Kenya, submit nomination awards, Digitally Fit Awards nominations, Kenya awards nomination, recognise outstanding Kenyans">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/nominate.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/nominate.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominate | Digitally Fit Awards">
@@ -79,13 +79,13 @@ if ($categoryParam !== '') {
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/nominate.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/nominate.php">
 <meta property="og:description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, and community.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Nominate | Digitally Fit Awards">
 <meta name="twitter:description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, and community.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -96,17 +96,17 @@ if ($categoryParam !== '') {
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"https://mema.memaawards.africa/nominate.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"https://dfa.tuqiohub.africa/nominate.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Digitally Fit Awards","url":"https://mema.memaawards.africa/nominate.php","description":"Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/nominate.php","description":"Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -122,7 +122,7 @@ if ($categoryParam !== '') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
 .nom-form-wrap { background:#fff;border-radius:14px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.07); }
-.nom-form-wrap label { font-weight:600;font-size:.88rem;color:#053732;margin-bottom:6px;display:block; }
+.nom-form-wrap label { font-weight:600;font-size:.88rem;color:#0a0a0a;margin-bottom:6px;display:block; }
 .nom-form-wrap input,.nom-form-wrap textarea,.nom-form-wrap select {
     width:100%;border:2px solid #eee;border-radius:8px;padding:11px 14px;
     font-size:.9rem;color:#333;transition:border-color .2s;background:#fafafa;
@@ -131,9 +131,9 @@ if ($categoryParam !== '') {
     border-color:#be9b3f;outline:none;background:#fff;box-shadow:0 0 0 3px rgba(190,155,63,0.1);
 }
 .section-divider { border-top:2px solid #f0f0f0;margin:28px 0;padding-top:24px; }
-.section-divider h6 { font-weight:700;color:#053732;margin-bottom:20px;font-size:.95rem;text-transform:uppercase;letter-spacing:1px; }
+.section-divider h6 { font-weight:700;color:#0a0a0a;margin-bottom:20px;font-size:.95rem;text-transform:uppercase;letter-spacing:1px; }
 .app-question-wrap { margin-bottom:16px; }
-.cat-card:hover { border-color:#053732 !important; background:#f7f5ff !important; }
+.cat-card:hover { border-color:#0a0a0a !important; background:#f7f5ff !important; }
 /* intl-tel-input */
 .nom-form-wrap .iti { width:100%; }
 .nom-form-wrap .iti input { border-radius:0 8px 8px 0; }
@@ -147,7 +147,7 @@ if ($categoryParam !== '') {
 .nom-form-wrap .select2-container--default.select2-container--focus .select2-selection--single,
 .nom-form-wrap .select2-container--default.select2-container--open .select2-selection--single { border-color:#be9b3f;box-shadow:0 0 0 3px rgba(190,155,63,0.1);background:#fff; }
 .select2-dropdown { border:2px solid #be9b3f;border-radius:8px;font-size:.9rem;z-index:9999; }
-.select2-container--default .select2-results__option--highlighted[aria-selected] { background:#053732; }
+.select2-container--default .select2-results__option--highlighted[aria-selected] { background:#0a0a0a; }
 .select2-search--dropdown .select2-search__field { border:1px solid #eee;border-radius:6px;padding:6px 10px;font-size:.88rem; }
 .select2-container--default .select2-selection--single .select2-selection__clear { margin-right:24px;color:#aaa;font-size:1.1rem; }
 </style>
@@ -189,10 +189,10 @@ if ($categoryParam !== '') {
                 if ($selectedPromoted):
                 ?>
                 <div style="background:#fff;border-radius:14px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.07);text-align:center;">
-                    <div style="width:64px;height:64px;background:linear-gradient(135deg,#053732,#0a5c50);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                    <div style="width:64px;height:64px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
                         <i class="flaticon-trophy-1" style="font-size:1.6rem;color:#be9b3f;"></i>
                     </div>
-                    <h4 style="font-weight:800;color:#053732;margin-bottom:8px;"><?= htmlspecialchars($selectedPromoted['name']) ?></h4>
+                    <h4 style="font-weight:800;color:#0a0a0a;margin-bottom:8px;"><?= htmlspecialchars($selectedPromoted['name']) ?></h4>
                     <p style="color:#666;max-width:420px;margin:0 auto 24px;">Nominations for this category have closed — the finalists have been selected and voting is now open. Cast your vote for your favourite artist!</p>
                     <a href="<?= SITE_URL ?>/nominees?category=<?= htmlspecialchars($selectedPromoted['slug'] ?? '') ?>"
                        class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">
@@ -206,7 +206,7 @@ if ($categoryParam !== '') {
                 <?php elseif (empty($nomEvents)): ?>
                 <div class="text-center" style="padding:80px 0;">
                     <i class="fas fa-hourglass-half" style="font-size:3rem;color:#be9b3f;opacity:.3;"></i>
-                    <h4 style="margin-top:20px;color:#053732;">No Nominations Currently Open</h4>
+                    <h4 style="margin-top:20px;color:#0a0a0a;">No Nominations Currently Open</h4>
                     <p class="text-muted">Check back soon when nominations open for upcoming events.</p>
                     <a href="<?= SITE_URL ?>/events.php" class="theme-btn btn-style-one" style="margin-top:16px;">
                         <span class="btn-title">Browse Events</span>
@@ -215,7 +215,7 @@ if ($categoryParam !== '') {
                 <?php else: ?>
 
                 <div class="nom-form-wrap">
-                    <h3 id="form-headline" style="font-weight:800;color:#053732;margin-bottom:6px;">Submit a Nomination</h3>
+                    <h3 id="form-headline" style="font-weight:800;color:#0a0a0a;margin-bottom:6px;">Submit a Nomination</h3>
                     <p id="form-subheadline" style="color:#888;font-size:.9rem;margin-bottom:20px;">Are you nominating yourself or putting someone else forward?</p>
 
                     <!-- Self / Other toggle -->
@@ -234,12 +234,12 @@ if ($categoryParam !== '') {
                         <!-- Event: badge when pre-selected, dropdown when not -->
                         <?php if ($selectedSlug && $selectedEvent): ?>
                         <div style="display:flex;align-items:center;gap:12px;background:#f0eeff;border-radius:10px;padding:12px 16px;margin-bottom:20px;">
-                            <div style="width:36px;height:36px;background:#053732;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <div style="width:36px;height:36px;background:#0a0a0a;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                 <i class="fas fa-calendar-alt" style="color:#fff;font-size:.85rem;"></i>
                             </div>
                             <div style="flex:1;min-width:0;">
                                 <p style="margin:0;font-size:.68rem;color:#888;text-transform:uppercase;letter-spacing:.5px;font-weight:700;">Submitting for</p>
-                                <p style="margin:0;font-weight:800;color:#053732;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= htmlspecialchars($selectedEvent['name']) ?></p>
+                                <p style="margin:0;font-weight:800;color:#0a0a0a;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= htmlspecialchars($selectedEvent['name']) ?></p>
                             </div>
                             <?php if (count($nomEvents) > 1): ?>
                             <a href="nominate.php" style="font-size:.78rem;color:#be9b3f;font-weight:700;white-space:nowrap;flex-shrink:0;text-decoration:none;">
@@ -266,7 +266,7 @@ if ($categoryParam !== '') {
                         <?php if (!empty($promotedCats)): ?>
                         <!-- Promoted categories notice -->
                         <div style="background:linear-gradient(135deg,rgba(5,55,50,.06),rgba(5,55,50,.03));border:1px solid rgba(5,55,50,.15);border-radius:10px;padding:16px 18px;margin-bottom:20px;">
-                            <p style="margin:0 0 10px;font-size:.82rem;font-weight:700;color:#053732;text-transform:uppercase;letter-spacing:.5px;"><i class="flaticon-trophy-1 me-2" style="color:#be9b3f;"></i>Now in Voting Phase</p>
+                            <p style="margin:0 0 10px;font-size:.82rem;font-weight:700;color:#0a0a0a;text-transform:uppercase;letter-spacing:.5px;"><i class="flaticon-trophy-1 me-2" style="color:#be9b3f;"></i>Now in Voting Phase</p>
                             <div style="display:flex;flex-wrap:wrap;gap:8px;">
                             <?php foreach ($promotedCats as $pCat): ?>
                                 <a href="<?= SITE_URL ?>/nominees?category=<?= htmlspecialchars($pCat['slug'] ?? '') ?>"
@@ -455,7 +455,7 @@ if ($categoryParam !== '') {
                                 <!-- Empty state -->
                                 <div id="photo-empty-state">
                                     <div style="width:60px;height:60px;border-radius:50%;background:#f0eeff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-                                        <i class="fas fa-camera" style="font-size:1.4rem;color:#053732;opacity:.6;"></i>
+                                        <i class="fas fa-camera" style="font-size:1.4rem;color:#0a0a0a;opacity:.6;"></i>
                                     </div>
                                     <p style="margin:0 0 4px;font-weight:700;font-size:.9rem;color:#333;">Click to upload or drag &amp; drop</p>
                                     <p style="margin:0;font-size:.8rem;color:#aaa;">JPG, PNG or WebP</p>
@@ -465,7 +465,7 @@ if ($categoryParam !== '') {
                                     <img id="photo-preview-img" src="" alt="Preview"
                                          style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #ede9f6;flex-shrink:0;">
                                     <div style="text-align:left;">
-                                        <p id="photo-preview-name" style="margin:0 0 2px;font-weight:700;font-size:.9rem;color:#053732;word-break:break-all;"></p>
+                                        <p id="photo-preview-name" style="margin:0 0 2px;font-weight:700;font-size:.9rem;color:#0a0a0a;word-break:break-all;"></p>
                                         <p id="photo-preview-size" style="margin:0 0 8px;font-size:.78rem;color:#aaa;"></p>
                                         <button type="button" id="photo-remove-btn"
                                                 style="font-size:.78rem;color:#be9b3f;background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 10px;cursor:pointer;">
@@ -530,7 +530,7 @@ if ($categoryParam !== '') {
     <div class="modal-dialog modal-dialog-centered" style="max-width:480px;" role="document">
         <div class="modal-content" style="border-radius:16px;border:none;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.18);">
             <!-- Header -->
-            <div class="modal-header" style="background:linear-gradient(135deg,#053732 0%,#0a5c50 100%);border:none;padding:20px 24px;align-items:center;">
+            <div class="modal-header" style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);border:none;padding:20px 24px;align-items:center;">
                 <div style="display:flex;align-items:center;gap:12px;flex:1;">
                     <div style="width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <i class="fas fa-clipboard-check" style="color:#fff;font-size:.95rem;"></i>
@@ -608,7 +608,7 @@ var NomForm = {
         this.mode = mode;
         var btnSelf  = document.getElementById('btn-self');
         var btnOther = document.getElementById('btn-other');
-        var activeStyle  = 'flex:1;padding:13px;border-radius:10px;border:2px solid #053732;background:#053732;font-weight:700;font-size:.9rem;color:#fff;cursor:pointer;transition:all .2s;';
+        var activeStyle  = 'flex:1;padding:13px;border-radius:10px;border:2px solid #0a0a0a;background:#0a0a0a;font-weight:700;font-size:.9rem;color:#fff;cursor:pointer;transition:all .2s;';
         var passiveStyle = 'flex:1;padding:13px;border-radius:10px;border:2px solid #eee;background:#fff;font-weight:700;font-size:.9rem;color:#888;cursor:pointer;transition:all .2s;';
 
         if (mode === 'self') {
@@ -760,7 +760,7 @@ var NomForm = {
             bodyEl.innerHTML +=
                 '<div style="display:flex;align-items:center;gap:14px;padding:0 0 14px;border-bottom:2px solid #f0eeff;margin-bottom:6px;">' +
                 '<img src="' + photoSrc + '" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:3px solid #ede9f6;flex-shrink:0;">' +
-                '<div><p style="margin:0;font-weight:800;font-size:.95rem;color:#053732;">' + nomName + '</p>' +
+                '<div><p style="margin:0;font-weight:800;font-size:.95rem;color:#0a0a0a;">' + nomName + '</p>' +
                 '<p style="margin:0;font-size:.78rem;color:#888;margin-top:2px;"><i class="fas fa-image" style="margin-right:4px;color:#be9b3f;"></i>Photo attached</p></div>' +
                 '</div>';
         }
@@ -770,7 +770,7 @@ var NomForm = {
             var last = i === rows.length - 1;
             return '<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;' + (last ? '' : 'border-bottom:1px solid #f5f5f5;') + '">' +
                    '<span style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.6px;min-width:95px;flex-shrink:0;padding-top:3px;">' + r.label + '</span>' +
-                   '<span style="font-size:.9rem;font-weight:600;color:#053732;flex:1;word-break:break-word;">' + r.value + '</span>' +
+                   '<span style="font-size:.9rem;font-weight:600;color:#0a0a0a;flex:1;word-break:break-word;">' + r.value + '</span>' +
                    '</div>';
         }).join('');
 
@@ -838,7 +838,7 @@ var NomForm = {
             c.style.background = '#fafafa';
         });
         // Select clicked card
-        el.style.border = '2px solid #053732';
+        el.style.border = '2px solid #0a0a0a';
         el.style.background = '#f0eeff';
         var catId = el.getAttribute('data-cat-id');
         document.getElementById('category_id_hidden').value = catId;
@@ -955,7 +955,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('photo-preview-size').textContent = (file.size / 1024).toFixed(0) + ' KB';
             document.getElementById('photo-empty-state').style.display = 'none';
             document.getElementById('photo-preview-state').style.display = 'flex';
-            dropzone.style.borderColor = '#053732';
+            dropzone.style.borderColor = '#0a0a0a';
             dropzone.style.background  = '#f7f5ff';
         };
         reader.readAsDataURL(file);

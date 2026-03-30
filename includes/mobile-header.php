@@ -1,6 +1,6 @@
 <div class="mobile-header">
 
-            <div class="logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/mema-logo-dark.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
+            <div class="logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
 
 
 
@@ -44,7 +44,7 @@
 
                 <div class="upper-box">
 
-                    <div class="nav-logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/mema-logo-dark.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
+                    <div class="nav-logo"><a href="<?php echo SITE_URL; ?>/"><img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" title="Digitally Fit Awards" style="max-height:65px; width:auto;"></a></div>
 
                     <div class="close-btn"><i class="icon flaticon-close"></i></div>
 
@@ -62,7 +62,7 @@
 
                     <li><i class="flaticon-alarm-clock-1"></i>Monday - Friday 9am - 6pm <strong>Timing</strong></li>
 
-                    <li><i class="flaticon-email-1"></i> <a href="mailto:info@memaawards.co.ke">info@memaawards.co.ke</a> <strong>Mail to us</strong></li>
+                    <li><i class="flaticon-email-1"></i> <a href="mailto:info@dfa.tuqiohub.africa">info@dfa.tuqiohub.africa</a> <strong>Mail to us</strong></li>
 
                 </ul>
 

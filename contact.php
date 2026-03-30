@@ -9,11 +9,11 @@ include 'libs/App.php';
 
 <!-- SEO -->
 <title>Contact Us | Digitally Fit Awards</title>
-<meta name="description" content="Get in touch with Digitally Fit Awards. Contact us for event management inquiries, partnerships, nominations, or general support. Email: info@mema.memaawards.africa">
+<meta name="description" content="Get in touch with Digitally Fit Awards. Contact us for event management inquiries, partnerships, nominations, or general support. Email: info@dfa.tuqiohub.africa">
 <meta name="keywords" content="contact Digitally Fit Awards, Digitally Fit Awards support, event management inquiry Kenya, Digitally Fit Awards email, Nairobi events contact">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/contact.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/contact.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Contact Us | Digitally Fit Awards">
@@ -27,13 +27,13 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/contact.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/contact.php">
 <meta property="og:description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Contact Us | Digitally Fit Awards">
 <meta name="twitter:description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://mema.memaawards.africa/contact.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://dfa.tuqiohub.africa/contact.php"}]}
 </script>
 
 <!-- JSON-LD: ContactPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Digitally Fit Awards","url":"https://mema.memaawards.africa/contact.php","description":"Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support."}
+{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/contact.php","description":"Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -78,7 +78,7 @@ include 'libs/App.php';
 .contact-form-wrap label {
     font-weight: 600;
     font-size: .88rem;
-    color: #053732;
+    color: #0a0a0a;
     margin-bottom: 6px;
     display: block;
 }
@@ -104,7 +104,7 @@ include 'libs/App.php';
 }
 
 .contact-info-box {
-    background: linear-gradient(135deg, #053732, #0a5c50);
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
     border-radius: 14px;
     padding: 36px;
     color: #fff;
@@ -193,7 +193,7 @@ include 'libs/App.php';
         <div class="row">
             <div class="col-lg-7 mb-5 mb-lg-0 wow fadeInLeft">
                 <div class="contact-form-wrap">
-                    <h3 style="font-weight:800;color:#053732;margin-bottom:6px;">Send Us a Message</h3>
+                    <h3 style="font-weight:800;color:#0a0a0a;margin-bottom:6px;">Send Us a Message</h3>
                     <p class="text-muted mb-4" style="font-size:.9rem;">We'd love to hear from you. Fill in the form and we'll get back to you within 24 hours.</p>
 
                     <form id="contactForm">
@@ -301,8 +301,8 @@ include 'libs/App.php';
     padding:16px 22px;border-radius:12px;
     box-shadow:0 8px 28px rgba(0,0,0,0.2);
     font-size:.92rem;max-width:340px;display:none;
-    color:#fff;border-left:4px solid #10b981;
-    background:#053732;line-height:1.5;
+    color:#fff;border-left:4px solid #be9b3f;
+    background:#0a0a0a;line-height:1.5;
 "></div>
 
 <script>
@@ -312,7 +312,7 @@ include 'libs/App.php';
     function showToast(msg, isError) {
         var t = document.getElementById('contactToast');
         t.textContent = msg;
-        t.style.borderLeftColor = isError ? '#be9b3f' : '#10b981';
+        t.style.borderLeftColor = isError ? '#be9b3f' : '#be9b3f';
         t.style.display = 'block';
         t.style.opacity = '1';
         clearTimeout(t._timer);

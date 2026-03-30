@@ -30,7 +30,7 @@ $totalItems  = $resp['total'] ?? 0;
 <meta name="keywords" content="Digitally Fit Awards blog, Kenya events news, awards articles Kenya, event updates Nairobi, Digitally Fit Awards articles">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/blog.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/blog.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Articles & News | Digitally Fit Awards">
@@ -44,13 +44,13 @@ $totalItems  = $resp['total'] ?? 0;
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/blog.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/blog.php">
 <meta property="og:description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Articles &amp; News | Digitally Fit Awards">
 <meta name="twitter:description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -61,17 +61,17 @@ $totalItems  = $resp['total'] ?? 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://mema.memaawards.africa/blog.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dfa.tuqiohub.africa/blog.php"}]}
 </script>
 
 <!-- JSON-LD: Blog -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Digitally Fit Awards","url":"https://mema.memaawards.africa/blog.php","description":"Latest news, articles, and updates from Digitally Fit Awards.","publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa"}}
+{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/blog.php","description":"Latest news, articles, and updates from Digitally Fit Awards.","publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -98,11 +98,11 @@ $totalItems  = $resp['total'] ?? 0;
 .blog-card .post-meta { display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px; }
 .blog-card .post-meta span { font-size:.78rem;color:#999; }
 .blog-card .post-meta i { color:#be9b3f;margin-right:3px; }
-.blog-card h4 { font-size:1.05rem;font-weight:700;color:#053732;margin-bottom:10px;line-height:1.35; }
+.blog-card h4 { font-size:1.05rem;font-weight:700;color:#0a0a0a;margin-bottom:10px;line-height:1.35; }
 .blog-card h4 a { color:inherit;text-decoration:none; }
 .blog-card h4 a:hover { color:#be9b3f; }
 .blog-card .excerpt { font-size:.85rem;color:#777;line-height:1.65;margin-bottom:16px; }
-.placeholder-thumb { height:200px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center; }
+.placeholder-thumb { height:200px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center; }
 .placeholder-thumb i { font-size:2.5rem;color:rgba(255,255,255,.3); }
 </style>
 </head>
@@ -124,7 +124,7 @@ $totalItems  = $resp['total'] ?? 0;
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>MEMA News &amp; Updates</h1>
+            <h1>DFA News &amp; Updates</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>Blog</li>

@@ -16,7 +16,7 @@ $polls = $resp['data'] ?? [];
 <meta name="keywords" content="live polls Kenya, community polls, Digitally Fit Awards polls, online voting polls, real-time results Kenya">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/polls.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/polls.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Community Polls | Digitally Fit Awards">
@@ -30,13 +30,13 @@ $polls = $resp['data'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/polls.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/polls.php">
 <meta property="og:description" content="Participate in live community polls on Digitally Fit Awards and see real-time results.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Community Polls | Digitally Fit Awards">
 <meta name="twitter:description" content="Participate in live community polls on Digitally Fit Awards and see real-time results.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -47,17 +47,17 @@ $polls = $resp['data'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Polls","item":"https://mema.memaawards.africa/polls.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Polls","item":"https://dfa.tuqiohub.africa/polls.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Digitally Fit Awards","url":"https://mema.memaawards.africa/polls.php","description":"Participate in live community polls on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/polls.php","description":"Participate in live community polls on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -71,7 +71,7 @@ $polls = $resp['data'] ?? [];
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
 .poll-card { background:#fff;border-radius:12px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,0.06);height:100%; }
-.poll-card h5 { font-weight:700;color:#053732;margin-bottom:8px; }
+.poll-card h5 { font-weight:700;color:#0a0a0a;margin-bottom:8px; }
 .poll-card .poll-desc { font-size:.85rem;color:#888;margin-bottom:20px; }
 .poll-option-label {
     border:2px solid #eee;border-radius:8px;padding:12px 16px;margin-bottom:10px;cursor:pointer;
@@ -80,9 +80,9 @@ $polls = $resp['data'] ?? [];
 .poll-option-label:hover { border-color:#be9b3f;background:#fff5f5; }
 .poll-option-label input { accent-color:#be9b3f;width:16px;height:16px;flex-shrink:0; }
 .poll-bar { height:7px;background:#f0f0f0;border-radius:10px;margin-top:5px;overflow:hidden; }
-.poll-bar-fill { height:100%;background:linear-gradient(90deg,#be9b3f,#053732);border-radius:10px;transition:width .8s; }
+.poll-bar-fill { height:100%;background:linear-gradient(90deg,#be9b3f,#0a0a0a);border-radius:10px;transition:width .8s; }
 .poll-pct { font-size:.75rem;color:#be9b3f;font-weight:700;margin-left:auto; }
-.voted-check { display:inline-block;width:20px;height:20px;background:#10b981;border-radius:50%;color:#fff;font-size:.7rem;line-height:20px;text-align:center;flex-shrink:0; }
+.voted-check { display:inline-block;width:20px;height:20px;background:#be9b3f;border-radius:50%;color:#fff;font-size:.7rem;line-height:20px;text-align:center;flex-shrink:0; }
 </style>
 </head>
 <body>

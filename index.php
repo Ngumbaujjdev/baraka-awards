@@ -11,7 +11,7 @@ usort($upcoming, fn($a, $b) =>
 $blogResp   = tuqio_api('/api/public/blog');
 $blogPosts  = array_slice($blogResp['data'] ?? [], 0, 3);
 
-// MEMA Gala 2026 — schedule + sponsors
+// Digitally Fit Awards Gala 2026 — schedule + sponsors
 $galaResp      = tuqio_api('/api/public/events/mema-gala-2026');
 $galaEvent     = $galaResp['event'] ?? [];          // API returns { event:{...}, schedule_days:[...] }
 $scheduleDays  = $galaResp['schedule_days'] ?? [];  // at root, not inside event
@@ -36,11 +36,11 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
 <!-- SEO -->
 <title>Home | Digitally Fit Awards</title>
-<meta name="description" content="The Myogenic Excellent Music Awards — celebrate Kenya's best gospel artists. Nominate, vote, and join us at the MEMA Gala 2026 in Nairobi.">
-<meta name="keywords" content="Digitally Fit Awards, gospel music awards Kenya, vote gospel 2026, MEMA Gala Nairobi, nominate gospel artist">
+<meta name="description" content="East Africa's premier digital excellence awards. Nominate, vote, and join us at the Digitally Fit Awards Gala 2026.">
+<meta name="keywords" content="Digitally Fit Awards, digital excellence awards East Africa, vote digital awards 2026, Digitally Fit Awards Gala, nominate digital achiever">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Digitally Fit Awards — Kenya's Premier Event Hub">
@@ -54,13 +54,13 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/">
 <meta property="og:description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Home | Digitally Fit Awards">
 <meta name="twitter:description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -71,12 +71,12 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform powering nominations, voting, ticketing, and live events.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: WebSite -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management platform powering nominations, voting, ticketing, and live events.","potentialAction":{"@type":"SearchAction","target":"https://mema.memaawards.africa/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"Kenya's premier event management platform powering nominations, voting, ticketing, and live events.","potentialAction":{"@type":"SearchAction","target":"https://dfa.tuqiohub.africa/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -111,7 +111,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
         <div class="banner-carousel owl-carousel owl-theme">
 
-            <!-- Slide 1: MEMA 2026 Gala -->
+            <!-- Slide 1: Digitally Fit Awards 2026 Gala -->
 
             <div class="slide-item slide-bg-1">
 
@@ -119,11 +119,11 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
                     <div class="content-box">
 
-                        <span class="title animate-1">MEMA 2026 — Nairobi</span>
+                        <span class="title animate-1">Digitally Fit Awards 2026 — Nairobi</span>
 
-                        <h2 class="animate-2">Celebrating Africa's <br>Gospel Excellence</h2>
+                        <h2 class="animate-2">Celebrating Digital <br>Excellence in East Africa</h2>
 
-                        <div class="text animate-3">The inaugural Myogenic Excellent Music Awards — honouring outstanding gospel talent across performance, production, and photography</div>
+                        <div class="text animate-3">Digitally Fit Awards — recognising outstanding achievements across 300+ digital categories, organised by KEOnline</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">View Nominees</span></a>
@@ -148,7 +148,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
                         <h2 class="animate-2">Nominate Your <br>Favourite Artist</h2>
 
-                        <div class="text animate-3">Nominations open April 16 – July 15, 2026. Eight categories open for public nomination — have your say</div>
+                        <div class="text animate-3">Nominations are open. 300+ categories open for public nomination — have your say</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-two"><span class="btn-title">Nominate Now</span></a>
@@ -173,7 +173,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
                         <h2 class="animate-2">The Stage is Set. <br>The Vote is Yours.</h2>
 
-                        <div class="text animate-3">Voting opens August 1, 2026. September 16 — MEMA Gala Night, Nairobi. Get your tickets now</div>
+                        <div class="text animate-3">Voting opens August 1, 2026. September 16 — Digitally Fit Awards Gala Night, Nairobi. Get your tickets now</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">Vote Now</span></a>
@@ -193,7 +193,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
     <!--End Banner Section -->
 
 
-<!-- ══ 2. MEMA GALA 2026 SPOTLIGHT ════════════════════ -->
+<!-- ══ 2. DFA 2026 SPOTLIGHT ════════════════════ -->
 <?php
 $_galaPhase  = $galaEvent['current_phase'] ?? '';
 $_galaBanner = !empty($galaEvent['banner_image']) ? API_STORAGE . $galaEvent['banner_image']
@@ -206,7 +206,7 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
     <div class="auto-container">
         <div class="sec-title text-center">
             <span class="sub-title">The Event</span>
-            <h2>MEMA Gala 2026</h2>
+            <h2>Digitally Fit Awards Gala 2026</h2>
             <span class="divider"></span>
         </div>
         <div class="row align-items-center" style="margin-top:20px;">
@@ -215,11 +215,11 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
                 <div style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(5,55,50,0.18);">
                     <?php if ($_galaBanner): ?>
                     <img src="<?= htmlspecialchars($_galaBanner) ?>"
-                         alt="MEMA Gala 2026"
+                         alt="Digitally Fit Awards Gala 2026"
                          style="width:100%;height:auto;display:block;"
-                         onerror="this.parentElement.style.background='linear-gradient(135deg,#053732,#0a5c50)';this.style.display='none'">
+                         onerror="this.parentElement.style.background='linear-gradient(135deg,#0a0a0a,#1a1a1a)';this.style.display='none'">
                     <?php else: ?>
-                    <div style="height:420px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center;">
+                    <div style="height:420px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;">
                         <i class="flaticon-trophy-1" style="font-size:5rem;color:rgba(190,155,63,0.5);"></i>
                     </div>
                     <?php endif; ?>
@@ -240,15 +240,15 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
             <!-- Right: Event Details -->
             <div class="col-lg-6 col-md-12 wow fadeInRight" style="padding-left:40px;margin-bottom:30px;">
                 <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Nairobi · September 16, 2026</span>
-                <h3 style="font-size:2rem;font-weight:800;color:#053732;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'MEMA Gala 2026') ?></h3>
+                <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026') ?></h3>
                 <?php if (!empty($galaEvent['tagline'])): ?>
                 <p style="font-size:1.05rem;color:#be9b3f;font-style:italic;margin-bottom:14px;"><?= htmlspecialchars($galaEvent['tagline']) ?></p>
                 <?php endif; ?>
-                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating outstanding gospel music talent across Kenya and Africa — live performances, 9 award categories, and an unforgettable gala experience.', 0, 220)) ?>...</p>
+                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating digital excellence across East Africa — 300+ categories and an unforgettable gala experience.', 0, 220)) ?>...</p>
                 <!-- Phase badges -->
                 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
-                    <span style="background:#f0faf8;color:#053732;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-trophy" style="color:#be9b3f;margin-right:5px;"></i>9 Award Categories</span>
-                    <span style="background:#f0faf8;color:#053732;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:5px;"></i>Nairobi, Kenya</span>
+                    <span style="background:#f0faf8;color:#0d0d0d;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-trophy" style="color:#be9b3f;margin-right:5px;"></i>9 Award Categories</span>
+                    <span style="background:#f0faf8;color:#0d0d0d;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:5px;"></i>Nairobi, Kenya</span>
                     <?php if (!empty($ticketTypes)): ?>
                     <span style="background:#fdf8ee;color:#7a6020;border:1px solid #e8d8a0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-ticket-alt" style="color:#be9b3f;margin-right:5px;"></i>Tickets Available</span>
                     <?php endif; ?>
@@ -290,7 +290,7 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
                     <?php if ($_nominationsOpen): ?>
                     <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-one"><span class="btn-title">Nominate Now</span></a>
                     <?php elseif ($_votingOpen): ?>
-                    <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;"><span class="btn-title">Vote Now</span></a>
+                    <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;"><span class="btn-title">Vote Now</span></a>
                     <?php else: ?>
                     <a href="<?= SITE_URL ?>/tickets" class="theme-btn btn-style-one"><span class="btn-title">Get Tickets</span></a>
                     <?php endif; ?>
@@ -321,10 +321,10 @@ $_catsJson = json_encode(array_map(fn($c) => [
     'count'  => count($c['nominees'] ?? []),
 ], $allCategories));
 ?>
-<section style="padding:80px 0;background:linear-gradient(160deg,#032620 0%,#053732 100%);">
+<section style="padding:80px 0;background:linear-gradient(160deg,#0a0a0a 0%,#0a0a0a 100%);">
     <div class="auto-container">
         <div class="sec-title text-center" style="margin-bottom:32px;">
-            <span class="sub-title" style="color:#be9b3f;">MEMA Gala 2026</span>
+            <span class="sub-title" style="color:#be9b3f;">Digitally Fit Awards Gala 2026</span>
             <span class="divider"></span>
             <p style="color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 24px;">
                 <?php if ($_promotedCount > 0 && $_collectingCount > 0): ?>
@@ -332,7 +332,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                 <?php elseif ($_promotedCount > 0): ?>
                     All categories are now in voting phase — cast your vote for your favourite artists!
                 <?php else: ?>
-                    Nominate your favourite gospel artists. <?= $_totalCats ?> categories open for public nomination.
+                    Nominate your favourite digital achievers. <?= $_totalCats ?> categories open for public nomination.
                 <?php endif; ?>
             </p>
             <!-- Live search -->
@@ -358,7 +358,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
         <!-- Footer CTAs -->
         <div class="text-center" style="margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
             <?php if ($_promotedCount > 0): ?>
-            <a href="<?= SITE_URL ?>/nominees?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">
+            <a href="<?= SITE_URL ?>/nominees?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
                 <span class="btn-title">Vote Now &rarr;</span>
             </a>
             <?php endif; ?>
@@ -368,7 +368,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                 <span class="btn-title">Submit a Nomination</span>
             </a>
             <?php else: ?>
-            <a href="<?= SITE_URL ?>/nominate?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">
+            <a href="<?= SITE_URL ?>/nominate?event=mema-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
                 <span class="btn-title">Submit a Nomination</span>
             </a>
             <?php endif; ?>
@@ -395,8 +395,8 @@ $_catsJson = json_encode(array_map(fn($c) => [
 
     function buildCard(cat) {
         var imgHtml = cat.image
-            ? '<div style="position:relative;height:120px;overflow:hidden;"><img src="'+cat.image+'" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0a5c50,#053732)\';this.style.display=\'none\';"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(5,55,50,.65));"></div></div>'
-            : '<div style="height:120px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center;"><i class="flaticon-trophy-1" style="font-size:2.2rem;color:rgba(190,155,63,.4);"></i></div>';
+            ? '<div style="position:relative;height:120px;overflow:hidden;"><img src="'+cat.image+'" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#1a1a1a,#0a0a0a)\';this.style.display=\'none\';"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(5,55,50,.65));"></div></div>'
+            : '<div style="height:120px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="flaticon-trophy-1" style="font-size:2.2rem;color:rgba(190,155,63,.4);"></i></div>';
         var color  = statusColors[cat.status] || '#888';
         var label  = statusLabels[cat.status] || cat.status;
         var isPromoted = cat.status === 'promoted';
@@ -490,10 +490,10 @@ $_catsJson = json_encode(array_map(fn($c) => [
 <section style="padding:80px 0;background:#fff;">
     <div class="auto-container">
         <div class="sec-title text-center" style="margin-bottom:40px;">
-            <span class="sub-title">MEMA Gala 2026 &mdash; Nairobi</span>
+            <span class="sub-title">Digitally Fit Awards Gala 2026 &mdash; Nairobi</span>
             <h2>Secure Your Seat</h2>
             <span class="divider"></span>
-            <p style="color:#666;max-width:520px;margin:10px auto 0;">Join us for an extraordinary evening celebrating gospel excellence. Choose a ticket that fits your experience.</p>
+            <p style="color:#666;max-width:520px;margin:10px auto 0;">Join us for an extraordinary evening celebrating digital excellence. Choose a ticket that fits your experience.</p>
         </div>
         <div class="row justify-content-center">
         <?php foreach ($ticketTypes as $tkt):
@@ -510,13 +510,13 @@ $_catsJson = json_encode(array_map(fn($c) => [
             <div style="border:2px solid <?= $tBorderColor ?>;border-radius:14px;padding:28px 24px;height:100%;position:relative;text-align:center;<?= $tIsVIP ? 'box-shadow:0 8px 32px rgba(190,155,63,.18);' : '' ?>">
                 <?= $tBadge ?>
                 <!-- Icon -->
-                <div style="width:52px;height:52px;border-radius:12px;background:<?= $tIsVIP ? 'linear-gradient(135deg,#be9b3f,#d4af5a)' : 'linear-gradient(135deg,#053732,#0a5c50)' ?>;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                <div style="width:52px;height:52px;border-radius:12px;background:<?= $tIsVIP ? 'linear-gradient(135deg,#be9b3f,#d4af5a)' : 'linear-gradient(135deg,#0a0a0a,#1a1a1a)' ?>;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
                     <i class="fas fa-<?= $tIsTable ? 'users' : ($tIsVIP ? 'star' : 'ticket-alt') ?>" style="color:#fff;font-size:1.3rem;"></i>
                 </div>
-                <h5 style="font-weight:800;color:#053732;margin-bottom:8px;font-size:1rem;"><?= htmlspecialchars($tkt['name']) ?></h5>
+                <h5 style="font-weight:800;color:#0d0d0d;margin-bottom:8px;font-size:1rem;"><?= htmlspecialchars($tkt['name']) ?></h5>
                 <!-- Price -->
                 <div style="margin-bottom:14px;">
-                    <span style="font-size:1.8rem;font-weight:900;color:<?= $tIsVIP ? '#be9b3f' : '#053732' ?>;">KES <?= number_format($tPrice) ?></span>
+                    <span style="font-size:1.8rem;font-weight:900;color:<?= $tIsVIP ? '#be9b3f' : '#0a0a0a' ?>;">KES <?= number_format($tPrice) ?></span>
                     <?php if ($tIsTable): ?><div style="font-size:.75rem;color:#888;margin-top:2px;">per table (10 seats)</div><?php endif; ?>
                 </div>
                 <?php if (!empty($tkt['description'])): ?>
@@ -552,7 +552,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
 <?php endif; ?>
 
 
-<!-- ══ 5. HOW MEMA WORKS ══════════════════════════════ -->
+<!-- ══ 5. HOW DFA WORKS ══════════════════════════════ -->
 <section class="feature-section">
     <div class="anim-icons full-width">
         <span class="icon icon-circle-1 wow zoomIn"></span>
@@ -561,7 +561,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
     <div class="auto-container">
         <div class="sec-title text-center">
             <span class="sub-title">Simple Steps</span>
-            <h2>How MEMA Works</h2>
+            <h2>How Digitally Fit Awards Works</h2>
             <span class="divider"></span>
         </div>
         <div class="row">
@@ -571,7 +571,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                         <div class="icon"><span class="flaticon-calendar-1"></span></div>
                     </div>
                     <h4>1. Browse the Nominees</h4>
-                    <p>Explore all categories and the talented artists shortlisted for MEMA 2026. Find your favourites across 9 award categories.</p>
+                    <p>Explore all categories and the talented artists shortlisted for Digitally Fit Awards 2026. Find your favourites across 9 award categories.</p>
                     <a href="<?= SITE_URL ?>/nominees" class="read-more">View Nominees <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -591,7 +591,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                         <div class="icon"><span class="flaticon-trophy-1"></span></div>
                     </div>
                     <h4>3. Celebrate the Winners</h4>
-                    <p>Join us at the MEMA Gala in Nairobi on September 16, 2026 — a landmark celebration of faith, creativity, and African musical culture.</p>
+                    <p>Join us at the Digitally Fit Awards Gala in Nairobi on September 16, 2026 — a landmark celebration of innovation, creativity, and digital excellence in East Africa.</p>
                     <a href="<?= SITE_URL ?>/tickets" class="read-more">Get Tickets <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -620,7 +620,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
                 <div class="tab active-tab">
                     <?php if (!empty($day['date'])): ?>
                     <div style="margin-bottom:20px;">
-                        <h6 style="color:#053732;"><i class="fas fa-calendar-day" style="color:#be9b3f;margin-right:8px;"></i><?= date('l, d F Y', strtotime($day['date'])) ?></h6>
+                        <h6 style="color:#0d0d0d;"><i class="fas fa-calendar-day" style="color:#be9b3f;margin-right:8px;"></i><?= date('l, d F Y', strtotime($day['date'])) ?></h6>
                     </div>
                     <?php endif; ?>
                     <div class="schedule-timeline">
@@ -680,7 +680,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
     <div class="auto-container">
         <div class="sec-title">
             <span class="sub-title">News &amp; Insights</span>
-            <h2>MEMA News &amp; Updates</h2>
+            <h2>DFA News &amp; Updates</h2>
             <span class="divider"></span>
         </div>
         <div class="row">
@@ -736,10 +736,10 @@ $_catsJson = json_encode(array_map(fn($c) => [
 <section style="padding:70px 0 80px;background:#fff;border-top:1px solid #f0f0f0;">
     <div class="auto-container">
         <div class="sec-title text-center" style="margin-bottom:10px;">
-            <span class="sub-title">MEMA Gala 2026</span>
+            <span class="sub-title">Digitally Fit Awards Gala 2026</span>
             <h2>Sponsors &amp; Partners</h2>
             <span class="divider"></span>
-            <p style="color:#777;max-width:520px;margin:10px auto 0;">We are grateful to the organisations making MEMA 2026 possible.</p>
+            <p style="color:#777;max-width:520px;margin:10px auto 0;">We are grateful to the organisations making Digitally Fit Awards 2026 possible.</p>
         </div>
 
         <!-- Carousel strip -->
@@ -759,11 +759,11 @@ $_catsJson = json_encode(array_map(fn($c) => [
                              onmouseout="this.style.filter='grayscale(20%)'"
                              onerror="this.style.display='none'">
                         <?php endif; ?>
-                        <span style="font-size:.74rem;font-weight:700;color:#053732;letter-spacing:.3px;text-align:center;line-height:1.3;">
+                        <span style="font-size:.74rem;font-weight:700;color:#0d0d0d;letter-spacing:.3px;text-align:center;line-height:1.3;">
                             <?= htmlspecialchars($sp['name'] ?? '') ?>
                         </span>
                         <?php
-                        $tierBadgeColors = ['title'=>'#be9b3f','partner'=>'#053732','gold'=>'#a07c00','silver'=>'#666','bronze'=>'#7a4000'];
+                        $tierBadgeColors = ['title'=>'#be9b3f','partner'=>'#0a0a0a','gold'=>'#a07c00','silver'=>'#666','bronze'=>'#7a4000'];
                         $tierBadgeLabel  = ['title'=>'Title Sponsor','partner'=>'Partner','gold'=>'Gold','silver'=>'Silver','bronze'=>'Bronze'];
                         $t = $sp['tier'] ?? '';
                         if ($t): ?>
@@ -799,7 +799,7 @@ $_catsJson = json_encode(array_map(fn($c) => [
 <script>
 function tuqioImgErr(el) {
     el.onerror = null;
-    el.parentElement.innerHTML = '<div style="height:100%;min-height:220px;background:linear-gradient(135deg,#053732,#0a5c50);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
+    el.parentElement.innerHTML = '<div style="height:100%;min-height:220px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="fas fa-calendar-alt" style="font-size:3rem;color:rgba(255,255,255,0.2);"></i></div>';
 }
 </script>
 </body>

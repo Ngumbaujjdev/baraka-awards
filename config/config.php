@@ -32,8 +32,8 @@ define("API_STORAGE", API_BASE . "/storage/");
 define("ADMIN_URL", API_BASE . "/login");
 
 // ─── DFA branding ──────────────────────────────────────────────────────────
-define("BRAND_PRIMARY", "#1a1a2e"); // placeholder — swap with DFA primary color
-define("BRAND_ACCENT",  "#e94560"); // placeholder — swap with DFA accent color
+define("BRAND_PRIMARY", "#0d0d0d"); // Black
+define("BRAND_ACCENT",  "#BF9E44"); // Gold
 
 // ─── API helper (GET) ──────────────────────────────────────────────────────
 function tuqio_api(string $path): array {

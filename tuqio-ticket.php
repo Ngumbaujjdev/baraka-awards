@@ -29,7 +29,7 @@ $evtThumb = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><?= $ticket ? htmlspecialchars($ticket['ticket_type_name'] . ' · ' . $evtName) : 'Ticket' ?> | Tuqio Hub</title>
+<title><?= $ticket ? htmlspecialchars($ticket['ticket_type_name'] . ' · ' . $evtName) : 'Ticket' ?> | Digitally Fit Awards</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -162,7 +162,7 @@ $evtThumb = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_
         <!-- Footer: download button -->
         <?php if ($orderNumber && !empty($ticket['ticket_number'])): ?>
         <div class="tkt-footer">
-            <span style="font-size:.78rem;color:#aaa;"><i class="fas fa-shield-alt" style="color:#10b981;margin-right:4px;"></i>Secured by Tuqio</span>
+            <span style="font-size:.78rem;color:#aaa;"><i class="fas fa-shield-alt" style="color:#be9b3f;margin-right:4px;"></i>Secured by Tuqio</span>
             <a href="<?= API_BASE ?>/api/public/tickets/<?= urlencode($orderNumber) ?>/download/<?= urlencode($ticket['ticket_number']) ?>"
                class="tkt-dl-btn" target="_blank">
                 <i class="fas fa-file-pdf"></i> Download PDF

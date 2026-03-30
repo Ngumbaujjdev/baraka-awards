@@ -29,14 +29,14 @@ function ticket_status($t) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Get Tickets | MEMA Gala 2026</title>
-<meta name="description" content="Buy tickets to the MEMA Gala 2026 — Kenya's premier gospel music awards. Individual seats and group tables available.">
+<title>Get Tickets | Digitally Fit Awards Gala 2026</title>
+<meta name="description" content="Buy tickets to the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards. Individual seats and group tables available.">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Get Tickets | MEMA Gala 2026">
+<meta property="og:title" content="Get Tickets | Digitally Fit Awards Gala 2026">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
-<meta property="og:description" content="Buy tickets to the MEMA Gala 2026 — Kenya's premier gospel music awards.">
+<meta property="og:description" content="Buy tickets to the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -63,7 +63,7 @@ function ticket_status($t) {
 <?php include 'includes/hidden-bar.php'; ?>
 
 <!-- Page Title -->
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/mema-about/about-1.webp);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -81,8 +81,8 @@ function ticket_status($t) {
 
         <!-- Event Intro Banner -->
         <div class="tix-intro">
-            <h2>MEMA Gala 2026 &mdash; September 16, Nairobi</h2>
-            <p>Join us for Kenya's premier gospel music awards night. An unforgettable evening of music, worship, and celebration.</p>
+            <h2>Digitally Fit Awards Gala 2026 &mdash; September 16, Nairobi</h2>
+            <p>Join us for East Africa's premier digital excellence awards night. An unforgettable evening of music, worship, and celebration.</p>
             <div class="tix-meta">
                 <span><i class="flaticon-calendar"></i> Tuesday, 16 September 2026</span>
                 <span><i class="flaticon-clock-1"></i> Doors open 5:00 PM</span>
@@ -211,7 +211,7 @@ function ticket_status($t) {
         <?php endif; ?>
 
         <!-- CTA -->
-        <div style="background:linear-gradient(135deg,#053732,#0a5c50);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:10px;">
+        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:10px;">
             <h3 style="font-weight:800;margin-bottom:10px;">Questions About Tickets?</h3>
             <p style="color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 24px;">Need group booking assistance, accessibility accommodations, or have a general enquiry? We're happy to help.</p>
             <a href="<?= SITE_URL ?>/contact" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">

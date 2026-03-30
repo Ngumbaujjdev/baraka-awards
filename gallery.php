@@ -16,7 +16,7 @@ $photos = $resp['photos'] ?? [];
 <meta name="keywords" content="event photos Kenya, Digitally Fit Awards gallery, awards ceremony photos, Kenya events highlights, event photography Nairobi">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/gallery.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/gallery.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Photo Gallery | Digitally Fit Awards">
@@ -30,13 +30,13 @@ $photos = $resp['photos'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/gallery.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/gallery.php">
 <meta property="og:description" content="Browse photos and highlights from Digitally Fit Awards events across Kenya.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Photo Gallery | Digitally Fit Awards">
 <meta name="twitter:description" content="Browse photos and highlights from Digitally Fit Awards events across Kenya.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -47,17 +47,17 @@ $photos = $resp['photos'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"https://mema.memaawards.africa/gallery.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"https://dfa.tuqiohub.africa/gallery.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Photo Gallery | Digitally Fit Awards","url":"https://mema.memaawards.africa/gallery.php","description":"Browse photos and highlights from Digitally Fit Awards events."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Photo Gallery | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/gallery.php","description":"Browse photos and highlights from Digitally Fit Awards events."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -121,7 +121,7 @@ $photos = $resp['photos'] ?? [];
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>MEMA Gallery</h1>
+            <h1>DFA Gallery</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>Gallery</li>
@@ -164,7 +164,7 @@ $photos = $resp['photos'] ?? [];
         <?php else: ?>
         <div class="text-center" style="padding:80px 0;">
             <i class="fas fa-images" style="font-size:3rem;color:#ddd;display:block;margin-bottom:20px;"></i>
-            <h4 style="color:#053732;font-weight:700;margin-bottom:10px;">No Photos Yet</h4>
+            <h4 style="color:#0a0a0a;font-weight:700;margin-bottom:10px;">No Photos Yet</h4>
             <p style="color:#999;margin-bottom:28px;">Event photos will appear here after each event.</p>
             <a href="<?= SITE_URL ?>/events" class="theme-btn btn-style-one">
                 <span class="btn-title">Browse Events</span>

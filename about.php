@@ -10,12 +10,12 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>About Digitally Fit Awards | Kenya's Gospel Music Awards</title>
-<meta name="description" content="Learn about Digitally Fit Awards — Kenya's first dedicated gospel music awards ceremony, celebrating outstanding artists, producers, directors, and photographers.">
-<meta name="keywords" content="about Digitally Fit Awards, Kenya gospel music awards, gospel music Kenya, Myogenic Excellent Music Awards, MEMA Gala Nairobi">
+<title>About Digitally Fit Awards | East Africa's Digital Excellence Awards</title>
+<meta name="description" content="Learn about Digitally Fit Awards — East Africa's premier digital excellence awards ceremony, celebrating outstanding artists, producers, directors, and photographers.">
+<meta name="keywords" content="about Digitally Fit Awards, digital excellence awards East Africa, Digitally Fit Awards Gala Nairobi">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/about.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/about">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="About Digitally Fit Awards">
@@ -29,13 +29,13 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/about.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/about">
 <meta property="og:description" content="Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="About Digitally Fit Awards | Kenya's Premier Event Platform">
 <meta name="twitter:description" content="Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -46,17 +46,17 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://mema.memaawards.africa/about.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://dfa.tuqiohub.africa/about"}]}
 </script>
 
 <!-- JSON-LD: AboutPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"AboutPage","name":"About Digitally Fit Awards","url":"https://mema.memaawards.africa/about.php","description":"Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls."}
+{"@context":"https://schema.org","@type":"AboutPage","name":"About Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/about","description":"Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -77,7 +77,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 /* ── Pre-tag label ── */
 .pre-tag {
     display: inline-block;
-    background: rgba(190,155,63,0.1);
+    background: rgba(191,158,68,0.1);
     color: #be9b3f;
     font-size: .72rem;
     font-weight: 700;
@@ -113,7 +113,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 }
 .split-heading {
     font-size: 2rem; font-weight: 900;
-    color: #053732; line-height: 1.25; margin-bottom: 20px;
+    color: #0a0a0a; line-height: 1.25; margin-bottom: 20px;
 }
 .split-text { font-size: .95rem; color: #666; line-height: 1.85; margin-bottom: 14px; }
 
@@ -152,7 +152,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 }
 
 /* ── Section headings ── */
-.section-heading { font-size: 2rem; font-weight: 800; color: #053732; margin-bottom: 10px; }
+.section-heading { font-size: 2rem; font-weight: 800; color: #0a0a0a; margin-bottom: 10px; }
 .section-sub     { font-size: .95rem; color: #777; max-width: 520px; margin: 0 auto; }
 
 
@@ -165,7 +165,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
     font-size: 1.4rem; font-weight: 900;
     margin: 0 auto 20px;
 }
-.step-wrap h5 { font-weight: 700; color: #053732; margin-bottom: 8px; }
+.step-wrap h5 { font-weight: 700; color: #0a0a0a; margin-bottom: 8px; }
 .step-wrap p  { font-size: .88rem; color: #777; line-height: 1.7; }
 .step-connector {
     display: flex; align-items: center; justify-content: center;
@@ -176,11 +176,11 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 .value-item { display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start; }
 .value-icon {
     width: 46px; height: 46px; border-radius: 10px;
-    background: rgba(190,155,63,0.1);
+    background: rgba(191,158,68,0.1);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; font-size: 1.1rem; color: #be9b3f;
 }
-.value-item h6 { font-weight: 700; color: #053732; margin-bottom: 4px; }
+.value-item h6 { font-weight: 700; color: #0a0a0a; margin-bottom: 4px; }
 .value-item p  { font-size: .85rem; color: #777; margin: 0; line-height: 1.6; }
 
 /* ── CTA box ── */
@@ -208,7 +208,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <div class="form-back-drop"></div>
 <?php include 'includes/hidden-bar.php'; ?>
 
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/mema-about/about-1.webp);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -223,14 +223,14 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- ── Mission ─────────────────────────────────────────────── -->
 <div class="about-split wow fadeIn">
-    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/mema-about/about-who-we-are.webp);"></div>
+    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);"></div>
     <div class="split-content">
         <div>
             <div class="split-label">Who We Are</div>
-            <h2 class="split-heading">Celebrating Kenya's Gospel Music Excellence</h2>
-            <p class="split-text">The Myogenic Excellent Music Awards (MEMA) is Kenya's first dedicated gospel music awards ceremony — honouring the artists, producers, video directors, and photographers who give gospel music its power and soul.</p>
-            <p class="split-text">Our mission is to elevate African gospel music by giving its creators a platform for genuine, community-driven recognition. Every nomination, vote, and category exists to celebrate the people who move audiences through faith-filled artistry.</p>
-            <p class="split-text">Our vision is to become the leading voice for gospel music excellence across Africa — an annual celebration that the entire continent looks to as the benchmark for artistic and spiritual impact.</p>
+            <h2 class="split-heading">Celebrating Digital Excellence in East Africa</h2>
+            <p class="split-text">The Digitally Fit Awards is East Africa's premier digital excellence awards ceremony — honouring individuals and organisations who have demonstrated outstanding achievement across 300+ digital categories.</p>
+            <p class="split-text">Our mission is to elevate the digital ecosystem by giving its innovators, creators, and entrepreneurs a platform for genuine, community-driven recognition. Every nomination, vote, and category exists to celebrate the people driving digital transformation.</p>
+            <p class="split-text">Our vision is to become the leading voice for digital excellence across Africa — an annual celebration that the entire continent looks to as the benchmark for innovation and impact. Organised by KEOnline.</p>
             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="margin-top:8px;">
                 <span class="btn-title">View Award Categories →</span>
             </a>
@@ -239,15 +239,15 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 </div>
 
 <!-- ── Stats ────────────────────────────────────────────────── -->
-<section class="about-counter" style="background-image:url(<?= SITE_URL ?>/assets/mema-about/background.webp);">
+<section class="about-counter" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
     <div class="auto-container">
         <div class="row">
             <?php
             $statsArr = [
-                ['1',      'Inaugural Edition',  'fa-trophy'],
-                ['9',      'Award Categories',   'fa-music'],
-                ['1',      'Nairobi, Kenya',      'fa-map-marker-alt'],
-                ['2026',   'Gala Year',           'fa-calendar-star'],
+                ['300+',    'Award Categories',  'fa-trophy'],
+                ['2026',    'Inaugural Edition',  'fa-star'],
+                ['E.Africa','Coverage Region',    'fa-map-marker-alt'],
+                ['KEOnline','Organised By',        'fa-building'],
             ];
             foreach ($statsArr as $idx => [$n,$l,$i]): ?>
             <div class="col-md-3 col-sm-6 counter-col wow zoomIn" data-wow-delay="<?= $idx * 150 ?>ms">
@@ -266,21 +266,21 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
         <div class="text-center mb-5">
             <span class="pre-tag">Your Journey</span>
             <h2 class="section-heading">How It Works</h2>
-            <p class="section-sub">Three simple steps to participate in MEMA 2026.</p>
+            <p class="section-sub">Three simple steps to participate in Digitally Fit Awards 2026.</p>
         </div>
         <div class="row align-items-start">
             <div class="col-md-4 wow fadeInUp">
                 <div class="step-wrap">
                     <div class="step-num">1</div>
                     <h5>Browse the Nominees</h5>
-                    <p>Explore all categories and the talented artists shortlisted for MEMA 2026. Find your favourites across 9 award categories.</p>
+                    <p>Explore all categories and the digital achievers shortlisted for Digitally Fit Awards 2026. Find your favourites across 300+ award categories.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.15s">
                 <div class="step-wrap">
                     <div class="step-num">2</div>
                     <h5>Cast Your Vote</h5>
-                    <p>Buy a vote bundle, pay via M-Pesa or card, and back your favourite artist. Every vote counts toward the final result.</p>
+                    <p>Buy a vote bundle, pay via M-Pesa or card, and back your favourite nominee. Every vote counts toward the final result.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -323,7 +323,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
                              onmouseout="this.style.filter='grayscale(20%)'"
                              onerror="this.style.display='none'">
                         <?php endif; ?>
-                        <span style="font-size:.74rem;font-weight:700;color:#053732;letter-spacing:.3px;text-align:center;">
+                        <span style="font-size:.74rem;font-weight:700;color:#0a0a0a;letter-spacing:.3px;text-align:center;">
                             <?= htmlspecialchars($sp['name'] ?? '') ?>
                         </span>
                     </a>
@@ -342,13 +342,13 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
             <div class="col-lg-6 mb-5 mb-lg-0 wow fadeInLeft">
                 <span class="pre-tag">Our Values</span>
-                <h2 class="section-heading mb-4">What MEMA Stands For</h2>
+                <h2 class="section-heading mb-4">What DFA Stands For</h2>
                 <?php
                 $values = [
-                    ['fa-shield-alt', 'Integrity',     'Every vote, nomination, and result is handled with full transparency. MEMA stands for honest, verifiable awards.'],
+                    ['fa-shield-alt', 'Integrity',     'Every vote, nomination, and result is handled with full transparency. DFA stands for honest, verifiable awards.'],
                     ['fa-eye',        'Transparency',  'Public voting, real-time counts, and open nomination processes ensure every participant can trust the outcome.'],
-                    ['fa-star',       'Excellence',    'MEMA celebrates the very best — artists, producers, and creatives who have set the bar for gospel music in Africa.'],
-                    ['fa-heart',      'Community',     'We are built by and for the Kenyan gospel community — uniting artists, fans, and supporters around a shared passion.'],
+                    ['fa-star',       'Excellence',    'DFA celebrates the very best — individuals and organisations who have set the bar for digital excellence in East Africa.'],
+                    ['fa-heart',      'Community',     'We are built by and for the East African digital community — uniting innovators, creators, and supporters around a shared passion for digital excellence.'],
                 ];
                 foreach ($values as [$icon,$title,$desc]): ?>
                 <div class="value-item">
@@ -364,9 +364,9 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
             <div class="col-lg-6 wow fadeInRight">
                 <div class="cta-box">
                     <i class="fas fa-microphone mb-4" style="font-size:3rem;opacity:.8;display:block;"></i>
-                    <h3>Nominate an Artist Today</h3>
-                    <p>Know a gospel artist who deserves recognition? Nominations are open until July 15, 2026. Submit your nomination now.</p>
-                    <a href="<?= SITE_URL ?>/nominate?event=mema-gala-2026" class="theme-btn btn-style-two cta-box-btn">
+                    <h3>Nominate a Digital Achiever Today</h3>
+                    <p>Know someone who deserves recognition for digital excellence? Nominations are open. Submit your nomination now.</p>
+                    <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-two cta-box-btn">
                         <span class="btn-title">Submit a Nomination →</span>
                     </a>
                 </div>

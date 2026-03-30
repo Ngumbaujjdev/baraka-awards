@@ -18,7 +18,7 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 <meta name="keywords" content="vote Kenya awards, cast your vote, Kenya nominees voting, Digitally Fit Awards vote, online voting Kenya">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/vote.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/vote.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Cast Your Vote | Digitally Fit Awards">
@@ -32,13 +32,13 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/vote.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/vote.php">
 <meta property="og:description" content="Cast your vote for your favourite nominees on Digitally Fit Awards. Voting is open now.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Cast Your Vote | Digitally Fit Awards">
 <meta name="twitter:description" content="Cast your vote for your favourite nominees on Digitally Fit Awards. Voting is open now.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -49,17 +49,17 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Vote","item":"https://mema.memaawards.africa/vote.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Vote","item":"https://dfa.tuqiohub.africa/vote.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Cast Your Vote | Digitally Fit Awards","url":"https://mema.memaawards.africa/vote.php","description":"Cast your vote for your favourite nominees on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Cast Your Vote | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/vote.php","description":"Cast your vote for your favourite nominees on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -105,8 +105,8 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
         <?php if (empty($voteEvents)): ?>
         <!-- No active voting -->
         <div class="text-center" style="padding:80px 0;">
-            <i class="fas fa-vote-yea" style="font-size:3.5rem;color:#053732;opacity:.15;"></i>
-            <h3 style="margin-top:24px;color:#053732;font-weight:800;">No Active Voting Right Now</h3>
+            <i class="fas fa-vote-yea" style="font-size:3.5rem;color:#0a0a0a;opacity:.15;"></i>
+            <h3 style="margin-top:24px;color:#0a0a0a;font-weight:800;">No Active Voting Right Now</h3>
             <p class="text-muted" style="max-width:460px;margin:14px auto 28px;">Voting windows open and close with each event. Check back soon or browse all events to see what's coming up.</p>
             <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
                 <a href="events" class="theme-btn btn-style-one">
@@ -123,11 +123,11 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
             if (!empty($pastVoted)):
             ?>
             <div style="margin-top:60px;text-align:left;max-width:600px;margin-left:auto;margin-right:auto;">
-                <h5 style="font-weight:700;color:#053732;margin-bottom:20px;">Past Voting Events</h5>
+                <h5 style="font-weight:700;color:#0a0a0a;margin-bottom:20px;">Past Voting Events</h5>
                 <?php foreach ($pastVoted as $ev): ?>
                 <div style="display:flex;align-items:center;gap:16px;background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
                     <div style="flex:1;">
-                        <div style="font-weight:700;color:#053732;font-size:.95rem;"><?= htmlspecialchars($ev['name']) ?></div>
+                        <div style="font-weight:700;color:#0a0a0a;font-size:.95rem;"><?= htmlspecialchars($ev['name']) ?></div>
                         <?php if (!empty($ev['date_start'])): ?>
                         <div style="font-size:.78rem;color:#aaa;margin-top:3px;"><i class="fas fa-calendar me-1" style="color:#be9b3f;"></i><?= date('M Y', strtotime($ev['date_start'])) ?></div>
                         <?php endif; ?>
@@ -145,7 +145,7 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 
         <div class="text-center" style="margin-bottom:50px;">
             <span style="font-size:.8rem;font-weight:700;letter-spacing:2px;color:#be9b3f;text-transform:uppercase;">Voting Now Open</span>
-            <h2 style="font-weight:800;color:#053732;margin-top:8px;">Cast Your Vote</h2>
+            <h2 style="font-weight:800;color:#0a0a0a;margin-top:8px;">Cast Your Vote</h2>
             <p style="color:#777;max-width:520px;margin:0 auto;">Select an event below and vote for your favourite nominees. Your vote counts!</p>
         </div>
 
@@ -209,12 +209,12 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
         <div style="background:#fff;border-radius:14px;padding:30px 36px;margin-top:60px;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
             <div class="row align-items-center gy-3">
                 <div class="col-lg-7">
-                    <h5 style="font-weight:800;color:#053732;margin-bottom:8px;"><i class="fas fa-info-circle me-2" style="color:#be9b3f;"></i>How Voting Works</h5>
+                    <h5 style="font-weight:800;color:#0a0a0a;margin-bottom:8px;"><i class="fas fa-info-circle me-2" style="color:#be9b3f;"></i>How Voting Works</h5>
                     <ul style="list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:14px 28px;">
-                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#10b981;"></i>Select your event above</li>
-                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#10b981;"></i>Browse nominees by category</li>
-                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#10b981;"></i>Click "Vote" on your choice</li>
-                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#10b981;"></i>Watch live vote counts update</li>
+                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#be9b3f;"></i>Select your event above</li>
+                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#be9b3f;"></i>Browse nominees by category</li>
+                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#be9b3f;"></i>Click "Vote" on your choice</li>
+                        <li style="font-size:.85rem;color:#555;"><i class="fas fa-check-circle me-2" style="color:#be9b3f;"></i>Watch live vote counts update</li>
                     </ul>
                 </div>
                 <div class="col-lg-5 text-lg-end">

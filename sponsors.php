@@ -28,13 +28,13 @@ foreach ($allSponsors as $sp) {
 <head>
 <meta charset="utf-8">
 <title>Sponsors &amp; Partners | Digitally Fit Awards</title>
-<meta name="description" content="Meet the sponsors and partners powering the MEMA Gala 2026 — Kenya's premier gospel music awards.">
+<meta name="description" content="Meet the sponsors and partners powering the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards.">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Sponsors & Partners | Digitally Fit Awards">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
-<meta property="og:description" content="Meet the sponsors and partners powering the MEMA Gala 2026.">
+<meta property="og:description" content="Meet the sponsors and partners powering the Digitally Fit Awards Gala 2026.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -63,14 +63,14 @@ foreach ($allSponsors as $sp) {
 }
 .sponsor-card:hover { box-shadow: 0 8px 30px rgba(5,55,50,.1); border-color: #be9b3f; transform: translateY(-3px); }
 .sponsor-card img { height: 80px; max-width: 180px; object-fit: contain; }
-.sponsor-card .sp-name { font-weight: 700; color: #053732; font-size: .95rem; }
+.sponsor-card .sp-name { font-weight: 700; color: #0a0a0a; font-size: .95rem; }
 .sponsor-card .sp-tier { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 2px 10px; border-radius: 20px; }
 .tier-title   { background: #fdf0d5; color: #7a5a00; }
-.tier-partner { background: #e8f4f0; color: #053732; }
+.tier-partner { background: #e8f4f0; color: #0a0a0a; }
 .tier-gold    { background: #fef9ec; color: #a07c00; }
 .tier-silver  { background: #f4f4f4; color: #555; }
 .tier-bronze  { background: #fdf0e8; color: #7a4000; }
-.tier-heading { font-size: 1.05rem; font-weight: 800; color: #053732; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; padding-bottom: 10px; border-bottom: 2px solid rgba(190,155,63,.35); display: inline-block; }
+.tier-heading { font-size: 1.05rem; font-weight: 800; color: #0a0a0a; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; padding-bottom: 10px; border-bottom: 2px solid rgba(190,155,63,.35); display: inline-block; }
 </style>
 </head>
 <body>
@@ -86,7 +86,7 @@ foreach ($allSponsors as $sp) {
 <div class="form-back-drop"></div>
 <?php include 'includes/hidden-bar.php'; ?>
 
-<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/mema-about/about-1.webp);">
+<section class="page-title" style="background-image:url(<?= SITE_URL ?>/assets/images/banner/banner.jpg);">
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
@@ -146,9 +146,9 @@ foreach ($allSponsors as $sp) {
         <?php endif; ?>
 
         <!-- Become a Sponsor CTA -->
-        <div style="background:linear-gradient(135deg,#053732,#0a5c50);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:20px;">
-            <h3 style="font-weight:800;margin-bottom:10px;">Interested in Sponsoring MEMA 2026?</h3>
-            <p style="color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 24px;">Partner with Kenya's premier gospel music awards and put your brand in front of a passionate, faith-driven audience across the country.</p>
+        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:20px;">
+            <h3 style="font-weight:800;margin-bottom:10px;">Interested in Sponsoring Digitally Fit Awards 2026?</h3>
+            <p style="color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 24px;">Partner with East Africa's premier digital excellence awards and put your brand in front of a passionate, digitally-engaged audience across the country.</p>
             <a href="<?= SITE_URL ?>/contact" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">
                 <span class="btn-title">Get in Touch →</span>
             </a>

@@ -53,7 +53,7 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 /* ── Hero ── */
 .np-hero {
     position: relative;
-    background: linear-gradient(135deg, #053732 0%, #0a5c50 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     padding: 0;
     overflow: hidden;
     min-height: 360px;
@@ -132,7 +132,7 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
     padding: 28px; margin-bottom: 24px;
 }
 .np-card-title {
-    font-size: 1rem; font-weight: 800; color: #053732;
+    font-size: 1rem; font-weight: 800; color: #0a0a0a;
     margin: 0 0 16px; display: flex; align-items: center; gap: 8px;
 }
 .np-card-title i { color: #be9b3f; }
@@ -149,7 +149,7 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
     text-decoration: none; border: 1px solid #e5e5e5;
     transition: all .2s;
 }
-.social-link-btn:hover { background: #053732; color: #fff; border-color: #053732; text-decoration: none; }
+.social-link-btn:hover { background: #0a0a0a; color: #fff; border-color: #0a0a0a; text-decoration: none; }
 
 /* Video embed */
 .np-video { border-radius: 10px; overflow: hidden; margin-top: 4px; }
@@ -173,9 +173,9 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 .btn-vote-big.disabled { background: #ddd; color: #999; cursor: not-allowed; box-shadow: none; transform: none; }
 .vote-bar-wrap { margin-top: 16px; }
 .vote-count-row { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; color: #888; margin-bottom: 8px; }
-.vote-count-row .count-val { font-size: 1.05rem; font-weight: 800; color: #053732; }
+.vote-count-row .count-val { font-size: 1.05rem; font-weight: 800; color: #0a0a0a; }
 .vote-bar-bg { background: #f0f0f0; border-radius: 20px; height: 8px; overflow: hidden; }
-.vote-bar-fill { height: 8px; border-radius: 20px; background: linear-gradient(90deg,#053732,#be9b3f); transition: width .8s; }
+.vote-bar-fill { height: 8px; border-radius: 20px; background: linear-gradient(90deg,#0a0a0a,#be9b3f); transition: width .8s; }
 .voting-closed-note { font-size: .75rem; color: #aaa; text-align: center; margin-top: 10px; }
 
 /* Share buttons */
@@ -195,12 +195,12 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 .share-tw   { background: #000; color: #fff; }
 .share-li   { background: #0077b5; color: #fff; }
 .share-copy { background: #f0f0f0; color: #333; border: 1px solid #e0e0e0; }
-.copy-success { display: none; color: #059669; font-size: .78rem; text-align: center; margin-top: 6px; font-weight: 700; }
+.copy-success { display: none; color: #a0822f; font-size: .78rem; text-align: center; margin-top: 6px; font-weight: 700; }
 
 /* Back link */
 .np-back-link {
     display: flex; align-items: center; gap: 6px;
-    color: #053732; font-size: .85rem; font-weight: 700;
+    color: #0a0a0a; font-size: .85rem; font-weight: 700;
     text-decoration: none; justify-content: center;
     padding: 10px 0; transition: color .2s;
 }

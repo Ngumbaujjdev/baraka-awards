@@ -2,7 +2,7 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-// ── Resolve which event to show (MEMA-only site) ─────────────────────────
+// ── Resolve which event to show ─────────────────────────
 $activeSlug = $_GET['event'] ?? 'mema-gala-2026';
 
 $response   = $activeSlug ? tuqio_api('/api/public/events/' . $activeSlug . '/nominees') : [];
@@ -23,7 +23,7 @@ usort($categoriesSorted, fn($a, $b) => ($b['total_count'] ?? 0) <=> ($a['total_c
 $sidebarCats    = array_slice($categoriesSorted, 0, 10);
 $hiddenCatCount = max(0, count($categories) - 10);
 
-$initialsColors = ['#be9b3f', '#053732', '#0a5c50', '#6c757d'];
+$initialsColors = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
 $globalIdx = 0;
 ?>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ $globalIdx = 0;
 <meta name="keywords" content="nominees Kenya, finalists awards Kenya, vote nominees, <?= htmlspecialchars($eventName) ?>, Digitally Fit Awards voting">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mema.memaawards.africa/nominees.php">
+<link rel="canonical" href="https://dfa.tuqiohub.africa/nominees.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
@@ -51,13 +51,13 @@ $globalIdx = 0;
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://mema.memaawards.africa/nominees.php">
+<meta property="og:url" content="https://dfa.tuqiohub.africa/nominees.php">
 <meta property="og:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Digitally Fit Awards.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@memaawards">
+<meta name="twitter:site" content="@digitallyfitawards">
 <meta name="twitter:title" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
 <meta name="twitter:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Digitally Fit Awards.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
@@ -68,17 +68,17 @@ $globalIdx = 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://mema.memaawards.africa","description":"Kenya's premier event management and awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@mema.memaawards.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/memaawards","https://www.tiktok.com/@memaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mema.memaawards.africa/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"https://mema.memaawards.africa/nominees.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"https://dfa.tuqiohub.africa/nominees.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Digitally Fit Awards","url":"https://mema.memaawards.africa/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -95,7 +95,7 @@ $globalIdx = 0;
 <style>
 /* Category nav */
 .cat-nav .nav-link {
-    color: #053732; padding: 10px 16px; font-size: .88rem; font-weight: 600;
+    color: #0a0a0a; padding: 10px 16px; font-size: .88rem; font-weight: 600;
     border-radius: 6px; margin-bottom: 4px; border: 1px solid #eee;
     background: #fafafa; transition: all .25s; display: flex; align-items: center; gap: 8px;
 }
@@ -124,17 +124,17 @@ $globalIdx = 0;
     align-items: center; justify-content: center; margin: 0 auto 18px;
     font-size: 1.9rem; font-weight: 800; color: #fff; letter-spacing: 1px;
 }
-.nominee-name { font-size: 1.05rem; color: #053732; margin-bottom: 4px; font-weight: 700; line-height: 1.3; }
+.nominee-name { font-size: 1.05rem; color: #0a0a0a; margin-bottom: 4px; font-weight: 700; line-height: 1.3; }
 .nominee-title { font-size: .82rem; color: #be9b3f; font-weight: 600; margin-bottom: 4px; }
 .nominee-location { font-size: .8rem; color: #999; margin-bottom: 16px; }
 .nominee-location i { color: #be9b3f; margin-right: 3px; }
 .vote-bar-container { background: #f0f0f0; border-radius: 10px; height: 7px; width: 100%; margin-bottom: 6px; overflow: hidden; }
-.vote-bar-fill { background: linear-gradient(90deg, #be9b3f, #053732); height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+.vote-bar-fill { background: linear-gradient(90deg, #be9b3f, #0a0a0a); height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
 .vote-stats { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: #888; margin-bottom: 16px; }
 .vote-stats .vote-count { color: #be9b3f; }
 .nominee-card-footer { margin-top: auto; }
 /* Countdown */
-.countdown-widget { background: linear-gradient(135deg, #032620, #be9b3f); border-radius: 10px; padding: 24px; color: #fff; text-align: center; margin-bottom: 30px; }
+.countdown-widget { background: linear-gradient(135deg, #0a0a0a, #be9b3f); border-radius: 10px; padding: 24px; color: #fff; text-align: center; margin-bottom: 30px; }
 .countdown-widget h6 { font-size: .88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: .85; margin-bottom: 12px; }
 .countdown-boxes { display: flex; gap: 8px; justify-content: center; }
 .countdown-box { background: rgba(255,255,255,0.18); border-radius: 8px; padding: 10px 14px; min-width: 52px; }
@@ -144,7 +144,7 @@ $globalIdx = 0;
 /* Modal */
 /* Event selector */
 .event-selector { margin-bottom: 28px; }
-.event-selector label { font-weight: 600; color: #053732; margin-bottom: 8px; display: block; }
+.event-selector label { font-weight: 600; color: #0a0a0a; margin-bottom: 8px; display: block; }
 .event-selector select { border: 2px solid #eee; border-radius: 8px; padding: 9px 14px; font-size: .9rem; width: 100%; max-width: 420px; color: #333; }
 .event-selector select:focus { border-color: #be9b3f; outline: none; box-shadow: 0 0 0 3px rgba(190,155,63,0.12); }
 /* Nominee filter row */
@@ -274,7 +274,7 @@ $globalIdx = 0;
                          data-current-page="1">
 
                         <div style="margin-bottom:28px;">
-                            <h3 style="color:#053732;font-weight:700;font-size:1.4rem;margin-bottom:6px;">
+                            <h3 style="color:#0a0a0a;font-weight:700;font-size:1.4rem;margin-bottom:6px;">
                                 <?= htmlspecialchars($category['name']) ?>
                             </h3>
                             <?php if (!empty($category['description'])): ?>
@@ -501,7 +501,7 @@ $globalIdx = 0;
     <div id="nom-modal-box" style="background:#fff;border-radius:14px;width:100%;max-width:540px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 48px rgba(0,0,0,.28);position:relative;">
 
         <!-- Header -->
-        <div style="background:linear-gradient(135deg,#053732 0%,#0a5c50 100%);padding:18px 22px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between;">
+        <div style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);padding:18px 22px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between;">
             <div>
                 <span id="modal-category" style="font-size:.7rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.8px;font-weight:700;"></span>
                 <div id="modal-name" style="margin:3px 0 0;font-weight:800;color:#fff;line-height:1.2;font-size:1.15rem;"></div>
@@ -525,11 +525,11 @@ $globalIdx = 0;
                     <div id="modal-title" style="font-size:.9rem;color:#be9b3f;font-weight:700;margin-bottom:6px;"></div>
                     <div id="modal-code-wrap" style="display:none;margin-bottom:6px;">
                         <span style="font-size:.7rem;color:#999;text-transform:uppercase;letter-spacing:.5px;">Code</span><br>
-                        <span id="modal-code" style="font-family:monospace;font-size:.9rem;font-weight:700;color:#053732;background:#f0eeff;padding:2px 8px;border-radius:5px;"></span>
+                        <span id="modal-code" style="font-family:monospace;font-size:.9rem;font-weight:700;color:#0a0a0a;background:#f0eeff;padding:2px 8px;border-radius:5px;"></span>
                     </div>
                     <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(5,55,50,.06);padding:5px 12px;border-radius:20px;">
-                        <i class="fas fa-poll" style="color:#053732;font-size:.8rem;"></i>
-                        <span id="modal-vote-count" style="font-size:.82rem;font-weight:700;color:#053732;"></span>
+                        <i class="fas fa-poll" style="color:#0a0a0a;font-size:.8rem;"></i>
+                        <span id="modal-vote-count" style="font-size:.82rem;font-weight:700;color:#0a0a0a;"></span>
                     </div>
                 </div>
             </div>
@@ -545,11 +545,11 @@ $globalIdx = 0;
                 <p style="font-size:.75rem;color:#aaa;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin:0 0 8px;">Contact</p>
                 <div style="display:flex;flex-direction:column;gap:6px;">
                     <div id="modal-email-row" style="display:none;align-items:center;gap:8px;">
-                        <i class="fas fa-envelope" style="color:#053732;font-size:.8rem;width:16px;text-align:center;"></i>
-                        <a id="modal-email" href="#" style="font-size:.85rem;color:#053732;text-decoration:none;"></a>
+                        <i class="fas fa-envelope" style="color:#0a0a0a;font-size:.8rem;width:16px;text-align:center;"></i>
+                        <a id="modal-email" href="#" style="font-size:.85rem;color:#0a0a0a;text-decoration:none;"></a>
                     </div>
                     <div id="modal-phone-row" style="display:none;align-items:center;gap:8px;">
-                        <i class="fas fa-phone" style="color:#053732;font-size:.8rem;width:16px;text-align:center;"></i>
+                        <i class="fas fa-phone" style="color:#0a0a0a;font-size:.8rem;width:16px;text-align:center;"></i>
                         <span id="modal-phone" style="font-size:.85rem;color:#444;"></span>
                     </div>
                 </div>
@@ -720,7 +720,7 @@ $globalIdx = 0;
     var IS_VOTING_OPEN     = <?= $isVotingOpen ? 'true' : 'false' ?>;
     var VOTE_BUNDLE_URL    = '<?= htmlspecialchars($voteBundleUrl) ?>';
     var NOMINEE_PROFILE_URL = '<?= SITE_URL ?>/nominee';
-    var COLORS          = ['#be9b3f', '#053732', '#0a5c50', '#6c757d'];
+    var COLORS          = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
     var cardColorIdx    = <?= $globalIdx ?>; // continue from PHP-rendered count
 
     function esc(s) {
@@ -818,7 +818,7 @@ $globalIdx = 0;
         var $pane   = $('#cat-pane-' + catSlug);
         var $grid   = $pane.find('.nominees-grid');
         var catName = $pane.data('cat-name') || catSlug;
-        $grid.html('<div class="text-center" style="padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#053732;"></i></div>');
+        $grid.html('<div class="text-center" style="padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#0a0a0a;"></i></div>');
         $.get(API_BASE + '/api/public/events/' + encodeURIComponent(EVENT_SLUG) + '/nominees', {
             category_slug: catSlug, page: page, per_page: 24
         }).done(function (data) {
@@ -937,7 +937,7 @@ $(document).ready(function() {
         linkedin:  { icon:'fab fa-linkedin-in', color:'#0a66c2', label:'LinkedIn'  },
         youtube:   { icon:'fab fa-youtube',     color:'#ff0000', label:'YouTube'   },
         tiktok:    { icon:'fab fa-tiktok',      color:'#010101', label:'TikTok'    },
-        website:   { icon:'fas fa-globe',       color:'#053732', label:'Website'   }
+        website:   { icon:'fas fa-globe',       color:'#0a0a0a', label:'Website'   }
     };
 
     $(document).on('click', '.nominee-card', function(e) {
@@ -948,7 +948,7 @@ $(document).ready(function() {
         var desc      = $t.data('desc')          || '';
         var img       = $t.data('image')         || '';
         var ini       = $t.data('initials')      || '';
-        var color     = $t.data('color')         || '#053732';
+        var color     = $t.data('color')         || '#0a0a0a';
         var votes     = parseInt($t.data('votes'), 10) || 0;
         var catName   = $t.data('category-name') || '';
         var nomId     = $t.data('candidate-id')  || '';
