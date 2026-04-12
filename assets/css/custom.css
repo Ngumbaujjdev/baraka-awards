@@ -215,8 +215,8 @@ i.fa, i.fas, i.fab, i.far {
 
 /* ── Slide background images ── */
 .slide-bg-1 { background-image: url("../images/digitaly-fit-gallery/new-slide-1.jpeg"); }
-.slide-bg-2 { background-image: url("../../2025-gallery-digitaly-event/slide-2.webp"); }
-.slide-bg-3 { background-image: url("../../2025-gallery-digitaly-event/slide-3.jpg"); }
+.slide-bg-2 { background-image: url("../images/digitaly-fit-gallery/nairobi-event-view.png"); }
+.slide-bg-3 { background-image: url("../images/digitaly-fit-gallery/digitaly-fit-awards.jpg"); }
 
 /* ── Slide 1: radial gradient overlay (gold centre → black, mirrors mema) ── */
 .slide-bg-1:before {
