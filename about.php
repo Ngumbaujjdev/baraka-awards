@@ -15,29 +15,29 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <meta name="keywords" content="about Digitally Fit Awards, digital excellence awards East Africa, Digitally Fit Awards Gala Nairobi">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/about">
+<link rel="canonical" href="https://digitallyfitawards.com/about">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="About Digitally Fit Awards">
-<meta itemprop="description" content="Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls.">
+<meta itemprop="description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="About Digitally Fit Awards | Kenya's Premier Event Platform">
+<meta property="og:title" content="About Digitally Fit Awards | East Africa's Digital Excellence Awards">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/about">
-<meta property="og:description" content="Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls.">
+<meta property="og:url" content="https://digitallyfitawards.com/about">
+<meta property="og:description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="About Digitally Fit Awards | Kenya's Premier Event Platform">
-<meta name="twitter:description" content="Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls.">
+<meta name="twitter:title" content="About Digitally Fit Awards | East Africa's Digital Excellence Awards">
+<meta name="twitter:description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -46,17 +46,17 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://digitallyfitawards.com","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://dfa.tuqiohub.africa/about"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://digitallyfitawards.com/"},{"@type":"ListItem","position":2,"name":"About","item":"https://digitallyfitawards.com/about"}]}
 </script>
 
 <!-- JSON-LD: AboutPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"AboutPage","name":"About Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/about","description":"Kenya's premier event management platform powering awards, conferences, nominations, voting, ticketing, and live polls."}
+{"@context":"https://schema.org","@type":"AboutPage","name":"About Digitally Fit Awards","url":"https://digitallyfitawards.com/about","description":"East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -244,10 +244,10 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
         <div class="row">
             <?php
             $statsArr = [
-                ['300+',    'Award Categories',  'fa-trophy'],
-                ['KE',      'East Africa Region','fa-map-marker-alt'],
-                ['1M+',     'Annual reach',      'fa-signal'],
-                ['Oracom',  'Partnerships',      'fa-building'],
+                ['1st',      'Inaugural Edition',  'fa-trophy'],
+                ['10+',      'Award Categories',   'fa-award'],
+                ['Nairobi',  'Host City',           'fa-map-marker-alt'],
+                ['2026',     'Inaugural Year',      'fa-calendar-alt'],
             ];
             foreach ($statsArr as $idx => [$n,$l,$i]): ?>
             <div class="col-md-3 col-sm-6 counter-col wow zoomIn" data-wow-delay="<?= $idx * 150 ?>ms">
@@ -366,7 +366,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
                     <i class="fas fa-microphone mb-4" style="font-size:3rem;opacity:.8;display:block;"></i>
                     <h3>Nominate a Digital Achiever Today</h3>
                     <p>Know someone who deserves recognition for digital excellence? Nominations are open. Submit your nomination now.</p>
-                    <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-two cta-box-btn">
+                    <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-two cta-box-btn">
                         <span class="btn-title">Submit a Nomination →</span>
                     </a>
                 </div>

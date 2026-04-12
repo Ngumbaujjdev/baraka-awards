@@ -2,8 +2,19 @@
 include 'config/config.php';
 include 'libs/App.php';
 
+// ── Fetch all DFA events for switcher ───────────────────
+$_dfaEvsList = tuqio_api('/api/public/events?client=digitally-fit-awards');
+$_allDfaEvs  = $_dfaEvsList['data'] ?? [];
+usort($_allDfaEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
+// Default: first event with banner_image, else latest
+$_defaultNomEv = null;
+foreach ($_allDfaEvs as $_e) {
+    if (!$_defaultNomEv && !empty($_e['banner_image'])) { $_defaultNomEv = $_e; }
+}
+if (!$_defaultNomEv && !empty($_allDfaEvs)) { $_defaultNomEv = end($_allDfaEvs); }
+
 // ── Resolve which event to show ─────────────────────────
-$activeSlug = $_GET['event'] ?? 'dfa-gala-2026';
+$activeSlug = $_GET['event'] ?? ($_defaultNomEv['slug'] ?? '');
 
 $response   = $activeSlug ? tuqio_api('/api/public/events/' . $activeSlug . '/nominees') : [];
 $event      = $response['event'] ?? [];
@@ -17,11 +28,20 @@ $eventName    = $event['name'] ?? 'Digitally Fit Awards';
 
 $voteBundleUrl = SITE_URL . '/vote-bundle.php?event=' . urlencode($activeSlug ?: '');
 
-// Sidebar: top 10 categories by nominee count
-$categoriesSorted = $categories;
-usort($categoriesSorted, fn($a, $b) => ($b['total_count'] ?? 0) <=> ($a['total_count'] ?? 0));
-$sidebarCats    = array_slice($categoriesSorted, 0, 10);
-$hiddenCatCount = max(0, count($categories) - 10);
+// Build grouped sidebar structure
+$sidebarGroups = [];
+if (!empty($response['groups'])) {
+    foreach ($response['groups'] as $grp) {
+        $sidebarGroups[$grp['name'] ?? 'Other'] = $grp['categories'] ?? [];
+    }
+}
+if (!empty($response['ungrouped'])) {
+    $sidebarGroups['Other'] = $response['ungrouped'];
+}
+// Fallback: no groups — show flat list
+if (empty($sidebarGroups) && !empty($categories)) {
+    $sidebarGroups['__root__'] = $categories;
+}
 
 $initialsColors = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
 $globalIdx = 0;
@@ -37,7 +57,7 @@ $globalIdx = 0;
 <meta name="keywords" content="nominees Kenya, finalists awards Kenya, vote nominees, <?= htmlspecialchars($eventName) ?>, Digitally Fit Awards voting">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/nominees.php">
+<link rel="canonical" href="<?= SITE_URL ?>/nominees.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
@@ -51,7 +71,7 @@ $globalIdx = 0;
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/nominees.php">
+<meta property="og:url" content="<?= SITE_URL ?>/nominees.php">
 <meta property="og:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Digitally Fit Awards.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -68,22 +88,23 @@ $globalIdx = 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"https://dfa.tuqiohub.africa/nominees.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"<?= SITE_URL ?>/nominees.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Digitally Fit Awards","url":"<?= SITE_URL ?>/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/custom.css" rel="stylesheet">
+<link href="<?= SITE_URL ?>/assets/css/nominees.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
@@ -92,101 +113,6 @@ $globalIdx = 0;
 <meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<style>
-/* Category nav */
-.cat-nav .nav-link {
-    color: #0a0a0a; padding: 10px 16px; font-size: .88rem; font-weight: 600;
-    border-radius: 6px; margin-bottom: 4px; border: 1px solid #eee;
-    background: #fafafa; transition: all .25s; display: flex; align-items: center; gap: 8px;
-}
-.cat-nav .nav-link.active { background: #be9b3f; border-color: #be9b3f; color: #fff; }
-.cat-nav .nav-link:hover:not(.active) { background: #fff0f0; border-color: #be9b3f; color: #be9b3f; }
-.cat-nav .nav-link .count-badge {
-    margin-left: auto; background: rgba(190,155,63,0.12); color: #be9b3f;
-    border-radius: 20px; font-size: .7rem; font-weight: 700; padding: 2px 8px;
-}
-.cat-nav .nav-link.active .count-badge { background: rgba(255,255,255,0.25); color: #fff; }
-/* Nominee cards */
-.nominee-card {
-    background: #fff; border-radius: 12px; padding: 28px 20px 20px;
-    text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    transition: transform .3s, box-shadow .3s; height: 100%;
-    display: flex; flex-direction: column; cursor: pointer;
-}
-.nominee-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-.nominee-photo {
-    width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
-    margin: 0 auto 18px; border: 4px solid #f9fafc;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: block;
-}
-.nominee-initials {
-    width: 110px; height: 110px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; margin: 0 auto 18px;
-    font-size: 1.9rem; font-weight: 800; color: #fff; letter-spacing: 1px;
-}
-.nominee-name { font-size: 1.05rem; color: #0a0a0a; margin-bottom: 4px; font-weight: 700; line-height: 1.3; }
-.nominee-title { font-size: .82rem; color: #be9b3f; font-weight: 600; margin-bottom: 4px; }
-.nominee-location { font-size: .8rem; color: #999; margin-bottom: 16px; }
-.nominee-location i { color: #be9b3f; margin-right: 3px; }
-.vote-bar-container { background: #f0f0f0; border-radius: 10px; height: 7px; width: 100%; margin-bottom: 6px; overflow: hidden; }
-.vote-bar-fill { background: linear-gradient(90deg, #be9b3f, #0a0a0a); height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
-.vote-stats { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: #888; margin-bottom: 16px; }
-.vote-stats .vote-count { color: #be9b3f; }
-.nominee-card-footer { margin-top: auto; }
-/* Countdown */
-.countdown-widget { background: linear-gradient(135deg, #0a0a0a, #be9b3f); border-radius: 10px; padding: 24px; color: #fff; text-align: center; margin-bottom: 30px; }
-.countdown-widget h6 { font-size: .88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: .85; margin-bottom: 12px; }
-.countdown-boxes { display: flex; gap: 8px; justify-content: center; }
-.countdown-box { background: rgba(255,255,255,0.18); border-radius: 8px; padding: 10px 14px; min-width: 52px; }
-.countdown-box .num { font-size: 1.6rem; font-weight: 800; display: block; line-height: 1; }
-.countdown-box .lbl { font-size: .62rem; text-transform: uppercase; letter-spacing: 1px; opacity: .7; }
-.countdown-closed { font-size: .92rem; opacity: .88; color: #fff; margin: 0; }
-/* Modal */
-/* Event selector */
-.event-selector { margin-bottom: 28px; }
-.event-selector label { font-weight: 600; color: #0a0a0a; margin-bottom: 8px; display: block; }
-.event-selector select { border: 2px solid #eee; border-radius: 8px; padding: 9px 14px; font-size: .9rem; width: 100%; max-width: 420px; color: #333; }
-.event-selector select:focus { border-color: #be9b3f; outline: none; box-shadow: 0 0 0 3px rgba(190,155,63,0.12); }
-/* Nominee filter row */
-.nom-filter-row { display: flex; gap: 12px; margin-bottom: 24px; align-items: stretch; }
-.nom-search-wrap { position: relative; flex: 1 1 0; min-width: 0; }
-.nom-search-wrap input { width: 100%; border: 2px solid #eee; border-radius: 10px; padding: 11px 44px 11px 16px; font-size: .9rem; color: #333; transition: border-color .2s; height: 46px; box-sizing: border-box; }
-.nom-search-wrap input:focus { border-color: #be9b3f; outline: none; box-shadow: 0 0 0 3px rgba(190,155,63,.1); }
-.nom-search-wrap .search-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #aaa; pointer-events: none; }
-.nom-search-wrap .search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #aaa; cursor: pointer; display: none; font-size: .85rem; }
-.nom-cat-wrap { flex: 0 0 200px; }
-.nom-cat-wrap .select2-container { width: 100% !important; }
-.nom-cat-wrap .select2-container--default .select2-selection--single { height: 46px; border: 2px solid #eee; border-radius: 10px; display: flex; align-items: center; padding: 0 12px; font-size: .9rem; }
-.nom-cat-wrap .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: normal; padding: 0; color: #333; }
-.nom-cat-wrap .select2-container--default .select2-selection--single .select2-selection__arrow { height: 44px; right: 8px; }
-.nom-cat-wrap .select2-container--default.select2-container--open .select2-selection--single,
-.nom-cat-wrap .select2-container--default.select2-container--focus .select2-selection--single { border-color: #be9b3f; box-shadow: 0 0 0 3px rgba(190,155,63,.1); outline: none; }
-.select2-dropdown { border: 2px solid #be9b3f; border-radius: 10px; font-size: .9rem; }
-.select2-results__option--highlighted { background: #be9b3f !important; }
-@media (max-width: 576px) { .nom-filter-row { flex-direction: column; } .nom-cat-wrap { flex: none; } }
-#nom-no-results { display: none; text-align: center; padding: 60px 0; color: #aaa; }
-
-/* Animated vote count */
-@keyframes voteFlash { 0%{background:rgba(190,155,63,.15)} 100%{background:transparent} }
-.vote-updated { animation: voteFlash .8s ease-out; border-radius: 4px; }
-
-/* Velocity badge */
-.velocity-badge {
-    display: inline-flex; align-items: center; gap: 4px; font-size: .68rem; font-weight: 700;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #fff;
-    padding: 2px 8px; border-radius: 20px; margin-left: 6px;
-}
-
-/* Winner badge */
-.winner-badge {
-    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-    background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #fff;
-    font-size: .65rem; font-weight: 800; padding: 3px 12px; border-radius: 20px;
-    text-transform: uppercase; letter-spacing: .5px; white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(245,158,11,.4);
-}
-.nominee-card { position: relative; }
-</style>
 </head>
 <body>
 <div class="page-wrapper">
@@ -235,13 +161,38 @@ $globalIdx = 0;
                 </div>
                 <?php else: ?>
 
-                <!-- Nominee Filter Row: Search + Category -->
+                <!-- Event switcher pills (AJAX — no full page reload) -->
+                <?php if (count($_allDfaEvs) > 1): ?>
+                <div id="nomEventPills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;">
+                    <?php foreach ($_allDfaEvs as $_ev): $isAct = ($_ev['slug'] ?? '') === $activeSlug; ?>
+                    <button type="button"
+                            class="nom-event-pill"
+                            data-slug="<?= htmlspecialchars($_ev['slug'] ?? '', ENT_QUOTES) ?>"
+                            data-active="<?= $isAct ? '1' : '0' ?>"
+                            onclick="switchNomEvent(this.dataset.slug)">
+                        <?= htmlspecialchars($_ev['name'] ?? '') ?>
+                    </button>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+
+                <!-- Nominee Filter Row: Search + Group + Category -->
                 <div class="nom-filter-row">
                     <div class="nom-search-wrap">
                         <input type="text" id="nom-search" placeholder="Search nominees by name..." autocomplete="off">
                         <i class="fas fa-search search-icon" id="nom-search-icon"></i>
                         <i class="fas fa-times search-clear" id="nom-search-clear"></i>
                     </div>
+                    <?php if (count($sidebarGroups) > 1 || !isset($sidebarGroups['__root__'])): ?>
+                    <div class="nom-group-wrap">
+                        <select id="nom-group-select">
+                            <option value="">All Groups</option>
+                            <?php foreach ($sidebarGroups as $gName => $gCats): if ($gName === '__root__') continue; ?>
+                            <option value="<?= htmlspecialchars($gName) ?>"><?= htmlspecialchars($gName) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <?php endif; ?>
                     <div class="nom-cat-wrap">
                         <select id="nom-cat-select">
                             <option value="">All Categories</option>
@@ -395,34 +346,66 @@ $globalIdx = 0;
             <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
                 <aside class="sidebar padding-left">
 
-                    <!-- Category filter -->
-                    <?php if (!empty($categories)): ?>
+                    <!-- Category filter — grouped -->
+                    <?php if (!empty($sidebarGroups)): ?>
                     <div class="sidebar-widget" style="margin-bottom:30px;">
                         <h5 class="sidebar-title">Categories</h5>
                         <div class="widget-content">
-                            <nav>
-                                <div class="nav flex-column cat-nav" id="nomineeTabs" role="tablist">
-                                    <?php foreach ($sidebarCats as $ci => $cat):
-                                        $cCount = (int)($cat['total_count'] ?? count($cat['candidates'] ?? $cat['nominees'] ?? []));
-                                    ?>
-                                    <button class="nav-link <?= $ci === 0 ? 'active' : '' ?>"
-                                            id="cat-tab-<?= htmlspecialchars($cat['slug']) ?>"
-                                            data-toggle="pill"
-                                            data-target="#cat-pane-<?= htmlspecialchars($cat['slug']) ?>"
-                                            type="button" role="tab">
-                                        <?= htmlspecialchars($cat['name']) ?>
-                                        <span class="count-badge"><?= $cCount ?></span>
-                                    </button>
-                                    <?php endforeach; ?>
-                                    <?php if ($hiddenCatCount > 0): ?>
-                                    <button id="showAllCats" type="button"
-                                            style="margin-top:8px;width:100%;padding:8px;border:1px dashed rgba(190,155,63,.4);background:transparent;border-radius:6px;font-size:.78rem;color:#be9b3f;font-weight:600;cursor:pointer;"
-                                            onclick="showAllSidebarCats()">
-                                        + <?= $hiddenCatCount ?> more categories
-                                    </button>
-                                    <?php endif; ?>
-                                </div>
+                            <?php
+                            $SIDEBAR_GROUPS_VISIBLE = 5;
+                            $totalSidebarGroups = count(array_filter(array_keys($sidebarGroups), fn($k) => $k !== '__root__'));
+                            $hasMoreGroups = $totalSidebarGroups > $SIDEBAR_GROUPS_VISIBLE;
+                            ?>
+                            <nav id="catSidebarNav" class="nav flex-column cat-nav" role="tablist">
+                                <?php
+                                $sbIdx      = 0;
+                                $grpOpenIdx = 0;
+                                foreach ($sidebarGroups as $groupName => $groupCats):
+                                    $isFirst  = $grpOpenIdx === 0;
+                                    $hasLabel = $groupName !== '__root__' && count($sidebarGroups) > 1;
+                                    $isHidden = $hasLabel && $grpOpenIdx >= $SIDEBAR_GROUPS_VISIBLE;
+                                    $grpOpenIdx++;
+                                    if ($hasLabel):
+                                ?>
+                                <details class="cat-group-details <?= $isHidden ? 'sidebar-group-hidden' : '' ?>" <?= $isFirst ? 'open' : '' ?>>
+                                    <summary class="cat-group-summary">
+                                        <?= htmlspecialchars($groupName) ?>
+                                        <i class="fas fa-chevron-down cat-group-chevron"></i>
+                                    </summary>
+                                    <div class="cat-group-body">
+                                <?php endif; ?>
+                                <?php foreach ($groupCats as $cat):
+                                    $cCount   = (int)($cat['total_count'] ?? count($cat['nominees'] ?? []));
+                                    $catSlug  = htmlspecialchars($cat['slug'] ?? '');
+                                    $isActive = ($sbIdx === 0);
+                                    $sbIdx++;
+                                ?>
+                                <button class="nav-link <?= $isActive ? 'active' : '' ?>"
+                                        id="cat-tab-<?= $catSlug ?>"
+                                        data-toggle="pill"
+                                        data-target="#cat-pane-<?= $catSlug ?>"
+                                        type="button" role="tab">
+                                    <?= htmlspecialchars($cat['name'] ?? '') ?>
+                                    <span class="count-badge"><?= $cCount ?></span>
+                                </button>
+                                <?php endforeach; ?>
+                                <?php if ($hasLabel): ?>
+                                    </div>
+                                </details>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
                             </nav>
+                            <?php if ($hasMoreGroups): ?>
+                            <?php $hiddenCount = $totalSidebarGroups - $SIDEBAR_GROUPS_VISIBLE; $firstBatch = min($hiddenCount, 5); ?>
+                            <button id="sidebarShowMore" onclick="sidebarShowAllGroups(this)" style="
+                                width:100%; margin-top:10px; padding:9px 0; background:none;
+                                border:1px dashed rgba(190,155,63,.4); border-radius:8px;
+                                color:#be9b3f; font-size:.8rem; font-weight:700; cursor:pointer;
+                                letter-spacing:.4px; transition:all .2s;">
+                                <i class="fas fa-chevron-down" style="margin-right:5px;font-size:.7rem;"></i>
+                                Show <?= $firstBatch ?> More <span style="opacity:.55;font-weight:500;">(<?= $hiddenCount ?> remaining)</span>
+                            </button>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -591,6 +574,20 @@ $globalIdx = 0;
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
 <?php include 'includes/footer-links.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<?php
+$_grpKeysInline = array_keys($sidebarGroups);
+$_grpValsInline = array_map(fn($cats) => array_column($cats, 'slug'), array_values($sidebarGroups));
+$_nomConfigJson = htmlspecialchars(json_encode([
+    'group_cats'      => array_combine($_grpKeysInline, $_grpValsInline) ?: (object)[],
+    'all_cat_opts'    => array_values(array_map(fn($c) => ['slug' => $c['slug'] ?? '', 'name' => $c['name'] ?? ''], $categories)),
+    'is_voting_open'  => $isVotingOpen,
+    'vote_bundle_url' => $voteBundleUrl,
+    'event_slug'      => $activeSlug,
+]), ENT_QUOTES, 'UTF-8');
+?>
+<!-- Nominee page data — in HTML attr so it's safe from script-tag nesting issues -->
+<div id="nom-page-data" data-config="<?= $_nomConfigJson ?>" style="display:none;"></div>
 
 <script>
 (function () {
@@ -855,76 +852,288 @@ $globalIdx = 0;
         $('html,body').animate({ scrollTop: top - 100 }, 300);
     });
 
+    // Expose for AJAX event-switcher
+    window._nomUpdateEventConfig = function(slug, isVotingOpen, voteBundleUrl) {
+        EVENT_SLUG      = slug;
+        IS_VOTING_OPEN  = isVotingOpen;
+        VOTE_BUNDLE_URL = voteBundleUrl;
+    };
+    window._nomBuildPagination = buildPagination;
+
 }(jQuery));
 
-// ── Nominee Search + Category Filter ─────────────────────────
+// ── Nominee Search + Group + Category Filter ─────────────────────────
+<?php
+$_grpKeys = array_keys($sidebarGroups);
+$_grpVals = array_map(fn($cats) => array_column($cats, 'slug'), array_values($sidebarGroups));
+$_groupCatsJson    = json_encode(array_combine($_grpKeys, $_grpVals) ?: (object)[]);
+$_allCatOptsJson   = json_encode(array_values(array_map(fn($c) => [
+    'slug' => $c['slug'] ?? '',
+    'name' => $c['name'] ?? '',
+], $categories)));
+?>
 (function() {
-    var $input     = document.getElementById('nom-search');
-    var $clear     = document.getElementById('nom-search-clear');
-    var $icon      = document.getElementById('nom-search-icon');
-    var $noRes     = document.getElementById('nom-no-results');
-    var $catSelect = document.getElementById('nom-cat-select');
+    var $input = document.getElementById('nom-search');
+    var $clear = document.getElementById('nom-search-clear');
+    var $icon  = document.getElementById('nom-search-icon');
+    var $noRes = document.getElementById('nom-no-results');
+
+    var GROUP_CATS      = <?= $_groupCatsJson ?>;
+    var ALL_CAT_OPTIONS = <?= $_allCatOptsJson ?>;
+    var _lastActivePaneSlug = '';
+
+    function getCatSel()   { return document.getElementById('nom-cat-select'); }
+    function getGroupSel() { return document.getElementById('nom-group-select'); }
+
+    function initS2(selector, placeholder) {
+        if (!window.jQuery || !$.fn.select2) return;
+        var $el = $(selector);
+        if (!$el.length) return;
+        if ($el.hasClass('select2-hidden-accessible')) $el.select2('destroy');
+        $el.select2({ placeholder: placeholder, allowClear: true });
+    }
+
+    function repopulateCatOptions(groupName) {
+        var $cs = getCatSel();
+        if (!$cs) return;
+        if (window.jQuery && $.fn.select2) { try { $('#nom-cat-select').select2('destroy'); } catch(e){} }
+        var allowed = groupName && GROUP_CATS[groupName] ? GROUP_CATS[groupName] : null;
+        var html = '<option value=""></option>';
+        ALL_CAT_OPTIONS.forEach(function(c) {
+            if (!allowed || allowed.indexOf(c.slug) !== -1)
+                html += '<option value="' + c.slug + '">' + c.name + '</option>';
+        });
+        $cs.innerHTML = html;
+        initS2('#nom-cat-select', 'All Categories');
+    }
+
+    // ── Public reinit — always registered (even if no nominees on this page) ──
+    window.initNomFilters = function(newGroupCats, newAllCatOpts) {
+        GROUP_CATS      = newGroupCats      || {};
+        ALL_CAT_OPTIONS = newAllCatOpts     || [];
+        _lastActivePaneSlug = '';
+        if (window.jQuery && $.fn.select2) {
+            try { var $cs2 = $('#nom-cat-select'); if ($cs2.hasClass('select2-hidden-accessible')) $cs2.select2('destroy'); } catch(e){}
+            try { var $gs2 = $('#nom-group-select'); if ($gs2.hasClass('select2-hidden-accessible')) $gs2.select2('destroy'); } catch(e){}
+        }
+        initS2('#nom-cat-select', 'All Categories');
+        if (getGroupSel()) initS2('#nom-group-select', 'All Groups');
+        var firstSlug = (ALL_CAT_OPTIONS[0] || {}).slug;
+        if (firstSlug) { _lastActivePaneSlug = firstSlug; activatePane(firstSlug); }
+        if ($input) { $input.value = ''; }
+        var tc = document.getElementById('nomineeTabContent');
+        if (tc) tc.classList.remove('search-all');
+        if ($noRes) $noRes.style.display = 'none';
+        document.querySelectorAll('.tab-pane').forEach(function(p) { p.style.display = ''; });
+    };
+
+    // Initial Select2 setup
+    $(function() {
+        initS2('#nom-cat-select', 'All Categories');
+        if (getGroupSel()) initS2('#nom-group-select', 'All Groups');
+    });
+
+    // No filter row (event has no nominees yet) — stop here
     if (!$input) return;
 
-    // Init Select2
-    if (window.jQuery && $.fn.select2) {
-        $('#nom-cat-select').select2({
-            placeholder: 'All Categories',
-            allowClear: true,
-            minimumResultsForSearch: Infinity
-        });
-        $('#nom-cat-select').on('change', function() {
-            applyFilters();
-            // Also switch sidebar tab to match
-            var slug = $(this).val();
-            if (slug) {
-                var $tab = $('[data-target="#cat-pane-' + slug + '"]');
-                if ($tab.length) $tab.tab('show');
-            } else {
-                // Show all — switch to first tab
-                var $first = $('[data-toggle="pill"]').first();
-                if ($first.length) $first.tab('show');
+    var _lockGroupChange = false;
+
+    if (window.jQuery) {
+        $(document).on('change', '#nom-cat-select', function() {
+            var slug  = $(this).val();
+            var $gs   = getGroupSel();
+            if (slug && $gs) {
+                var foundGrp = '';
+                Object.keys(GROUP_CATS).forEach(function(g) {
+                    if (g !== '__root__' && GROUP_CATS[g].indexOf(slug) !== -1) foundGrp = g;
+                });
+                var currentGrp = $($gs).val() || '';
+                if (foundGrp && foundGrp !== currentGrp) {
+                    _lockGroupChange = true;
+                    repopulateCatOptions(foundGrp);
+                    $('#nom-cat-select').val(slug).trigger('change.select2');
+                    $('#nom-group-select').val(foundGrp).trigger('change.select2');
+                    _lockGroupChange = false;
+                }
             }
+            applyFilters();
         });
+
+        $(document).on('change', '#nom-group-select', function() {
+            if (_lockGroupChange) return;
+            repopulateCatOptions($(this).val());
+            applyFilters();
+        });
+    }
+
+    function activatePane(slug) {
+        if (!slug) return;
+        document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.remove('show', 'active'); });
+        document.querySelectorAll('[data-toggle="pill"]').forEach(function(b) { b.classList.remove('active'); });
+        var pane = document.getElementById('cat-pane-' + slug);
+        var btn  = document.querySelector('[data-target="#cat-pane-' + slug + '"]');
+        if (pane) pane.classList.add('active', 'show');
+        if (btn)  btn.classList.add('active');
     }
 
     function applyFilters() {
+        var $cs  = getCatSel();
+        var $gs  = getGroupSel();
         var q    = $input.value.trim().toLowerCase();
-        var cat  = $catSelect ? $catSelect.value : '';
-        var totalVisible = 0;
+        var cat  = $cs ? $cs.value : '';
+        var grp  = $gs ? $gs.value : '';
+        var tc   = document.getElementById('nomineeTabContent');
 
-        // Search icon toggle
         $clear.style.display = q.length > 0 ? 'block' : 'none';
         $icon.style.display  = q.length > 0 ? 'none'  : 'block';
 
-        document.querySelectorAll('.nominee-card').forEach(function(card) {
-            var name      = (card.getAttribute('data-name')     || '').toLowerCase();
-            var cardCat   = (card.getAttribute('data-category') || '');
-            var matchName = !q   || name.indexOf(q) !== -1;
-            var matchCat  = !cat || cardCat === cat;
+        if (q) {
+            // ── Global search: show ALL panes, filter cards across every category ──
+            if (tc) tc.classList.add('search-all');
+            var totalVisible = 0;
+            document.querySelectorAll('.tab-pane').forEach(function(pane) {
+                var paneHits = 0;
+                pane.querySelectorAll('.nominee-card').forEach(function(card) {
+                    var name = (card.getAttribute('data-name') || '').toLowerCase();
+                    var show = name.indexOf(q) !== -1;
+                    card.parentElement.style.display = show ? '' : 'none';
+                    if (show) paneHits++;
+                });
+                pane.style.display = paneHits === 0 ? 'none' : '';
+                totalVisible += paneHits;
+            });
+            if ($noRes) $noRes.style.display = totalVisible === 0 ? 'block' : 'none';
+            return;
+        }
 
-            // When filtering by category, show ALL panes so cards are visible
-            if (cat) {
-                var pane = card.closest('.tab-pane');
-                if (pane) { pane.classList.add('show', 'active'); }
-            }
-
-            var show = matchName && matchCat;
-            card.parentElement.style.display = show ? '' : 'none';
-            if (show) totalVisible++;
+        // ── No query — restore single-pane tab mode ──
+        if (tc) tc.classList.remove('search-all');
+        document.querySelectorAll('.tab-pane').forEach(function(pane) {
+            pane.style.display = '';
+            pane.querySelectorAll('.nominee-card').forEach(function(card) {
+                card.parentElement.style.display = '';
+            });
         });
+        if ($noRes) $noRes.style.display = 'none';
 
-        $noRes.style.display = totalVisible === 0 && (q.length > 0 || cat) ? 'block' : 'none';
+        // Tab navigation based on cat/group dropdown
+        if (cat) {
+            _lastActivePaneSlug = cat;
+            activatePane(cat);
+        } else if (grp) {
+            var slugs = GROUP_CATS[grp] || [];
+            for (var i = 0; i < slugs.length; i++) {
+                if (document.getElementById('cat-pane-' + slugs[i])) {
+                    _lastActivePaneSlug = slugs[i];
+                    activatePane(slugs[i]);
+                    break;
+                }
+            }
+        } else if (_lastActivePaneSlug) {
+            activatePane(_lastActivePaneSlug);
+        }
     }
 
-    $input.addEventListener('input', applyFilters);
+    window._nomApplyFilters = applyFilters;
+    window._nomActivatePane = activatePane;
+    window._nomGroupCats    = GROUP_CATS;
 
-    $clear.addEventListener('click', function() {
-        $input.value = '';
-        applyFilters();
-        $input.focus();
-    });
+    $input.addEventListener('input', applyFilters);
+    $clear.addEventListener('click', function() { $input.value = ''; applyFilters(); $input.focus(); });
 }());
+
+// ── AJAX event switcher ──────────────────────────────────────────────────
+window.switchNomEvent = function(slug) {
+    // Find current active slug
+    var activePill = document.querySelector('.nom-event-pill[data-active="1"]');
+    var currentSlug = activePill ? activePill.dataset.slug : '';
+    if (!slug || slug === currentSlug) return;
+
+    // Loading overlay on content area
+    var tc = document.getElementById('nomineeTabContent');
+    if (tc) {
+        tc.style.position = 'relative';
+        var ov = document.createElement('div');
+        ov.id = 'nom-switch-overlay';
+        ov.style.cssText = 'position:absolute;inset:0;background:rgba(255,255,255,.8);'
+            + 'display:flex;align-items:center;justify-content:center;z-index:20;border-radius:8px;min-height:200px;';
+        ov.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#be9b3f;"></i>';
+        tc.appendChild(ov);
+    }
+
+    fetch('nominees?event=' + encodeURIComponent(slug))
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+            var parser = new DOMParser();
+            var doc    = parser.parseFromString(html, 'text/html');
+
+            // Swap tab content
+            var newTc = doc.getElementById('nomineeTabContent');
+            if (tc && newTc) tc.innerHTML = newTc.innerHTML;
+
+            // Swap sidebar nav
+            var newNav = doc.getElementById('catSidebarNav');
+            var curNav = document.getElementById('catSidebarNav');
+            if (curNav && newNav) curNav.innerHTML = newNav.innerHTML;
+
+            // Swap filter dropdowns (preserve search text)
+            var searchVal = document.getElementById('nom-search') ? document.getElementById('nom-search').value : '';
+            var newFr = doc.querySelector('.nom-filter-row');
+            var curFr = document.querySelector('.nom-filter-row');
+            if (curFr && newFr) {
+                curFr.innerHTML = newFr.innerHTML;
+                var si = document.getElementById('nom-search');
+                if (si) si.value = searchVal;
+            }
+
+            // Read page config from the safe data-config attribute
+            var nomData = {};
+            try {
+                var configEl = doc.getElementById('nom-page-data');
+                if (configEl) nomData = JSON.parse(configEl.getAttribute('data-config') || '{}');
+            } catch(e) {}
+            if (window.initNomFilters) {
+                window.initNomFilters(nomData.group_cats || {}, nomData.all_cat_opts || []);
+            }
+            if (window._nomUpdateEventConfig) {
+                window._nomUpdateEventConfig(
+                    nomData.event_slug      || slug,
+                    !!nomData.is_voting_open,
+                    nomData.vote_bundle_url || ''
+                );
+            }
+
+            // Re-init pagination on any multi-page panes
+            if (window.jQuery && window._nomBuildPagination) {
+                jQuery('.tab-pane[data-last-page]').each(function() {
+                    var $p = jQuery(this);
+                    var cs = $p.data('cat-slug');
+                    var lp = parseInt($p.data('last-page'), 10) || 1;
+                    if (lp > 1) window._nomBuildPagination($p, cs, 1, lp);
+                });
+            }
+
+            // Update pill active states
+            document.querySelectorAll('.nom-event-pill').forEach(function(p) {
+                var isAct = p.dataset.slug === slug;
+                p.dataset.active   = isAct ? '1' : '0';
+                p.style.background = isAct ? '#be9b3f' : '#fff';
+                p.style.color      = isAct ? '#fff'    : '#555';
+                p.style.borderColor= isAct ? '#be9b3f' : '#ddd';
+            });
+
+            // Update browser URL without page reload
+            history.pushState({ event: slug }, '', 'nominees?event=' + encodeURIComponent(slug));
+        })
+        .catch(function() {
+            // Fallback to full page load on any error
+            window.location.href = 'nominees?event=' + encodeURIComponent(slug);
+        })
+        .finally(function() {
+            var ov2 = document.getElementById('nom-switch-overlay');
+            if (ov2) ov2.remove();
+        });
+};
 
 // ── Nominee Modal ──────────────────────────────────────────────────────────
 $(document).ready(function() {

@@ -43,7 +43,7 @@ $seoPostDesc  = htmlspecialchars(strip_tags($post['excerpt'] ?? mb_substr($post[
 $seoPostDesc  = mb_strimwidth($seoPostDesc, 0, 160, '...');
 $seoPostImg   = !empty($featImg) ? API_STORAGE . $featImg : OG_IMAGE;
 $seoPostSlug  = urlencode($post['slug'] ?? '');
-$seoPostUrl   = 'https://dfa.tuqiohub.africa/blog-single.php?slug=' . $seoPostSlug;
+$seoPostUrl   = SITE_URL . '/blog-single.php?slug=' . $seoPostSlug;
 $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 ?>
 
@@ -85,17 +85,17 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dfa.tuqiohub.africa/blog.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($post['title'] ?? '') ?>","item":"<?= $seoPostUrl ?>"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Blog","item":"<?= SITE_URL ?>/blog.php"},{"@type":"ListItem","position":3,"name":"<?= addslashes($post['title'] ?? '') ?>","item":"<?= $seoPostUrl ?>"}]}
 </script>
 
 <!-- JSON-LD: Article -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Digitally Fit Awards') ?>"},"publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa"}}
+{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Digitally Fit Awards') ?>"},"publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

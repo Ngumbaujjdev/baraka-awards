@@ -44,7 +44,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta name="keywords" content="Kenya events, upcoming events Nairobi, award ceremonies Kenya, conferences Kenya, Digitally Fit Awards events">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/events.php">
+<link rel="canonical" href="<?= SITE_URL ?>/events.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Upcoming Events | Digitally Fit Awards">
@@ -58,7 +58,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/events.php">
+<meta property="og:url" content="<?= SITE_URL ?>/events.php">
 <meta property="og:description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -75,17 +75,17 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Events","item":"https://dfa.tuqiohub.africa/events.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Events","item":"<?= SITE_URL ?>/events.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/events.php","description":"Browse all upcoming and past events on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Digitally Fit Awards","url":"<?= SITE_URL ?>/events.php","description":"Browse all upcoming and past events on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

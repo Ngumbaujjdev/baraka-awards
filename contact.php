@@ -9,11 +9,11 @@ include 'libs/App.php';
 
 <!-- SEO -->
 <title>Contact Us | Digitally Fit Awards</title>
-<meta name="description" content="Get in touch with Digitally Fit Awards. Contact us for event management inquiries, partnerships, nominations, or general support. Email: info@dfa.tuqiohub.africa">
+<meta name="description" content="Get in touch with Digitally Fit Awards. Contact us for event management inquiries, partnerships, nominations, or general support. Email: <?= ADMIN_EMAIL ?>">
 <meta name="keywords" content="contact Digitally Fit Awards, Digitally Fit Awards support, event management inquiry Kenya, Digitally Fit Awards email, Nairobi events contact">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/contact.php">
+<link rel="canonical" href="<?= SITE_URL ?>/contact.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Contact Us | Digitally Fit Awards">
@@ -27,7 +27,7 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/contact.php">
+<meta property="og:url" content="<?= SITE_URL ?>/contact.php">
 <meta property="og:description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://dfa.tuqiohub.africa/contact.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Contact","item":"<?= SITE_URL ?>/contact.php"}]}
 </script>
 
 <!-- JSON-LD: ContactPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/contact.php","description":"Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support."}
+{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Digitally Fit Awards","url":"<?= SITE_URL ?>/contact.php","description":"Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

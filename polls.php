@@ -16,7 +16,7 @@ $polls = $resp['data'] ?? [];
 <meta name="keywords" content="live polls Kenya, community polls, Digitally Fit Awards polls, online voting polls, real-time results Kenya">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/polls.php">
+<link rel="canonical" href="<?= SITE_URL ?>/polls.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Community Polls | Digitally Fit Awards">
@@ -30,7 +30,7 @@ $polls = $resp['data'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/polls.php">
+<meta property="og:url" content="<?= SITE_URL ?>/polls.php">
 <meta property="og:description" content="Participate in live community polls on Digitally Fit Awards and see real-time results.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -47,17 +47,17 @@ $polls = $resp['data'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Polls","item":"https://dfa.tuqiohub.africa/polls.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Polls","item":"<?= SITE_URL ?>/polls.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/polls.php","description":"Participate in live community polls on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Digitally Fit Awards","url":"<?= SITE_URL ?>/polls.php","description":"Participate in live community polls on Digitally Fit Awards."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

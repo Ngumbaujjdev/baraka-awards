@@ -2,32 +2,98 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$eventsResp  = tuqio_api('/api/public/events');
-$allEvents   = $eventsResp['data'] ?? [];
-$upcoming    = array_values(array_filter($allEvents, fn($e) => ($e['status'] ?? '') !== 'past'));
-usort($upcoming, fn($a, $b) =>
-    (!empty($b['banner_image']) || !empty($b['thumbnail_image'])) <=> (!empty($a['banner_image']) || !empty($a['thumbnail_image'])));
+$blogResp  = tuqio_api('/api/public/blog');
+$blogPosts = array_slice($blogResp['data'] ?? [], 0, 3);
 
-$blogResp   = tuqio_api('/api/public/blog');
-$blogPosts  = array_slice($blogResp['data'] ?? [], 0, 3);
+// ── All DFA events — driven by client param, no hardcoding ──────────
+$_evListResp  = tuqio_api('/api/public/events?client=digitally-fit-awards');
+$_allDfaEvs   = $_evListResp['data'] ?? [];
+// Sort by start_date ascending (soonest first)
+usort($_allDfaEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
 
-// Digitally Fit Awards Gala 2026 — schedule + sponsors
-$galaResp      = tuqio_api('/api/public/events/dfa-gala-2026');
-$galaEvent     = $galaResp['event'] ?? [];          // API returns { event:{...}, schedule_days:[...] }
-$scheduleDays  = $galaResp['schedule_days'] ?? [];  // at root, not inside event
-$galaSponsors  = $galaResp['sponsors'] ?? [];
+// Spotlight = first event with a banner_image; fallback = latest start_date
+$featuredEvent = null;
+foreach ($_allDfaEvs as $_e) {
+    if (!$featuredEvent && !empty($_e['banner_image'])) { $featuredEvent = $_e; }
+}
+if (!$featuredEvent) { $featuredEvent = !empty($_allDfaEvs) ? end($_allDfaEvs) : []; }
+$featuredSlug = $featuredEvent['slug'] ?? '';
 
-// Nominee categories (dynamic — scales to 100+)
-$nomResp       = tuqio_api('/api/public/events/dfa-gala-2026/nominees');
-$allCategories = $nomResp['categories'] ?? [];
-$displayCats   = array_slice($allCategories, 0, 10);  // show first 10 on homepage
+// Other events = everything except the spotlight, soonest first
+$otherEvents = array_values(array_filter($_allDfaEvs, fn($e) => ($e['slug'] ?? '') !== $featuredSlug));
 
-// Dynamic CTA phase
-$_today             = date('Y-m-d');
-$_nominationsOpen   = ($_today >= '2026-04-16' && $_today <= '2026-07-15');
-$_votingOpen        = ($_today >= '2026-08-01' && $_today <= '2026-09-14');
-$ticketTypes        = $galaResp['ticket_types'] ?? [];
-$_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_available']))) > 0;
+// Full spotlight details: schedule, sponsors, tickets
+$galaResp     = $featuredSlug ? tuqio_api('/api/public/events/' . $featuredSlug) : [];
+$galaEvent    = $galaResp['event'] ?? [];
+$scheduleDays = $galaResp['schedule_days'] ?? [];
+$galaSponsors = $galaResp['sponsors'] ?? [];
+$ticketTypes  = $galaResp['ticket_types'] ?? [];
+$_ticketsAvailable = count(array_filter($ticketTypes, fn($t) => !empty($t['is_available']))) > 0;
+
+// ── Per-event nominees data for category tabs ────────────────────────
+$dfaEventsData = [];
+$allCategories = [];   // kept for spotlight hero nomination-date display
+foreach ($_allDfaEvs as $_ev) {
+    $_slug = $_ev['slug'] ?? '';
+    if (!$_slug) continue;
+    $_nr   = tuqio_api('/api/public/events/' . $_slug . '/nominees');
+    $_cats = $_nr['categories'] ?? [];
+
+    // Group lookup: category id → group name (works when group_id is set)
+    $_gl = [];
+    foreach ($_nr['groups'] ?? [] as $_g) {
+        foreach ($_g['categories'] ?? [] as $_gc) {
+            $_gl[$_gc['id']] = $_g['name'];
+        }
+    }
+
+    // Groups with their category slugs (for pill drill-down)
+    $_groups = array_values(array_map(fn($g) => [
+        'name'  => $g['name'],
+        'slugs' => array_column($g['categories'] ?? [], 'slug'),
+    ], $_nr['groups'] ?? []));
+
+    // Category rows for JS
+    $_catsArr = array_map(fn($c) => [
+        'id'    => $c['id'] ?? '',
+        'name'  => $c['name'] ?? '',
+        'slug'  => $c['slug'] ?? '',
+        'desc'  => $c['description'] ?? '',
+        'image' => !empty($c['image'])
+                    ? (str_starts_with($c['image'], 'http') ? $c['image'] : API_STORAGE . $c['image'])
+                    : '',
+        'status'=> $c['nomination_status'] ?? 'collecting',
+        'count' => $c['total_count'] ?? count($c['nominees'] ?? []),
+        'group' => $_gl[$c['id']] ?? '',
+    ], $_cats);
+
+    $_promoted   = count(array_filter($_cats, fn($c) => ($c['nomination_status'] ?? '') === 'promoted'));
+    $_collecting = count(array_filter($_cats, fn($c) => ($c['nomination_status'] ?? '') === 'collecting'));
+
+    $dfaEventsData[] = [
+        'slug'             => $_slug,
+        'name'             => $_ev['name'] ?? '',
+        'tagline'          => $_ev['tagline'] ?? '',
+        'voting_is_open'   => !empty($_ev['voting_is_open']),
+        'voting_closes'    => $_ev['voting_closes_at'] ?? '',
+        'start_date'       => $_ev['start_date'] ?? '',
+        'total_cats'       => count($_cats),
+        'promoted_count'   => $_promoted,
+        'collecting_count' => $_collecting,
+        'cats'             => $_catsArr,
+        'groups'           => $_groups,
+    ];
+
+    // Keep allCategories from the spotlight event for hero date display
+    if ($_slug === $featuredSlug) { $allCategories = $_cats; }
+}
+$_dfaEventsJson = json_encode($dfaEventsData);
+
+// Spotlight phase helpers (used by section 2)
+$_galaPhase  = $galaEvent['current_phase'] ?? '';
+$_vI         = !empty($galaEvent['voting_is_open']);
+$_vO         = !empty($galaEvent['voting_opens_at'])  ? strtotime($galaEvent['voting_opens_at'])  : 0;
+$_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['voting_closes_at']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +106,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 <meta name="keywords" content="Digitally Fit Awards, digital excellence awards East Africa, vote digital awards 2026, Digitally Fit Awards Gala, nominate digital achiever">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/">
+<link rel="canonical" href="<?= SITE_URL ?>/">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Digitally Fit Awards — Kenya's Premier Event Hub">
@@ -54,7 +120,7 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/">
+<meta property="og:url" content="<?= SITE_URL ?>/">
 <meta property="og:description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -71,12 +137,12 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"East Africa's premier digital excellence awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: WebSite -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","description":"Kenya's premier event management platform powering nominations, voting, ticketing, and live events.","potentialAction":{"@type":"SearchAction","target":"https://dfa.tuqiohub.africa/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"Kenya's premier event management platform powering nominations, voting, ticketing, and live events.","potentialAction":{"@type":"SearchAction","target":"<?= SITE_URL ?>/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -193,29 +259,42 @@ $_ticketsAvailable  = count(array_filter($ticketTypes, fn($t) => !empty($t['is_a
     <!--End Banner Section -->
 
 
-<!-- ══ 2. DFA 2026 SPOTLIGHT ════════════════════ -->
+<!-- ══ 2. SPOTLIGHT — featured event ══════════════ -->
 <?php
-$_galaPhase  = $galaEvent['current_phase'] ?? '';
-$_galaBanner = !empty($galaEvent['banner_image']) ? API_STORAGE . $galaEvent['banner_image']
-             : (!empty($galaEvent['thumbnail_image']) ? API_STORAGE . $galaEvent['thumbnail_image'] : '');
-$_galaDate   = !empty($galaEvent['start_date']) ? date('d M Y', strtotime($galaEvent['start_date'])) : 'December 5, 2026';
+$_galaBanner  = !empty($galaEvent['banner_image'])
+              ? (str_starts_with($galaEvent['banner_image'], 'http') ? $galaEvent['banner_image'] : API_STORAGE . $galaEvent['banner_image'])
+              : (!empty($galaEvent['thumbnail_image'])
+                  ? (str_starts_with($galaEvent['thumbnail_image'], 'http') ? $galaEvent['thumbnail_image'] : API_STORAGE . $galaEvent['thumbnail_image'])
+                  : '');
+$_galaDate    = !empty($galaEvent['start_date']) ? date('d M Y', strtotime($galaEvent['start_date'])) : null;
 $_phaseLabels = ['voting'=>'Voting Open','on_sale'=>'Tickets On Sale','nomination'=>'Nominations Open','upcoming'=>'Coming Soon'];
 $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
+$_venueStr    = trim(implode(', ', array_filter([$galaEvent['venue_name'] ?? '', $galaEvent['venue_city'] ?? '']))) ?: 'Nairobi, Kenya';
+// Ticket helpers
+$__ftk     = array_filter($ticketTypes, fn($t)=>!empty($t['sale_starts_at']) && strtotime($t['sale_starts_at'])>time());
+usort($__ftk, fn($a,$b)=>strtotime($a['sale_starts_at'])<=>strtotime($b['sale_starts_at']));
+$__nextTkt = array_values($__ftk)[0] ?? null;
+$__hasTkt  = count(array_filter($ticketTypes, fn($t)=>!empty($t['is_available']))) > 0;
+// Nomination window from categories
+$_nS=$_nE=null;
+foreach($allCategories as $_cc){ if(!empty($_cc['nomination_starts_at'])){ $_nS=$_cc['nomination_starts_at']; $_nE=$_cc['nomination_ends_at']??null; break; } }
+// Spotlight cat count
+$_spotCatCount = count($allCategories);
 ?>
 <section style="padding:80px 0;background:#fff;">
     <div class="auto-container">
         <div class="sec-title text-center">
-            <span class="sub-title">The Event</span>
-            <h2>Digitally Fit Awards Gala 2026</h2>
+            <span class="sub-title">The Flagship Event</span>
+            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards') ?></h2>
             <span class="divider"></span>
         </div>
         <div class="row align-items-center" style="margin-top:20px;">
             <!-- Left: Event Banner -->
             <div class="col-lg-6 col-md-12 wow fadeInLeft" style="margin-bottom:30px;">
-                <div style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(5,55,50,0.18);">
+                <div style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.15);">
                     <?php if ($_galaBanner): ?>
                     <img src="<?= htmlspecialchars($_galaBanner) ?>"
-                         alt="Digitally Fit Awards Gala 2026"
+                         alt="<?= htmlspecialchars($galaEvent['name'] ?? '') ?>"
                          style="width:100%;height:auto;display:block;"
                          onerror="this.parentElement.style.background='linear-gradient(135deg,#0a0a0a,#1a1a1a)';this.style.display='none'">
                     <?php else: ?>
@@ -223,49 +302,44 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
                         <i class="flaticon-trophy-1" style="font-size:5rem;color:rgba(190,155,63,0.5);"></i>
                     </div>
                     <?php endif; ?>
-                    <!-- Overlay -->
-                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,55,50,0.75) 0%,transparent 55%);"></div>
-                    <!-- Date badge -->
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,transparent 55%);"></div>
                     <div style="position:absolute;bottom:20px;left:20px;">
                         <div style="background:#be9b3f;color:#fff;font-size:.75rem;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:inline-block;"><?= htmlspecialchars($_phaseLabel) ?></div>
-                        <div style="color:#fff;font-size:1.1rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                        <?php if ($_galaDate): ?>
+                        <div style="color:#fff;font-size:1.05rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
                             <i class="fas fa-calendar-alt" style="color:#be9b3f;margin-right:6px;"></i><?= $_galaDate ?>
                         </div>
+                        <?php endif; ?>
                         <div style="color:rgba(255,255,255,0.85);font-size:.9rem;">
-                            <i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:6px;"></i><?= htmlspecialchars($galaEvent['venue_name'] ?? 'Nairobi, Kenya') ?>
+                            <i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:6px;"></i><?= htmlspecialchars($_venueStr) ?>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Right: Event Details -->
             <div class="col-lg-6 col-md-12 wow fadeInRight" style="padding-left:40px;margin-bottom:30px;">
-                <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Villa Rosa Kempinski, Nairobi · December 5, 2026</span>
-                <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026') ?></h3>
+                <?php if ($_venueStr || $_galaDate): ?>
+                <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;"><?= htmlspecialchars(implode(' · ', array_filter([$_venueStr, $_galaDate]))) ?></span>
+                <?php endif; ?>
+                <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards') ?></h3>
                 <?php if (!empty($galaEvent['tagline'])): ?>
                 <p style="font-size:1.05rem;color:#be9b3f;font-style:italic;margin-bottom:14px;"><?= htmlspecialchars($galaEvent['tagline']) ?></p>
                 <?php endif; ?>
-                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating digital excellence across East Africa — 300+ categories and an unforgettable gala experience.', 0, 220)) ?>...</p>
-                <!-- Phase badges -->
+                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating digital excellence across East Africa.', 0, 220)) ?>...</p>
+                <!-- Info badges -->
                 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
-                    <span style="background:#f0faf8;color:#0d0d0d;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-trophy" style="color:#be9b3f;margin-right:5px;"></i>9 Award Categories</span>
-                    <span style="background:#f0faf8;color:#0d0d0d;border:1px solid #c0e8e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:5px;"></i>Nairobi, Kenya</span>
-                    <?php if (!empty($ticketTypes)): ?>
+                    <?php if ($_spotCatCount > 0): ?>
+                    <span style="background:#f5f5f5;color:#0d0d0d;border:1px solid #e0e0e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-trophy" style="color:#be9b3f;margin-right:5px;"></i><?= $_spotCatCount ?> Categories</span>
+                    <?php endif; ?>
+                    <?php if ($_venueStr): ?>
+                    <span style="background:#f5f5f5;color:#0d0d0d;border:1px solid #e0e0e0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-map-marker-alt" style="color:#be9b3f;margin-right:5px;"></i><?= htmlspecialchars($galaEvent['venue_city'] ?? 'Nairobi') ?>, Kenya</span>
+                    <?php endif; ?>
+                    <?php if ($__hasTkt): ?>
                     <span style="background:#fdf8ee;color:#7a6020;border:1px solid #e8d8a0;font-size:.78rem;padding:4px 14px;border-radius:20px;font-weight:600;"><i class="fas fa-ticket-alt" style="color:#be9b3f;margin-right:5px;"></i>Tickets Available</span>
                     <?php endif; ?>
                 </div>
-                <!-- Key dates strip -->
+                <!-- Key dates -->
                 <div style="margin-bottom:20px;display:flex;flex-direction:column;gap:6px;">
-                    <?php
-                    $_vI = !empty($galaEvent['voting_is_open']);
-                    $_vO = !empty($galaEvent['voting_opens_at'])  ? strtotime($galaEvent['voting_opens_at'])  : 0;
-                    $_vC = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['voting_closes_at']) : 0;
-                    // Ticket sale start
-                    $__nextTkt = null;
-                    $__ftk = array_filter($ticketTypes, fn($t)=>!empty($t['sale_starts_at']) && strtotime($t['sale_starts_at'])>time());
-                    usort($__ftk, fn($a,$b)=>strtotime($a['sale_starts_at'])<=>strtotime($b['sale_starts_at']));
-                    $__nextTkt = array_values($__ftk)[0] ?? null;
-                    $__hasTkt  = count(array_filter($ticketTypes, fn($t)=>!empty($t['is_available']))) > 0;
-                    ?>
                     <?php if ($__hasTkt): ?>
                     <div style="font-size:.82rem;color:#333;"><i class="fas fa-ticket-alt" style="color:#be9b3f;width:18px;"></i> <strong>Tickets:</strong> On sale now</div>
                     <?php elseif ($__nextTkt): ?>
@@ -274,27 +348,22 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
                     <?php if ($_vI): ?>
                     <div style="font-size:.82rem;color:#333;"><i class="fas fa-vote-yea" style="color:#be9b3f;width:18px;"></i> <strong>Voting:</strong> Open now<?= $_vC ? ' — closes '.date('d M Y',$_vC) : '' ?></div>
                     <?php elseif ($_vO): ?>
-                    <div style="font-size:.82rem;color:#333;"><i class="fas fa-vote-yea" style="color:#be9b3f;width:18px;"></i> <strong>Voting opens:</strong> <?= date('d M Y', $_vO) ?><?= $_vC ? ' — closes '.date('d M Y',$_vC) : '' ?></div>
+                    <div style="font-size:.82rem;color:#333;"><i class="fas fa-vote-yea" style="color:#be9b3f;width:18px;"></i> <strong>Voting opens:</strong> <?= date('d M Y',$_vO) ?><?= $_vC ? ' — closes '.date('d M Y',$_vC) : '' ?></div>
                     <?php endif; ?>
-                    <?php
-                    // Nomination window from categories
-                    $_nS=$_nE=null;
-                    foreach($allCategories as $_cc){ if(!empty($_cc['nomination_starts_at'])){ $_nS=$_cc['nomination_starts_at']; $_nE=$_cc['nomination_ends_at']??null; break; } }
-                    if($_nS):
-                    ?>
+                    <?php if ($_nS): ?>
                     <div style="font-size:.82rem;color:#333;"><i class="fas fa-pen-nib" style="color:#be9b3f;width:18px;"></i> <strong>Nominations:</strong> <?= date('d M Y',strtotime($_nS)) ?><?= $_nE ? ' – '.date('d M Y',strtotime($_nE)) : '' ?></div>
                     <?php endif; ?>
                 </div>
-                <!-- CTAs -->
+                <!-- CTAs — driven by event phase -->
                 <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                    <?php if ($_nominationsOpen): ?>
-                    <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-one"><span class="btn-title">Nominate Now</span></a>
-                    <?php elseif ($_votingOpen): ?>
-                    <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;"><span class="btn-title">Vote Now</span></a>
-                    <?php else: ?>
+                    <?php if ($_vI): ?>
+                    <a href="<?= SITE_URL ?>/nominees?event=<?= urlencode($featuredSlug) ?>" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;"><span class="btn-title">Vote Now →</span></a>
+                    <?php elseif ($_galaPhase === 'nomination'): ?>
+                    <a href="<?= SITE_URL ?>/nominate?event=<?= urlencode($featuredSlug) ?>" class="theme-btn btn-style-one"><span class="btn-title">Nominate Now</span></a>
+                    <?php elseif ($__hasTkt): ?>
                     <a href="<?= SITE_URL ?>/tickets" class="theme-btn btn-style-one"><span class="btn-title">Get Tickets</span></a>
                     <?php endif; ?>
-                    <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-two"><span class="btn-title">Full Event Details →</span></a>
+                    <a href="<?= SITE_URL ?>/event-detail?slug=<?= urlencode($featuredSlug) ?>" class="theme-btn btn-style-two"><span class="btn-title">Full Event Details →</span></a>
                 </div>
             </div>
         </div>
@@ -302,48 +371,190 @@ $_phaseLabel  = $_phaseLabels[$_galaPhase] ?? 'Coming Soon';
 </section>
 
 
-
-<!-- ══ 3. DYNAMIC AWARD CATEGORIES ═══════════════════ -->
+<!-- ══ 2b. OTHER ACTIVE EVENTS ══════════════════ -->
 <?php
-$_totalCats     = count($allCategories);
-$_promotedCount = count(array_filter($allCategories, fn($c) => ($c['nomination_status'] ?? '') === 'promoted'));
-$_collectingCount = count(array_filter($allCategories, fn($c) => ($c['nomination_status'] ?? '') === 'collecting'));
-$_nomStatColors = ['collecting' => '#22c55e', 'promoted' => '#be9b3f', 'closed' => '#ef4444', 'completed' => '#6366f1'];
-$_votingIsOpen  = !empty($galaEvent['voting_is_open']);
-// Pass all categories to JS as JSON for pagination
-$_catsJson = json_encode(array_map(fn($c) => [
-    'id'     => $c['id'] ?? '',
-    'name'   => $c['name'] ?? '',
-    'slug'   => $c['slug'] ?? '',
-    'desc'   => $c['description'] ?? '',
-    'image'  => !empty($c['image']) ? API_STORAGE . $c['image'] : '',
-    'status' => $c['nomination_status'] ?? 'collecting',
-    'count'  => count($c['nominees'] ?? []),
-], $allCategories));
+$_oePerPage  = 4;  // cards per page — increase if needed
+$_oePage     = max(1, (int)($_GET['ep'] ?? 1));
+$_oeTotal    = count($otherEvents);
+$_oePages    = (int)ceil($_oeTotal / $_oePerPage);
+$_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 ?>
-<section style="padding:80px 0;background:linear-gradient(160deg,#0a0a0a 0%,#0a0a0a 100%);">
+<?php if (!empty($otherEvents)): ?>
+<section style="padding:70px 0 60px;background:#f4f4f4;border-top:1px solid #e8e8e8;">
     <div class="auto-container">
-        <div class="sec-title text-center" style="margin-bottom:32px;">
-            <span class="sub-title" style="color:#be9b3f;">Digitally Fit Awards Gala 2026</span>
+        <div class="sec-title text-center" style="margin-bottom:40px;">
+            <span class="sub-title">More Awards</span>
+            <h2 style="font-size:2rem;">Also Open Now</h2>
             <span class="divider"></span>
-            <p style="color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 24px;">
-                <?php if ($_promotedCount > 0 && $_collectingCount > 0): ?>
-                    <?= $_promotedCount ?> <?= $_promotedCount === 1 ? 'category' : 'categories' ?> now in voting — cast your vote! <?= $_collectingCount ?> still open for nominations.
-                <?php elseif ($_promotedCount > 0): ?>
-                    All categories are now in voting phase — cast your vote for your favourite artists!
-                <?php else: ?>
-                    Nominate your favourite digital achievers. <?= $_totalCats ?> categories open for public nomination.
-                <?php endif; ?>
-            </p>
-            <!-- Live search -->
-            <div style="max-width:420px;margin:0 auto;position:relative;">
-                <input type="text" id="catSearch" placeholder="Search categories…" autocomplete="off"
-                       style="width:100%;padding:12px 44px 12px 18px;border:none;border-radius:30px;font-size:.9rem;color:#333;box-shadow:0 4px 20px rgba(0,0,0,.2);outline:none;">
-                <i class="fas fa-search" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none;"></i>
-            </div>
+            <p style="color:#777;max-width:480px;margin:10px auto 0;font-size:.92rem;">More Digitally Fit Awards are live — cast your vote or submit a nomination.</p>
         </div>
 
-        <!-- Category grid — rendered by JS (see script below) -->
+        <div class="row justify-content-center">
+        <?php foreach ($_oeSlice as $_i => $_oe):
+            $_oeSlug      = $_oe['slug'] ?? '';
+            $_oeVoting    = !empty($_oe['voting_is_open']);
+            $_oePhase     = $_oe['current_phase'] ?? 'upcoming';
+            $_oeCloses    = !empty($_oe['voting_closes_at']) ? date('d M Y', strtotime($_oe['voting_closes_at'])) : null;
+            $_oeEventDt   = !empty($_oe['start_date'])       ? date('d M Y', strtotime($_oe['start_date']))       : null;
+            $_oeHasBanner = !empty($_oe['banner_image']);
+            $_oeBannerUrl = $_oeHasBanner
+                ? (str_starts_with($_oe['banner_image'], 'http') ? $_oe['banner_image'] : API_STORAGE . $_oe['banner_image'])
+                : '';
+            $_oeHasThumb  = !empty($_oe['thumbnail_image']);
+            $_oeThumbUrl  = $_oeHasThumb
+                ? (str_starts_with($_oe['thumbnail_image'], 'http') ? $_oe['thumbnail_image'] : API_STORAGE . $_oe['thumbnail_image'])
+                : '';
+            $_oeImgUrl    = $_oeBannerUrl ?: $_oeThumbUrl;
+            // Stats from pre-built nominees data
+            $_oeEntry     = array_values(array_filter($dfaEventsData, fn($d) => $d['slug'] === $_oeSlug))[0] ?? [];
+            $_oePromoted  = $_oeEntry['promoted_count']   ?? 0;
+            $_oeTotalCats = $_oeEntry['total_cats']        ?? 0;
+            $_oeCollect   = $_oeEntry['collecting_count']  ?? 0;
+            // Decorative gradient accent (cycles through variations)
+            $_oeAccents   = ['135deg,#0a0a0a 0%,#1e1e1e 55%,#2b1d00 100%', '135deg,#0a0a0a 0%,#1a1a2e 55%,#0f3460 100%', '135deg,#0a0a0a 0%,#1e1a0a 55%,#3a2e00 100%', '135deg,#0d0d0d 0%,#1a0a0a 55%,#2e0f0f 100%'];
+            $_oeGrad      = $_oeAccents[$_i % count($_oeAccents)];
+        ?>
+        <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp" style="margin-bottom:28px;" data-wow-delay="<?= $_i * 100 ?>ms">
+            <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 32px rgba(0,0,0,.09);height:100%;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;"
+                 onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 14px 40px rgba(0,0,0,.14)';"
+                 onmouseout="this.style.transform='';this.style.boxShadow='0 6px 32px rgba(0,0,0,.09)';">
+
+                <!-- Card header — clickable, links to event detail -->
+                <a href="<?= SITE_URL ?>/event-detail?slug=<?= urlencode($_oeSlug) ?>" style="display:block;text-decoration:none;">
+                <?php if ($_oeImgUrl): ?>
+                <div style="position:relative;height:180px;overflow:hidden;">
+                    <img src="<?= htmlspecialchars($_oeImgUrl) ?>"
+                         alt="<?= htmlspecialchars($_oe['name'] ?? '') ?>"
+                         style="width:100%;height:100%;object-fit:cover;display:block;"
+                         onerror="this.parentElement.style.background='linear-gradient(<?= $_oeGrad ?>)';this.style.display='none';">
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 55%);"></div>
+                    <!-- Phase badge -->
+                    <span style="position:absolute;top:14px;left:14px;font-size:.62rem;font-weight:800;background:<?= $_oeVoting ? '#be9b3f' : '#22c55e' ?>;color:#fff;padding:3px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.6px;">
+                        <?= $_oeVoting ? 'Voting Open' : ($_oePhase === 'nomination' ? 'Nominations Open' : 'Coming Soon') ?>
+                    </span>
+                    <!-- Event name overlay -->
+                    <div style="position:absolute;bottom:16px;left:16px;right:16px;">
+                        <h4 style="color:#fff;font-weight:800;font-size:1.05rem;margin:0;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,.5);"><?= htmlspecialchars($_oe['name'] ?? '') ?></h4>
+                    </div>
+                </div>
+                <?php else: ?>
+                <!-- No image — decorative gradient header -->
+                <div style="background:linear-gradient(<?= $_oeGrad ?>);padding:30px 24px 24px;position:relative;overflow:hidden;min-height:170px;">
+                    <!-- Decorative rings -->
+                    <div style="position:absolute;right:-24px;top:-24px;width:130px;height:130px;border-radius:50%;border:28px solid rgba(190,155,63,.07);pointer-events:none;"></div>
+                    <div style="position:absolute;right:20px;bottom:-20px;width:80px;height:80px;border-radius:50%;border:16px solid rgba(190,155,63,.05);pointer-events:none;"></div>
+                    <!-- Watermark trophy -->
+                    <i class="flaticon-trophy-1" style="position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:5rem;color:rgba(190,155,63,.1);pointer-events:none;"></i>
+                    <!-- Phase badge -->
+                    <span style="display:inline-block;font-size:.62rem;font-weight:800;background:<?= $_oeVoting ? '#be9b3f' : '#22c55e' ?>;color:#fff;padding:3px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;">
+                        <?= $_oeVoting ? 'Voting Open' : ($_oePhase === 'nomination' ? 'Nominations Open' : 'Coming Soon') ?>
+                    </span>
+                    <h4 style="color:#fff;font-weight:800;font-size:1.15rem;margin:0 0 8px;line-height:1.3;max-width:220px;"><?= htmlspecialchars($_oe['name'] ?? '') ?></h4>
+                    <?php if (!empty($_oe['tagline'])): ?>
+                    <p style="color:rgba(255,255,255,.48);font-size:.78rem;margin:0;line-height:1.45;max-width:200px;"><?= htmlspecialchars($_oe['tagline']) ?></p>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+                </a>
+
+                <!-- Card body -->
+                <div style="padding:20px 22px;flex:1;display:flex;flex-direction:column;">
+                    <?php if ($_oeImgUrl && !empty($_oe['tagline'])): ?>
+                    <p style="font-size:.82rem;color:#666;margin:0 0 14px;line-height:1.5;"><?= htmlspecialchars($_oe['tagline']) ?></p>
+                    <?php endif; ?>
+
+                    <!-- Stats chips -->
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+                        <?php if ($_oeVoting && $_oeCloses): ?>
+                        <span style="font-size:.75rem;background:#fff8ee;color:#8a6220;border:1px solid #e8d8a0;padding:3px 10px;border-radius:20px;font-weight:600;"><i class="fas fa-clock" style="margin-right:4px;"></i>Closes <?= $_oeCloses ?></span>
+                        <?php elseif (!$_oeVoting && $_oeEventDt): ?>
+                        <span style="font-size:.75rem;background:#f5f5f5;color:#555;border:1px solid #e5e5e5;padding:3px 10px;border-radius:20px;font-weight:600;"><i class="fas fa-calendar" style="margin-right:4px;"></i><?= $_oeEventDt ?></span>
+                        <?php endif; ?>
+                        <?php if ($_oePromoted > 0): ?>
+                        <span style="font-size:.75rem;background:#fff8ee;color:#8a6220;border:1px solid #e8d8a0;padding:3px 10px;border-radius:20px;font-weight:600;"><i class="fas fa-vote-yea" style="margin-right:4px;color:#be9b3f;"></i><?= $_oePromoted ?> in voting</span>
+                        <?php endif; ?>
+                        <?php if ($_oeTotalCats > 0): ?>
+                        <span style="font-size:.75rem;background:#f5f5f5;color:#555;border:1px solid #e5e5e5;padding:3px 10px;border-radius:20px;font-weight:600;"><i class="fas fa-trophy" style="margin-right:4px;color:#be9b3f;"></i><?= $_oeTotalCats ?> categories</span>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div style="margin-top:auto;display:flex;gap:8px;">
+                        <?php if ($_oeVoting): ?>
+                        <a href="<?= SITE_URL ?>/nominees?event=<?= urlencode($_oeSlug) ?>"
+                           style="flex:1;display:block;text-align:center;background:#be9b3f;color:#fff;font-weight:700;font-size:.85rem;padding:11px 14px;border-radius:10px;text-decoration:none;transition:background .2s;"
+                           onmouseover="this.style.background='#a8883a';" onmouseout="this.style.background='#be9b3f';">
+                            Vote Now →
+                        </a>
+                        <?php elseif ($_oePhase === 'nomination'): ?>
+                        <a href="<?= SITE_URL ?>/nominate?event=<?= urlencode($_oeSlug) ?>"
+                           style="flex:1;display:block;text-align:center;background:#0a0a0a;color:#fff;font-weight:700;font-size:.85rem;padding:11px 14px;border-radius:10px;text-decoration:none;">
+                            Nominate Now
+                        </a>
+                        <?php endif; ?>
+                        <a href="<?= SITE_URL ?>/event-detail?slug=<?= urlencode($_oeSlug) ?>"
+                           style="flex:1;display:block;text-align:center;background:#f5f5f5;color:#0a0a0a;font-weight:700;font-size:.85rem;padding:11px 14px;border-radius:10px;text-decoration:none;border:1px solid #e8e8e8;transition:background .2s;"
+                           onmouseover="this.style.background='#ececec';" onmouseout="this.style.background='#f5f5f5';">
+                            Event Details →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        </div>
+
+        <?php if ($_oePages > 1): ?>
+        <!-- Pagination -->
+        <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-top:20px;">
+            <?php if ($_oePage > 1): ?>
+            <a href="?ep=<?= $_oePage-1 ?>#more-events" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;border:2px solid rgba(190,155,63,.4);background:transparent;color:#be9b3f;font-weight:700;text-decoration:none;transition:all .18s;">&lsaquo;</a>
+            <?php endif; ?>
+            <?php for ($__p = 1; $__p <= $_oePages; $__p++): ?>
+            <a href="?ep=<?= $__p ?>#more-events"
+               style="display:flex;align-items:center;justify-content:center;min-width:38px;height:38px;border-radius:8px;border:2px solid <?= $__p===$_oePage ? '#be9b3f' : 'rgba(190,155,63,.3)' ?>;background:<?= $__p===$_oePage ? '#be9b3f' : 'transparent' ?>;color:<?= $__p===$_oePage ? '#fff' : '#be9b3f' ?>;font-weight:700;text-decoration:none;font-size:.85rem;padding:0 10px;">
+                <?= $__p ?>
+            </a>
+            <?php endfor; ?>
+            <?php if ($_oePage < $_oePages): ?>
+            <a href="?ep=<?= $_oePage+1 ?>#more-events" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;border:2px solid rgba(190,155,63,.4);background:transparent;color:#be9b3f;font-weight:700;text-decoration:none;">&rsaquo;</a>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
+    </div>
+</section>
+<div id="more-events"></div>
+<?php endif; ?>
+
+
+
+<!-- ══ 3. AWARD CATEGORIES — multi-event tabs ════════ -->
+<section style="padding:80px 0;background:linear-gradient(160deg,#0a0a0a,#0a0a0a);">
+    <div class="auto-container">
+
+        <!-- Event tab switcher -->
+        <div id="dfaEventTabs" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px;"></div>
+
+        <div class="sec-title text-center" style="margin-bottom:24px;">
+            <span class="divider" style="margin-bottom:0;"></span>
+            <!-- Dynamic status line -->
+            <p id="catStatusText" style="color:rgba(255,255,255,0.7);max-width:580px;margin:16px auto 0;font-size:.95rem;"></p>
+        </div>
+
+        <!-- Search -->
+        <div style="max-width:420px;margin:0 auto 18px;position:relative;">
+            <input type="text" id="catSearch" placeholder="Search categories…" autocomplete="off"
+                   style="width:100%;padding:12px 44px 12px 18px;border:none;border-radius:30px;font-size:.9rem;color:#333;box-shadow:0 4px 20px rgba(0,0,0,.2);outline:none;">
+            <i class="fas fa-search" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none;"></i>
+        </div>
+
+        <!-- Group filter pills (hidden for events with no group data) -->
+        <div id="catGroupPills" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:10px;"></div>
+        <!-- Category sub-pills (shown after a group is selected) -->
+        <div id="catCatPills" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:20px;"></div>
+
+        <!-- Category grid -->
         <div class="row" id="catGrid" style="min-height:220px;"></div>
 
         <!-- No results -->
@@ -355,132 +566,280 @@ $_catsJson = json_encode(array_map(fn($c) => [
         <!-- Pagination -->
         <div id="catPagination" style="display:flex;justify-content:center;gap:8px;margin-top:28px;flex-wrap:wrap;"></div>
 
-        <!-- Footer CTAs -->
-        <div class="text-center" style="margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-            <?php if ($_promotedCount > 0): ?>
-            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
-                <span class="btn-title">Vote Now &rarr;</span>
-            </a>
-            <?php endif; ?>
-            <?php if ($_collectingCount > 0): ?>
-            <?php if ($_promotedCount > 0): ?>
-            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-two btn-ghost">
-                <span class="btn-title">Submit a Nomination</span>
-            </a>
-            <?php else: ?>
-            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-one" style="background:#BF9E44;border-color:#BF9E44;">
-                <span class="btn-title">Submit a Nomination</span>
-            </a>
-            <?php endif; ?>
-            <?php endif; ?>
-            <a href="<?= SITE_URL ?>/categories?event=dfa-gala-2026" class="theme-btn btn-style-two btn-ghost">
-                <span class="btn-title">Browse All <?= $_totalCats ?> Categories &rarr;</span>
-            </a>
-        </div>
+        <!-- Footer CTAs — JS rendered -->
+        <div id="catCtaBar" style="margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;"></div>
+
     </div>
 </section>
 
 <script>
 (function(){
-    var CATS       = <?= $_catsJson ?>;
-    var PAGE_SIZE  = 5;
-    var nomUrl     = '<?= SITE_URL ?>/nominate?event=dfa-gala-2026';
-    var nomineesUrl= '<?= SITE_URL ?>/nominees?event=dfa-gala-2026';
-    var isVoting   = <?= $_votingIsOpen ? 'true' : 'false' ?>;
-    var filtered   = CATS.slice();
-    var currentPage= 1;
+    var SITE     = '<?= SITE_URL ?>';
+    var EVENTS   = <?= $_dfaEventsJson ?>;
+    var PAGE_SIZE= 6;
+
+    // Default to first voting event, else first event
+    var activeEventIdx = 0;
+    for (var _i = 0; _i < EVENTS.length; _i++) {
+        if (EVENTS[_i].voting_is_open) { activeEventIdx = _i; break; }
+    }
+
+    var activeGroup  = '';
+    var activeCat    = '';
+    var searchQ      = '';
+    var currentPage  = 1;
+    var filtered     = [];
 
     var statusColors = {collecting:'#22c55e', promoted:'#be9b3f', closed:'#ef4444', completed:'#6366f1'};
     var statusLabels = {collecting:'Accepting Nominations', promoted:'Voting Open', closed:'Closed', completed:'Done'};
 
+    var tabStyle      = 'font-size:.82rem;font-weight:700;padding:8px 18px;border-radius:24px;border:2px solid rgba(190,155,63,.4);background:transparent;color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s;white-space:nowrap;';
+    var tabActiveStyle= 'font-size:.82rem;font-weight:700;padding:8px 18px;border-radius:24px;border:2px solid #be9b3f;background:#be9b3f;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap;';
+    var pillStyle     = 'font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:20px;border:1.5px solid rgba(190,155,63,.5);background:transparent;color:rgba(255,255,255,.7);cursor:pointer;transition:all .18s;white-space:nowrap;';
+    var pillActiveStyle='font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:20px;border:1.5px solid #be9b3f;background:#be9b3f;color:#fff;cursor:pointer;transition:all .18s;white-space:nowrap;';
+
+    function ev()   { return EVENTS[activeEventIdx]; }
+    function cats() { return ev().cats; }
+    function groups(){ return ev().groups; }
+    function hasGroupData() {
+        return groups().some(function(g){ return g.slugs && g.slugs.length > 0; });
+    }
+
+    // ── Render event tabs ───────────────────────────────────────────
+    function renderTabs() {
+        var el = document.getElementById('dfaEventTabs');
+        if (!el) return;
+        var html = '';
+        EVENTS.forEach(function(e, i) {
+            var isActive = i === activeEventIdx;
+            var badge = e.voting_is_open
+                ? '<span style="font-size:.58rem;font-weight:800;background:rgba(255,255,255,.25);color:#fff;padding:1px 7px;border-radius:20px;margin-left:6px;text-transform:uppercase;letter-spacing:.4px;">Voting</span>'
+                : '';
+            html += '<button data-tab="'+i+'" style="'+(isActive?tabActiveStyle:tabStyle)+'">'+e.name+badge+'</button>';
+        });
+        el.innerHTML = html;
+    }
+
+    // ── Status text ─────────────────────────────────────────────────
+    function renderStatusText() {
+        var el = document.getElementById('catStatusText');
+        if (!el) return;
+        var e = ev();
+        var txt = '';
+        if (e.promoted_count > 0 && e.collecting_count > 0) {
+            txt = e.promoted_count+' '+(e.promoted_count===1?'category':'categories')+' now in voting — cast your vote! '+e.collecting_count+' still open for nominations.';
+        } else if (e.promoted_count > 0) {
+            txt = 'All categories are in voting — cast your vote!';
+        } else if (e.collecting_count > 0) {
+            txt = 'Nominate your favourites. '+e.total_cats+' '+(e.total_cats===1?'category':'categories')+' open for public nomination.';
+        } else {
+            txt = e.total_cats+' award '+(e.total_cats===1?'category':'categories')+'.';
+        }
+        el.textContent = txt;
+    }
+
+    // ── Footer CTA bar ───────────────────────────────────────────────
+    function renderCtaBar() {
+        var el = document.getElementById('catCtaBar');
+        if (!el) return;
+        var e   = ev();
+        var html = '';
+        if (e.voting_is_open || e.promoted_count > 0) {
+            html += '<a href="'+SITE+'/nominees?event='+encodeURIComponent(e.slug)+'" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;"><span class="btn-title">Vote Now &rarr;</span></a>';
+        }
+        if (e.collecting_count > 0) {
+            var nomStyle = (e.voting_is_open || e.promoted_count > 0) ? 'class="theme-btn btn-style-two btn-ghost"' : 'class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;"';
+            html += '<a href="'+SITE+'/nominate?event='+encodeURIComponent(e.slug)+'" '+nomStyle+'><span class="btn-title">Submit a Nomination</span></a>';
+        }
+        html += '<a href="'+SITE+'/categories?event='+encodeURIComponent(e.slug)+'" class="theme-btn btn-style-two btn-ghost"><span class="btn-title">Browse All '+e.total_cats+' Categories &rarr;</span></a>';
+        el.innerHTML = html;
+    }
+
+    // ── Group & category pills ───────────────────────────────────────
+    function renderGroupPills() {
+        var el = document.getElementById('catGroupPills');
+        if (!el) return;
+        if (!hasGroupData()) { el.innerHTML = ''; return; }
+        var html = '<button data-grp="" style="'+(activeGroup===''?pillActiveStyle:pillStyle)+'">All</button>';
+        groups().forEach(function(g) {
+            if (!g.slugs || !g.slugs.length) return;
+            var esc = g.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+            html += '<button data-grp="'+esc+'" style="'+(activeGroup===g.name?pillActiveStyle:pillStyle)+'">'+g.name+'</button>';
+        });
+        el.innerHTML = html;
+    }
+
+    function renderCatPills() {
+        var el = document.getElementById('catCatPills');
+        if (!el) return;
+        if (!activeGroup) { el.innerHTML = ''; return; }
+        var grp = groups().filter(function(g){ return g.name === activeGroup; })[0];
+        if (!grp || !grp.slugs || !grp.slugs.length) { el.innerHTML = ''; return; }
+        var groupCats = cats().filter(function(c){ return grp.slugs.indexOf(c.slug) !== -1; });
+        if (!groupCats.length) { el.innerHTML = ''; return; }
+        var html = '<button data-cat="" style="'+(activeCat===''?pillActiveStyle:pillStyle)+'">All</button>';
+        groupCats.forEach(function(c) {
+            html += '<button data-cat="'+c.slug.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" style="'+(activeCat===c.slug?pillActiveStyle:pillStyle)+'">'+c.name.replace(/&/g,'&amp;')+'</button>';
+        });
+        el.innerHTML = html;
+    }
+
+    // ── Card builder ────────────────────────────────────────────────
     function buildCard(cat) {
+        var e = ev();
+        var nomUrl      = SITE+'/nominate?event='+encodeURIComponent(e.slug);
+        var nomineesUrl = SITE+'/nominees?event='+encodeURIComponent(e.slug);
+        var groupBadge  = cat.group
+            ? '<span style="position:absolute;top:10px;left:10px;font-size:.6rem;font-weight:700;background:rgba(0,0,0,.55);color:#be9b3f;padding:2px 9px;border-radius:20px;letter-spacing:.5px;backdrop-filter:blur(4px);">'+cat.group+'</span>'
+            : '';
         var imgHtml = cat.image
-            ? '<div style="position:relative;height:120px;overflow:hidden;"><img src="'+cat.image+'" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#1a1a1a,#0a0a0a)\';this.style.display=\'none\';"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(5,55,50,.65));"></div></div>'
-            : '<div style="height:120px;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="flaticon-trophy-1" style="font-size:2.2rem;color:rgba(190,155,63,.4);"></i></div>';
+            ? '<div style="position:relative;height:120px;overflow:hidden;"><img src="'+cat.image+'" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#1a1a1a,#000000)\';this.style.display=\'none\';"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(190,155,63,.65));"></div>'+groupBadge+'</div>'
+            : '<div style="position:relative;height:120px;background:linear-gradient(135deg,#000000,#1a1a1a);display:flex;align-items:center;justify-content:center;"><i class="flaticon-trophy-1" style="font-size:2.2rem;color:rgba(190,155,63,.4);"></i>'+groupBadge+'</div>';
         var color  = statusColors[cat.status] || '#888';
         var label  = statusLabels[cat.status] || cat.status;
-        var isPromoted = cat.status === 'promoted';
-        var ctaHtml= isPromoted
+        var ctaHtml = (cat.status==='promoted')
             ? '<a href="'+nomineesUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:700;text-decoration:none;">Vote Now \u2192</a>'
-            : (!isVoting && cat.status==='collecting')
-                ? '<a href="'+nomUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:700;text-decoration:none;">Nominate &rarr;</a>'
-                : '<a href="'+nomineesUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:700;text-decoration:none;">View Nominees &rarr;</a>';
+            : (!e.voting_is_open && cat.status==='collecting')
+                ? '<a href="'+nomUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:700;text-decoration:none;">Nominate \u2192</a>'
+                : '<a href="'+nomineesUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:700;text-decoration:none;">View Nominees \u2192</a>';
         var countTxt = cat.count > 0
             ? '<span style="font-size:.71rem;color:rgba(255,255,255,.45);"><i class="fas fa-users" style="margin-right:3px;"></i>'+cat.count+' nominated</span>'
             : '<span style="font-size:.71rem;color:rgba(255,255,255,.3);">No nominees yet</span>';
-        return '<div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom:20px;">'+
-            '<div onclick="openCatModal('+JSON.stringify(cat)+')" style="background:rgba(255,255,255,.05);border:1px solid rgba(190,155,63,.18);border-radius:12px;overflow:hidden;cursor:pointer;height:100%;transition:all .22s;" '+
-            'onmouseover="this.style.borderColor=\'rgba(190,155,63,.55)\';this.style.background=\'rgba(190,155,63,.09)\';this.style.transform=\'translateY(-2px)\';" '+
-            'onmouseout="this.style.borderColor=\'rgba(190,155,63,.18)\';this.style.background=\'rgba(255,255,255,.05)\';this.style.transform=\'\';">' +
-            imgHtml +
-            '<div style="padding:14px;">'+
-            '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;">'+
-            '<h6 style="color:#fff;font-weight:700;font-size:.88rem;margin:0;line-height:1.35;flex:1;">'+cat.name+'</h6>'+
-            '<span style="font-size:.63rem;font-weight:700;background:rgba(0,0,0,.22);color:'+color+';padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:8px;margin-top:2px;">'+label+'</span>'+
-            '</div>'+
-            (cat.desc?'<p style="color:rgba(255,255,255,.52);font-size:.77rem;line-height:1.5;margin-bottom:9px;">'+cat.desc.substring(0,80)+(cat.desc.length>80?'\u2026':'')+'</p>':'')+
-            '<div style="display:flex;justify-content:space-between;align-items:center;">'+countTxt+ctaHtml+'</div>'+
-            '</div></div></div>';
+        return '<div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom:20px;">'
+            +'<div onclick="openCatModal('+JSON.stringify(cat)+')" style="background:rgba(255,255,255,.05);border:1px solid rgba(190,155,63,.18);border-radius:12px;overflow:hidden;cursor:pointer;height:100%;transition:all .22s;"'
+            +' onmouseover="this.style.borderColor=\'rgba(190,155,63,.55)\';this.style.background=\'rgba(190,155,63,.09)\';this.style.transform=\'translateY(-2px)\';"'
+            +' onmouseout="this.style.borderColor=\'rgba(190,155,63,.18)\';this.style.background=\'rgba(255,255,255,.05)\';this.style.transform=\'\';">'
+            +imgHtml
+            +'<div style="padding:14px;">'
+            +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;">'
+            +'<h6 style="color:#fff;font-weight:700;font-size:.88rem;margin:0;line-height:1.35;flex:1;">'+cat.name+'</h6>'
+            +'<span style="font-size:.63rem;font-weight:700;background:rgba(0,0,0,.22);color:'+color+';padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:8px;margin-top:2px;">'+label+'</span>'
+            +'</div>'
+            +(cat.desc?'<p style="color:rgba(255,255,255,.52);font-size:.77rem;line-height:1.5;margin-bottom:9px;">'+cat.desc.substring(0,80)+(cat.desc.length>80?'\u2026':'')+'</p>':'')
+            +'<div style="display:flex;justify-content:space-between;align-items:center;">'+countTxt+ctaHtml+'</div>'
+            +'</div></div></div>';
     }
 
+    // ── Grid & pagination ────────────────────────────────────────────
     function renderGrid() {
-        var grid = document.getElementById('catGrid');
-        var noRes= document.getElementById('catNoResults');
+        var grid  = document.getElementById('catGrid');
+        var noRes = document.getElementById('catNoResults');
         if (!grid) return;
         if (filtered.length === 0) { grid.innerHTML=''; noRes.style.display='block'; renderPagination(); return; }
-        noRes.style.display='none';
-        var start=(currentPage-1)*PAGE_SIZE, end=start+PAGE_SIZE;
-        grid.innerHTML = filtered.slice(start,end).map(buildCard).join('');
+        noRes.style.display = 'none';
+        var start = (currentPage-1)*PAGE_SIZE;
+        grid.innerHTML = filtered.slice(start, start+PAGE_SIZE).map(buildCard).join('');
         renderPagination();
     }
 
     function renderPagination() {
-        var pag=document.getElementById('catPagination');
+        var pag   = document.getElementById('catPagination');
         if (!pag) return;
-        var total=Math.ceil(filtered.length/PAGE_SIZE);
-        if (total<=1){ pag.innerHTML=''; return; }
-        var html='';
-        for(var i=1;i<=total;i++){
-            var active=i===currentPage;
-            html+='<button onclick="goCatPage('+i+')" style="min-width:34px;height:34px;border-radius:8px;border:2px solid '+(active?'#be9b3f':'rgba(190,155,63,.3)')+';background:'+(active?'#be9b3f':'transparent')+';color:'+(active?'#fff':'#be9b3f')+';font-weight:700;font-size:.8rem;cursor:pointer;padding:0 10px;transition:all .18s;">'+i+'</button>';
+        var total = Math.ceil(filtered.length / PAGE_SIZE);
+        if (total <= 1) { pag.innerHTML=''; return; }
+        var html = '';
+        for (var i=1; i<=total; i++) {
+            var act = i === currentPage;
+            html += '<button onclick="goCatPage('+i+')" style="min-width:34px;height:34px;border-radius:8px;border:2px solid '+(act?'#be9b3f':'rgba(190,155,63,.3)')+';background:'+(act?'#be9b3f':'transparent')+';color:'+(act?'#fff':'#be9b3f')+';font-weight:700;font-size:.8rem;cursor:pointer;padding:0 10px;transition:all .18s;">'+i+'</button>';
         }
-        pag.innerHTML=html;
+        pag.innerHTML = html;
     }
 
-    window.goCatPage=function(p){
-        currentPage=p;
-        renderGrid();
-        var g=document.getElementById('catGrid');
-        if(g) window.scrollTo({top:g.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
+    window.goCatPage = function(p) {
+        currentPage = p; renderGrid();
+        var g = document.getElementById('catGrid');
+        if (g) window.scrollTo({top:g.getBoundingClientRect().top+window.scrollY-80, behavior:'smooth'});
     };
 
-    window.openCatModal=function(cat){
-        var color  = statusColors[cat.status]||'#888';
-        var label  = statusLabels[cat.status]||cat.status;
-        document.getElementById('catModalName').textContent=cat.name;
-        document.getElementById('catModalDesc').textContent=cat.desc||'No description available.';
-        document.getElementById('catModalBadge').textContent=label;
-        document.getElementById('catModalBadge').style.cssText='font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap;margin-left:12px;margin-top:3px;background:rgba(0,0,0,.06);color:'+color;
-        document.getElementById('catModalCount').textContent=cat.count>0?cat.count+' nominee'+(cat.count!==1?'s':'')+' so far':'No nominees yet';
-        var cta=document.getElementById('catModalCta');
-        if(cat.status==='promoted'){ cta.href=nomineesUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='Vote Now \u2192'; cta.style.background='#be9b3f'; cta.style.borderColor='#be9b3f'; }
-        else if(!isVoting&&cat.status==='collecting'){ cta.href=nomUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='Nominate for this category \u2192'; cta.style.background=''; cta.style.borderColor=''; }
-        else { cta.href=nomineesUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='View Nominees \u2192'; cta.style.background=''; cta.style.borderColor=''; }
-        var img=document.getElementById('catModalImgEl');
-        var icon=document.getElementById('catModalIcon');
-        if(cat.image){ img.src=cat.image; img.style.display='block'; icon.style.display='none'; }
-        else { img.style.display='none'; icon.style.display='flex'; }
-        if(typeof $!=='undefined') $('#catModal').modal('show');
+    // ── Filter ───────────────────────────────────────────────────────
+    function applyFilter() {
+        filtered = cats().filter(function(c) {
+            var grpOk = !activeGroup || c.group === activeGroup;
+            var catOk = !activeCat   || c.slug  === activeCat;
+            var qOk   = !searchQ     || c.name.toLowerCase().indexOf(searchQ) !== -1;
+            return grpOk && catOk && qOk;
+        });
+        currentPage = 1;
+        renderGrid();
+    }
+
+    // ── Switch event tab ─────────────────────────────────────────────
+    function switchEvent(idx) {
+        activeEventIdx = idx;
+        activeGroup    = '';
+        activeCat      = '';
+        searchQ        = '';
+        currentPage    = 1;
+        var inp = document.getElementById('catSearch');
+        if (inp) inp.value = '';
+        renderTabs();
+        renderStatusText();
+        renderGroupPills();
+        renderCatPills();
+        renderCtaBar();
+        applyFilter();
+    }
+
+    // ── Modal ────────────────────────────────────────────────────────
+    window.openCatModal = function(cat) {
+        var e           = ev();
+        var nomUrl      = SITE+'/nominate?event='+encodeURIComponent(e.slug);
+        var nomineesUrl = SITE+'/nominees?event='+encodeURIComponent(e.slug);
+        var color = statusColors[cat.status]||'#888';
+        var label = statusLabels[cat.status]||cat.status;
+        document.getElementById('catModalName').textContent  = cat.name;
+        document.getElementById('catModalDesc').textContent  = cat.desc||'No description available.';
+        document.getElementById('catModalBadge').textContent = label;
+        document.getElementById('catModalBadge').style.cssText = 'font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap;margin-left:12px;margin-top:3px;background:rgba(0,0,0,.06);color:'+color;
+        document.getElementById('catModalCount').textContent = cat.count>0?cat.count+' nominee'+(cat.count!==1?'s':'')+' so far':'No nominees yet';
+        var cta = document.getElementById('catModalCta');
+        if (cat.status==='promoted') {
+            cta.href=nomineesUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='Vote Now \u2192';
+            cta.style.background='#be9b3f'; cta.style.borderColor='#be9b3f';
+        } else if (!e.voting_is_open && cat.status==='collecting') {
+            cta.href=nomUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='Nominate for this category \u2192';
+            cta.style.background=''; cta.style.borderColor='';
+        } else {
+            cta.href=nomineesUrl+'&category='+cat.slug; cta.querySelector('.btn-title').textContent='View Nominees \u2192';
+            cta.style.background=''; cta.style.borderColor='';
+        }
+        var img  = document.getElementById('catModalImgEl');
+        var icon = document.getElementById('catModalIcon');
+        if (cat.image) { img.src=cat.image; img.style.display='block'; icon.style.display='none'; }
+        else            { img.style.display='none'; icon.style.display='flex'; }
+        if (typeof $!=='undefined') $('#catModal').modal('show');
     };
 
-    document.getElementById('catSearch').addEventListener('input',function(){
-        var q=this.value.trim().toLowerCase();
-        filtered=q?CATS.filter(function(c){return c.name.toLowerCase().indexOf(q)!==-1;}):CATS.slice();
-        currentPage=1;
-        renderGrid();
+    // ── Event delegation ─────────────────────────────────────────────
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('#dfaEventTabs button');
+        if (btn) { switchEvent(parseInt(btn.getAttribute('data-tab'), 10)||0); return; }
+
+        btn = e.target.closest('#catGroupPills button');
+        if (btn) {
+            activeGroup = btn.getAttribute('data-grp') || '';
+            activeCat   = '';
+            renderGroupPills(); renderCatPills(); applyFilter();
+            return;
+        }
+        btn = e.target.closest('#catCatPills button');
+        if (btn) {
+            activeCat = btn.getAttribute('data-cat') || '';
+            renderCatPills(); applyFilter();
+        }
     });
 
-    renderGrid();
+    document.getElementById('catSearch').addEventListener('input', function() {
+        searchQ = this.value.trim().toLowerCase();
+        applyFilter();
+    });
+
+    // ── Init ─────────────────────────────────────────────────────────
+    renderTabs();
+    renderStatusText();
+    renderGroupPills();
+    renderCtaBar();
+    applyFilter();
 }());
 </script>
 
@@ -496,55 +855,84 @@ $_catsJson = json_encode(array_map(fn($c) => [
             <p style="color:#666;max-width:520px;margin:10px auto 0;">Join us for an extraordinary evening celebrating digital excellence. Choose a ticket that fits your experience.</p>
         </div>
         <div class="row justify-content-center">
-        <?php foreach ($ticketTypes as $tkt):
-            $tPrice    = (int)($tkt['price'] ?? 0);
-            $tAvail    = !empty($tkt['is_available']);
-            $tSaleStart= !empty($tkt['sale_starts_at']) ? strtotime($tkt['sale_starts_at']) : 0;
-            $tSaleEnd  = !empty($tkt['sale_ends_at'])   ? strtotime($tkt['sale_ends_at'])   : 0;
-            $tIsVIP    = stripos($tkt['name'],'vip')!==false || stripos($tkt['name'],'vvip')!==false;
-            $tIsTable  = stripos($tkt['name'],'table')!==false;
-            $tBorderColor = $tIsVIP ? '#be9b3f' : '#e5e7eb';
-            $tBadge    = $tIsVIP ? '<span style="font-size:.65rem;font-weight:800;background:#be9b3f;color:#fff;padding:2px 10px;border-radius:20px;letter-spacing:.5px;position:absolute;top:-1px;left:50%;transform:translateX(-50%);white-space:nowrap;">VIP</span>' : '';
+        <?php foreach (array_slice($ticketTypes, 0, 3) as $tkt):
+            $tPrice     = (int)($tkt['price'] ?? 0);
+            $tSoldOut   = !empty($tkt['is_sold_out']);
+            $tAvail     = !$tSoldOut && !empty($tkt['is_available']);
+            $tSaleStart = !empty($tkt['sale_starts_at']) ? strtotime($tkt['sale_starts_at']) : 0;
+            $tSaleEnd   = !empty($tkt['sale_ends_at'])   ? date('d M Y', strtotime($tkt['sale_ends_at'])) : null;
+            $tIsVIP     = stripos($tkt['name'],'vip')!==false || stripos($tkt['name'],'vvip')!==false;
+            $tIsTable   = stripos($tkt['name'],'table')!==false;
+            $tEarlyBird = stripos($tkt['name'],'early bird')!==false || stripos($tkt['name'],'early-bird')!==false;
+            $tStatus    = $tSoldOut ? 'sold_out' : ($tAvail ? 'available' : 'coming_soon');
+            $tIcon      = $tIsTable ? 'users' : ($tIsVIP ? 'star' : 'ticket-alt');
+            $tFaded     = $tStatus !== 'available' ? 'opacity:.75;' : '';
+            $tHeaderBg  = $tIsVIP
+                ? 'linear-gradient(135deg,#8a6e2a,#be9b3f)'
+                : 'linear-gradient(135deg,#0a0a0a,#1a1a1a)';
+            $tBorder    = $tIsVIP ? '#be9b3f' : '#e5e7eb';
         ?>
         <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp" style="margin-bottom:28px;">
-            <div style="border:2px solid <?= $tBorderColor ?>;border-radius:14px;padding:28px 24px;height:100%;position:relative;text-align:center;<?= $tIsVIP ? 'box-shadow:0 8px 32px rgba(190,155,63,.18);' : '' ?>">
-                <?= $tBadge ?>
-                <!-- Icon -->
-                <div style="width:52px;height:52px;border-radius:12px;background:<?= $tIsVIP ? 'linear-gradient(135deg,#be9b3f,#d4af5a)' : 'linear-gradient(135deg,#0a0a0a,#1a1a1a)' ?>;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-                    <i class="fas fa-<?= $tIsTable ? 'users' : ($tIsVIP ? 'star' : 'ticket-alt') ?>" style="color:#fff;font-size:1.3rem;"></i>
+            <div style="background:#fff;border:1.5px solid <?= $tBorder ?>;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;height:100%;<?= $tFaded ?><?= $tIsVIP ? 'box-shadow:0 8px 32px rgba(190,155,63,.18);' : '' ?>">
+                <!-- Card header -->
+                <div style="background:<?= $tHeaderBg ?>;padding:22px 22px 18px;position:relative;">
+                    <!-- Status badge -->
+                    <?php if ($tStatus === 'sold_out'): ?>
+                    <span style="position:absolute;top:14px;right:14px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;background:#c0392b;color:#fff;padding:2px 10px;border-radius:20px;">Sold Out</span>
+                    <?php elseif ($tStatus === 'coming_soon'): ?>
+                    <span style="position:absolute;top:14px;right:14px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;background:rgba(255,255,255,.22);color:#fff;padding:2px 10px;border-radius:20px;">Coming Soon</span>
+                    <?php elseif ($tEarlyBird): ?>
+                    <span style="position:absolute;top:14px;right:14px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;background:#be9b3f;color:#fff;padding:2px 10px;border-radius:20px;">Early Bird</span>
+                    <?php else: ?>
+                    <span style="position:absolute;top:14px;right:14px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;background:#16a34a;color:#fff;padding:2px 10px;border-radius:20px;">On Sale</span>
+                    <?php endif; ?>
+                    <i class="fas fa-<?= $tIcon ?>" style="color:rgba(255,255,255,.3);font-size:2rem;margin-bottom:8px;display:block;"></i>
+                    <div style="font-size:1rem;font-weight:800;color:#fff;margin-bottom:6px;padding-right:80px;line-height:1.3;"><?= htmlspecialchars($tkt['name']) ?></div>
+                    <div>
+                        <span style="font-size:1.6rem;font-weight:900;color:#fff;"><?= isset($tkt['price']) ? 'KES '.number_format($tPrice) : 'TBA' ?></span>
+                        <?php if (!empty($tkt['original_price']) && $tkt['original_price'] > $tPrice): ?>
+                        <span style="font-size:.82rem;color:rgba(255,255,255,.5);text-decoration:line-through;margin-left:6px;">KES <?= number_format($tkt['original_price']) ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($tIsTable): ?><div style="font-size:.72rem;color:rgba(255,255,255,.6);margin-top:2px;">per table (10 seats)</div><?php endif; ?>
                 </div>
-                <h5 style="font-weight:800;color:#0d0d0d;margin-bottom:8px;font-size:1rem;"><?= htmlspecialchars($tkt['name']) ?></h5>
-                <!-- Price -->
-                <div style="margin-bottom:14px;">
-                    <span style="font-size:1.8rem;font-weight:900;color:<?= $tIsVIP ? '#be9b3f' : '#0a0a0a' ?>;">KES <?= number_format($tPrice) ?></span>
-                    <?php if ($tIsTable): ?><div style="font-size:.75rem;color:#888;margin-top:2px;">per table (10 seats)</div><?php endif; ?>
+                <!-- Card body -->
+                <div style="padding:20px 22px;flex:1;display:flex;flex-direction:column;">
+                    <?php if (!empty($tkt['description'])): ?>
+                    <p style="font-size:.85rem;color:#666;line-height:1.6;margin-bottom:14px;flex:1;"><?= htmlspecialchars($tkt['description']) ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($tkt['benefits'])): ?>
+                    <ul style="list-style:none;padding:0;margin:0 0 14px;flex:1;">
+                        <?php foreach (array_slice($tkt['benefits'],0,4) as $tb): ?>
+                        <li style="font-size:.85rem;color:#444;padding:5px 0;border-bottom:1px solid #f4f4f4;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-check" style="color:#be9b3f;font-size:.7rem;flex-shrink:0;"></i><?= htmlspecialchars($tb) ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+                    <?php if ($tStatus === 'coming_soon' && $tSaleStart && $tSaleStart > time()): ?>
+                    <div style="font-size:.75rem;color:#999;margin-bottom:12px;">Sales open: <strong style="color:#0a0a0a;"><?= date('d M Y', $tSaleStart) ?></strong></div>
+                    <?php elseif ($tStatus === 'available' && $tSaleEnd): ?>
+                    <div style="font-size:.75rem;color:#999;margin-bottom:12px;">Offer ends: <strong style="color:#be9b3f;"><?= $tSaleEnd ?></strong></div>
+                    <?php endif; ?>
+                    <?php if ($tStatus === 'available'): ?>
+                    <a href="<?= SITE_URL ?>/tickets"
+                       style="display:block;text-align:center;background:<?= $tHeaderBg ?>;color:#fff;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;">
+                        <?= $tIsTable ? 'Book Table' : 'Buy Ticket' ?> &rarr;
+                    </a>
+                    <?php elseif ($tStatus === 'sold_out'): ?>
+                    <span style="display:block;text-align:center;background:#c0392b;color:#fff;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:8px;opacity:.7;">Sold Out</span>
+                    <?php else: ?>
+                    <span style="display:block;text-align:center;background:#e5e7eb;color:#999;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:8px;cursor:default;">Coming Soon</span>
+                    <?php endif; ?>
                 </div>
-                <?php if (!empty($tkt['description'])): ?>
-                <p style="font-size:.82rem;color:#888;line-height:1.6;margin-bottom:16px;"><?= htmlspecialchars($tkt['description']) ?></p>
-                <?php endif; ?>
-                <!-- Status / CTA -->
-                <?php if ($tAvail): ?>
-                <div style="display:inline-flex;align-items:center;gap:6px;font-size:.75rem;color:#16a34a;font-weight:700;background:#f0fdf4;border:1px solid #86efac;padding:3px 12px;border-radius:20px;margin-bottom:16px;">
-                    <i class="fas fa-circle" style="font-size:.45rem;"></i>On Sale Now
-                </div><br>
-                <a href="<?= SITE_URL ?>/tickets" class="theme-btn btn-style-one" style="<?= $tIsVIP ? 'background:#be9b3f;border-color:#be9b3f;' : '' ?>font-size:.82rem;">
-                    <span class="btn-title">Buy Ticket &rarr;</span>
-                </a>
-                <?php elseif ($tSaleStart && $tSaleStart > time()): ?>
-                <div style="font-size:.75rem;color:#f59e0b;font-weight:700;background:#fffbeb;border:1px solid #fcd34d;padding:3px 12px;border-radius:20px;margin-bottom:16px;display:inline-block;">
-                    <i class="fas fa-clock" style="margin-right:4px;"></i>Sale starts <?= date('d M Y', $tSaleStart) ?>
-                </div><br>
-                <span style="font-size:.8rem;color:#aaa;font-style:italic;">Not yet on sale</span>
-                <?php else: ?>
-                <span style="font-size:.8rem;color:#aaa;font-style:italic;">Coming soon</span>
-                <?php endif; ?>
             </div>
         </div>
         <?php endforeach; ?>
         </div>
-        <div class="text-center" style="margin-top:16px;">
-            <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-two">
-                <span class="btn-title">View Full Ticket Details &rarr;</span>
+        <div class="text-center" style="margin-top:24px;">
+            <a href="<?= SITE_URL ?>/tickets" class="theme-btn btn-style-two">
+                <span class="btn-title">View All Tickets &rarr;</span>
             </a>
         </div>
     </div>

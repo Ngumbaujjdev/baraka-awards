@@ -56,11 +56,10 @@ Version: 1.0.0
 
 ***/
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=Exo:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
 
 /*
-font-family: 'Archivo', sans-serif;
-font-family: 'Exo', sans-serif;
+font-family: 'Outfit', sans-serif;
 */
 
 @import url("flaticon.css");
@@ -103,7 +102,7 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
-  font-family: "Archivo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 a {
@@ -129,7 +128,7 @@ h6 {
   background: none;
   font-weight: 600;
   line-height: 1.2em;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 h1 {
@@ -3408,7 +3407,7 @@ Page Title
   font-size: 16px;
   color: #be9b3f;
   font-weight: 700;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   margin-bottom: 15px;
 }
 
@@ -3613,19 +3612,19 @@ Page Title
   top: 0;
   height: 100%;
   width: 100%;
-  background: #000ec1;
+  background: #0a0a0a;
   background: -o-radial-gradient(
     center,
     ellipse,
-    #000ec1 0%,
-    #053732 56%,
-    #053732 100%
+    #1a1a1a 0%,
+    #0a0a0a 56%,
+    #0a0a0a 100%
   );
   background: radial-gradient(
     ellipse at center,
-    #000ec1 0%,
-    #053732 56%,
-    #053732 100%
+    #1a1a1a 0%,
+    #0a0a0a 56%,
+    #0a0a0a 100%
   );
   opacity: 0.9;
   content: "";
@@ -3847,7 +3846,7 @@ Page Title
   font-size: 60px;
   line-height: 1em;
   color: #ffffff;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   margin-right: 5px;
   top: 5px;
@@ -4047,7 +4046,7 @@ a.ui-button:active,
   font-size: 60px;
   line-height: 1em;
   color: #ffffff;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   margin-right: 5px;
   top: 5px;
@@ -4295,7 +4294,7 @@ a.ui-button:active,
   font-size: 84px;
   line-height: 1em;
   color: #000000;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
 }
 
@@ -4550,7 +4549,7 @@ a.ui-button:active,
   position: relative;
   display: block;
   font-size: 16px;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   line-height: 24px;
   padding-top: 15px;
@@ -4640,7 +4639,7 @@ a.ui-button:active,
   line-height: 1.2em;
   color: #ffffff;
   font-weight: 700;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -5488,7 +5487,7 @@ a.ui-button:active,
   line-height: 1.2em;
   color: #ffffff;
   font-weight: 700;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -6466,7 +6465,7 @@ a.ui-button:active,
   line-height: 40px;
   font-weight: 700;
   color: #be9b3f;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .schedule-tabs .tab-buttons li .month {
@@ -6476,7 +6475,7 @@ a.ui-button:active,
   color: #053732;
   line-height: 1em;
   text-transform: uppercase;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .schedule-tabs .tab-buttons li .month .colored {
@@ -7489,7 +7488,7 @@ Accordian Box
   font-weight: 600;
   cursor: pointer;
   background: #ffffff;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -7880,7 +7879,7 @@ Accordian Box
   color: #be9b3f;
   font-weight: bold;
   line-height: 1.2;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -7892,7 +7891,7 @@ Accordian Box
   color: #be9b3f;
   font-weight: 400;
   top: -20px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -8139,7 +8138,7 @@ Accordian Box
   font-weight: bold;
   line-height: 1.2;
   padding: 15px 35px 0;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -8151,7 +8150,7 @@ Accordian Box
   color: #ffffff;
   font-weight: 400;
   top: -20px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Outfit", sans-serif;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -8351,7 +8350,7 @@ Accordian Box
   color: #be9b3f;
   font-weight: bold;
   line-height: 1.2;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .pricing-block-three .price sup {
@@ -8360,7 +8359,7 @@ Accordian Box
   font-size: 24px;
   color: #be9b3f;
   font-weight: 400;
-  font-family: "Archivo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .pricing-block-three .price sup em {
@@ -8394,7 +8393,7 @@ Accordian Box
   line-height: 34px;
   color: #01136d;
   font-weight: 700;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .pricing-block-three .theme-btn {
@@ -8973,7 +8972,7 @@ Accordian Box
   margin-right: 10px;
   font-size: 16px;
   text-transform: uppercase;
-  font-family: "Exo", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   color: #053732;
 }

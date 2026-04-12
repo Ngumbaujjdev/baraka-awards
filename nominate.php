@@ -65,7 +65,7 @@ if ($categoryParam !== '') {
 <meta name="keywords" content="nominate Kenya, submit nomination awards, Digitally Fit Awards nominations, Kenya awards nomination, recognise outstanding Kenyans">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/nominate.php">
+<link rel="canonical" href="<?= SITE_URL ?>/nominate.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominate | Digitally Fit Awards">
@@ -79,7 +79,7 @@ if ($categoryParam !== '') {
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/nominate.php">
+<meta property="og:url" content="<?= SITE_URL ?>/nominate.php">
 <meta property="og:description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, and community.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -96,17 +96,17 @@ if ($categoryParam !== '') {
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"https://dfa.tuqiohub.africa/nominate.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"<?= SITE_URL ?>/nominate.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/nominate.php","description":"Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Digitally Fit Awards","url":"<?= SITE_URL ?>/nominate.php","description":"Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

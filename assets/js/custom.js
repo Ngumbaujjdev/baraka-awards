@@ -104,7 +104,7 @@
 			smartSpeed: 500,
 			autoHeight: true,
 			autoplay: true,
-			autoplayTimeout:10000,
+			autoplayTimeout:30000,
 			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
 			responsive:{
 				0:{

@@ -2,8 +2,19 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-// Resolve event slug — default to Digitally Fit Awards Gala 2026
-$eventSlug = $_GET['event'] ?? 'dfa-gala-2026';
+// ── Fetch all DFA events for switcher ───────────────────
+$_dfaCatEvsList = tuqio_api('/api/public/events?client=digitally-fit-awards');
+$_allDfaCatEvs  = $_dfaCatEvsList['data'] ?? [];
+usort($_allDfaCatEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
+// Default: first event with banner_image, else latest
+$_defaultCatEv = null;
+foreach ($_allDfaCatEvs as $_e) {
+    if (!$_defaultCatEv && !empty($_e['banner_image'])) { $_defaultCatEv = $_e; }
+}
+if (!$_defaultCatEv && !empty($_allDfaCatEvs)) { $_defaultCatEv = end($_allDfaCatEvs); }
+
+// Resolve event slug
+$eventSlug = $_GET['event'] ?? ($_defaultCatEv['slug'] ?? '');
 
 // Fetch event details (for dates/status)
 $eventResp    = tuqio_api('/api/public/events/' . urlencode($eventSlug));
@@ -34,15 +45,30 @@ foreach ($allCategories as $_c) {
 $voteOpens  = !empty($galaEvent['voting_opens_at'])  ? strtotime($galaEvent['voting_opens_at'])  : 0;
 $voteCloses = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['voting_closes_at']) : 0;
 
+// Build group lookup: category_id => group_name
+$_catGroupLookup = [];
+foreach ($nomResp['groups'] ?? [] as $_grp) {
+    foreach ($_grp['categories'] ?? [] as $_gc) {
+        $_catGroupLookup[$_gc['id']] = $_grp['name'];
+    }
+}
+// Build groups list for filter pills: [{name, slugs}]
+$_catGroupsList = array_values(array_map(fn($g) => [
+    'name'  => $g['name'],
+    'slugs' => array_column($g['categories'] ?? [], 'slug'),
+], array_filter($nomResp['groups'] ?? [], fn($g) => !empty($g['categories']))));
+$_catGroupsJson = json_encode($_catGroupsList);
+
 $totalCats = count($allCategories);
 $catsJson  = json_encode(array_map(fn($c) => [
     'id'     => $c['id'] ?? '',
     'name'   => $c['name'] ?? '',
     'slug'   => $c['slug'] ?? '',
     'desc'   => $c['description'] ?? '',
-    'image'  => !empty($c['image']) ? API_STORAGE . $c['image'] : '',
+    'image'  => !empty($c['image']) ? (str_starts_with($c['image'], 'http') ? $c['image'] : API_STORAGE . $c['image']) : '',
     'status' => $c['nomination_status'] ?? 'collecting',
     'count'  => count($c['nominees'] ?? []),
+    'group'  => $_catGroupLookup[$c['id'] ?? ''] ?? '',
 ], $allCategories));
 
 $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
@@ -156,6 +182,19 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
         </div>
         <?php else: ?>
 
+        <!-- Event switcher pills -->
+        <?php if (count($_allDfaCatEvs) > 1): ?>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;">
+            <?php foreach ($_allDfaCatEvs as $_ev): $isAct = ($_ev['slug'] ?? '') === $eventSlug; ?>
+            <a href="<?= SITE_URL ?>/categories?event=<?= urlencode($_ev['slug'] ?? '') ?>"
+               style="display:inline-block;padding:7px 18px;border-radius:20px;font-size:.82rem;font-weight:700;text-decoration:none;
+                      <?= $isAct ? 'background:#be9b3f;color:#fff;border:2px solid #be9b3f;' : 'background:#fff;color:#555;border:2px solid #ddd;' ?>">
+                <?= htmlspecialchars($_ev['name'] ?? '') ?>
+            </a>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
         <!-- Stats + search header -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
             <div>
@@ -169,6 +208,9 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
                 <i class="fas fa-search" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#bbb;pointer-events:none;"></i>
             </div>
         </div>
+
+        <!-- Group filter pills -->
+        <div id="catsGroupPills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;"></div>
 
         <!-- Category grid — rendered by JS -->
         <div class="row" id="catsGrid" style="min-height:200px;"></div>
@@ -284,15 +326,58 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
 <script>
 (function(){
     var CATS        = <?= $catsJson ?>;
+    var GROUPS      = <?= $_catGroupsJson ?>;
     var PAGE_SIZE   = 12;
     var isVoting    = <?= $isVotingOpen ? 'true' : 'false' ?>;
     var nomUrl      = '<?= SITE_URL ?>/nominate?event=<?= urlencode($eventSlug) ?>';
     var nomineesUrl = '<?= SITE_URL ?>/nominees?event=<?= urlencode($eventSlug) ?>';
     var filtered    = CATS.slice();
     var currentPage = 1;
+    var activeGroup = '';
 
     var statusColors = {collecting:'#22c55e', closed:'#ef4444', completed:'#6366f1'};
     var statusLabels = {collecting:'Accepting Nominations', closed:'Closed', completed:'Done'};
+
+    // ── Group filter pills ──────────────────────────────
+    function hasGroupData() {
+        return GROUPS.length > 0 && GROUPS.some(function(g){ return g.slugs && g.slugs.length > 0; });
+    }
+
+    function renderGroupPills() {
+        var wrap = document.getElementById('catsGroupPills');
+        if (!wrap || !hasGroupData()) { if(wrap) wrap.style.display='none'; return; }
+        wrap.style.display = 'flex';
+        var html = '<button onclick="setGroupFilter(\'\')" style="padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;'
+            + (activeGroup==='' ? 'background:#be9b3f;color:#fff;border:2px solid #be9b3f;' : 'background:#fff;color:#555;border:2px solid #ddd;')
+            + '">All</button>';
+        GROUPS.forEach(function(g) {
+            html += '<button onclick="setGroupFilter(\''+g.name.replace(/'/g,"\\'")+'\')" style="padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;'
+                + (activeGroup===g.name ? 'background:#be9b3f;color:#fff;border:2px solid #be9b3f;' : 'background:#fff;color:#555;border:2px solid #ddd;')
+                + '">'+g.name+'</button>';
+        });
+        wrap.innerHTML = html;
+    }
+
+    window.setGroupFilter = function(groupName) {
+        activeGroup = groupName;
+        renderGroupPills();
+        applyFilters();
+    };
+
+    function applyFilters() {
+        var q = (document.getElementById('catsSearch') ? document.getElementById('catsSearch').value.trim().toLowerCase() : '');
+        filtered = CATS.filter(function(c) {
+            var matchQ   = !q   || c.name.toLowerCase().indexOf(q) !== -1;
+            var matchGrp = !activeGroup;
+            if (!matchGrp) {
+                var grp = GROUPS.find(function(g){ return g.name === activeGroup; });
+                matchGrp = grp ? grp.slugs.indexOf(c.slug) !== -1 : false;
+            }
+            return matchQ && matchGrp;
+        });
+        currentPage = 1;
+        renderGrid();
+    }
 
     function buildCard(cat) {
         var color  = statusColors[cat.status] || '#888';
@@ -301,15 +386,17 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
             ? '<div class="cat-img-area"><img src="'+cat.image+'" alt="" onerror="this.parentElement.outerHTML=\'<div class=cat-img-placeholder><i class=flaticon-trophy-1 style=font-size:2.5rem;color:rgba(190,155,63,.35)></i></div>\'"><div class="cat-img-overlay"></div></div>'
             : '<div class="cat-img-placeholder"><i class="flaticon-trophy-1" style="font-size:2.5rem;color:rgba(190,155,63,.35);"></i></div>';
         var cta = (!isVoting && cat.status==='collecting')
-            ? '<a href="'+nomUrl+'&category='+cat.id+'" onclick="event.stopPropagation();" class="cat-cta">Nominate &rarr;</a>'
+            ? '<a href="'+nomUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" class="cat-cta">Nominate &rarr;</a>'
             : '<a href="'+nomineesUrl+'&category='+cat.slug+'" onclick="event.stopPropagation();" class="cat-cta">View Nominees &rarr;</a>';
         var count = cat.count > 0
             ? '<span class="cat-count"><i class="fas fa-users" style="margin-right:3px;"></i>'+cat.count+' nominated</span>'
             : '<span class="cat-count">No nominees yet</span>';
+        var grpBadge = cat.group ? '<span style="font-size:.6rem;font-weight:700;color:#be9b3f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block;">'+cat.group+'</span>' : '';
         return '<div class="col-lg-4 col-md-6 col-sm-12 cat-card-wrap">'
             + '<div class="cat-card-inner" onclick="openCatsModal('+JSON.stringify(cat)+')">'
             + imgHtml
             + '<div class="cat-body">'
+            + grpBadge
             + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">'
             + '<h6 class="cat-name">'+cat.name+'</h6>'
             + '<span class="cat-badge" style="color:'+color+';margin-left:8px;margin-top:2px;">'+label+'</span>'
@@ -358,7 +445,7 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
         document.getElementById('catsModalCount').textContent = cat.count>0 ? cat.count+' nominee'+(cat.count!==1?'s':'')+' so far' : 'No nominees yet';
         var cta = document.getElementById('catsModalCta');
         if (!isVoting && cat.status==='collecting') {
-            cta.href = nomUrl+'&category='+cat.id;
+            cta.href = nomUrl+'&category='+cat.slug;
             cta.querySelector('.btn-title').textContent = 'Nominate for this category \u2192';
         } else {
             cta.href = nomineesUrl+'&category='+cat.slug;
@@ -372,12 +459,10 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
     };
 
     document.getElementById('catsSearch').addEventListener('input', function(){
-        var q = this.value.trim().toLowerCase();
-        filtered = q ? CATS.filter(function(c){ return c.name.toLowerCase().indexOf(q)!==-1; }) : CATS.slice();
-        currentPage = 1;
-        renderGrid();
+        applyFilters();
     });
 
+    renderGroupPills();
     renderGrid();
 }());
 </script>

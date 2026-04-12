@@ -13,7 +13,7 @@ include 'libs/App.php';
 <meta name="keywords" content="Digitally Fit Awards FAQ, how to vote Kenya, how to nominate Kenya, event tickets FAQ, Digitally Fit Awards help">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/faq.php">
+<link rel="canonical" href="https://digitallyfitawards.com/faq.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Frequently Asked Questions | Digitally Fit Awards">
@@ -27,7 +27,7 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/faq.php">
+<meta property="og:url" content="https://digitallyfitawards.com/faq.php">
 <meta property="og:description" content="Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://digitallyfitawards.com","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://dfa.tuqiohub.africa/faq.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://digitallyfitawards.com/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://digitallyfitawards.com/faq.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/faq.php","description":"Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Digitally Fit Awards","url":"https://digitallyfitawards.com/faq.php","description":"Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -163,24 +163,14 @@ include 'libs/App.php';
             <div class="sidebar-side col-lg-4 col-md-12">
                 <aside class="sidebar padding-left" style="position:sticky;top:100px;">
                     <div class="sidebar-widget mb-4">
-                        <h5 class="sidebar-title">Jump to Section</h5>
+                        <h5 class="sidebar-title">Quick Actions</h5>
                         <nav>
-                            <a href="#general"     class="faq-sidebar-link active">General</a>
-                            <a href="#voting"      class="faq-sidebar-link">Voting &amp; Nominees</a>
-                            <a href="#nominations" class="faq-sidebar-link">Nominations</a>
-                            <a href="#tickets"     class="faq-sidebar-link">Tickets &amp; Attendance</a>
-                            <a href="#technical"   class="faq-sidebar-link">Technical</a>
+                            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-users me-2" style="color:#BF9E44;"></i>View Nominees</a>
+                            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-vote-yea me-2" style="color:#BF9E44;"></i>Vote Now</a>
+                            <a href="<?= SITE_URL ?>/tickets?event=dfa-gala-2026"  class="faq-sidebar-link"><i class="fas fa-ticket-alt me-2" style="color:#BF9E44;"></i>Buy Tickets</a>
+                            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-user-plus me-2" style="color:#BF9E44;"></i>Submit a Nomination</a>
+                            <a href="<?= SITE_URL ?>/contact"                       class="faq-sidebar-link"><i class="fas fa-envelope me-2" style="color:#BF9E44;"></i>Contact Us</a>
                         </nav>
-                    </div>
-                    <div class="sidebar-widget faq-sidebar-box">
-                        <h5 class="sidebar-title">Quick Links</h5>
-                        <ul class="list-unstyled faq-sidebar-links mb-0">
-                            <li><a href="nominees"><i class="fas fa-users me-2" style="color:#BF9E44;"></i>View Nominees</a></li>
-                            <li><a href="nominees"><i class="fas fa-vote-yea me-2" style="color:#BF9E44;"></i>Vote Now</a></li>
-                            <li><a href="tickets"><i class="fas fa-ticket-alt me-2" style="color:#BF9E44;"></i>Buy Tickets</a></li>
-                            <li><a href="nominate"><i class="fas fa-user-plus me-2" style="color:#BF9E44;"></i>Submit a Nomination</a></li>
-                            <li><a href="contact"><i class="fas fa-envelope me-2" style="color:#BF9E44;"></i>Contact Us</a></li>
-                        </ul>
                     </div>
                 </aside>
             </div>
@@ -193,14 +183,13 @@ include 'libs/App.php';
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
 <?php include 'includes/footer-links.php'; ?>
 <script>
-/* ── Sidebar active link on scroll ── */
+/* ── Highlight sidebar link matching current page ── */
 (function(){
-    var links=document.querySelectorAll('.faq-sidebar-link');
-    var sections=['general','voting','nominations','tickets','technical'];
-    window.addEventListener('scroll',function(){
-        var y=window.scrollY+150,active=sections[0];
-        sections.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top+window.scrollY<=y)active=id;});
-        links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+active);});
+    var path = window.location.pathname.replace(/\/$/, '');
+    document.querySelectorAll('.faq-sidebar-link').forEach(function(l){
+        var href = l.getAttribute('href') || '';
+        var linkPath = href.split('?')[0].replace(/\/$/, '');
+        if (linkPath && path.endsWith(linkPath)) l.classList.add('active');
     });
 })();
 

@@ -62,7 +62,7 @@
 
                     <li><i class="flaticon-alarm-clock-1"></i>Monday - Friday 9am - 6pm <strong>Timing</strong></li>
 
-                    <li><i class="flaticon-email-1"></i> <a href="mailto:info@dfa.tuqiohub.africa">info@dfa.tuqiohub.africa</a> <strong>Mail to us</strong></li>
+                    <li><i class="flaticon-email-1"></i> <a href="mailto:<?= ADMIN_EMAIL ?>"><?= ADMIN_EMAIL ?></a> <strong>Mail to us</strong></li>
 
                 </ul>
 

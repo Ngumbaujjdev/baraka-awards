@@ -30,7 +30,7 @@ $totalItems  = $resp['total'] ?? 0;
 <meta name="keywords" content="Digitally Fit Awards blog, Kenya events news, awards articles Kenya, event updates Nairobi, Digitally Fit Awards articles">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dfa.tuqiohub.africa/blog.php">
+<link rel="canonical" href="<?= SITE_URL ?>/blog.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Articles & News | Digitally Fit Awards">
@@ -44,7 +44,7 @@ $totalItems  = $resp['total'] ?? 0;
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://dfa.tuqiohub.africa/blog.php">
+<meta property="og:url" content="<?= SITE_URL ?>/blog.php">
 <meta property="og:description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
@@ -61,17 +61,17 @@ $totalItems  = $resp['total'] ?? 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"info@dfa.tuqiohub.africa","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dfa.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dfa.tuqiohub.africa/blog.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Blog","item":"<?= SITE_URL ?>/blog.php"}]}
 </script>
 
 <!-- JSON-LD: Blog -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Digitally Fit Awards","url":"https://dfa.tuqiohub.africa/blog.php","description":"Latest news, articles, and updates from Digitally Fit Awards.","publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"https://dfa.tuqiohub.africa"}}
+{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Digitally Fit Awards","url":"<?= SITE_URL ?>/blog.php","description":"Latest news, articles, and updates from Digitally Fit Awards.","publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
