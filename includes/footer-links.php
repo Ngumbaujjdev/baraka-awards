@@ -23,3 +23,4 @@
 <!-- Custom script -->
 <script src="<?php echo SITE_URL; ?>/assets/js/custom.js"></script>
 <script>new WOW().init();</script>
+<?php include __DIR__ . '/whatsapp-float.php'; ?>

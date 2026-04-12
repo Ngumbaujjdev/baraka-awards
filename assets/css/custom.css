@@ -558,3 +558,26 @@ i.fa, i.fas, i.fab, i.far {
     .tc-header .tc-name { font-size: .95rem; padding-right: 80px; }
     .tc-header .tc-price { font-size: 1.4rem; }
 }
+
+/* ── WhatsApp sticky button ──────────────────────────────────────────────── */
+.whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #25d366;
+    color: #fff;
+    padding: 12px 18px 12px 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: .95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: background .2s, transform .2s;
+}
+.whatsapp-float i { font-size: 1.4rem; }
+.whatsapp-float:hover { background: #128c5e; color: #fff; transform: scale(1.04); }
+@media (max-width: 576px) { .whatsapp-float__label { display: none; } }
