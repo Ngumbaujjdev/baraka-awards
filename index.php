@@ -101,34 +101,34 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Home | Digitally Fit Awards</title>
-<meta name="description" content="East Africa's premier digital excellence awards. Nominate, vote, and join us at the Digitally Fit Awards Gala 2026.">
-<meta name="keywords" content="Digitally Fit Awards, digital excellence awards East Africa, vote digital awards 2026, Digitally Fit Awards Gala, nominate digital achiever">
+<title>Digitally Fit Awards — Recognising Online Excellence</title>
+<meta name="description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact. Celebrating digital excellence across Business of the Year, Person of the Year, and more.">
+<meta name="keywords" content="Digitally Fit Awards, digital excellence awards, online presence awards, business of the year, person of the year, digital impact awards Kenya, online awards 2026, social media awards, website awards Africa">
 <meta name="author" content="Digitally Fit Awards">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Digitally Fit Awards — Kenya's Premier Event Hub">
-<meta itemprop="description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
+<meta itemprop="name" content="Digitally Fit Awards">
+<meta itemprop="description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Home | Digitally Fit Awards">
+<meta property="og:title" content="Digitally Fit Awards — Recognising Online Excellence">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/">
-<meta property="og:description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
+<meta property="og:description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
 <meta property="og:site_name" content="Digitally Fit Awards">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Home | Digitally Fit Awards">
-<meta name="twitter:description" content="Kenya's premier event management platform powering nominations, voting, ticketing, and live events.">
+<meta name="twitter:title" content="Digitally Fit Awards — Recognising Online Excellence">
+<meta name="twitter:description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -137,12 +137,12 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
 </script>
 
 <!-- JSON-LD: WebSite -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"Kenya's premier event management platform powering nominations, voting, ticketing, and live events.","potentialAction":{"@type":"SearchAction","target":"<?= SITE_URL ?>/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","potentialAction":{"@type":"SearchAction","target":"<?= SITE_URL ?>/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
