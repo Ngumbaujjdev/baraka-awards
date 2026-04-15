@@ -13,11 +13,11 @@ define("ADMIN_EMAIL",       "info@digitallyfitawards.com");
 define("SITE_PHONE", "+254709000838"); // Safaricom (also WhatsApp)
 
 // ─── Social ────────────────────────────────────────────────────────────────
-define("SOCIAL_FACEBOOK",  "#"); // TODO: add DFA Facebook URL
-define("SOCIAL_INSTAGRAM", "#"); // TODO: add DFA Instagram URL
-define("SOCIAL_TWITTER",   "#"); // TODO: add DFA Twitter/X URL
-define("SOCIAL_LINKEDIN",  "#"); // TODO: add DFA LinkedIn URL
-define("SOCIAL_TIKTOK",    "#"); // TODO: add DFA TikTok URL
+define("SOCIAL_FACEBOOK",  "https://www.facebook.com/Digitallyfitawards");
+define("SOCIAL_INSTAGRAM", "https://www.instagram.com/digitallyfitawards/");
+define("SOCIAL_TWITTER",   "https://x.com/DigitallyFAward");
+define("SOCIAL_LINKEDIN",  "https://www.linkedin.com/company/digitally-fit-awards/");
+define("SOCIAL_TIKTOK",    "#");
 
 // ─── OG image ──────────────────────────────────────────────────────────────
 define("OG_IMAGE", $isLocal
