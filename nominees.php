@@ -563,6 +563,10 @@ $globalIdx = 0;
             <?php else: ?>
             <div style="color:#aaa;font-style:italic;font-size:.88rem;text-align:center;">Voting is not currently open.</div>
             <?php endif; ?>
+            <a id="modal-profile-link" href="#"
+               style="font-size:.82rem;color:#be9b3f;font-weight:600;text-decoration:none;display:block;text-align:center;margin-top:10px;">
+                View Full Profile &rarr;
+            </a>
         </div>
 
     </div>
@@ -1137,7 +1141,8 @@ window.switchNomEvent = function(slug) {
 
 // ── Nominee Modal ──────────────────────────────────────────────────────────
 $(document).ready(function() {
-    var EVENT_SLUG = <?= json_encode($activeSlug ?: '') ?>;
+    var EVENT_SLUG          = <?= json_encode($activeSlug ?: '') ?>;
+    var NOMINEE_PROFILE_URL = '<?= SITE_URL ?>/nominee';
 
     var socialIcons = {
         facebook:  { icon:'fab fa-facebook-f',  color:'#1877f2', label:'Facebook'  },
@@ -1161,6 +1166,7 @@ $(document).ready(function() {
         var votes     = parseInt($t.data('votes'), 10) || 0;
         var catName   = $t.data('category-name') || '';
         var nomId     = $t.data('candidate-id')  || '';
+        var slug      = $t.data('slug')          || '';
         var isWinner  = parseInt($t.data('is-winner'), 10);
         var winnerPos = $t.data('winner-pos')    || '';
         var code      = $t.data('code')          || '';
@@ -1255,6 +1261,9 @@ $(document).ready(function() {
         if ($('#modal-vote-btn').length) {
             $('#modal-vote-btn').attr('href', 'vote-bundle.php?event=' + encodeURIComponent(EVENT_SLUG) + '&nominee=' + encodeURIComponent(nomId));
         }
+
+        // Profile link
+        $('#modal-profile-link').attr('href', NOMINEE_PROFILE_URL + '?slug=' + encodeURIComponent(slug) + '&event=' + encodeURIComponent(EVENT_SLUG));
 
         // Open custom overlay
         $('#nomineeModal').css('display', 'flex');

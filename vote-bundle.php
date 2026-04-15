@@ -470,30 +470,6 @@ body.mob-pay-on { padding-bottom:120px !important; }
                         </button>
                     </div>
 
-                    <!-- Confirmation modal (pure CSS/JS, no Bootstrap dependency) -->
-                    <div id="payConfirmModal" onclick="if(event.target===this)VotePage.closeConfirm()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
-                        <div style="background:#fff;border-radius:16px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;">
-                            <!-- Header -->
-                            <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:20px 24px;color:#fff;">
-                                <div style="font-size:1rem;font-weight:800;margin-bottom:2px;">Confirm Your Vote</div>
-                                <div style="font-size:.78rem;opacity:.75;">Please review before paying</div>
-                            </div>
-                            <!-- Body -->
-                            <div style="padding:22px 24px;">
-                                <div id="payConfirmBody"></div>
-                                <div style="display:flex;gap:10px;margin-top:20px;">
-                                    <button type="button" onclick="VotePage.closeConfirm()"
-                                            style="flex:1;padding:12px;border-radius:9px;border:2px solid #eee;background:#fff;font-weight:700;font-size:.88rem;color:#555;cursor:pointer;">
-                                        <i class="fas fa-times" style="margin-right:6px;"></i>Cancel
-                                    </button>
-                                    <button type="button" id="payConfirmBtn" onclick="VotePage.confirmPay()"
-                                            style="flex:2;padding:12px;border-radius:9px;border:none;font-weight:800;font-size:.88rem;color:#fff;cursor:pointer;transition:opacity .2s;">
-                                        <i class="fas fa-lock" style="margin-right:6px;"></i>Confirm &amp; Pay
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="secure-note">
                         <i class="fas fa-shield-alt" style="margin-right:4px;"></i>
                         Secured by Paystack &middot; 256-bit SSL
@@ -1020,7 +996,9 @@ window.VotePage = (function () {
         .then(r => r.json())
         .then(data => {
             if (data.payment_url) {
-                window.location.href = data.payment_url;
+                var redir = document.getElementById('redirectingModal');
+                if (redir) redir.style.display = 'flex';
+                setTimeout(function() { window.location.href = data.payment_url; }, 1200);
             } else {
                 const msg = data.error || data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Checkout failed.');
                 showAlert('<i class="fas fa-exclamation-circle me-2"></i>' + msg, 'error');
@@ -1086,5 +1064,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<!-- ── Confirmation modal ─────────────────────────────────────────────── -->
+<div id="payConfirmModal" onclick="if(event.target===this)VotePage.closeConfirm()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#fff;border-radius:16px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;">
+        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:20px 24px;color:#fff;">
+            <div style="font-size:1rem;font-weight:800;margin-bottom:2px;">Confirm Your Vote</div>
+            <div style="font-size:.78rem;opacity:.75;">Please review before paying</div>
+        </div>
+        <div style="padding:22px 24px;">
+            <div id="payConfirmBody"></div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+                <button type="button" onclick="VotePage.closeConfirm()"
+                        style="flex:1;padding:12px;border-radius:9px;border:2px solid #eee;background:#fff;font-weight:700;font-size:.88rem;color:#555;cursor:pointer;">
+                    <i class="fas fa-times" style="margin-right:6px;"></i>Cancel
+                </button>
+                <button type="button" id="payConfirmBtn" onclick="VotePage.confirmPay()"
+                        style="flex:2;padding:12px;border-radius:9px;border:none;font-weight:800;font-size:.88rem;color:#fff;cursor:pointer;transition:opacity .2s;">
+                    <i class="fas fa-lock" style="margin-right:6px;"></i>Confirm &amp; Pay
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Redirecting overlay ────────────────────────────────────────────── -->
+<div id="redirectingModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#fff;border-radius:18px;max-width:360px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,.35);overflow:hidden;text-align:center;">
+        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:28px 24px 22px;">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+                <i class="fas fa-lock" style="color:#be9b3f;font-size:1.6rem;"></i>
+            </div>
+            <div style="color:#fff;font-size:1.1rem;font-weight:800;margin-bottom:4px;">Redirecting to Payment</div>
+            <div style="color:rgba(255,255,255,.6);font-size:.8rem;">Please wait, do not close this tab</div>
+        </div>
+        <div style="padding:28px 24px;">
+            <div style="display:flex;justify-content:center;margin-bottom:18px;">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#be9b3f;"></i>
+            </div>
+            <p style="color:#555;font-size:.88rem;margin:0 0 6px;">You are being securely redirected to <strong>Paystack</strong> to complete your payment.</p>
+            <p style="color:#aaa;font-size:.78rem;margin:0;">This will only take a moment&hellip;</p>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
