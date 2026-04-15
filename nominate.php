@@ -19,9 +19,14 @@ foreach ($nomEvents as $ev) {
 // Fetch ONLY public-nomination categories for selected event
 $categories = [];
 $promotedCats = [];
+$groups    = [];
+$ungrouped = [];
+$hasGroups = false;
 if ($selectedSlug) {
     $nomResp    = tuqio_api('/api/public/events/' . urlencode($selectedSlug) . '/nominees?for_nomination=1');
     $allCats    = $nomResp['categories'] ?? [];
+    $groups     = $nomResp['groups']    ?? [];
+    $ungrouped  = $nomResp['ungrouped'] ?? [];
     // Split: promoted = in voting phase, collecting = nominations open
     foreach ($allCats as $cat) {
         if (($cat['nomination_status'] ?? '') === 'promoted') {
@@ -29,6 +34,10 @@ if ($selectedSlug) {
         } else {
             $categories[] = $cat;
         }
+    }
+    // Only show group cascade when at least one open nomination category is assigned to a group
+    foreach ($categories as $cat) {
+        if (!empty($cat['group_id'])) { $hasGroups = true; break; }
     }
 }
 
@@ -290,8 +299,24 @@ if ($categoryParam !== '') {
 
                         <?php elseif (!empty($categories)): ?>
 
+                        <?php if ($hasGroups): ?>
+                        <!-- Group picker (Select2) — filters categories below -->
+                        <div class="mb-3" id="group-select-wrap">
+                            <label>Category Group <span style="color:#be9b3f;">*</span></label>
+                            <select id="group_select" name="_group_id">
+                                <option value="">— Select a group —</option>
+                                <?php foreach ($groups as $grp): ?>
+                                <option value="<?= (int)$grp['id'] ?>"><?= htmlspecialchars($grp['name']) ?></option>
+                                <?php endforeach; ?>
+                                <?php if (!empty($ungrouped)): ?>
+                                <option value="0">Other / Ungrouped</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <?php endif; ?>
+
                         <!-- Category select (Select2) -->
-                        <div class="mb-4">
+                        <div class="mb-4" id="cat-select-wrap"<?= $hasGroups ? ' style="display:none;"' : '' ?>>
                             <label>Award Category <span style="color:#be9b3f;">*</span></label>
                             <select name="category_id" id="category_select">
                                 <option value="">— Select a category —</option>
@@ -301,6 +326,7 @@ if ($categoryParam !== '') {
                                     $typeLabel = $cType === 'application_form' ? 'Full Application' : 'Nomination';
                                 ?>
                                 <option value="<?= $cId ?>"
+                                        data-group-id="<?= (int)($cat['group_id'] ?? 0) ?>"
                                         data-type="<?= htmlspecialchars($cType) ?>"
                                         data-questions="<?= htmlspecialchars(json_encode($cat['nomination_questions'] ?? [])) ?>"
                                         <?= ($selectedCatId === $cId) ? 'selected' : '' ?>>
@@ -477,6 +503,12 @@ if ($categoryParam !== '') {
                             <p id="photo-size-warning" style="display:none;font-size:.78rem;color:#be9b3f;margin-top:6px;">
                                 <i class="fas fa-exclamation-triangle me-1"></i>File exceeds 2 MB — please choose a smaller image.
                             </p>
+                        </div>
+
+                        <!-- Nominee Phone -->
+                        <div class="mb-3" id="nominee-phone-wrap">
+                            <label id="nominee-phone-label">Nominee's Phone <span style="color:#aaa;font-weight:400;font-size:.82rem;">(optional)</span></label>
+                            <input type="tel" name="nominee_phone" id="nominee_phone" value="<?= htmlspecialchars($_POST['nominee_phone'] ?? '') ?>" placeholder="+254 700 000 000">
                         </div>
 
                         <div class="mb-4" id="nominee-desc-wrap">
@@ -669,6 +701,10 @@ var NomForm = {
 
         // ── Validation ──────────────────────────────────────────────
         if (!slug)  { showNomToast('warning','Missing field','Please select an event.'); return; }
+        var groupSelEl = document.getElementById('group_select');
+        if (groupSelEl && !groupSelEl.value) {
+            showNomToast('warning','Missing field','Please select a category group first.'); return;
+        }
         if (!catId) {
             var msg = document.getElementById('cat-required-msg');
             if (msg) msg.style.display = 'block';
@@ -696,6 +732,7 @@ var NomForm = {
         fd.append('nominator_phone', NomForm._itiPhone ? NomForm._itiPhone.getNumber() : ((form.querySelector('[name="nominator_phone"]') || {}).value || ''));
         fd.append('self_nomination', this.mode === 'self' ? '1' : '0');
         fd.append('nominee_country', (form.querySelector('[name="nominee_country"]') || {}).value || '');
+        fd.append('nominee_phone',   (form.querySelector('[name="nominee_phone"]')   || {}).value || '');
         form.querySelectorAll('[name^="app_"]').forEach(function(el) {
             fd.append('application_answers[' + el.name.slice(4) + ']', el.value);
         });
@@ -723,9 +760,11 @@ var NomForm = {
             { label: 'Nominee',    value: nomName },
             { label: 'Nominating', value: this.mode === 'self' ? 'Myself' : 'Someone else' },
         ];
-        if (countryText) rows.push({ label: 'Country',    value: countryText });
-        rows.push(        { label: 'Your Email', value: nomEmail });
-        if (phoneNum)    rows.push({ label: 'Your Phone', value: phoneNum });
+        if (countryText) rows.push({ label: 'Country',       value: countryText });
+        var nomineePhone = (form.querySelector('[name="nominee_phone"]') || {}).value || '';
+        if (nomineePhone) rows.push({ label: "Nominee's Phone", value: nomineePhone });
+        rows.push(        { label: 'Your Email',  value: nomEmail });
+        if (phoneNum)    rows.push({ label: 'Your Phone',  value: phoneNum });
         if (nomDesc) {
             var descLabelEl = document.getElementById('nominee-desc-label');
             var descLabel = descLabelEl ? descLabelEl.textContent.trim() : 'Statement';
@@ -1011,6 +1050,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (typeof $ !== 'undefined' && $.fn.select2) {
+        // ── Group picker (cascade) ─────────────────────────────────────────────
+        var dfaAllCats = <?= json_encode(array_values($categories)) ?>;
+        var dfaUngrouped = <?= json_encode(array_values($ungrouped)) ?>;
+        var dfaHasGroups = <?= $hasGroups ? 'true' : 'false' ?>;
+
+        if (dfaHasGroups) {
+            $('#group_select').select2({
+                placeholder: '— Select a group —',
+                allowClear: true,
+                width: '100%',
+            });
+
+            $('#group_select').on('change', function () {
+                var raw = $(this).val();
+                var gid = raw === '' ? null : (parseInt(raw) || 0);
+                var $catWrap = $('#cat-select-wrap');
+                var $cat = $('#category_select');
+
+                // Rebuild category options filtered by chosen group
+                $cat.empty().append('<option value="">— Select a category —</option>');
+
+                if (gid !== null) {
+                    var pool = (gid === 0) ? dfaUngrouped : dfaAllCats.filter(function (c) {
+                        return parseInt(c.group_id) === gid;
+                    });
+                    pool.forEach(function (cat) {
+                        var typeLabel = cat.nomination_type === 'application_form' ? 'Full Application' : 'Nomination';
+                        var $opt = $('<option>', {
+                            value: cat.id,
+                            text: cat.name + ' — ' + typeLabel,
+                        });
+                        $opt.attr('data-group-id', parseInt(cat.group_id) || 0);
+                        $opt.attr('data-type', cat.nomination_type || '');
+                        $opt.attr('data-questions', JSON.stringify(cat.nomination_questions || []));
+                        $cat.append($opt);
+                    });
+                    $catWrap.show();
+                } else {
+                    $catWrap.hide();
+                }
+                $cat.val('').trigger('change');
+            });
+        }
+
         // Category picker
         $('#category_select').select2({
             placeholder: '— Select a category —',
