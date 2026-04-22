@@ -7,7 +7,7 @@ $services = [
         'icon'     => 'fa-calendar-alt',
         'title'    => 'Event Management',
         'tagline'  => 'End-to-end event operations from one dashboard',
-        'desc'     => 'Digitally Fit Awards gives organizers a complete toolkit to plan, launch, and run any type of event — from intimate community gatherings to large national galas. Manage every detail from a single, intuitive dashboard.',
+        'desc'     => 'Baraka Awards Kenya gives organizers a complete toolkit to plan, launch, and run any type of event — from intimate community gatherings to large national galas. Manage every detail from a single, intuitive dashboard.',
         'features' => [
             'Custom event landing pages with full branding control',
             'Multi-day programme and session scheduling',
@@ -116,7 +116,7 @@ $otherServices = array_filter($services, fn($k) => $k !== $id, ARRAY_FILTER_USE_
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><?= htmlspecialchars($service['title']) ?> | Digitally Fit Awards</title>
+<title><?= htmlspecialchars($service['title']) ?> | Baraka Awards Kenya</title>
 <meta name="description" content="<?= htmlspecialchars($service['tagline']) ?>">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -125,7 +125,7 @@ $otherServices = array_filter($services, fn($k) => $k !== $id, ARRAY_FILTER_USE_
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>

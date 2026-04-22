@@ -1,4 +1,4 @@
-<a href="https://wa.me/254736557315"
+<a href="https://wa.me/254710388288"
    target="_blank" rel="noopener"
    class="whatsapp-float"
    aria-label="Chat with us on WhatsApp">

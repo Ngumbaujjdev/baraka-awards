@@ -121,6 +121,8 @@
 /* Global search mode — show all tab panes so search crosses all categories */
 #nomineeTabContent.search-all .tab-pane { display: block !important; opacity: 1 !important; }
 #nomineeTabContent.search-all .tab-pane + .tab-pane { border-top: 1px solid #f0f0f0; padding-top: 24px; margin-top: 8px; }
+/* Hide category headings during search — show nominees only */
+#nomineeTabContent.search-all .tab-pane > div:first-child { display: none !important; }
 
 /* ── Animated vote count ─────────────────────────────────────────── */
 @keyframes voteFlash { 0%{background:rgba(190,155,63,.15)} 100%{background:transparent} }

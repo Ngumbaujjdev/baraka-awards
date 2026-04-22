@@ -3,30 +3,31 @@ include 'config/config.php';
 include 'libs/App.php';
 
 $orderNumber = trim($_GET['ref'] ?? '');
-if (!$orderNumber) { header('Location: ' . SITE_URL . '/events'); exit; }
+if (!$orderNumber) { header('Location: ' . SITE_URL . '/tickets'); exit; }
 
 // Fetch purchase details from API
 $resp = tuqio_api('/api/public/tickets/' . urlencode($orderNumber));
 
-// If API returns error, show generic success screen (payment processed)
 $purchase = $resp['purchase'] ?? null;
 $tickets  = $resp['tickets']  ?? [];
 $event    = $resp['event']    ?? null;
 
 // Graceful fallback if backend hasn't returned details yet
-$hasFull  = !empty($purchase) && !empty($event);
+$hasFull = !empty($purchase) && !empty($event);
+
+$storageBase = API_BASE . '/storage/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Booking Confirmed | Digitally Fit Awards</title>
+<title>Booking Confirmed | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/custom.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -39,7 +40,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 }
 .confirm-icon {
     width:80px;height:80px;border-radius:50%;
-    background:linear-gradient(135deg,#be9b3f,#a0822f);
+    background:linear-gradient(135deg,#10b981,#059669);
     display:flex;align-items:center;justify-content:center;
     font-size:2.2rem;color:#fff;margin:0 auto 20px;
     box-shadow:0 8px 30px rgba(16,185,129,.4);
@@ -82,7 +83,6 @@ $hasFull  = !empty($purchase) && !empty($event);
 .action-btn:hover { opacity:.9;transform:translateY(-1px); }
 .btn-download { background:linear-gradient(135deg,#be9b3f,#a0822f);color:#fff; }
 .btn-outline   { background:#fff;color:#0a0a0a;border:2px solid #0a0a0a; }
-.btn-share     { background:#0a0a0a;color:#fff; }
 
 .email-note {
     background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;
@@ -148,9 +148,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                     <h4 style="font-size:1.1rem;font-weight:800;color:#0a0a0a;margin-bottom:20px;">
                         <i class="fas fa-ticket-alt" style="color:#be9b3f;margin-right:8px;"></i>
                         Your Ticket<?= count($tickets) !== 1 ? 's' : '' ?>
-                        <?php if ($hasFull): ?>
-                        (<?= count($tickets) ?>)
-                        <?php endif; ?>
+                        <?php if ($hasFull): ?>(<?= count($tickets) ?>)<?php endif; ?>
                     </h4>
 
                     <?php if (!empty($tickets)): ?>
@@ -217,7 +215,7 @@ $hasFull  = !empty($purchase) && !empty($event);
                                 </div>
                                 <?php endif; ?>
                                 <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
-                                    <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#a0822f;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;width:fit-content;">
+                                    <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#059669;border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;width:fit-content;">
                                         <i class="fas fa-circle" style="font-size:.45rem;"></i> Valid
                                     </span>
                                     <div style="display:flex;flex-wrap:wrap;gap:7px;">
@@ -273,9 +271,8 @@ $hasFull  = !empty($purchase) && !empty($event);
                                 <i class="fas fa-file-pdf"></i> Download PDF Tickets
                             </a>
                             <?php if ($hasFull): ?>
-                            <a href="<?= SITE_URL ?>/event-detail?slug=<?= urlencode($event['slug'] ?? '') ?>"
-                               class="action-btn btn-outline">
-                                <i class="fas fa-calendar-alt"></i> View Event
+                            <a href="<?= SITE_URL ?>/tickets" class="action-btn btn-outline">
+                                <i class="fas fa-ticket-alt"></i> Back to Tickets
                             </a>
                             <?php endif; ?>
                         </div>
@@ -352,8 +349,8 @@ $hasFull  = !empty($purchase) && !empty($event);
 
                     <!-- Event image -->
                     <?php
-                    $evtThumb = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_image']
-                               : (!empty($event['banner_image'])  ? API_STORAGE . $event['banner_image'] : '');
+                    $evtThumb = !empty($event['thumbnail_image']) ? $storageBase . $event['thumbnail_image']
+                               : (!empty($event['banner_image'])  ? $storageBase . $event['banner_image'] : '');
                     ?>
                     <?php if ($evtThumb): ?>
                     <div style="margin-top:20px;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.1);">
@@ -378,16 +375,16 @@ $hasFull  = !empty($purchase) && !empty($event);
                     </div>
                     <?php endif; ?>
 
-                    <!-- What to expect -->
+                    <!-- What's Next -->
                     <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-top:20px;">
                         <div style="font-size:.85rem;font-weight:800;color:#0a0a0a;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;">
                             <i class="fas fa-info-circle" style="color:#be9b3f;margin-right:6px;"></i>What's Next
                         </div>
                         <div style="font-size:.8rem;color:#555;line-height:1.7;">
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
-                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
-                            <div><i class="fas fa-check" style="color:#be9b3f;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Check your email for your PDF ticket(s)</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Save or print the QR code on each ticket</div>
+                            <div style="margin-bottom:8px;"><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Present the QR code at the venue entrance</div>
+                            <div><i class="fas fa-check" style="color:#10b981;margin-right:8px;"></i>Arrive early — doors open 30 min before start time</div>
                         </div>
                     </div>
 
@@ -416,7 +413,6 @@ function copyTicketLink(btn, url) {
         btn.style.color = '#065f46';
         setTimeout(function() { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; }, 2000);
     }).catch(function() {
-        // fallback for older browsers
         var ta = document.createElement('textarea');
         ta.value = url;
         document.body.appendChild(ta);
@@ -436,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
         text:         <?= json_encode($tk['barcode']) ?>,
         width:        90,
         height:       90,
-        colorDark:    '#0a0a0a',
+        colorDark:    '#000000',
         colorLight:   '#ffffff',
         correctLevel: QRCode.CorrectLevel.H,
     });
@@ -449,27 +445,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 window.Confirm = {
     downloadIcs: function() {
-        const eventName  = <?= json_encode($event['name']) ?>;
-        const startDate  = <?= json_encode($event['start_date'] ?? '') ?>;
-        const endDate    = <?= json_encode($event['end_date'] ?? $event['start_date'] ?? '') ?>;
-        const startTime  = <?= json_encode($event['start_time'] ?? '09:00:00') ?>;
-        const endTime    = <?= json_encode($event['end_time'] ?? '18:00:00') ?>;
-        const venue      = <?= json_encode(implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_address'] ?? '', $event['venue_city'] ?? '']))) ?>;
-        const orderNum   = <?= json_encode($orderNumber) ?>;
+        const eventName = <?= json_encode($event['name']) ?>;
+        const startDate = <?= json_encode($event['start_date'] ?? '') ?>;
+        const endDate   = <?= json_encode($event['end_date'] ?? $event['start_date'] ?? '') ?>;
+        const startTime = <?= json_encode($event['start_time'] ?? '09:00:00') ?>;
+        const endTime   = <?= json_encode($event['end_time'] ?? '18:00:00') ?>;
+        const venue     = <?= json_encode(implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_address'] ?? '', $event['venue_city'] ?? '']))) ?>;
+        const orderNum  = <?= json_encode($orderNumber) ?>;
 
         function icsDate(d, t) {
             const dt = new Date(d + 'T' + t);
             return dt.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
         }
 
-        const dtStart  = icsDate(startDate, startTime);
-        const dtEnd    = icsDate(endDate, endTime);
-        const uid      = 'mema-' + orderNum + '@digitallyfitawards.com';
+        const dtStart = icsDate(startDate, startTime);
+        const dtEnd   = icsDate(endDate, endTime);
+        const uid     = 'baraka-' + orderNum + '@barakaawards.tuqiohub.africa';
 
         const ics = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'PRODID:-//Digitally Fit Awards//EN',
+            'PRODID:-//Baraka Awards Kenya//EN',
             'CALSCALE:GREGORIAN',
             'METHOD:PUBLISH',
             'BEGIN:VEVENT',
@@ -479,7 +475,7 @@ window.Confirm = {
             'DTEND:' + dtEnd,
             'SUMMARY:' + eventName,
             'LOCATION:' + venue,
-            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Digitally Fit Awards.',
+            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Baraka Awards Kenya.',
             'STATUS:CONFIRMED',
             'END:VEVENT',
             'END:VCALENDAR'

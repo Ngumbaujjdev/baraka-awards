@@ -51,7 +51,8 @@ foreach ($categories as $cat) {
     }
 }
 
-$preNominee = $nomineeId && isset($allNominees[$nomineeId]) ? $allNominees[$nomineeId] : null;
+$preNominee     = $nomineeId && isset($allNominees[$nomineeId]) ? $allNominees[$nomineeId] : null;
+$lockedNominee  = !empty($preNominee); // when true, skip the full picker
 
 // Event display helpers
 $dateStr = !empty($event['start_date']) ? date('d M Y', strtotime($event['start_date'])) : 'TBD';
@@ -69,7 +70,7 @@ $nomIdx = 0;
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Vote — <?= htmlspecialchars($event['name']) ?> | Digitally Fit Awards</title>
+<title>Vote — <?= htmlspecialchars($event['name']) ?> | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -77,6 +78,8 @@ $nomIdx = 0;
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.min.css">
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
+<link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -276,12 +279,49 @@ body.mob-pay-on { padding-bottom:120px !important; }
 
                 <!-- Nominee picker -->
                 <div class="step-hdr" id="step1Hdr">
-                    <div class="step-num" id="step1Num">1</div>
+                    <div class="step-num done" id="step1Num"><?= $lockedNominee ? '✓' : '1' ?></div>
                     <div>
-                        <div class="step-hdr-title">Select a Nominee</div>
-                        <div class="step-hdr-sub" id="step1Sub">Choose who you're voting for</div>
+                        <div class="step-hdr-title"><?= $lockedNominee ? 'Voting for' : 'Select a Nominee' ?></div>
+                        <div class="step-hdr-sub" id="step1Sub">
+                            <?= $lockedNominee ? htmlspecialchars($preNominee['name']) : 'Choose who you\'re voting for' ?>
+                        </div>
                     </div>
                 </div>
+
+                <?php if ($lockedNominee):
+                    $nName    = $preNominee['name'] ?? '';
+                    $words    = array_filter(explode(' ', trim($nName)));
+                    $initials = implode('', array_map(fn($w) => strtoupper($w[0] ?? ''), array_slice($words, 0, 2)));
+                    $color    = $initialsColors[0];
+                    $nImage   = !empty($preNominee['image']) ? $preNominee['image'] : '';
+                ?>
+                <div class="nominee-pick-card selected" style="cursor:default;margin-bottom:8px;">
+                    <?php if ($nImage): ?>
+                    <img src="<?= htmlspecialchars($nImage) ?>" alt="<?= htmlspecialchars($nName) ?>"
+                         class="nom-thumb"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <div class="nom-initials-sm" style="display:none;background:<?= $color ?>;"><?= htmlspecialchars($initials) ?></div>
+                    <?php else: ?>
+                    <div class="nom-initials-sm" style="background:<?= $color ?>;"><?= htmlspecialchars($initials) ?></div>
+                    <?php endif; ?>
+                    <div class="nom-info">
+                        <div class="nom-name"><?= htmlspecialchars($nName) ?></div>
+                        <?php $subtitle = $preNominee['subtitle'] ?? $preNominee['_category'] ?? ''; ?>
+                        <?php if ($subtitle): ?>
+                        <div class="nom-cat"><?= htmlspecialchars($subtitle) ?></div>
+                        <?php endif; ?>
+                        <div class="nom-votes"><i class="fas fa-poll-h" style="margin-right:3px;"></i><?= number_format((int)($preNominee['votes_count'] ?? 0)) ?> votes</div>
+                    </div>
+                    <div class="nom-pick-check" style="background:#be9b3f;border-color:#be9b3f;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <a href="<?= SITE_URL ?>/nominees?event=<?= urlencode($slug) ?>"
+                   style="font-size:.78rem;color:#aaa;display:inline-block;margin-bottom:24px;text-decoration:none;">
+                    <i class="fas fa-exchange-alt" style="margin-right:4px;"></i>Vote for a different nominee
+                </a>
+
+                <?php else: // full picker ?>
 
                 <?php if (count($categories) > 1): ?>
                 <!-- Category filter -->
@@ -308,7 +348,7 @@ body.mob-pay-on { padding-bottom:120px !important; }
                     $initials = implode('', array_map(fn($w) => strtoupper($w[0] ?? ''), array_slice($words, 0, 2)));
                     $color    = $initialsColors[$nomIdx % 4];
                     $nomIdx++;
-                    $nImage   = !empty($n['image']) ? API_STORAGE . $n['image'] : '';
+                    $nImage   = !empty($n['image']) ? $n['image'] : '';
                     $isPreSel = $preNominee && (int)$n['id'] === $nomineeId;
                 ?>
                 <div class="nominee-pick-card <?= $isPreSel ? 'selected' : '' ?>"
@@ -343,10 +383,12 @@ body.mob-pay-on { padding-bottom:120px !important; }
                 </div>
                 <div id="showMoreNominees" style="display:none;text-align:center;margin:12px 0 4px;">
                     <button type="button" onclick="VotePage.showAllNominees(this)"
-                            style="background:none;border:1.5px solid #C23014;color:#C23014;border-radius:20px;padding:7px 22px;font-size:13px;cursor:pointer;font-weight:600;">
+                            style="background:none;border:1.5px solid #be9b3f;color:#be9b3f;border-radius:20px;padding:7px 22px;font-size:13px;cursor:pointer;font-weight:600;">
                         <i class="fas fa-chevron-down" style="margin-right:6px;"></i>Show <span id="showMoreCount"></span> more nominees
                     </button>
                 </div>
+
+                <?php endif; // $lockedNominee ?>
 
                 <!-- Step 2: Select bundle -->
                 <div class="step-hdr" style="margin-top:36px;" id="step2Hdr">
@@ -596,6 +638,7 @@ function applyCountryUI(countryCode) {
 window.VotePage = (function () {
     let selectedNomineeId   = PRE_NOMINEE_ID;
     let selectedNomineeName = <?= $preNominee ? json_encode($preNominee['name'] ?? '') : 'null' ?>;
+    let selectedNomineeSlug = <?= $preNominee ? json_encode($preNominee['slug'] ?? '') : "''" ?>;
     let selectedBundleId    = null;
     let selectedBundleVotes = 0;
     let selectedBundlePrice = 0;
@@ -643,6 +686,8 @@ window.VotePage = (function () {
         document.querySelectorAll('.nominee-pick-card').forEach(el => el.classList.remove('selected'));
         selectedNomineeId   = id;
         selectedNomineeName = name;
+        const _card = document.getElementById('npcard-' + id);
+        selectedNomineeSlug = _card ? (_card.dataset.slug || '') : '';
         const card = document.getElementById('npcard-' + id);
         if (card) card.classList.add('selected');
         renderSummary();
@@ -893,6 +938,8 @@ window.VotePage = (function () {
             showAlert('<i class="fas fa-exclamation-circle me-2"></i>Please enter a valid phone number.', 'error'); return;
         }
 
+        const _callbackUrl = SITE_URL_JS + '/vote-success?event=' + encodeURIComponent(EVENT_SLUG) + '&nominee=' + encodeURIComponent(selectedNomineeSlug || '');
+
         if (_useCustom) {
             _pendingPayload = {
                 custom_amount:  _customAmount,
@@ -903,6 +950,7 @@ window.VotePage = (function () {
                 voter_phone:    phone,
                 payment_method: method || 'card',
                 voter_country:  window._voterCountry || localStorage.getItem('voter_country') || 'KE',
+                callback_url:   _callbackUrl,
             };
         } else {
             _pendingPayload = {
@@ -913,6 +961,7 @@ window.VotePage = (function () {
                 voter_phone:    phone,
                 payment_method: method || 'card',
                 voter_country:  window._voterCountry || localStorage.getItem('voter_country') || 'KE',
+                callback_url:   _callbackUrl,
             };
         }
         _pendingMethod = method || 'card';
@@ -1020,23 +1069,15 @@ window.VotePage = (function () {
     renderSummary();
     updateStepUI();
 
-    // Auto-activate the nominee's category tab when arriving from "Vote Now"
-    if (PRE_NOMINEE_CAT) {
+    // Auto-activate the nominee's category tab when arriving from "Vote Now" (full picker mode only)
+    if (PRE_NOMINEE_CAT && !<?= $lockedNominee ? 'true' : 'false' ?>) {
         var catBtn = document.querySelector('.cat-tab-btn[data-cat="' + PRE_NOMINEE_CAT + '"]');
         filterCat(PRE_NOMINEE_CAT, catBtn);
     }
 
-    // Scroll to pre-selected nominee
+    // When nominee is locked, scroll directly to Step 2
     if (PRE_NOMINEE_ID) {
-        setTimeout(function() {
-            var el = document.getElementById('npcard-' + PRE_NOMINEE_ID);
-            if (el) el.scrollIntoView({behavior:'smooth', block:'nearest'});
-        }, 400);
-    }
-
-    // If pre-selected nominee but no bundle yet, scroll to step 2 after a moment
-    if (PRE_NOMINEE_ID && !selectedBundleId) {
-        setTimeout(function() { scrollNext('step2Hdr'); }, 800);
+        setTimeout(function() { scrollNext('step2Hdr'); }, 400);
     }
 
     return { selectNominee, selectBundle, filterCat, showAllNominees, pay, closeConfirm, confirmPay, calcCustomVotes, applyCustomAmount };

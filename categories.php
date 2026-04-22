@@ -2,9 +2,9 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-// ── Fetch all DFA events for switcher ───────────────────
-$_dfaCatEvsList = tuqio_api('/api/public/events?client=digitally-fit-awards');
-$_allDfaCatEvs  = $_dfaCatEvsList['data'] ?? [];
+// ── Fetch all Baraka events for switcher ───────────────────
+$_barakaCatEvsList = tuqio_api('/api/public/events?client=baraka-awards');
+$_allDfaCatEvs  = $_barakaCatEvsList['data'] ?? [];
 usort($_allDfaCatEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
 // Default: first event with banner_image, else latest
 $_defaultCatEv = null;
@@ -71,13 +71,13 @@ $catsJson  = json_encode(array_map(fn($c) => [
     'group'  => $_catGroupLookup[$c['id'] ?? ''] ?? '',
 ], $allCategories));
 
-$eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
+$eventName = $galaEvent['name'] ?? 'Baraka Awards Kenya Gala 2026';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Award Categories | <?= htmlspecialchars($eventName) ?> | Digitally Fit Awards</title>
+<title>Award Categories | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya</title>
 <meta name="description" content="Browse all award categories for <?= htmlspecialchars($eventName) ?>. Nominate your favourite gospel artists in <?= $totalCats ?> categories.">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Award Categories | <?= htmlspecialchars($eventName) ?>">
@@ -259,7 +259,7 @@ $eventName = $galaEvent['name'] ?? 'Digitally Fit Awards Gala 2026';
                 <?php if ($voteOpens): ?>
                 <div class="info-row"><i class="fas fa-vote-yea"></i><div><strong>Voting opens</strong><br><?= date('d M Y', $voteOpens) ?><?= $voteCloses ? ' &ndash; '.date('d M Y', $voteCloses) : '' ?></div></div>
                 <?php endif; ?>
-                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>December 5, 2026 &mdash; Villa Rosa Kempinski, Nairobi</div></div>
+                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>30th May 2026 &mdash; Villa Rosa Kempinski, Nairobi</div></div>
             </div>
 
             <!-- Quick links -->

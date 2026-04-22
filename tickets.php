@@ -2,9 +2,17 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$galaResp  = tuqio_api('/api/public/events/dfa-gala-2026');
-$galaEvent = $galaResp['data'] ?? $galaResp ?? [];
-$tickets   = $galaEvent['ticket_types'] ?? [];
+// Use the same featured-event logic as the homepage
+$_evListResp = tuqio_api('/api/public/events?client=baraka-awards');
+$_allEvs     = $_evListResp['data'] ?? [];
+usort($_allEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
+$_featSlug   = null;
+foreach ($_allEvs as $_e) { if (!$_featSlug && !empty($_e['banner_image'])) { $_featSlug = $_e['slug']; break; } }
+if (!$_featSlug && !empty($_allEvs)) { $_featSlug = end($_allEvs)['slug'] ?? null; }
+
+$galaResp  = $_featSlug ? tuqio_api('/api/public/events/' . $_featSlug) : [];
+$galaEvent = $galaResp['event'] ?? [];
+$tickets   = $galaResp['ticket_types'] ?? [];
 
 // Separate individual seats from group tables
 $individual = array_filter($tickets, fn($t) => !str_contains(strtolower($t['name']), 'table'));
@@ -29,15 +37,15 @@ function ticket_status($t) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Get Tickets | Digitally Fit Awards Gala 2026</title>
-<meta name="description" content="Buy tickets to the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards. Individual seats and group tables available.">
-<meta name="author" content="Digitally Fit Awards">
+<title>Get Tickets | Baraka Awards Kenya Gala 2026</title>
+<meta name="description" content="Buy tickets to the Baraka Awards Kenya Gala 2026 — Kenya's premier entertainment and cultural awards. Individual seats and group tables available.">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Get Tickets | Digitally Fit Awards Gala 2026">
+<meta property="og:title" content="Get Tickets | Baraka Awards Kenya Gala 2026">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
-<meta property="og:description" content="Buy tickets to the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Buy tickets to the Baraka Awards Kenya Gala 2026 — Kenya's premier entertainment and cultural awards.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -45,7 +53,7 @@ function ticket_status($t) {
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
@@ -79,14 +87,21 @@ function ticket_status($t) {
 <section style="padding:70px 0;background:#f9fafb;">
     <div class="auto-container">
 
+        <?php
+        $tixDateStr = !empty($galaEvent['start_date']) ? date('d M Y', strtotime($galaEvent['start_date'])) : 'Coming Soon';
+        if (!empty($galaEvent['end_date']) && $galaEvent['end_date'] !== $galaEvent['start_date'])
+            $tixDateStr .= ' – ' . date('d M Y', strtotime($galaEvent['end_date']));
+        $tixVenue = implode(', ', array_filter([$galaEvent['venue_name'] ?? '', $galaEvent['venue_city'] ?? ''])) ?: 'To be announced';
+        $tixCity  = $galaEvent['venue_city'] ?? 'Kenya';
+        ?>
         <!-- Event Intro Banner -->
         <div class="tix-intro">
-            <h2>Digitally Fit Awards Gala &mdash; Join the Celebration</h2>
-            <p>Experience East Africa's premier digital excellence awards night. Celebrate the pioneers and innovators of the regional digital landscape.</p>
+            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Baraka Awards Kenya Gala') ?> &mdash; Join the Celebration</h2>
+            <p><?= htmlspecialchars($galaEvent['description'] ?? "Experience Kenya's premier entertainment and cultural awards night.") ?></p>
             <div class="tix-meta">
-                <span><i class="flaticon-calendar"></i> Event Date: Coming Soon</span>
-                <span><i class="flaticon-clock-1"></i> Venue: To be announced</span>
-                <span><i class="flaticon-location"></i> Nairobi, Kenya</span>
+                <span><i class="flaticon-calendar"></i> <?= htmlspecialchars($tixDateStr) ?></span>
+                <span><i class="flaticon-clock-1"></i> <?= htmlspecialchars($tixVenue) ?></span>
+                <span><i class="flaticon-location"></i> <?= htmlspecialchars($tixCity) ?></span>
             </div>
         </div>
 
@@ -144,7 +159,7 @@ function ticket_status($t) {
                             <div class="tc-sale-info">Offer ends: <span><?= $saleEnd ?></span></div>
                             <?php endif; ?>
                             <?php if ($status === 'available'): ?>
-                            <a href="<?= SITE_URL ?>/checkout?slug=dfa-gala-2026" class="btn-buy">Buy Ticket →</a>
+                            <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>" class="btn-buy">Buy Ticket →</a>
                             <?php elseif ($status === 'sold_out'): ?>
                             <span class="btn-buy btn-sold">Sold Out</span>
                             <?php else: ?>
@@ -193,7 +208,7 @@ function ticket_status($t) {
                             <div class="per">per table</div>
                             <div style="margin-top:12px;">
                                 <?php if ($status === 'available'): ?>
-                                <a href="<?= SITE_URL ?>/checkout?slug=dfa-gala-2026" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
+                                <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
                                 <?php elseif ($status === 'sold_out'): ?>
                                 <span class="btn-buy btn-sold" style="display:inline-block;padding:10px 20px;">Sold Out</span>
                                 <?php else: ?>

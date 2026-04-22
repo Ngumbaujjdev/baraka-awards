@@ -2,7 +2,7 @@
 <div id="loading">
     <div id="loading-center">
         <div id="loading-logo">
-            <img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" style="width:160px; margin-bottom:20px;">
+            <img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg" alt="Baraka Awards Kenya" style="width:160px; margin-bottom:20px;">
         </div>
         <div id="loading-center-absolute">
             <div class="object" id="first_object"></div>

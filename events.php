@@ -6,7 +6,7 @@ $resp      = tuqio_api('/api/public/events');
 $allEvents = $resp['data'] ?? [];
 $today     = date('Y-m-d');
 
-// All events from this API are DFA events — no filtering needed
+// All events from this API are Baraka events — no filtering needed
 
 $upcoming = [];
 $past     = [];
@@ -39,34 +39,34 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Upcoming Events | Digitally Fit Awards</title>
-<meta name="description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
-<meta name="keywords" content="Kenya events, upcoming events Nairobi, award ceremonies Kenya, conferences Kenya, Digitally Fit Awards events">
-<meta name="author" content="Digitally Fit Awards">
+<title>Upcoming Events | Baraka Awards Kenya</title>
+<meta name="description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
+<meta name="keywords" content="Kenya events, upcoming events Nairobi, award ceremonies Kenya, conferences Kenya, Baraka Awards Kenya events">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/events.php">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Upcoming Events | Digitally Fit Awards">
-<meta itemprop="description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
+<meta itemprop="name" content="Upcoming Events | Baraka Awards Kenya">
+<meta itemprop="description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Upcoming Events | Digitally Fit Awards">
+<meta property="og:title" content="Upcoming Events | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/events.php">
-<meta property="og:description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Upcoming Events | Digitally Fit Awards">
-<meta name="twitter:description" content="Browse all upcoming and past events on Digitally Fit Awards — award ceremonies, conferences, and live experiences across Kenya.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Upcoming Events | Baraka Awards Kenya">
+<meta name="twitter:description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -75,7 +75,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -85,7 +85,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Digitally Fit Awards","url":"<?= SITE_URL ?>/events.php","description":"Browse all upcoming and past events on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Baraka Awards Kenya","url":"<?= SITE_URL ?>/events.php","description":"Browse all upcoming and past events on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -95,7 +95,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="<?= SITE_URL ?>/assets/images/favicon/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -216,7 +216,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
     </div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>DFA Events</h1>
+            <h1>Baraka Awards Events</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>Events</li>

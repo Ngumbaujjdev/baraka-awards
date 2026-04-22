@@ -8,34 +8,34 @@ include 'libs/App.php';
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Contact Us | Digitally Fit Awards</title>
-<meta name="description" content="Get in touch with Digitally Fit Awards. Contact us for event management inquiries, partnerships, nominations, or general support. Email: <?= ADMIN_EMAIL ?>">
-<meta name="keywords" content="contact Digitally Fit Awards, Digitally Fit Awards support, event management inquiry Kenya, Digitally Fit Awards email, Nairobi events contact">
-<meta name="author" content="Digitally Fit Awards">
+<title>Contact Us | Baraka Awards Kenya</title>
+<meta name="description" content="Get in touch with Baraka Awards Kenya. Contact us for event management inquiries, partnerships, nominations, or general support. Email: <?= ADMIN_EMAIL ?>">
+<meta name="keywords" content="contact Baraka Awards Kenya, Baraka Awards Kenya support, event management inquiry Kenya, Baraka Awards Kenya email, Nairobi events contact">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/contact.php">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Contact Us | Digitally Fit Awards">
-<meta itemprop="description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
+<meta itemprop="name" content="Contact Us | Baraka Awards Kenya">
+<meta itemprop="description" content="Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Contact Us | Digitally Fit Awards">
+<meta property="og:title" content="Contact Us | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/contact.php">
-<meta property="og:description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Contact Us | Digitally Fit Awards">
-<meta name="twitter:description" content="Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Contact Us | Baraka Awards Kenya">
+<meta name="twitter:description" content="Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -44,7 +44,7 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -54,7 +54,7 @@ include 'libs/App.php';
 
 <!-- JSON-LD: ContactPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Digitally Fit Awards","url":"<?= SITE_URL ?>/contact.php","description":"Get in touch with Digitally Fit Awards for event management inquiries, partnerships, or support."}
+{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Baraka Awards Kenya","url":"<?= SITE_URL ?>/contact.php","description":"Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -63,7 +63,7 @@ include 'libs/App.php';
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -243,7 +243,7 @@ include 'libs/App.php';
                         <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <div class="ci-label">Location</div>
-                            <div class="ci-value">Westlands Business Park, 8th Floor<br>Westlands, Nairobi, Kenya</div>
+                            <div class="ci-value">Southfield Mall, Mombasa Road<br>Nairobi, Kenya</div>
                         </div>
                     </div>
                     <div class="ci-row">

@@ -8,34 +8,34 @@ include 'libs/App.php';
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Pricing | Digitally Fit Awards — Transparent Event Platform Fees</title>
-<meta name="description" content="Simple, transparent pricing for Digitally Fit Awards. Pay only when you earn — 5% on ticketing and from 20% on voting. No setup fees, no monthly subscription.">
-<meta name="keywords" content="Digitally Fit Awards pricing, event ticketing fees Kenya, voting platform pricing, event management cost Kenya, affordable ticketing platform">
-<meta name="author" content="Digitally Fit Awards">
+<title>Pricing | Baraka Awards Kenya — Transparent Event Platform Fees</title>
+<meta name="description" content="Simple, transparent pricing for Baraka Awards Kenya. Pay only when you earn — 5% on ticketing and from 20% on voting. No setup fees, no monthly subscription.">
+<meta name="keywords" content="Baraka Awards Kenya pricing, event ticketing fees Kenya, voting platform pricing, event management cost Kenya, affordable ticketing platform">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/pricing">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Pricing | Digitally Fit Awards">
+<meta itemprop="name" content="Pricing | Baraka Awards Kenya">
 <meta itemprop="description" content="Simple pay-as-you-earn pricing for events, ticketing, and voting.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Pricing | Digitally Fit Awards — Transparent Event Platform Fees">
+<meta property="og:title" content="Pricing | Baraka Awards Kenya — Transparent Event Platform Fees">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/pricing">
-<meta property="og:description" content="Simple, transparent pricing for Digitally Fit Awards. Pay only when you earn — 5% on ticketing and from 20% on voting.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Simple, transparent pricing for Baraka Awards Kenya. Pay only when you earn — 5% on ticketing and from 20% on voting.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Pricing | Digitally Fit Awards — Transparent Event Platform Fees">
-<meta name="twitter:description" content="Simple, transparent pricing for Digitally Fit Awards. Pay only when you earn — 5% on ticketing and from 20% on voting.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Pricing | Baraka Awards Kenya — Transparent Event Platform Fees">
+<meta name="twitter:description" content="Simple, transparent pricing for Baraka Awards Kenya. Pay only when you earn — 5% on ticketing and from 20% on voting.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -44,7 +44,7 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -59,7 +59,7 @@ include 'libs/App.php';
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -428,7 +428,7 @@ include 'libs/App.php';
                             <li><span class="chk navy-chk"><i class="fas fa-check"></i></span>Automatic revenue split to your account</li>
                             <li><span class="chk navy-chk"><i class="fas fa-check"></i></span>Attendee check-in app</li>
                             <li><span class="chk navy-chk"><i class="fas fa-check"></i></span>Post-event attendance reports</li>
-                            <li><span class="chk navy-chk"><i class="fas fa-check"></i></span>Free event listing on Digitally Fit Awards</li>
+                            <li><span class="chk navy-chk"><i class="fas fa-check"></i></span>Free event listing on Baraka Awards Kenya</li>
                         </ul>
                         <a href="<?= ADMIN_URL ?>/register" target="_blank" rel="noopener"
                            class="theme-btn btn-style-two" style="text-align:center;display:block;">
@@ -587,7 +587,7 @@ include 'libs/App.php';
                         <i class="fas fa-chevron-down pfaq-icon"></i>
                     </div>
                     <div class="pfaq-a">
-                        None at all. Digitally Fit Awards is completely free to set up and there are no monthly charges. You only pay a percentage when payments are collected through the platform.
+                        None at all. Baraka Awards Kenya is completely free to set up and there are no monthly charges. You only pay a percentage when payments are collected through the platform.
                     </div>
                 </div>
 

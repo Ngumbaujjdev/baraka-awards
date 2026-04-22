@@ -23,8 +23,8 @@ $_navUpcoming = array_slice(array_values($_navUpcoming), 0, 5);
                 <div class="logo">
                     <a href="<?php echo SITE_URL; ?>/">
                         <img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo.svg"
-                             alt="Digitally Fit Awards" title="Digitally Fit Awards"
-                             style="height:70px; width:auto;">
+                             alt="Baraka Awards Kenya" title="Baraka Awards Kenya"
+                             style="height:70px; width:auto; display:block;">
                     </a>
                 </div>
             </div>
@@ -126,7 +126,7 @@ $_navUpcoming = array_slice(array_values($_navUpcoming), 0, 5);
 
                             <li class="dropdown"><a href="#">About</a>
                                 <ul>
-                                    <li><a href="<?php echo SITE_URL; ?>/about">About DFA</a></li>
+                                    <li><a href="<?php echo SITE_URL; ?>/about">About Baraka Awards</a></li>
                                     <li><a href="<?php echo SITE_URL; ?>/faq">FAQ</a></li>
                                     <li><a href="<?php echo SITE_URL; ?>/contact">Contact</a></li>
                                 </ul>

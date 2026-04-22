@@ -1,7 +1,7 @@
 <?php
 include 'config/config.php';
 include 'libs/App.php';
-$galaAbout     = tuqio_api('/api/public/events/dfa-gala-2026');
+$galaAbout     = tuqio_api('/api/public/events/baraka-awards-2026');
 $aboutSponsors = $galaAbout['sponsors'] ?? [];
 ?>
 <!DOCTYPE html>
@@ -10,34 +10,34 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>About Digitally Fit Awards | East Africa's Digital Excellence Awards</title>
-<meta name="description" content="Learn about Digitally Fit Awards — East Africa's premier digital excellence awards ceremony, celebrating outstanding artists, producers, directors, and photographers.">
-<meta name="keywords" content="about Digitally Fit Awards, digital excellence awards East Africa, Digitally Fit Awards Gala Nairobi">
-<meta name="author" content="Digitally Fit Awards">
+<title>About Baraka Awards Kenya | East Africa's Entertainment & Cultural Awards</title>
+<meta name="description" content="Learn about Baraka Awards Kenya — Kenya's premier entertainment and cultural awards ceremony, celebrating outstanding artists, producers, directors, and photographers.">
+<meta name="keywords" content="about Baraka Awards Kenya, entertainment and cultural awards East Africa, Baraka Awards Kenya Gala Nairobi">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://digitallyfitawards.com/about">
+<link rel="canonical" href="https://barakaawards.tuqiohub.africa/about">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="About Digitally Fit Awards">
-<meta itemprop="description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
+<meta itemprop="name" content="About Baraka Awards Kenya">
+<meta itemprop="description" content="Kenya's premier entertainment and cultural awards — celebrating outstanding brands, individuals, and organisations in the region's entertainment landscape.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="About Digitally Fit Awards | East Africa's Digital Excellence Awards">
+<meta property="og:title" content="About Baraka Awards Kenya | East Africa's Entertainment & Cultural Awards">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitallyfitawards.com/about">
-<meta property="og:description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:url" content="https://barakaawards.tuqiohub.africa/about">
+<meta property="og:description" content="Kenya's premier entertainment and cultural awards — celebrating outstanding brands, individuals, and organisations in the region's entertainment landscape.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="About Digitally Fit Awards | East Africa's Digital Excellence Awards">
-<meta name="twitter:description" content="East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="About Baraka Awards Kenya | East Africa's Entertainment & Cultural Awards">
+<meta name="twitter:description" content="Kenya's premier entertainment and cultural awards — celebrating outstanding brands, individuals, and organisations in the region's entertainment landscape.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -46,17 +46,17 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://digitallyfitawards.com","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://digitallyfitawards.com/"},{"@type":"ListItem","position":2,"name":"About","item":"https://digitallyfitawards.com/about"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://barakaawards.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"About","item":"https://barakaawards.tuqiohub.africa/about"}]}
 </script>
 
 <!-- JSON-LD: AboutPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"AboutPage","name":"About Digitally Fit Awards","url":"https://digitallyfitawards.com/about","description":"East Africa's premier digital excellence awards — celebrating outstanding brands, individuals, and organisations in the region's digital landscape."}
+{"@context":"https://schema.org","@type":"AboutPage","name":"About Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa/about","description":"Kenya's premier entertainment and cultural awards — celebrating outstanding brands, individuals, and organisations in the region's entertainment landscape."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -65,7 +65,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -212,7 +212,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>About Digitally Fit Awards</h1>
+            <h1>About Baraka Awards Kenya</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>About</li>
@@ -223,14 +223,14 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- ── Mission ─────────────────────────────────────────────── -->
 <div class="about-split wow fadeIn">
-    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/event-poster.jpeg);"></div>
+    <div class="split-img" style="background-image:url(<?= SITE_URL ?>/assets/images/digitaly-fit-gallery/about-nairobi.jpeg);"></div>
     <div class="split-content">
         <div>
             <div class="split-label">Who We Are</div>
-            <h2 class="split-heading">Celebrating Digital Excellence across East Africa</h2>
-            <p class="split-text">The Digitally Fit Awards (DFA) is East Africa's premier recognition platform for digital pioneers. We celebrate the brands, individuals, and organizations that have transformed the regional digital landscape through innovation and impactful online presence.</p>
-            <p class="split-text">Founded on the principle that digital "fitness" is the gold standard for modern success, DFA provides a community-driven stage where excellence is recognized through public voting and expert evaluation.</p>
-            <p class="split-text">Our events bring together the brightest minds in tech, marketing, and business to network and celebrate the power of digital transformation. Organised by Oracom Group and powered by KEOnline.</p>
+            <h2 class="split-heading">Celebrating Talent, Culture &amp; Excellence in Kenya</h2>
+            <p class="split-text">The Baraka Awards Kenya is a community-driven awards platform that recognises and celebrates outstanding talent across humanitarian service, entertainment, events, and media. We believe every champion deserves a stage — and the fans decide the winner.</p>
+            <p class="split-text">Born from a passion for uplifting Kenyan creatives and changemakers, the Baraka Awards brings artists, producers, MCs, DJs, photographers, videographers, and humanitarian leaders under one roof — to be recognised, celebrated, and rewarded.</p>
+            <p class="split-text">Our inaugural 2026 gala on 30th May at Southfield Mall, Mombasa Road, Nairobi, marks the beginning of an annual tradition of excellence and community celebration.</p>
             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-one" style="margin-top:8px;">
                 <span class="btn-title">View All Awards →</span>
             </a>
@@ -244,10 +244,10 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
         <div class="row">
             <?php
             $statsArr = [
-                ['1st',      'Inaugural Edition',  'fa-trophy'],
-                ['10+',      'Award Categories',   'fa-award'],
-                ['Nairobi',  'Host City',           'fa-map-marker-alt'],
-                ['2026',     'Inaugural Year',      'fa-calendar-alt'],
+                ['1st',   'Inaugural Edition',  'fa-trophy'],
+                ['21',    'Award Categories',   'fa-award'],
+                ['89',    'Nominated Talents',  'fa-users'],
+                ['30 May','Gala Night 2026',    'fa-calendar-alt'],
             ];
             foreach ($statsArr as $idx => [$n,$l,$i]): ?>
             <div class="col-md-3 col-sm-6 counter-col wow zoomIn" data-wow-delay="<?= $idx * 150 ?>ms">
@@ -266,28 +266,28 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
         <div class="text-center mb-5">
             <span class="pre-tag">Your Journey</span>
             <h2 class="section-heading">How It Works</h2>
-            <p class="section-sub">A simple three-step process to digital recognition.</p>
+            <p class="section-sub">A simple three-step journey from nomination to the gala stage.</p>
         </div>
         <div class="row align-items-start">
             <div class="col-md-4 wow fadeInUp">
                 <div class="step-wrap">
                     <div class="step-num">1</div>
                     <h5>Nominations</h5>
-                    <p>Brands and individuals are nominated across various categories for their outstanding digital footprint and impact.</p>
+                    <p>Artists, producers, MCs, DJs, photographers, and humanitarians are nominated across 21 categories by the organising team and the public.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.15s">
                 <div class="step-wrap">
                     <div class="step-num">2</div>
-                    <h5>Voting Phase</h5>
-                    <p>The shortlisted nominees enter a public voting phase where their fans and customers cast their votes through our secure platform.</p>
+                    <h5>Public Voting</h5>
+                    <p>Fans cast their votes for their favourite nominees from 24th April to 24th May 2026 through our secure online platform. Every vote counts.</p>
                 </div>
             </div>
             <div class="col-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="step-wrap">
                     <div class="step-num">3</div>
                     <h5>Gala Night</h5>
-                    <p>Winners are announced at a star-studded gala ceremony, celebrating the best of digital fitness in the region.</p>
+                    <p>Winners are announced live on 30th May 2026 at Southfield Mall, Mombasa Road — a night of glam, music, and celebration of Kenya's finest talent.</p>
                 </div>
             </div>
         </div>
@@ -342,13 +342,13 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
             <div class="col-lg-6 mb-5 mb-lg-0 wow fadeInLeft">
                 <span class="pre-tag">Our Values</span>
-                <h2 class="section-heading mb-4">What DFA Stands For</h2>
+                <h2 class="section-heading mb-4">What Baraka Awards Stands For</h2>
                 <?php
                 $values = [
-                    ['fa-shield-alt', 'Integrity',     'Every vote, nomination, and result is handled with full transparency. DFA stands for honest, verifiable awards.'],
-                    ['fa-eye',        'Transparency',  'Public voting, real-time counts, and open nomination processes ensure every participant can trust the outcome.'],
-                    ['fa-star',       'Excellence',    'DFA celebrates the very best — individuals and organisations who have set the bar for digital excellence in East Africa.'],
-                    ['fa-heart',      'Community',     'We are built by and for the East African digital community — uniting innovators, creators, and supporters around a shared passion for digital excellence.'],
+                    ['fa-shield-alt', 'Integrity',     'Every vote, nomination, and result is handled with full transparency. Baraka Awards stands for honest, verifiable recognition.'],
+                    ['fa-eye',        'Transparency',  'Public voting, real-time vote counts, and open nomination processes ensure every participant and fan can trust the outcome.'],
+                    ['fa-star',       'Excellence',    'We celebrate the very best — artists, producers, MCs, DJs, humanitarians, and media personalities who have raised the bar in Kenya.'],
+                    ['fa-heart',      'Community',     'We are built by and for the Kenyan creative community — uniting performers, fans, and supporters around a shared love for culture and art.'],
                 ];
                 foreach ($values as [$icon,$title,$desc]): ?>
                 <div class="value-item">
@@ -364,10 +364,10 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
             <div class="col-lg-6 wow fadeInRight">
                 <div class="cta-box">
                     <i class="fas fa-microphone mb-4" style="font-size:3rem;opacity:.8;display:block;"></i>
-                    <h3>Nominate a Digital Achiever Today</h3>
-                    <p>Know someone who deserves recognition for digital excellence? Nominations are open. Submit your nomination now.</p>
-                    <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="theme-btn btn-style-two cta-box-btn">
-                        <span class="btn-title">Submit a Nomination →</span>
+                    <h3>Vote for Your Favourite Today</h3>
+                    <p>Voting is open from 24th April to 24th May 2026. Cast your votes for Kenya's finest artists, MCs, DJs, humanitarians and more — every vote makes a difference.</p>
+                    <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two cta-box-btn">
+                        <span class="btn-title">Vote Now →</span>
                     </a>
                 </div>
             </div>

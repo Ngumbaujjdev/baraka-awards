@@ -2,9 +2,9 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-// ── Fetch all DFA events for switcher ───────────────────
-$_dfaEvsList = tuqio_api('/api/public/events?client=digitally-fit-awards');
-$_allDfaEvs  = $_dfaEvsList['data'] ?? [];
+// ── Fetch all Baraka events for switcher ───────────────────
+$_barakaEvsList = tuqio_api('/api/public/events?client=baraka-awards');
+$_allDfaEvs  = $_barakaEvsList['data'] ?? [];
 usort($_allDfaEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
 // Default: first event with banner_image, else latest
 $_defaultNomEv = null;
@@ -24,7 +24,7 @@ $now          = time();
 $votingCloses = !empty($event['voting_closes_at']) ? strtotime($event['voting_closes_at']) : 0;
 $isVotingOpen = !empty($event['voting_is_open']); // use backend-calculated flag
 $voteUrl      = API_BASE . '/events/' . ($event['slug'] ?? $activeSlug);
-$eventName    = $event['name'] ?? 'Digitally Fit Awards';
+$eventName    = $event['name'] ?? 'Baraka Awards Kenya';
 
 $voteBundleUrl = SITE_URL . '/vote-bundle.php?event=' . urlencode($activeSlug ?: '');
 
@@ -52,16 +52,16 @@ $globalIdx = 0;
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?> | Digitally Fit Awards</title>
-<meta name="description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Browse all categories and vote for your favourites on Digitally Fit Awards.">
-<meta name="keywords" content="nominees Kenya, finalists awards Kenya, vote nominees, <?= htmlspecialchars($eventName) ?>, Digitally Fit Awards voting">
-<meta name="author" content="Digitally Fit Awards">
+<title>Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya</title>
+<meta name="description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Browse all categories and vote for your favourites on Baraka Awards Kenya.">
+<meta name="keywords" content="nominees Kenya, finalists awards Kenya, vote nominees, <?= htmlspecialchars($eventName) ?>, Baraka Awards Kenya voting">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/nominees.php">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
-<meta itemprop="description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote for your favourites on Digitally Fit Awards.">
+<meta itemprop="description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote for your favourites on Baraka Awards Kenya.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
@@ -72,14 +72,14 @@ $globalIdx = 0;
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/nominees.php">
-<meta property="og:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Digitally Fit Awards.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Baraka Awards Kenya.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
+<meta name="twitter:site" content="@barakaawards">
 <meta name="twitter:title" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
-<meta name="twitter:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Digitally Fit Awards.">
+<meta name="twitter:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Baraka Awards Kenya.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -88,7 +88,7 @@ $globalIdx = 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"East Africa's premier digital excellence awards platform — organised by KEOnline.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -98,7 +98,7 @@ $globalIdx = 0;
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Digitally Fit Awards","url":"<?= SITE_URL ?>/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Digitally Fit Awards."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -110,7 +110,7 @@ $globalIdx = 0;
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="<?= SITE_URL ?>/assets/images/favicon/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>

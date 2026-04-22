@@ -122,7 +122,7 @@ $ordinals = ['','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th'];
 
 <?php
 $seoTitle = htmlspecialchars($event['name'] ?? 'Event');
-$seoDesc  = htmlspecialchars(strip_tags($event['tagline'] ?? $event['short_description'] ?? 'Discover event details, schedule, tickets, nominees and more on Digitally Fit Awards.'));
+$seoDesc  = htmlspecialchars(strip_tags($event['tagline'] ?? $event['short_description'] ?? 'Discover event details, schedule, tickets, nominees and more on Baraka Awards Kenya.'));
 $seoDesc  = mb_strimwidth($seoDesc, 0, 160, '...');
 $seoSlug  = urlencode($slug);
 $seoImg   = !empty($event['banner_image']) ? API_STORAGE . $event['banner_image'] : OG_IMAGE;
@@ -130,20 +130,20 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
 ?>
 
 <!-- SEO -->
-<title><?= $seoTitle ?> | Digitally Fit Awards</title>
+<title><?= $seoTitle ?> | Baraka Awards Kenya</title>
 <meta name="description" content="<?= $seoDesc ?>">
-<meta name="keywords" content="<?= $seoTitle ?>, Kenya event, Digitally Fit Awards, event schedule, tickets Kenya, nominations">
-<meta name="author" content="Digitally Fit Awards">
+<meta name="keywords" content="<?= $seoTitle ?>, Kenya event, Baraka Awards Kenya, event schedule, tickets Kenya, nominations">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= $seoUrl ?>">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="<?= $seoTitle ?> | Digitally Fit Awards">
+<meta itemprop="name" content="<?= $seoTitle ?> | Baraka Awards Kenya">
 <meta itemprop="description" content="<?= $seoDesc ?>">
 <meta itemprop="image" content="<?= $seoImg ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="<?= $seoTitle ?> | Digitally Fit Awards">
+<meta property="og:title" content="<?= $seoTitle ?> | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= $seoImg ?>">
 <meta property="og:image:type" content="image/jpeg">
@@ -151,12 +151,12 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= $seoUrl ?>">
 <meta property="og:description" content="<?= $seoDesc ?>">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="<?= $seoTitle ?> | Digitally Fit Awards">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="<?= $seoTitle ?> | Baraka Awards Kenya">
 <meta name="twitter:description" content="<?= $seoDesc ?>">
 <meta name="twitter:image" content="<?= $seoImg ?>">
 
@@ -166,7 +166,7 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -176,7 +176,7 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
 
 <!-- JSON-LD: Event -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Event","name":"<?= addslashes($event['name'] ?? '') ?>","url":"<?= $seoUrl ?>","description":"<?= addslashes($seoDesc) ?>","image":"<?= $seoImg ?>","startDate":"<?= $event['start_date'] ?? '' ?>","endDate":"<?= $event['end_date'] ?? $event['start_date'] ?? '' ?>","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"<?= addslashes($event['venue_name'] ?? 'Nairobi, Kenya') ?>","address":{"@type":"PostalAddress","addressLocality":"<?= addslashes($event['venue_city'] ?? 'Nairobi') ?>","addressCountry":"KE"}},"organizer":{"@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>"}}
+{"@context":"https://schema.org","@type":"Event","name":"<?= addslashes($event['name'] ?? '') ?>","url":"<?= $seoUrl ?>","description":"<?= addslashes($seoDesc) ?>","image":"<?= $seoImg ?>","startDate":"<?= $event['start_date'] ?? '' ?>","endDate":"<?= $event['end_date'] ?? $event['start_date'] ?? '' ?>","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"<?= addslashes($event['venue_name'] ?? 'Nairobi, Kenya') ?>","address":{"@type":"PostalAddress","addressLocality":"<?= addslashes($event['venue_city'] ?? 'Nairobi') ?>","addressCountry":"KE"}},"organizer":{"@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -186,7 +186,7 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
@@ -371,7 +371,7 @@ $seoUrl   = SITE_URL . '/event-detail.php?slug=' . $seoSlug;
                     <img src="<?= htmlspecialchars($banner) ?>"
                          alt="<?= htmlspecialchars($event['name']) ?>"
                          style="width:100%;max-height:420px;object-fit:cover;display:block;"
-                         onerror="this.outerHTML='<div style=\'width:100%;height:420px;border-radius:12px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-ticket-alt\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
+                         onerror="this.outerHTML='<div style=\'width:100%;height:420px;border-radius:12px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-ticket-alt\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Baraka Awards Kenya</span></div>'">
                     <div style="position:absolute;top:16px;left:16px;">
                         <span style="background:<?= $phaseBadge[1] ?>;color:#fff;font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.8px;"><?= $phaseBadge[0] ?></span>
                     </div>

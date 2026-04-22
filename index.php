@@ -5,8 +5,8 @@ include 'libs/App.php';
 $blogResp  = tuqio_api('/api/public/blog');
 $blogPosts = array_slice($blogResp['data'] ?? [], 0, 3);
 
-// ── All DFA events — driven by client param, no hardcoding ──────────
-$_evListResp  = tuqio_api('/api/public/events?client=digitally-fit-awards');
+// ── All Baraka events — driven by client param, no hardcoding ──────────
+$_evListResp  = tuqio_api('/api/public/events?client=baraka-awards');
 $_allDfaEvs   = $_evListResp['data'] ?? [];
 // Sort by start_date ascending (soonest first)
 usort($_allDfaEvs, fn($a,$b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
@@ -31,7 +31,7 @@ $ticketTypes  = $galaResp['ticket_types'] ?? [];
 $_ticketsAvailable = count(array_filter($ticketTypes, fn($t) => !empty($t['is_available']))) > 0;
 
 // ── Per-event nominees data for category tabs ────────────────────────
-$dfaEventsData = [];
+$barakaEventsData = [];
 $allCategories = [];   // kept for spotlight hero nomination-date display
 foreach ($_allDfaEvs as $_ev) {
     $_slug = $_ev['slug'] ?? '';
@@ -70,7 +70,7 @@ foreach ($_allDfaEvs as $_ev) {
     $_promoted   = count(array_filter($_cats, fn($c) => ($c['nomination_status'] ?? '') === 'promoted'));
     $_collecting = count(array_filter($_cats, fn($c) => ($c['nomination_status'] ?? '') === 'collecting'));
 
-    $dfaEventsData[] = [
+    $barakaEventsData[] = [
         'slug'             => $_slug,
         'name'             => $_ev['name'] ?? '',
         'tagline'          => $_ev['tagline'] ?? '',
@@ -87,7 +87,7 @@ foreach ($_allDfaEvs as $_ev) {
     // Keep allCategories from the spotlight event for hero date display
     if ($_slug === $featuredSlug) { $allCategories = $_cats; }
 }
-$_dfaEventsJson = json_encode($dfaEventsData);
+$_barakaEventsJson = json_encode($barakaEventsData);
 
 // Spotlight phase helpers (used by section 2)
 $_galaPhase  = $galaEvent['current_phase'] ?? '';
@@ -101,34 +101,34 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Digitally Fit Awards — Recognising Online Excellence</title>
-<meta name="description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact. Celebrating digital excellence across Business of the Year, Person of the Year, and more.">
-<meta name="keywords" content="Digitally Fit Awards, digital excellence awards, online presence awards, business of the year, person of the year, digital impact awards Kenya, online awards 2026, social media awards, website awards Africa">
-<meta name="author" content="Digitally Fit Awards">
+<title>Baraka Awards Kenya — Recognising Online Excellence</title>
+<meta name="description" content="The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact. Celebrating entertainment excellence across Business of the Year, Person of the Year, and more.">
+<meta name="keywords" content="Baraka Awards Kenya, entertainment and cultural awards, online presence awards, business of the year, person of the year, community impact awards Kenya, online awards 2026, social media awards, website awards Africa">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Digitally Fit Awards">
-<meta itemprop="description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
+<meta itemprop="name" content="Baraka Awards Kenya">
+<meta itemprop="description" content="The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Digitally Fit Awards — Recognising Online Excellence">
+<meta property="og:title" content="Baraka Awards Kenya — Recognising Online Excellence">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/">
-<meta property="og:description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Digitally Fit Awards — Recognising Online Excellence">
-<meta name="twitter:description" content="The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Baraka Awards Kenya — Recognising Online Excellence">
+<meta name="twitter:description" content="The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -137,12 +137,12 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: WebSite -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","description":"The Digitally Fit Awards recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","potentialAction":{"@type":"SearchAction","target":"<?= SITE_URL ?>/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"The Baraka Awards Kenya recognises and rewards companies, businesses, individuals, icons, experts, organisations and brands that have a good online presence and create an online impact.","potentialAction":{"@type":"SearchAction","target":"<?= SITE_URL ?>/events.php?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -151,7 +151,7 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link href="<?= SITE_URL ?>/assets/css/color-switcher-design.css" rel="stylesheet">
@@ -177,7 +177,7 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
         <div class="banner-carousel owl-carousel owl-theme">
 
-            <!-- Slide 1: Digitally Fit Awards 2026 Gala -->
+            <!-- Slide 1: Baraka Awards Kenya 2026 Gala -->
 
             <div class="slide-item slide-bg-1">
 
@@ -185,11 +185,11 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
                     <div class="content-box">
 
-                        <span class="title animate-1">Digitally Fit Awards 2026 — Nairobi</span>
+                        <span class="title animate-1">Baraka Awards Kenya 2026 — Southfield Mall, Mombasa Road</span>
 
-                        <h2 class="animate-2">Celebrating Digital <br>Excellence in East Africa</h2>
+                        <h2 class="animate-2">Celebrating Talent, <br>Culture &amp; Excellence</h2>
 
-                        <div class="text animate-3">Digitally Fit Awards — recognising outstanding achievements across 300+ digital categories, organised by KEOnline</div>
+                        <div class="text animate-3">Baraka Awards Kenya — honouring the best in entertainment, media, events &amp; humanitarian service across 21 award categories</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">View Nominees</span></a>
@@ -212,9 +212,9 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
                         <span class="title animate-1">Nominations Open</span>
 
-                        <h2 class="animate-2">Nominate a <br>Digital Champion</h2>
+                        <h2 class="animate-2">Your Vote <br>Decides the Winner</h2>
 
-                        <div class="text animate-3">Nominations are open. 10 categories celebrating Kenya's digital leaders — nominate now, free of charge</div>
+                        <div class="text animate-3">Voting is open. 21 categories celebrating Kenya's finest artists, MCs, DJs, producers, photographers &amp; more — vote now</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominate" class="theme-btn btn-style-two"><span class="btn-title">Nominate Now</span></a>
@@ -239,7 +239,7 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
                         <h2 class="animate-2">The Stage is Set. <br>The Vote is Yours.</h2>
 
-                        <div class="text animate-3">Voting opens October 20, 2026. December 5 — Digitally Fit Awards Gala Night, Villa Rosa Kempinski, Nairobi. Get your tickets now</div>
+                        <div class="text animate-3">30th May 2026 — Baraka Awards Kenya Gala Night at Southfield Mall, Mombasa Road. Tickets from KES 500. Book yours now</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">Vote Now</span></a>
@@ -285,7 +285,7 @@ $_spotCatCount = count($allCategories);
     <div class="auto-container">
         <div class="sec-title text-center">
             <span class="sub-title">The Flagship Event</span>
-            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards') ?></h2>
+            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Baraka Awards Kenya') ?></h2>
             <span class="divider"></span>
         </div>
         <div class="row align-items-center" style="margin-top:20px;">
@@ -321,11 +321,11 @@ $_spotCatCount = count($allCategories);
                 <?php if ($_venueStr || $_galaDate): ?>
                 <span class="sub-title" style="font-size:.78rem;color:#be9b3f;font-weight:700;text-transform:uppercase;letter-spacing:2px;"><?= htmlspecialchars(implode(' · ', array_filter([$_venueStr, $_galaDate]))) ?></span>
                 <?php endif; ?>
-                <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Digitally Fit Awards') ?></h3>
+                <h3 style="font-size:2rem;font-weight:800;color:#0d0d0d;margin:10px 0;"><?= htmlspecialchars($galaEvent['name'] ?? 'Baraka Awards Kenya') ?></h3>
                 <?php if (!empty($galaEvent['tagline'])): ?>
                 <p style="font-size:1.05rem;color:#be9b3f;font-style:italic;margin-bottom:14px;"><?= htmlspecialchars($galaEvent['tagline']) ?></p>
                 <?php endif; ?>
-                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating digital excellence across East Africa.', 0, 220)) ?>...</p>
+                <p style="color:#555;line-height:1.8;margin-bottom:20px;"><?= htmlspecialchars(mb_substr($galaEvent['short_description'] ?? 'An extraordinary evening celebrating cultural and entertainment excellence in Kenya.', 0, 220)) ?>...</p>
                 <!-- Info badges -->
                 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
                     <?php if ($_spotCatCount > 0): ?>
@@ -386,7 +386,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
             <span class="sub-title">More Awards</span>
             <h2 style="font-size:2rem;">Also Open Now</h2>
             <span class="divider"></span>
-            <p style="color:#777;max-width:480px;margin:10px auto 0;font-size:.92rem;">More Digitally Fit Awards are live — cast your vote or submit a nomination.</p>
+            <p style="color:#777;max-width:480px;margin:10px auto 0;font-size:.92rem;">More Baraka Awards Kenya are live — cast your vote or submit a nomination.</p>
         </div>
 
         <div class="row justify-content-center">
@@ -406,7 +406,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                 : '';
             $_oeImgUrl    = $_oeBannerUrl ?: $_oeThumbUrl;
             // Stats from pre-built nominees data
-            $_oeEntry     = array_values(array_filter($dfaEventsData, fn($d) => $d['slug'] === $_oeSlug))[0] ?? [];
+            $_oeEntry     = array_values(array_filter($barakaEventsData, fn($d) => $d['slug'] === $_oeSlug))[0] ?? [];
             $_oePromoted  = $_oeEntry['promoted_count']   ?? 0;
             $_oeTotalCats = $_oeEntry['total_cats']        ?? 0;
             $_oeCollect   = $_oeEntry['collecting_count']  ?? 0;
@@ -534,7 +534,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
     <div class="auto-container">
 
         <!-- Event tab switcher -->
-        <div id="dfaEventTabs" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px;"></div>
+        <div id="barakaEventTabs" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px;"></div>
 
         <div class="sec-title text-center" style="margin-bottom:24px;">
             <span class="divider" style="margin-bottom:0;"></span>
@@ -575,7 +575,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <script>
 (function(){
     var SITE     = '<?= SITE_URL ?>';
-    var EVENTS   = <?= $_dfaEventsJson ?>;
+    var EVENTS   = <?= $_barakaEventsJson ?>;
     var PAGE_SIZE= 6;
 
     // Default to first voting event, else first event
@@ -607,7 +607,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 
     // ── Render event tabs ───────────────────────────────────────────
     function renderTabs() {
-        var el = document.getElementById('dfaEventTabs');
+        var el = document.getElementById('barakaEventTabs');
         if (!el) return;
         var html = '';
         EVENTS.forEach(function(e, i) {
@@ -812,7 +812,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 
     // ── Event delegation ─────────────────────────────────────────────
     document.addEventListener('click', function(e) {
-        var btn = e.target.closest('#dfaEventTabs button');
+        var btn = e.target.closest('#barakaEventTabs button');
         if (btn) { switchEvent(parseInt(btn.getAttribute('data-tab'), 10)||0); return; }
 
         btn = e.target.closest('#catGroupPills button');
@@ -849,10 +849,10 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <section style="padding:80px 0;background:#fff;">
     <div class="auto-container">
         <div class="sec-title text-center" style="margin-bottom:40px;">
-            <span class="sub-title">Digitally Fit Awards Gala 2026 &mdash; Nairobi</span>
+            <span class="sub-title">Baraka Awards Kenya Gala 2026 &mdash; Nairobi</span>
             <h2>Secure Your Seat</h2>
             <span class="divider"></span>
-            <p style="color:#666;max-width:520px;margin:10px auto 0;">Join us for an extraordinary evening celebrating digital excellence. Choose a ticket that fits your experience.</p>
+            <p style="color:#666;max-width:520px;margin:10px auto 0;">Join us for an extraordinary evening celebrating entertainment excellence. Choose a ticket that fits your experience.</p>
         </div>
         <div class="row justify-content-center">
         <?php foreach (array_slice($ticketTypes, 0, 3) as $tkt):
@@ -940,7 +940,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <?php endif; ?>
 
 
-<!-- ══ 5. HOW DFA WORKS ══════════════════════════════ -->
+<!-- ══ 5. HOW BARAKA AWARDS WORKS ══════════════════════════════ -->
 <section class="feature-section">
     <div class="anim-icons full-width">
         <span class="icon icon-circle-1 wow zoomIn"></span>
@@ -949,7 +949,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
     <div class="auto-container">
         <div class="sec-title text-center">
             <span class="sub-title">Simple Steps</span>
-            <h2>How Digitally Fit Awards Works</h2>
+            <h2>How Baraka Awards Kenya Works</h2>
             <span class="divider"></span>
         </div>
         <div class="row">
@@ -959,7 +959,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                         <div class="icon"><span class="flaticon-calendar-1"></span></div>
                     </div>
                     <h4>1. Browse the Nominees</h4>
-                    <p>Explore all categories and the talented artists shortlisted for Digitally Fit Awards 2026. Find your favourites across 9 award categories.</p>
+                    <p>Explore all categories and the talented artists shortlisted for Baraka Awards Kenya 2026. Find your favourites across 9 award categories.</p>
                     <a href="<?= SITE_URL ?>/nominees" class="read-more">View Nominees <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -979,7 +979,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                         <div class="icon"><span class="flaticon-trophy-1"></span></div>
                     </div>
                     <h4>3. Celebrate the Winners</h4>
-                    <p>Join us at the Digitally Fit Awards Gala on December 5, 2026 at the Villa Rosa Kempinski Nairobi — a landmark celebration of innovation, creativity, and digital excellence in East Africa.</p>
+                    <p>Join us at the Baraka Awards Kenya Gala on 30th May 2026 at the Southfield Mall, Mombasa Road — a landmark celebration of innovation, creativity, and cultural and entertainment excellence in Kenya.</p>
                     <a href="<?= SITE_URL ?>/tickets" class="read-more">Get Tickets <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -995,7 +995,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <section class="schedule-section" style="background:#f9fafb;padding:80px 0;">
     <div class="auto-container">
         <div class="sec-title text-center">
-            <span class="sub-title">December 5, 2026 &mdash; Villa Rosa Kempinski, Nairobi</span>
+            <span class="sub-title">30th May 2026 &mdash; Southfield Mall, Mombasa Road, Nairobi</span>
             <h2>Gala Evening Programme</h2>
             <span class="divider"></span>
         </div>
@@ -1068,7 +1068,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
     <div class="auto-container">
         <div class="sec-title">
             <span class="sub-title">News &amp; Insights</span>
-            <h2>DFA News &amp; Updates</h2>
+            <h2>Baraka Awards News &amp; Updates</h2>
             <span class="divider"></span>
         </div>
         <div class="row">
@@ -1097,9 +1097,9 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                     <div class="lower-content">
                         <div class="author">
                             <figure class="thumb">
-                                <img src="<?= SITE_URL ?>/assets/images/logo/dfa-logo.svg" alt="Digitally Fit Awards" style="background:#be9b3f; object-fit:contain; border-radius:50%; padding:2px;">
+                                <img src="<?= SITE_URL ?>/assets/images/logo/dfa-logo.svg" alt="Baraka Awards Kenya" style="background:#be9b3f; object-fit:contain; border-radius:50%; padding:2px;">
                             </figure>
-                            <h5 class="name"><?= htmlspecialchars($post['author']['name'] ?? 'Digitally Fit Awards') ?></h5>
+                            <h5 class="name">Baraka Awards</h5>
                         </div>
                         <h4><a href="<?= SITE_URL ?>/blog-single?slug=<?= urlencode($post['slug']) ?>"><?= htmlspecialchars(mb_strimwidth($post['title'], 0, 65, '…')) ?></a></h4>
                         <?php if (!empty($post['excerpt'])): ?>
@@ -1128,10 +1128,10 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <section style="padding:70px 0 80px;background:#fff;border-top:1px solid #f0f0f0;">
     <div class="auto-container">
         <div class="sec-title text-center" style="margin-bottom:10px;">
-            <span class="sub-title">Digitally Fit Awards Gala 2026</span>
+            <span class="sub-title">Baraka Awards Kenya Gala 2026</span>
             <h2>Sponsors &amp; Partners</h2>
             <span class="divider"></span>
-            <p style="color:#777;max-width:520px;margin:10px auto 0;">We are grateful to the organisations making Digitally Fit Awards 2026 possible.</p>
+            <p style="color:#777;max-width:520px;margin:10px auto 0;">We are grateful to the organisations making Baraka Awards Kenya 2026 possible.</p>
         </div>
 
         <!-- Carousel strip -->

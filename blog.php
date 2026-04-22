@@ -1,23 +1,50 @@
 <?php
 include 'config/config.php';
 include 'libs/App.php';
+include 'data/static-articles.php'; // $STATIC_ARTICLES
 
 $page      = (int)($_GET['page'] ?? 1);
 $search    = trim($_GET['search'] ?? '');
 $catFilter = trim($_GET['category'] ?? '');
 
 $queryParams = [
+    'client'   => CLIENT_SLUG,
     'page'     => $page,
     'search'   => $search,
-    'category' => $catFilter
+    'category' => $catFilter,
 ];
 $queryString = http_build_query(array_filter($queryParams));
 
-$resp     = tuqio_api('/api/public/blog?' . $queryString);
+$resp        = tuqio_api('/api/public/blog?' . $queryString);
 $posts       = $resp['data'] ?? [];
 $currentPage = $resp['current_page'] ?? 1;
 $lastPage    = $resp['last_page'] ?? 1;
 $totalItems  = $resp['total'] ?? 0;
+
+// Fall back to static articles when API has nothing
+if (empty($posts)) {
+    $pool = $STATIC_ARTICLES;
+
+    // apply search filter
+    if ($search !== '') {
+        $pool = array_values(array_filter($pool, fn($a) =>
+            stripos($a['title'], $search) !== false ||
+            stripos($a['excerpt'], $search) !== false
+        ));
+    }
+    // apply category filter
+    if ($catFilter !== '') {
+        $pool = array_values(array_filter($pool, fn($a) =>
+            isset($a['category']['name']) && stripos($a['category']['name'], $catFilter) !== false
+        ));
+    }
+
+    $totalItems  = count($pool);
+    $perPage     = 9;
+    $lastPage    = max(1, (int)ceil($totalItems / $perPage));
+    $currentPage = max(1, min($page, $lastPage));
+    $posts       = array_slice($pool, ($currentPage - 1) * $perPage, $perPage);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,34 +52,34 @@ $totalItems  = $resp['total'] ?? 0;
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Articles &amp; News | Digitally Fit Awards</title>
-<meta name="description" content="Stay up to date with the latest news, articles, and event updates from Digitally Fit Awards — Kenya's premier event management platform.">
-<meta name="keywords" content="Digitally Fit Awards blog, Kenya events news, awards articles Kenya, event updates Nairobi, Digitally Fit Awards articles">
-<meta name="author" content="Digitally Fit Awards">
+<title>Articles &amp; News | Baraka Awards Kenya</title>
+<meta name="description" content="Stay up to date with the latest news, articles, and event updates from Baraka Awards Kenya — Kenya's premier event management platform.">
+<meta name="keywords" content="Baraka Awards Kenya blog, Kenya events news, awards articles Kenya, event updates Nairobi, Baraka Awards Kenya articles">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/blog.php">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Articles & News | Digitally Fit Awards">
-<meta itemprop="description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
+<meta itemprop="name" content="Articles & News | Baraka Awards Kenya">
+<meta itemprop="description" content="Latest news, articles, and event updates from Baraka Awards Kenya.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Articles &amp; News | Digitally Fit Awards">
+<meta property="og:title" content="Articles &amp; News | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/blog.php">
-<meta property="og:description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Latest news, articles, and event updates from Baraka Awards Kenya.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Articles &amp; News | Digitally Fit Awards">
-<meta name="twitter:description" content="Latest news, articles, and event updates from Digitally Fit Awards.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Articles &amp; News | Baraka Awards Kenya">
+<meta name="twitter:description" content="Latest news, articles, and event updates from Baraka Awards Kenya.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -61,7 +88,7 @@ $totalItems  = $resp['total'] ?? 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -71,7 +98,7 @@ $totalItems  = $resp['total'] ?? 0;
 
 <!-- JSON-LD: Blog -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Digitally Fit Awards","url":"<?= SITE_URL ?>/blog.php","description":"Latest news, articles, and updates from Digitally Fit Awards.","publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>"}}
+{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Baraka Awards Kenya","url":"<?= SITE_URL ?>/blog.php","description":"Latest news, articles, and updates from Baraka Awards Kenya.","publisher":{"@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -80,7 +107,7 @@ $totalItems  = $resp['total'] ?? 0;
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -124,7 +151,7 @@ $totalItems  = $resp['total'] ?? 0;
     <div class="anim-icons full-width"><span class="icon icon-bull-eye"></span><span class="icon icon-dotted-circle"></span></div>
     <div class="auto-container">
         <div class="title-outer">
-            <h1>DFA News &amp; Updates</h1>
+            <h1>Baraka Awards News &amp; Updates</h1>
             <ul class="page-breadcrumb">
                 <li><a href="<?= SITE_URL ?>">Home</a></li>
                 <li>Blog</li>
@@ -180,9 +207,7 @@ $totalItems  = $resp['total'] ?? 0;
                             <?php if (!empty($post['published_at'])): ?>
                             <span><i class="fa fa-calendar-alt"></i><?= date('d M Y', strtotime($post['published_at'])) ?></span>
                             <?php endif; ?>
-                            <?php if (!empty($post['author'])): ?>
-                            <span><i class="fa fa-user"></i><?= htmlspecialchars($post['author']['name']) ?></span>
-                            <?php endif; ?>
+                            <span><i class="fa fa-user"></i>Baraka Awards</span>
                         </div>
                         <h4><a href="<?= SITE_URL ?>/blog-single?slug=<?= urlencode($post['slug']) ?>"><?= htmlspecialchars($post['title']) ?></a></h4>
                         <?php if (!empty($post['excerpt'])): ?>

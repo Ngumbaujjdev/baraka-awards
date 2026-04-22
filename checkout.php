@@ -29,14 +29,14 @@ $venue = implode(', ', array_filter([$event['venue_name'] ?? '', $event['venue_c
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Get Tickets — <?= htmlspecialchars($event['name']) ?> | Digitally Fit Awards</title>
+<title>Get Tickets — <?= htmlspecialchars($event['name']) ?> | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/custom.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.min.css">
-<link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -765,7 +765,8 @@ window.Checkout = (function () {
 
         const attendees = collectAttendees();
         _pendingPayload = { items, buyer_name: name, buyer_email: email, payment_method: method,
-            buyer_country: window._voterCountry || localStorage.getItem('voter_country') || 'KE' };
+            buyer_country: window._voterCountry || localStorage.getItem('voter_country') || 'KE',
+            callback_url:  SITE_URL + '/ticket-confirmation' };
         if (phone) _pendingPayload.buyer_phone = phone;
         if (promoCode) _pendingPayload.promo_code = promoCode;
         if (Object.keys(attendees).length > 0) _pendingPayload.attendees = attendees;

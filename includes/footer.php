@@ -19,11 +19,11 @@
                         <div class="logo" style="margin-bottom:20px;">
                             <a href="<?php echo SITE_URL; ?>/">
                                 <img src="<?php echo SITE_URL; ?>/assets/images/logo/dfa-logo-white.svg"
-                                     alt="Digitally Fit Awards" style="max-height:70px;width:auto;">
+                                     alt="Baraka Awards Kenya" style="max-height:70px;width:auto;">
                             </a>
                         </div>
                         <p style="color:rgba(255,255,255,0.72);font-size:0.95rem;line-height:1.8;margin-bottom:20px;">
-                            Celebrating digital excellence across East Africa. Organised by KEOnline — recognising outstanding achievements in 300+ digital categories.
+                            Celebrating cultural and entertainment excellence in Kenya. Organised by the Baraka Awards Kenya team — recognising outstanding achievements in 21 award categories.
                         </p>
                         <ul class="social-icon-two" style="list-style:none;padding:0;display:flex;gap:10px;flex-wrap:wrap;">
                             <?php
@@ -102,7 +102,7 @@
 
                         <!-- CTA block -->
                         <div style="margin-top:24px;background:rgba(191,158,68,0.15);border:1px solid rgba(191,158,68,0.3);border-radius:8px;padding:16px;text-align:center;">
-                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">Digitally Fit Awards 2026 — The premier digital excellence gala.</p>
+                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">30th May 2026 — Southfield Mall, Mombasa Road. Tickets from KES 500.</p>
                             <a href="<?php echo SITE_URL; ?>/tickets"
                                class="theme-btn btn-style-one"
                                style="font-size:.8rem;padding:8px 18px;">
@@ -120,8 +120,8 @@
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
                                 <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-location"></i></span>
                                 <div>
-                                    <span style="color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.6;">Nairobi, Kenya</span><br>
-                                    <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Head Office</span>
+                                    <span style="color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.6;">Southfield Mall, Mombasa Road, Nairobi</span><br>
+                                    <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Gala Venue — 30th May 2026</span>
                                 </div>
                             </li>
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
@@ -164,7 +164,7 @@
         <div class="auto-container">
             <div class="inner-container">
                 <div class="copyright-text">
-                    <p>&copy; <?php echo date('Y'); ?> <a href="<?php echo SITE_URL; ?>/">Digitally Fit Awards</a>. All Rights Reserved.</p>
+                    <p>&copy; <?php echo date('Y'); ?> <a href="<?php echo SITE_URL; ?>/">Baraka Awards Kenya</a>. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

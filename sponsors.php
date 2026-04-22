@@ -27,15 +27,15 @@ foreach ($allSponsors as $sp) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Sponsors &amp; Partners | Digitally Fit Awards</title>
-<meta name="description" content="Meet the sponsors and partners powering the Digitally Fit Awards Gala 2026 — East Africa's premier digital excellence awards.">
-<meta name="author" content="Digitally Fit Awards">
+<title>Sponsors &amp; Partners | Baraka Awards Kenya</title>
+<meta name="description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026 — Kenya's premier entertainment and cultural awards.">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Sponsors & Partners | Digitally Fit Awards">
+<meta property="og:title" content="Sponsors & Partners | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
-<meta property="og:description" content="Meet the sponsors and partners powering the Digitally Fit Awards Gala 2026.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -43,7 +43,7 @@ foreach ($allSponsors as $sp) {
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -147,8 +147,8 @@ foreach ($allSponsors as $sp) {
 
         <!-- Become a Sponsor CTA -->
         <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:20px;">
-            <h3 style="font-weight:800;margin-bottom:10px;">Interested in Sponsoring Digitally Fit Awards 2026?</h3>
-            <p style="color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 24px;">Partner with East Africa's premier digital excellence awards and put your brand in front of a passionate, digitally-engaged audience across the country.</p>
+            <h3 style="font-weight:800;margin-bottom:10px;">Interested in Sponsoring Baraka Awards Kenya 2026?</h3>
+            <p style="color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 24px;">Partner with Kenya's premier entertainment and cultural awards and put your brand in front of a passionate, digitally-engaged audience across the country.</p>
             <a href="<?= SITE_URL ?>/contact" class="theme-btn btn-style-one" style="background:#be9b3f;border-color:#be9b3f;">
                 <span class="btn-title">Get in Touch →</span>
             </a>

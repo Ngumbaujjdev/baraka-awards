@@ -3,37 +3,40 @@ ob_start();
 
 $_host   = $_SERVER['HTTP_HOST'] ?? '';
 $isLocal = str_contains($_host, 'localhost');
-$isLive  = str_contains($_host, 'digitallyfitawards.com') || str_contains($_host, 'dfa.tuqiohub.africa');
+$isLive  = str_contains($_host, 'barakaawards.tuqiohub.africa');
 // default = also live (any other host routes to production)
 
 // ─── Site ──────────────────────────────────────────────────────────────────
-define("SITE_URL", $isLocal ? "http://localhost/digitalyfit" : "https://digitallyfitawards.com");
-define("SITE_NAME",   "Digitally Fit Awards");
-define("ADMIN_EMAIL",       "info@digitallyfitawards.com");
-define("SITE_PHONE", "+254709000838"); // Safaricom (also WhatsApp)
+define("SITE_URL", $isLocal ? "http://localhost/baraka-awards" : "https://barakaawards.tuqiohub.africa");
+define("SITE_NAME",   "Baraka Awards Kenya");
+define("ADMIN_EMAIL",       "info@barakaawards.tuqiohub.africa");
+define("SITE_PHONE", "+254710388288"); // WhatsApp & calls
 
 // ─── Social ────────────────────────────────────────────────────────────────
-define("SOCIAL_FACEBOOK",  "https://www.facebook.com/Digitallyfitawards");
-define("SOCIAL_INSTAGRAM", "https://www.instagram.com/digitallyfitawards/");
-define("SOCIAL_TWITTER",   "https://x.com/DigitallyFAward");
-define("SOCIAL_LINKEDIN",  "https://www.linkedin.com/company/digitally-fit-awards/");
+define("SOCIAL_FACEBOOK",  "#");
+define("SOCIAL_INSTAGRAM", "#");
+define("SOCIAL_TWITTER",   "#");
+define("SOCIAL_LINKEDIN",  "#");
 define("SOCIAL_TIKTOK",    "#");
 
 // ─── OG image ──────────────────────────────────────────────────────────────
 define("OG_IMAGE", $isLocal
-    ? "http://localhost/digitalyfit/assets/images/og/dfa-og.webp"
-    : "https://digitallyfitawards.com/assets/images/og/dfa-og.webp");
+    ? "http://localhost/baraka-awards/assets/images/og/baraka-og.webp"
+    : "https://barakaawards.tuqiohub.africa/assets/images/og/baraka-og.webp");
 
 // ─── API ────────────────────────────────────────────────────────────────────
-define("API_BASE", $isLocal ? "http://localhost:8000" : "https://platform.digitallyfitawards.com");
+define("API_BASE", $isLocal ? "http://localhost:8000" : "https://platform.tuqiohub.africa");
 define("API_STORAGE", API_BASE . "/storage/");
 
 // ─── Admin (organizer platform) ────────────────────────────────────────────
 define("ADMIN_URL", API_BASE . "/login");
 
-// ─── DFA branding ──────────────────────────────────────────────────────────
-define("BRAND_PRIMARY", "#000000"); // DFA black
-define("BRAND_ACCENT",  "#be9b3f"); // DFA gold
+// ─── Baraka Awards branding ────────────────────────────────────────────────
+define("BRAND_PRIMARY", "#1a0a2e"); // deep purple
+define("BRAND_ACCENT",  "#d4af37"); // gold
+
+// ─── Client slug (used in API calls) ───────────────────────────────────────
+define("CLIENT_SLUG", "baraka-awards");
 
 // ─── API helper (GET) ──────────────────────────────────────────────────────
 function tuqio_api(string $path): array {

@@ -5,12 +5,42 @@ include 'libs/App.php';
 $nomineeSlug = trim($_GET['slug'] ?? '');
 $eventSlug   = trim($_GET['event'] ?? 'dfa-gala-2026');
 
+if (!$nomineeSlug) {
+    header('Location: ' . SITE_URL . '/nominees?event=' . urlencode($eventSlug));
+    exit;
+}
+
+// Try direct single-nominee endpoint first
 $resp    = tuqio_api('/api/public/events/' . urlencode($eventSlug) . '/nominees/' . urlencode($nomineeSlug));
-$nominee = $resp['nominee']  ?? null;
+$nominee = $resp['nominee'] ?? $resp['data'] ?? null;
 $cat     = $resp['category'] ?? [];
 $event   = $resp['event']    ?? [];
 
-if (!$nominee) {
+// Fallback: search full nominees list by slug
+if (!$nominee || !isset($nominee['name'])) {
+    $fullResp = tuqio_api('/api/public/events/' . urlencode($eventSlug) . '/nominees');
+    $event    = $fullResp['event'] ?? $event;
+    $cats     = $fullResp['categories'] ?? [];
+    if (empty($cats) && !empty($fullResp['groups'])) {
+        foreach ($fullResp['groups'] as $grp) {
+            foreach ($grp['categories'] ?? $grp['sub_categories'] ?? [] as $sc) {
+                $cats[] = $sc;
+            }
+        }
+        foreach ($fullResp['ungrouped'] ?? [] as $uc) { $cats[] = $uc; }
+    }
+    foreach ($cats as $c) {
+        foreach ($c['candidates'] ?? $c['nominees'] ?? [] as $n) {
+            if (($n['slug'] ?? '') === $nomineeSlug) {
+                $nominee = $n;
+                $cat     = ['name' => $c['name'] ?? '', 'slug' => $c['slug'] ?? ''];
+                break 2;
+            }
+        }
+    }
+}
+
+if (!$nominee || !isset($nominee['name'])) {
     header('Location: ' . SITE_URL . '/nominees?event=' . urlencode($eventSlug));
     exit;
 }
@@ -18,11 +48,11 @@ if (!$nominee) {
 $votingIsOpen  = (bool) ($event['voting_is_open'] ?? false);
 $voteBundleUrl = SITE_URL . '/vote-bundle?event=' . urlencode($eventSlug);
 
-$pageTitle = htmlspecialchars($nominee['name']) . ' | Digitally Fit Awards';
+$pageTitle = htmlspecialchars($nominee['name']) . ' | Baraka Awards Kenya';
 $ogImage   = !empty($nominee['image']) ? $nominee['image'] : OG_IMAGE;
 
 $shareUrl  = SITE_URL . '/nominee?slug=' . urlencode($nomineeSlug) . '&event=' . urlencode($eventSlug);
-$shareText = 'Vote for ' . $nominee['name'] . ' at Digitally Fit Awards 2026!';
+$shareText = 'Vote for ' . $nominee['name'] . ' at Baraka Awards Kenya 2026!';
 
 $socialLinks = $nominee['social_links'] ?? [];
 $votesCount  = (int) ($nominee['votes_count'] ?? 0);
@@ -34,11 +64,11 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 <title><?= $pageTitle ?></title>
 <meta name="description" content="<?= htmlspecialchars(substr(strip_tags($nominee['description'] ?? ''), 0, 160)) ?>">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="<?= htmlspecialchars($nominee['name']) ?> — Digitally Fit Awards">
+<meta property="og:title" content="<?= htmlspecialchars($nominee['name']) ?> — Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
 <meta property="og:description" content="<?= htmlspecialchars(substr(strip_tags($nominee['description'] ?? ''), 0, 160)) ?>">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -46,7 +76,7 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>

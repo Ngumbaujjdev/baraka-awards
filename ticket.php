@@ -29,7 +29,7 @@ $evtThumb = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><?= $ticket ? htmlspecialchars($ticket['ticket_type_name'] . ' · ' . $evtName) : 'Ticket' ?> | Digitally Fit Awards</title>
+<title><?= $ticket ? htmlspecialchars($ticket['ticket_type_name'] . ' · ' . $evtName) : 'Ticket' ?> | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">

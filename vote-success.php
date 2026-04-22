@@ -41,7 +41,7 @@ if ($nominee && !empty($nominee['id'])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Votes Cast! | Digitally Fit Awards</title>
+<title>Votes Cast! | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -225,8 +225,8 @@ if ($nominee && !empty($nominee['id'])) {
             <!-- Share -->
             <?php
             $shareText = $nominee
-                ? 'I just voted for ' . $nominee['name'] . ($event ? ' at ' . $event['name'] : '') . '! Cast your votes on Digitally Fit Awards.'
-                : 'I just voted on Digitally Fit Awards! Cast your votes too.';
+                ? 'I just voted for ' . $nominee['name'] . ($event ? ' at ' . $event['name'] : '') . '! Cast your votes on Baraka Awards Kenya.'
+                : 'I just voted on Baraka Awards Kenya! Cast your votes too.';
             $shareUrl  = SITE_URL . ($eventSlug ? '/nominees?event=' . urlencode($eventSlug) : '/events');
             $shareEnc  = urlencode($shareText . ' ' . $shareUrl);
             ?>

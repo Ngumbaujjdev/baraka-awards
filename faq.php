@@ -8,34 +8,34 @@ include 'libs/App.php';
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Frequently Asked Questions | Digitally Fit Awards</title>
-<meta name="description" content="Find answers to common questions about Digitally Fit Awards — how to vote, nominate, buy tickets, and participate in events across Kenya.">
-<meta name="keywords" content="Digitally Fit Awards FAQ, how to vote Kenya, how to nominate Kenya, event tickets FAQ, Digitally Fit Awards help">
-<meta name="author" content="Digitally Fit Awards">
+<title>Frequently Asked Questions | Baraka Awards Kenya</title>
+<meta name="description" content="Find answers to common questions about Baraka Awards Kenya — how to vote, nominate, buy tickets, and participate in events across Kenya.">
+<meta name="keywords" content="Baraka Awards Kenya FAQ, how to vote Kenya, how to nominate Kenya, event tickets FAQ, Baraka Awards Kenya help">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://digitallyfitawards.com/faq.php">
+<link rel="canonical" href="https://barakaawards.tuqiohub.africa/faq.php">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Frequently Asked Questions | Digitally Fit Awards">
-<meta itemprop="description" content="Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets.">
+<meta itemprop="name" content="Frequently Asked Questions | Baraka Awards Kenya">
+<meta itemprop="description" content="Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Frequently Asked Questions | Digitally Fit Awards">
+<meta property="og:title" content="Frequently Asked Questions | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitallyfitawards.com/faq.php">
-<meta property="og:description" content="Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:url" content="https://barakaawards.tuqiohub.africa/faq.php">
+<meta property="og:description" content="Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Frequently Asked Questions | Digitally Fit Awards">
-<meta name="twitter:description" content="Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Frequently Asked Questions | Baraka Awards Kenya">
+<meta name="twitter:description" content="Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"https://digitallyfitawards.com","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://digitallyfitawards.com/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://digitallyfitawards.com/faq.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://barakaawards.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://barakaawards.tuqiohub.africa/faq.php"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Digitally Fit Awards","url":"https://digitallyfitawards.com/faq.php","description":"Find answers to common questions about Digitally Fit Awards events, voting, nominations, and tickets."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa/faq.php","description":"Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -63,7 +63,7 @@ include 'libs/App.php';
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -121,17 +121,17 @@ include 'libs/App.php';
                 <div class="mb-5">
                     <div class="faq-category-title" id="general">General</div>
                     <div class="accordion" id="faqGeneral">
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#g1">What is Digitally Fit Awards?</button></h2><div id="g1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral"><div class="accordion-body">Digitally Fit Awards (DFA) is East Africa's premier platform for recognizing digital excellence. Organised by Oracom Group and KEOnline, we celebrate individuals, brands, and organizations that have built a significant and impactful digital presence.</div></div></div>
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g2">Why do we have Digitally Fit Awards?</button></h2><div id="g2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">In an increasingly digital world, being "Digitally Fit" is essential for any modern brand. DFA exists to highlight best practices, inspire innovation, and provide a benchmark for digital success across diverse industries in the region.</div></div></div>
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g3">When is the next Digitally Fit Awards event?</button></h2><div id="g3" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">The schedule for our upcoming events is currently being finalized. Stay tuned to our website and social media channels for the official announcement of dates, venues, and nomination openings.</div></div></div>
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g4">What are the main award categories?</button></h2><div id="g4" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">DFA covers a wide spectrum of digital achievements including IT & Tech Excellence, Digital Marketing, Social Media Influence, E-commerce, Fintech, and more. A full list of categories for the next event will be published once nominations are announced.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#g1">What is Baraka Awards Kenya?</button></h2><div id="g1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral"><div class="accordion-body">Baraka Awards Kenya is Kenya's premier platform for recognizing entertainment excellence. Organised by Baraka Awards Kenya and Baraka Awards Kenya, we celebrate individuals, brands, and organizations that have built a significant and impactful digital presence.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g2">Why do we have Baraka Awards Kenya?</button></h2><div id="g2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">In an increasingly digital world, being "Baraka Awards" is essential for any modern brand. Baraka Awards Kenya exists to highlight best practices, inspire innovation, and provide a benchmark for digital success across diverse industries in the region.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g3">When is the next Baraka Awards Kenya event?</button></h2><div id="g3" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">The schedule for our upcoming events is currently being finalized. Stay tuned to our website and social media channels for the official announcement of dates, venues, and nomination openings.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g4">What are the main award categories?</button></h2><div id="g4" class="accordion-collapse collapse" data-bs-parent="#faqGeneral"><div class="accordion-body">Baraka Awards Kenya covers a wide spectrum of digital achievements including IT & Tech Excellence, Digital Marketing, Social Media Influence, E-commerce, Fintech, and more. A full list of categories for the next event will be published once nominations are announced.</div></div></div>
                     </div>
                 </div>
 
                 <div class="mb-5">
                     <div class="faq-category-title" id="voting">Nominations &amp; Participation</div>
                     <div class="accordion" id="faqVoting">
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#v1">How can I participate in DFA?</button></h2><div id="v1" class="accordion-collapse collapse show" data-bs-parent="#faqVoting"><div class="accordion-body">You can participate by nominating your brand or someone else when the nomination window opens, voting for your favorites during the voting phase, or attending our high-profile gala events.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#v1">How can I participate in Baraka Awards?</button></h2><div id="v1" class="accordion-collapse collapse show" data-bs-parent="#faqVoting"><div class="accordion-body">You can participate by nominating your brand or someone else when the nomination window opens, voting for your favorites during the voting phase, or attending our high-profile gala events.</div></div></div>
                         <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#v2">How does the nomination process work?</button></h2><div id="v2" class="accordion-collapse collapse" data-bs-parent="#faqVoting"><div class="accordion-body">Once an event is live, you can submit nominations through our platform. All entries are reviewed by our panel to ensure they meet the criteria for the selected category before being shortlisted for public voting.</div></div></div>
                         <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#v3">Is there a cost to nominate or vote?</button></h2><div id="v3" class="accordion-collapse collapse" data-bs-parent="#faqVoting"><div class="accordion-body">Submitting a nomination is typically free. Voting systems vary by event but often involve vote bundles that help support the platform and event organization. Specific details are provided for each event.</div></div></div>
                     </div>
@@ -141,7 +141,7 @@ include 'libs/App.php';
                     <div class="faq-category-title" id="tickets">Tickets &amp; Attendance</div>
                     <div class="accordion" id="faqTickets">
                         <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#o1">How do I buy tickets for events?</button></h2><div id="o1" class="accordion-collapse collapse show" data-bs-parent="#faqTickets"><div class="accordion-body">Tickets can be purchased directly through our integrated ticketing system on the Tickets page of this website. We accept M-Pesa and major cards. E-tickets are delivered instantly via email.</div></div></div>
-                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#o2">What should I expect at a DFA event?</button></h2><div id="o2" class="accordion-collapse collapse" data-bs-parent="#faqTickets"><div class="accordion-body">Our gala events are premier networking opportunities featuring industry leaders, celebrating digital pioneers, and providing a platform for brands to showcase their digital fitness to a top-tier audience.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#o2">What should I expect at a Baraka Awards event?</button></h2><div id="o2" class="accordion-collapse collapse" data-bs-parent="#faqTickets"><div class="accordion-body">Our gala events are premier networking opportunities featuring industry leaders, celebrating creative pioneers, and providing a platform for brands to showcase their excellence to a top-tier audience.</div></div></div>
                     </div>
                 </div>
 

@@ -69,34 +69,34 @@ if ($categoryParam !== '') {
 <meta charset="utf-8">
 
 <!-- SEO -->
-<title>Nominate | Digitally Fit Awards</title>
-<meta name="description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, community, and more. Nominations are open now.">
-<meta name="keywords" content="nominate Kenya, submit nomination awards, Digitally Fit Awards nominations, Kenya awards nomination, recognise outstanding Kenyans">
-<meta name="author" content="Digitally Fit Awards">
+<title>Nominate | Baraka Awards Kenya</title>
+<meta name="description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans in leadership, business, community, and more. Nominations are open now.">
+<meta name="keywords" content="nominate Kenya, submit nomination awards, Baraka Awards Kenya nominations, Kenya awards nomination, recognise outstanding Kenyans">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= SITE_URL ?>/nominate.php">
 
 <!-- Schema.org microdata -->
-<meta itemprop="name" content="Nominate | Digitally Fit Awards">
-<meta itemprop="description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans.">
+<meta itemprop="name" content="Nominate | Baraka Awards Kenya">
+<meta itemprop="description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans.">
 <meta itemprop="image" content="<?= OG_IMAGE ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Nominate | Digitally Fit Awards">
+<meta property="og:title" content="Nominate | Baraka Awards Kenya">
 <meta property="og:type" content="website">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= SITE_URL ?>/nominate.php">
-<meta property="og:description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, and community.">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans in leadership, business, and community.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="Nominate | Digitally Fit Awards">
-<meta name="twitter:description" content="Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans in leadership, business, and community.">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Nominate | Baraka Awards Kenya">
+<meta name="twitter:description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans in leadership, business, and community.">
 <meta name="twitter:image" content="<?= OG_IMAGE ?>">
 
 <!-- Google Analytics -->
@@ -105,7 +105,7 @@ if ($categoryParam !== '') {
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -115,7 +115,7 @@ if ($categoryParam !== '') {
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Digitally Fit Awards","url":"<?= SITE_URL ?>/nominate.php","description":"Submit a nomination on Digitally Fit Awards. Recognise outstanding Kenyans."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominate.php","description":"Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -126,7 +126,7 @@ if ($categoryParam !== '') {
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>

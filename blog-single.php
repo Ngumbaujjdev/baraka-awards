@@ -1,20 +1,29 @@
 <?php
 include 'config/config.php';
 include 'libs/App.php';
+include 'data/static-articles.php'; // $STATIC_ARTICLES
 
 $slug = trim($_GET['slug'] ?? '');
 if (!$slug) { header('Location: ' . SITE_URL . '/blog'); exit; }
 
-$resp = tuqio_api('/api/public/blog/' . urlencode($slug));
-if (empty($resp['post'])) { header('Location: ' . SITE_URL . '/blog'); exit; }
-
-$post    = $resp['post'];
+$resp = tuqio_api('/api/public/blog/' . urlencode($slug) . '?client=' . CLIENT_SLUG);
+$post    = $resp['post'] ?? null;
 $related = $resp['related'] ?? [];
+
+// Fall back to static articles
+if (empty($post)) {
+    foreach ($STATIC_ARTICLES as $a) {
+        if ($a['slug'] === $slug) { $post = $a; break; }
+    }
+}
+if (empty($post)) { header('Location: ' . SITE_URL . '/blog'); exit; }
+
 $featImg = (!empty($post['featured_image']) && $post['featured_image'] !== 'null') ? $post['featured_image'] : null;
 
 // Fetch all posts for sidebar widgets (recent posts + categories)
-$allResp   = tuqio_api('/api/public/blog');
-$allPosts  = $allResp['data'] ?? [];
+$allResp  = tuqio_api('/api/public/blog?client=' . CLIENT_SLUG);
+$allPosts = $allResp['data'] ?? [];
+if (empty($allPosts)) { $allPosts = $STATIC_ARTICLES; }
 
 // Recent posts (exclude current, max 4)
 $recentPosts = array_filter($allPosts, fn($p) => $p['slug'] !== $post['slug']);
@@ -24,11 +33,11 @@ $recentPosts = array_slice(array_values($recentPosts), 0, 4);
 $catMap = [];
 foreach ($allPosts as $p) {
     if (!empty($p['category'])) {
-        $cid = $p['category']['id'];
-        if (!isset($catMap[$cid])) {
-            $catMap[$cid] = ['name' => $p['category']['name'], 'count' => 0];
+        $cname = $p['category']['name'];
+        if (!isset($catMap[$cname])) {
+            $catMap[$cname] = ['name' => $cname, 'count' => 0];
         }
-        $catMap[$cid]['count']++;
+        $catMap[$cname]['count']++;
     }
 }
 ?>
@@ -48,10 +57,10 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 ?>
 
 <!-- SEO -->
-<title><?= $seoPostTitle ?> | Digitally Fit Awards</title>
+<title><?= $seoPostTitle ?> | Baraka Awards Kenya</title>
 <meta name="description" content="<?= $seoPostDesc ?>">
-<meta name="keywords" content="<?= $seoPostTitle ?>, Digitally Fit Awards blog, Kenya events article, event news Kenya">
-<meta name="author" content="<?= htmlspecialchars($post['author_name'] ?? 'Digitally Fit Awards') ?>">
+<meta name="keywords" content="<?= $seoPostTitle ?>, Baraka Awards Kenya blog, Kenya events article, event news Kenya">
+<meta name="author" content="<?= htmlspecialchars($post['author_name'] ?? 'Baraka Awards Kenya') ?>">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="<?= $seoPostUrl ?>">
 
@@ -61,7 +70,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 <meta itemprop="image" content="<?= $seoPostImg ?>">
 
 <!-- Open Graph -->
-<meta property="og:title" content="<?= $seoPostTitle ?> | Digitally Fit Awards">
+<meta property="og:title" content="<?= $seoPostTitle ?> | Baraka Awards Kenya">
 <meta property="og:type" content="article">
 <meta property="og:image" content="<?= $seoPostImg ?>">
 <meta property="og:image:type" content="image/jpeg">
@@ -69,13 +78,13 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="<?= $seoPostUrl ?>">
 <meta property="og:description" content="<?= $seoPostDesc ?>">
-<meta property="og:site_name" content="Digitally Fit Awards">
+<meta property="og:site_name" content="Baraka Awards Kenya">
 <?php if ($seoPostDate): ?><meta property="article:published_time" content="<?= $seoPostDate ?>"><?php endif; ?>
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@digitallyfitawards">
-<meta name="twitter:title" content="<?= $seoPostTitle ?> | Digitally Fit Awards">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="<?= $seoPostTitle ?> | Baraka Awards Kenya">
 <meta name="twitter:description" content="<?= $seoPostDesc ?>">
 <meta name="twitter:image" content="<?= $seoPostImg ?>">
 
@@ -85,7 +94,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254757140682","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/digitallyfitawards","https://www.tiktok.com/@digitallyfitawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
@@ -95,7 +104,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 
 <!-- JSON-LD: Article -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Digitally Fit Awards') ?>"},"publisher":{"@type":"Organization","name":"Digitally Fit Awards","url":"<?= SITE_URL ?>"}}
+{"@context":"https://schema.org","@type":"Article","headline":"<?= addslashes($post['title'] ?? '') ?>","description":"<?= addslashes($seoPostDesc) ?>","image":"<?= $seoPostImg ?>","url":"<?= $seoPostUrl ?>","datePublished":"<?= $seoPostDate ?>","author":{"@type":"Person","name":"<?= addslashes($post['author_name'] ?? 'Baraka Awards Kenya') ?>"},"publisher":{"@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
@@ -104,7 +113,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
 <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="<?= SITE_URL ?>/assets/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="<?= SITE_URL ?>/assets/images/favicon/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Digitally Fit Awards">
+<meta name="apple-mobile-web-app-title" content="Baraka Awards Kenya">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style>
@@ -250,9 +259,7 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
                     <?php if (!empty($post['published_at'])): ?>
                     <span class="blog-meta-item"><i class="fa fa-calendar-alt blog-meta-icon"></i><?= date('d M Y', strtotime($post['published_at'])) ?></span>
                     <?php endif; ?>
-                    <?php if (!empty($post['author'])): ?>
-                    <span class="blog-meta-item"><i class="fa fa-user blog-meta-icon"></i><?= htmlspecialchars($post['author']['name']) ?></span>
-                    <?php endif; ?>
+                    <span class="blog-meta-item"><i class="fa fa-user blog-meta-icon"></i>Baraka Awards</span>
                     <?php if (!empty($post['category'])): ?>
                     <span class="blog-cat-pill"><?= htmlspecialchars($post['category']['name']) ?></span>
                     <?php endif; ?>
@@ -264,11 +271,11 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
                     <img src="<?= htmlspecialchars($featImg) ?>"
                          alt="<?= htmlspecialchars($post['title']) ?>"
                          style="width:100%;border-radius:10px;object-fit:cover;max-height:420px;"
-                         onerror="this.outerHTML='<div style=\'width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-newspaper\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Digitally Fit Awards</span></div>'">
+                         onerror="this.outerHTML='<div style=\'width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;\'><i class=\'fas fa-newspaper\' style=\'font-size:3rem;color:rgba(255,255,255,.35);\'></i><span style=\'color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;\'>Baraka Awards Kenya</span></div>'">
                     <?php else: ?>
                     <div style="width:100%;height:320px;border-radius:10px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#be9b3f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
                         <i class="fas fa-newspaper" style="font-size:3rem;color:rgba(255,255,255,.35);"></i>
-                        <span style="color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;">Digitally Fit Awards</span>
+                        <span style="color:rgba(255,255,255,.5);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;">Baraka Awards Kenya</span>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -333,7 +340,6 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
                     <?php endif; ?>
 
                     <!-- Author Widget -->
-                    <?php if (!empty($post['author'])): ?>
                     <div class="sidebar-widget author-widget">
                         <h5 class="sidebar-title">About the Author</h5>
                         <div class="widget-content">
@@ -341,16 +347,11 @@ $seoPostDate  = $post['published_at'] ?? $post['created_at'] ?? '';
                                 <div class="author-image no-img">
                                     <i class="fas fa-user"></i>
                                 </div>
-                                <h5><?= htmlspecialchars($post['author']['name']) ?></h5>
-                                <?php if (!empty($post['category'])): ?>
-                                <p>Writing about <?= htmlspecialchars($post['category']['name']) ?> and more.</p>
-                                <?php else: ?>
-                                <p>Contributor at Digitally Fit Awards.</p>
-                                <?php endif; ?>
+                                <h5>Baraka Awards</h5>
+                                <p>Official updates from the Baraka Awards Kenya team.</p>
                             </div>
                         </div>
                     </div>
-                    <?php endif; ?>
 
                     <!-- Recent Posts Widget -->
                     <?php if (!empty($recentPosts)): ?>

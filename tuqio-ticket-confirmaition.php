@@ -20,7 +20,7 @@ $hasFull  = !empty($purchase) && !empty($event);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Booking Confirmed | Digitally Fit Awards</title>
+<title>Booking Confirmed | Baraka Awards Kenya</title>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">
@@ -395,7 +395,7 @@ window.Confirm = {
         const ics = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'PRODID:-//Digitally Fit Awards//EN',
+            'PRODID:-//Baraka Awards Kenya//EN',
             'CALSCALE:GREGORIAN',
             'METHOD:PUBLISH',
             'BEGIN:VEVENT',
@@ -405,7 +405,7 @@ window.Confirm = {
             'DTEND:' + dtEnd,
             'SUMMARY:' + eventName,
             'LOCATION:' + venue,
-            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Digitally Fit Awards.',
+            'DESCRIPTION:Ticket booking #' + orderNum + '. Powered by Baraka Awards Kenya.',
             'STATUS:CONFIRMED',
             'END:VEVENT',
             'END:VCALENDAR'

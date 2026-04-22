@@ -3,7 +3,7 @@
         <div class="inner-container">
             <div class="top-left">
                 <ul class="contact-list-two">
-                    <li><strong>Digitally Fit Awards 2026</strong></li>
+                    <li><strong>Baraka Awards Kenya 2026</strong></li>
                     <li><a href="mailto:<?= ADMIN_EMAIL ?>" style="color:inherit;"><?= ADMIN_EMAIL ?></a></li>
                     <li><a href="tel:<?= SITE_PHONE ?>" style="color:inherit;"><?= SITE_PHONE ?></a></li>
                 </ul>
