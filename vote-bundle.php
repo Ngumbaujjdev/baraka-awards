@@ -70,7 +70,47 @@ $nomIdx = 0;
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<?php $vbSeoUrl = SITE_URL . '/vote-bundle?event=' . urlencode($slug); ?>
+
+<!-- SEO -->
 <title>Vote — <?= htmlspecialchars($event['name']) ?> | Baraka Awards Kenya</title>
+<meta name="description" content="Buy vote bundles for <?= htmlspecialchars($event['name']) ?> on Baraka Awards Kenya. Support your favourite nominees with bulk votes.">
+<meta name="keywords" content="vote bundle Baraka Awards, bulk votes Kenya, support nominee Kenya, Baraka Awards voting packages, cast votes Kenya, Baraka Awards 2026, vote online Kenya, East Africa awards voting">
+<meta name="author" content="Baraka Awards Kenya">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="<?= $vbSeoUrl ?>">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Vote — <?= htmlspecialchars($event['name']) ?> | Baraka Awards Kenya">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<?= $vbSeoUrl ?>">
+<meta property="og:image" content="<?= htmlspecialchars($thumbnail) ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:description" content="Buy vote bundles for <?= htmlspecialchars($event['name']) ?> on Baraka Awards Kenya. Support your favourite nominees.">
+<meta property="og:site_name" content="Baraka Awards Kenya">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Vote — <?= htmlspecialchars($event['name']) ?> | Baraka Awards Kenya">
+<meta name="twitter:description" content="Buy vote bundles for <?= htmlspecialchars($event['name']) ?> on Baraka Awards Kenya.">
+<meta name="twitter:image" content="<?= htmlspecialchars($thumbnail) ?>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Baraka Awards Kenya recognises and rewards companies, businesses, individuals, and brands that demonstrate exceptional online presence and impact across East Africa.","foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+</script>
+
+<!-- JSON-LD: WebPage -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Vote Bundles — <?= addslashes($event['name']) ?> | Baraka Awards Kenya","url":"<?= $vbSeoUrl ?>","description":"Buy vote bundles for <?= addslashes($event['name']) ?> on Baraka Awards Kenya."}
+</script>
+
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">

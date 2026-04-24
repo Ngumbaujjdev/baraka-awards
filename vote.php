@@ -15,10 +15,10 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 <!-- SEO -->
 <title>Cast Your Vote | Baraka Awards Kenya</title>
 <meta name="description" content="Cast your vote for your favourite nominees on Baraka Awards Kenya. Voting is open — support outstanding Kenyan talent and excellence.">
-<meta name="keywords" content="vote Kenya awards, cast your vote, Kenya nominees voting, Baraka Awards Kenya vote, online voting Kenya">
+<meta name="keywords" content="vote Baraka Awards Kenya, online voting Kenya, cast vote Kenya, vote for best brand Kenya, East Africa awards voting, social media awards vote, Nairobi awards vote 2026, vote nominees Kenya, Baraka Awards 2026 vote, online awards poll Kenya, vote for person of the year, support nominee Kenya">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/vote.php">
+<link rel="canonical" href="<?= SITE_URL ?>/vote">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Cast Your Vote | Baraka Awards Kenya">
@@ -32,7 +32,7 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/vote.php">
+<meta property="og:url" content="<?= SITE_URL ?>/vote">
 <meta property="og:description" content="Cast your vote for your favourite nominees on Baraka Awards Kenya. Voting is open now.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -49,17 +49,17 @@ $voteEvents = array_filter($allEvents, fn($e) => ($e['current_phase'] ?? '') ===
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Vote","item":"<?= SITE_URL ?>/vote.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Vote","item":"<?= SITE_URL ?>/vote"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Cast Your Vote | Baraka Awards Kenya","url":"<?= SITE_URL ?>/vote.php","description":"Cast your vote for your favourite nominees on Baraka Awards Kenya."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Cast Your Vote | Baraka Awards Kenya","url":"<?= SITE_URL ?>/vote","description":"Cast your vote for your favourite nominees on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

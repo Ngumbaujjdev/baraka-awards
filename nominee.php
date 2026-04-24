@@ -61,14 +61,56 @@ $votesCount  = (int) ($nominee['votes_count'] ?? 0);
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<?php
+$nomSeoDesc = htmlspecialchars(mb_strimwidth(strip_tags($nominee['description'] ?? ''), 0, 160, '...'));
+$nomSeoUrl  = SITE_URL . '/nominee?slug=' . urlencode($nomineeSlug) . '&event=' . urlencode($eventSlug);
+$nomCatName = htmlspecialchars($cat['name'] ?? 'Award Nominee');
+?>
+
+<!-- SEO -->
 <title><?= $pageTitle ?></title>
-<meta name="description" content="<?= htmlspecialchars(substr(strip_tags($nominee['description'] ?? ''), 0, 160)) ?>">
+<meta name="description" content="<?= $nomSeoDesc ?>">
+<meta name="keywords" content="<?= htmlspecialchars($nominee['name']) ?>, Baraka Awards Kenya, Kenya award nominee, vote <?= htmlspecialchars($nominee['name']) ?>, <?= $nomCatName ?>, nominated Kenya, award nominee East Africa, Baraka Awards 2026, online excellence Kenya">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="<?= $nomSeoUrl ?>">
+
+<!-- Open Graph -->
 <meta property="og:title" content="<?= htmlspecialchars($nominee['name']) ?> — Baraka Awards Kenya">
-<meta property="og:type" content="website">
+<meta property="og:type" content="profile">
 <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
-<meta property="og:description" content="<?= htmlspecialchars(substr(strip_tags($nominee['description'] ?? ''), 0, 160)) ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="<?= $nomSeoUrl ?>">
+<meta property="og:description" content="<?= $nomSeoDesc ?>">
 <meta property="og:site_name" content="Baraka Awards Kenya">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="<?= htmlspecialchars($nominee['name']) ?> — Baraka Awards Kenya">
+<meta name="twitter:description" content="<?= $nomSeoDesc ?>">
+<meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Baraka Awards Kenya recognises and rewards companies, businesses, individuals, and brands that demonstrate exceptional online presence and impact across East Africa.","foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+</script>
+
+<!-- JSON-LD: BreadcrumbList -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"<?= SITE_URL ?>/nominees"},{"@type":"ListItem","position":3,"name":"<?= addslashes($nominee['name']) ?>","item":"<?= $nomSeoUrl ?>"}]}
+</script>
+
+<!-- JSON-LD: Person -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"<?= addslashes($nominee['name']) ?>","description":"<?= addslashes($nomSeoDesc) ?>","image":"<?= htmlspecialchars($ogImage) ?>","url":"<?= $nomSeoUrl ?>"}
+</script>
+
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">

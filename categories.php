@@ -77,12 +77,50 @@ $eventName = $galaEvent['name'] ?? 'Baraka Awards Kenya Gala 2026';
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- SEO -->
 <title>Award Categories | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya</title>
-<meta name="description" content="Browse all award categories for <?= htmlspecialchars($eventName) ?>. Nominate your favourite gospel artists in <?= $totalCats ?> categories.">
+<meta name="description" content="Browse all award categories for <?= htmlspecialchars($eventName) ?>. Nominate outstanding brands, individuals, and organisations across <?= $totalCats ?> categories.">
+<meta name="keywords" content="Baraka Awards categories, online excellence categories, business of the year Kenya, person of the year Kenya, social media award category, website award Kenya, brand of the year Kenya, community impact award, East Africa award categories, Baraka Awards 2026, award nominations Kenya, Nairobi gala categories">
+<meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Award Categories | <?= htmlspecialchars($eventName) ?>">
-<meta property="og:description" content="Browse all <?= $totalCats ?> award categories for <?= htmlspecialchars($eventName) ?>.">
+<link rel="canonical" href="<?= SITE_URL ?>/categories">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Award Categories | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<?= SITE_URL ?>/categories">
+<meta property="og:description" content="Browse all <?= $totalCats ?> award categories for <?= htmlspecialchars($eventName) ?> — Kenya's premier online excellence awards.">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Baraka Awards Kenya">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Award Categories | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya">
+<meta name="twitter:description" content="Browse all <?= $totalCats ?> award categories for <?= htmlspecialchars($eventName) ?>.">
+<meta name="twitter:image" content="<?= OG_IMAGE ?>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Baraka Awards Kenya recognises and rewards companies, businesses, individuals, and brands that demonstrate exceptional online presence and impact across East Africa.","foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+</script>
+
+<!-- JSON-LD: BreadcrumbList -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Categories","item":"<?= SITE_URL ?>/categories"}]}
+</script>
+
+<!-- JSON-LD: CollectionPage -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Award Categories | Baraka Awards Kenya","url":"<?= SITE_URL ?>/categories","description":"Browse all award categories for <?= addslashes($eventName) ?> — Kenya's premier online excellence awards."}
+</script>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">

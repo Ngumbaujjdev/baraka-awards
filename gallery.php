@@ -13,10 +13,10 @@ $photos = $resp['photos'] ?? [];
 <!-- SEO -->
 <title>Photo Gallery | Baraka Awards Kenya</title>
 <meta name="description" content="Browse photos and highlights from Baraka Awards Kenya events across Kenya — awards ceremonies, conferences, summits, and community moments.">
-<meta name="keywords" content="event photos Kenya, Baraka Awards Kenya gallery, awards ceremony photos, Kenya events highlights, event photography Nairobi">
+<meta name="keywords" content="Baraka Awards gallery, Kenya award ceremony photos, Nairobi gala photos, East Africa awards night pictures, awards event gallery Kenya, event photography Kenya, gala dinner photos, awards night Kenya, Baraka Awards 2026 photos, award ceremony highlights, entertainment awards photos Nairobi">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/gallery.php">
+<link rel="canonical" href="<?= SITE_URL ?>/gallery">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Photo Gallery | Baraka Awards Kenya">
@@ -30,7 +30,7 @@ $photos = $resp['photos'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/gallery.php">
+<meta property="og:url" content="<?= SITE_URL ?>/gallery">
 <meta property="og:description" content="Browse photos and highlights from Baraka Awards Kenya events across Kenya.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -47,17 +47,17 @@ $photos = $resp['photos'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"<?= SITE_URL ?>/gallery.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"<?= SITE_URL ?>/gallery"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Photo Gallery | Baraka Awards Kenya","url":"<?= SITE_URL ?>/gallery.php","description":"Browse photos and highlights from Baraka Awards Kenya events."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Photo Gallery | Baraka Awards Kenya","url":"<?= SITE_URL ?>/gallery","description":"Browse photos and highlights from Baraka Awards Kenya events."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

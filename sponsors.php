@@ -27,15 +27,50 @@ foreach ($allSponsors as $sp) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- SEO -->
 <title>Sponsors &amp; Partners | Baraka Awards Kenya</title>
 <meta name="description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026 — Kenya's premier entertainment and cultural awards.">
+<meta name="keywords" content="Baraka Awards sponsors, Kenya awards sponsors 2026, East Africa event sponsors, brand sponsorship Kenya, corporate sponsorship Nairobi awards, Baraka Awards partners, title sponsor Kenya, gold sponsor Kenya, silver sponsor awards, official partner Baraka Awards">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Sponsors & Partners | Baraka Awards Kenya">
+<link rel="canonical" href="<?= SITE_URL ?>/sponsors">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sponsors &amp; Partners | Baraka Awards Kenya">
 <meta property="og:type" content="website">
+<meta property="og:url" content="<?= SITE_URL ?>/sponsors">
 <meta property="og:image" content="<?= OG_IMAGE ?>">
-<meta property="og:description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026 — Kenya's premier entertainment and cultural awards.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@barakaawards">
+<meta name="twitter:title" content="Sponsors &amp; Partners | Baraka Awards Kenya">
+<meta name="twitter:description" content="Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026.">
+<meta name="twitter:image" content="<?= OG_IMAGE ?>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Baraka Awards Kenya recognises and rewards companies, businesses, individuals, and brands that demonstrate exceptional online presence and impact across East Africa.","foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+</script>
+
+<!-- JSON-LD: BreadcrumbList -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Sponsors","item":"<?= SITE_URL ?>/sponsors"}]}
+</script>
+
+<!-- JSON-LD: WebPage -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Sponsors & Partners | Baraka Awards Kenya","url":"<?= SITE_URL ?>/sponsors","description":"Meet the sponsors and partners powering the Baraka Awards Kenya Gala 2026."}
+</script>
+
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/responsive.css" rel="stylesheet">

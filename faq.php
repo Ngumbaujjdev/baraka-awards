@@ -10,10 +10,10 @@ include 'libs/App.php';
 <!-- SEO -->
 <title>Frequently Asked Questions | Baraka Awards Kenya</title>
 <meta name="description" content="Find answers to common questions about Baraka Awards Kenya — how to vote, nominate, buy tickets, and participate in events across Kenya.">
-<meta name="keywords" content="Baraka Awards Kenya FAQ, how to vote Kenya, how to nominate Kenya, event tickets FAQ, Baraka Awards Kenya help">
+<meta name="keywords" content="Baraka Awards FAQ, awards platform questions Kenya, how to vote Kenya, how to nominate, Baraka Awards help, awards ceremony questions Nairobi, Baraka Awards guide, voting FAQ Kenya, nominations FAQ Kenya, event tickets help, Baraka Awards terms, awards platform support Kenya">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://barakaawards.tuqiohub.africa/faq.php">
+<link rel="canonical" href="https://barakaawards.tuqiohub.africa/faq">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Frequently Asked Questions | Baraka Awards Kenya">
@@ -27,7 +27,7 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://barakaawards.tuqiohub.africa/faq.php">
+<meta property="og:url" content="https://barakaawards.tuqiohub.africa/faq">
 <meta property="og:description" content="Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://barakaawards.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://barakaawards.tuqiohub.africa/faq.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://barakaawards.tuqiohub.africa/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://barakaawards.tuqiohub.africa/faq"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa/faq.php","description":"Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Frequently Asked Questions | Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa/faq","description":"Find answers to common questions about Baraka Awards Kenya events, voting, nominations, and tickets."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

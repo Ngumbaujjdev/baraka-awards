@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tuqiohub.africa/sitemap.xml
+Sitemap: https://barakaawards.tuqiohub.africa/sitemap.xml

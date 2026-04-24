@@ -13,10 +13,10 @@ $polls = $resp['data'] ?? [];
 <!-- SEO -->
 <title>Community Polls | Baraka Awards Kenya</title>
 <meta name="description" content="Participate in live community polls on Baraka Awards Kenya. Share your opinion and see real-time results on topics that matter in Kenya.">
-<meta name="keywords" content="live polls Kenya, community polls, Baraka Awards Kenya polls, online voting polls, real-time results Kenya">
+<meta name="keywords" content="Kenya polls online, live polls Baraka Awards, audience polls Nairobi, interactive polls Kenya, real-time voting Kenya, event polls East Africa, Baraka Awards live poll, community polls Kenya, awards poll 2026, Nairobi voting poll, audience choice Kenya, online poll awards">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/polls.php">
+<link rel="canonical" href="<?= SITE_URL ?>/polls">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Community Polls | Baraka Awards Kenya">
@@ -30,7 +30,7 @@ $polls = $resp['data'] ?? [];
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/polls.php">
+<meta property="og:url" content="<?= SITE_URL ?>/polls">
 <meta property="og:description" content="Participate in live community polls on Baraka Awards Kenya and see real-time results.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -47,17 +47,17 @@ $polls = $resp['data'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Polls","item":"<?= SITE_URL ?>/polls.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Polls","item":"<?= SITE_URL ?>/polls"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Baraka Awards Kenya","url":"<?= SITE_URL ?>/polls.php","description":"Participate in live community polls on Baraka Awards Kenya."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Community Polls | Baraka Awards Kenya","url":"<?= SITE_URL ?>/polls","description":"Participate in live community polls on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

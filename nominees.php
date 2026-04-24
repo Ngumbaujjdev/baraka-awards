@@ -54,10 +54,10 @@ $globalIdx = 0;
 <!-- SEO -->
 <title>Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?> | Baraka Awards Kenya</title>
 <meta name="description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Browse all categories and vote for your favourites on Baraka Awards Kenya.">
-<meta name="keywords" content="nominees Kenya, finalists awards Kenya, vote nominees, <?= htmlspecialchars($eventName) ?>, Baraka Awards Kenya voting">
+<meta name="keywords" content="Baraka Awards nominees 2026, Kenya award nominations, nominated brands Kenya, best in Kenya nominees, award candidates East Africa, online excellence nominees, social media award nominees Kenya, vote nominees Kenya, Baraka Awards finalists, East Africa awards 2026, Nairobi gala nominees">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/nominees.php">
+<link rel="canonical" href="<?= SITE_URL ?>/nominees">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominees &amp; Finalists | <?= htmlspecialchars($eventName) ?>">
@@ -71,7 +71,7 @@ $globalIdx = 0;
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/nominees.php">
+<meta property="og:url" content="<?= SITE_URL ?>/nominees">
 <meta property="og:description" content="Meet the nominees and finalists for <?= htmlspecialchars($eventName) ?>. Vote on Baraka Awards Kenya.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -88,17 +88,17 @@ $globalIdx = 0;
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.facebook.com/barakaawards","https://www.instagram.com/barakaawardske/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"<?= SITE_URL ?>/nominees.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominees","item":"<?= SITE_URL ?>/nominees"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominees.php","description":"Meet the nominees and finalists. Vote for your favourites on Baraka Awards Kenya."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominees & Finalists | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominees","description":"Meet the nominees and finalists. Vote for your favourites on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

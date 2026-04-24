@@ -71,10 +71,10 @@ if ($categoryParam !== '') {
 <!-- SEO -->
 <title>Nominate | Baraka Awards Kenya</title>
 <meta name="description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans in leadership, business, community, and more. Nominations are open now.">
-<meta name="keywords" content="nominate Kenya, submit nomination awards, Baraka Awards Kenya nominations, Kenya awards nomination, recognise outstanding Kenyans">
+<meta name="keywords" content="nominate Baraka Awards Kenya, submit nomination Kenya, award nominations 2026, nominate business Kenya, nominate person of the year Kenya, East Africa award submission, online excellence nomination, nominate brand Kenya, recognition awards Kenya, Baraka Awards submit, nominate online Kenya, awards entry Kenya">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/nominate.php">
+<link rel="canonical" href="<?= SITE_URL ?>/nominate">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Nominate | Baraka Awards Kenya">
@@ -88,7 +88,7 @@ if ($categoryParam !== '') {
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/nominate.php">
+<meta property="og:url" content="<?= SITE_URL ?>/nominate">
 <meta property="og:description" content="Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans in leadership, business, and community.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -105,17 +105,17 @@ if ($categoryParam !== '') {
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.facebook.com/share/p/1DJyLwtvqf/","https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.facebook.com/barakaawards","https://www.instagram.com/barakaawardske/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"<?= SITE_URL ?>/nominate.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Nominate","item":"<?= SITE_URL ?>/nominate"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominate.php","description":"Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Nominate | Baraka Awards Kenya","url":"<?= SITE_URL ?>/nominate","description":"Submit a nomination on Baraka Awards Kenya. Recognise outstanding Kenyans."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

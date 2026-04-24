@@ -54,10 +54,10 @@ if (empty($posts)) {
 <!-- SEO -->
 <title>Articles &amp; News | Baraka Awards Kenya</title>
 <meta name="description" content="Stay up to date with the latest news, articles, and event updates from Baraka Awards Kenya — Kenya's premier event management platform.">
-<meta name="keywords" content="Baraka Awards Kenya blog, Kenya events news, awards articles Kenya, event updates Nairobi, Baraka Awards Kenya articles">
+<meta name="keywords" content="Baraka Awards blog, Kenya awards news, online excellence articles, East Africa awards updates, Nairobi events news, award industry Kenya, Baraka Awards Kenya articles, entertainment awards blog, gala news Kenya, awards announcements Kenya, Kenya brand news, East Africa events coverage">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/blog.php">
+<link rel="canonical" href="<?= SITE_URL ?>/blog">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Articles & News | Baraka Awards Kenya">
@@ -71,7 +71,7 @@ if (empty($posts)) {
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/blog.php">
+<meta property="og:url" content="<?= SITE_URL ?>/blog">
 <meta property="og:description" content="Latest news, articles, and event updates from Baraka Awards Kenya.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -88,17 +88,17 @@ if (empty($posts)) {
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Blog","item":"<?= SITE_URL ?>/blog.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Blog","item":"<?= SITE_URL ?>/blog"}]}
 </script>
 
 <!-- JSON-LD: Blog -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Baraka Awards Kenya","url":"<?= SITE_URL ?>/blog.php","description":"Latest news, articles, and updates from Baraka Awards Kenya.","publisher":{"@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>"}}
+{"@context":"https://schema.org","@type":"Blog","name":"Articles & News | Baraka Awards Kenya","url":"<?= SITE_URL ?>/blog","description":"Latest news, articles, and updates from Baraka Awards Kenya.","publisher":{"@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>"}}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

@@ -41,10 +41,10 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <!-- SEO -->
 <title>Upcoming Events | Baraka Awards Kenya</title>
 <meta name="description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
-<meta name="keywords" content="Kenya events, upcoming events Nairobi, award ceremonies Kenya, conferences Kenya, Baraka Awards Kenya events">
+<meta name="keywords" content="Baraka Awards events 2026, Kenya award ceremony schedule, Nairobi gala dinner 2026, upcoming events Kenya, East Africa awards events, award night Kenya, live events Nairobi, entertainment events Kenya, corporate events Nairobi, Baraka Awards Kenya, online excellence events, award ceremony tickets Kenya">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/events.php">
+<link rel="canonical" href="<?= SITE_URL ?>/events">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Upcoming Events | Baraka Awards Kenya">
@@ -58,7 +58,7 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/events.php">
+<meta property="og:url" content="<?= SITE_URL ?>/events">
 <meta property="og:description" content="Browse all upcoming and past events on Baraka Awards Kenya — award ceremonies, conferences, and live experiences across Kenya.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -75,17 +75,17 @@ $sidebarUpcoming = array_slice($upcoming, 0, 5);
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Events","item":"<?= SITE_URL ?>/events.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Events","item":"<?= SITE_URL ?>/events"}]}
 </script>
 
 <!-- JSON-LD: WebPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Baraka Awards Kenya","url":"<?= SITE_URL ?>/events.php","description":"Browse all upcoming and past events on Baraka Awards Kenya."}
+{"@context":"https://schema.org","@type":"WebPage","name":"Upcoming Events | Baraka Awards Kenya","url":"<?= SITE_URL ?>/events","description":"Browse all upcoming and past events on Baraka Awards Kenya."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

@@ -12,7 +12,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 <!-- SEO -->
 <title>About Baraka Awards Kenya | East Africa's Entertainment & Cultural Awards</title>
 <meta name="description" content="Learn about Baraka Awards Kenya — Kenya's premier entertainment and cultural awards ceremony, celebrating outstanding artists, producers, directors, and photographers.">
-<meta name="keywords" content="about Baraka Awards Kenya, entertainment and cultural awards East Africa, Baraka Awards Kenya Gala Nairobi">
+<meta name="keywords" content="about Baraka Awards Kenya, Kenya entertainment awards ceremony, East Africa cultural awards, Nairobi awards gala, Baraka Awards history, online excellence recognition Kenya, award ceremony Nairobi, who is Baraka Awards, Kenya brand awards organiser, Baraka Awards team, awards platform East Africa, Nairobi gala 2026">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://barakaawards.tuqiohub.africa/about">
@@ -46,7 +46,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"https://barakaawards.tuqiohub.africa","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->

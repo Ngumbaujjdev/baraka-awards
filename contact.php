@@ -10,10 +10,10 @@ include 'libs/App.php';
 <!-- SEO -->
 <title>Contact Us | Baraka Awards Kenya</title>
 <meta name="description" content="Get in touch with Baraka Awards Kenya. Contact us for event management inquiries, partnerships, nominations, or general support. Email: <?= ADMIN_EMAIL ?>">
-<meta name="keywords" content="contact Baraka Awards Kenya, Baraka Awards Kenya support, event management inquiry Kenya, Baraka Awards Kenya email, Nairobi events contact">
+<meta name="keywords" content="contact Baraka Awards Kenya, Baraka Awards support, awards inquiry Kenya, Baraka Awards email phone, Nairobi awards contact, get in touch Baraka Awards, Baraka Awards Nairobi office, awards platform contact Kenya, customer support awards Kenya, Baraka Awards helpline, event inquiry Kenya">
 <meta name="author" content="Baraka Awards Kenya">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="<?= SITE_URL ?>/contact.php">
+<link rel="canonical" href="<?= SITE_URL ?>/contact">
 
 <!-- Schema.org microdata -->
 <meta itemprop="name" content="Contact Us | Baraka Awards Kenya">
@@ -27,7 +27,7 @@ include 'libs/App.php';
 <meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="<?= SITE_URL ?>/contact.php">
+<meta property="og:url" content="<?= SITE_URL ?>/contact">
 <meta property="og:description" content="Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support.">
 <meta property="og:site_name" content="Baraka Awards Kenya">
 
@@ -44,17 +44,17 @@ include 'libs/App.php';
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json">
-{"@context":"https://schema.org/","@type":"Organization","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support"},"sameAs":["https://www.instagram.com/p/DV0RJ11ii-7/?igsh=MXNiemxwbXdzMzJ6aw==","https://www.facebook.com/share/p/1DJyLwtvqf/","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
+{"@context":"https://schema.org/","@type":"Organization","@id":"https://barakaawards.tuqiohub.africa/#organization","logo":"https://barakaawards.tuqiohub.africa/assets/images/favicon/favicon-96x96.png","name":"Baraka Awards Kenya","url":"<?= SITE_URL ?>","description":"Kenya's premier entertainment and cultural awards platform — organised by the Baraka Awards Kenya team.","contactPoint":{"@type":"ContactPoint","telephone":"+254710388288","email":"<?= ADMIN_EMAIL ?>","contactType":"customer support","availableLanguage":"en-US"},"foundingDate":"2024","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"Southfield Mall, Mombasa Road","addressLocality":"Nairobi","addressRegion":"Nairobi","addressCountry":"Kenya"}},"sameAs":["https://www.instagram.com/barakaawardske/","https://www.facebook.com/barakaawards","https://twitter.com/barakaawards","https://www.tiktok.com/@barakaawardske"]}
 </script>
 
 <!-- JSON-LD: BreadcrumbList -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Contact","item":"<?= SITE_URL ?>/contact.php"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"<?= SITE_URL ?>/"},{"@type":"ListItem","position":2,"name":"Contact","item":"<?= SITE_URL ?>/contact"}]}
 </script>
 
 <!-- JSON-LD: ContactPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Baraka Awards Kenya","url":"<?= SITE_URL ?>/contact.php","description":"Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support."}
+{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Us | Baraka Awards Kenya","url":"<?= SITE_URL ?>/contact","description":"Get in touch with Baraka Awards Kenya for event management inquiries, partnerships, or support."}
 </script>
 <link href="<?= SITE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?= SITE_URL ?>/assets/css/style.css" rel="stylesheet">

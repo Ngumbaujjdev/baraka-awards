@@ -13,11 +13,11 @@ define("ADMIN_EMAIL",       "info@barakaawards.tuqiohub.africa");
 define("SITE_PHONE", "+254710388288"); // WhatsApp & calls
 
 // ─── Social ────────────────────────────────────────────────────────────────
-define("SOCIAL_FACEBOOK",  "#");
-define("SOCIAL_INSTAGRAM", "#");
-define("SOCIAL_TWITTER",   "#");
-define("SOCIAL_LINKEDIN",  "#");
-define("SOCIAL_TIKTOK",    "#");
+define("SOCIAL_FACEBOOK",  "https://www.facebook.com/barakaawards");
+define("SOCIAL_INSTAGRAM", "https://www.instagram.com/barakaawardske");
+define("SOCIAL_TWITTER",   "https://twitter.com/barakaawards");
+define("SOCIAL_LINKEDIN",  "");
+define("SOCIAL_TIKTOK",    "https://www.tiktok.com/@barakaawardske");
 
 // ─── OG image ──────────────────────────────────────────────────────────────
 define("OG_IMAGE", $isLocal
