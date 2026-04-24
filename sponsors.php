@@ -2,7 +2,7 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$galaResp    = tuqio_api('/api/public/events/dfa-gala-2026');
+$galaResp    = tuqio_api('/api/public/events/baraka-awards-2026');
 $galaEvent   = $galaResp['data'] ?? $galaResp ?? [];
 $allSponsors = $galaEvent['sponsors'] ?? [];
 

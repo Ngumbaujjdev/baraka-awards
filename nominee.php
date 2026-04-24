@@ -3,7 +3,7 @@ include 'config/config.php';
 include 'libs/App.php';
 
 $nomineeSlug = trim($_GET['slug'] ?? '');
-$eventSlug   = trim($_GET['event'] ?? 'dfa-gala-2026');
+$eventSlug   = trim($_GET['event'] ?? 'baraka-awards-2026');
 
 if (!$nomineeSlug) {
     header('Location: ' . SITE_URL . '/nominees?event=' . urlencode($eventSlug));

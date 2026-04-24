@@ -1063,7 +1063,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
         </div>
         <?php endforeach; ?>
         <div class="text-center" style="margin-top:32px;">
-            <a href="<?= SITE_URL ?>/event-detail?slug=dfa-gala-2026" class="theme-btn btn-style-one">
+            <a href="<?= SITE_URL ?>/event-detail?slug=baraka-awards-2026" class="theme-btn btn-style-one">
                 <span class="btn-title">Full Event Details</span>
             </a>
         </div>

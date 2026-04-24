@@ -165,10 +165,10 @@ include 'libs/App.php';
                     <div class="sidebar-widget mb-4">
                         <h5 class="sidebar-title">Quick Actions</h5>
                         <nav>
-                            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-users me-2" style="color:#BF9E44;"></i>View Nominees</a>
-                            <a href="<?= SITE_URL ?>/nominees?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-vote-yea me-2" style="color:#BF9E44;"></i>Vote Now</a>
-                            <a href="<?= SITE_URL ?>/tickets?event=dfa-gala-2026"  class="faq-sidebar-link"><i class="fas fa-ticket-alt me-2" style="color:#BF9E44;"></i>Buy Tickets</a>
-                            <a href="<?= SITE_URL ?>/nominate?event=dfa-gala-2026" class="faq-sidebar-link"><i class="fas fa-user-plus me-2" style="color:#BF9E44;"></i>Submit a Nomination</a>
+                            <a href="<?= SITE_URL ?>/nominees?event=baraka-awards-2026" class="faq-sidebar-link"><i class="fas fa-users me-2" style="color:#BF9E44;"></i>View Nominees</a>
+                            <a href="<?= SITE_URL ?>/nominees?event=baraka-awards-2026" class="faq-sidebar-link"><i class="fas fa-vote-yea me-2" style="color:#BF9E44;"></i>Vote Now</a>
+                            <a href="<?= SITE_URL ?>/tickets?event=baraka-awards-2026"  class="faq-sidebar-link"><i class="fas fa-ticket-alt me-2" style="color:#BF9E44;"></i>Buy Tickets</a>
+                            <a href="<?= SITE_URL ?>/nominate?event=baraka-awards-2026" class="faq-sidebar-link"><i class="fas fa-user-plus me-2" style="color:#BF9E44;"></i>Submit a Nomination</a>
                             <a href="<?= SITE_URL ?>/contact"                       class="faq-sidebar-link"><i class="fas fa-envelope me-2" style="color:#BF9E44;"></i>Contact Us</a>
                         </nav>
                     </div>
