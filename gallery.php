@@ -2,7 +2,17 @@
 include 'config/config.php';
 include 'libs/App.php';
 
-$resp   = tuqio_api('/api/public/events/dfa-gala-2026/gallery');
+// Resolve active Baraka Awards event slug dynamically
+$_evListResp = tuqio_api('/api/public/events?client=' . CLIENT_SLUG);
+$_allEvs     = $_evListResp['data'] ?? [];
+usort($_allEvs, fn($a, $b) => strcmp($a['start_date'] ?? '9999-12-31', $b['start_date'] ?? '9999-12-31'));
+$_activeSlug = null;
+foreach ($_allEvs as $_e) {
+    if (!$_activeSlug && !empty($_e['banner_image'])) { $_activeSlug = $_e['slug']; break; }
+}
+if (!$_activeSlug && !empty($_allEvs)) { $_activeSlug = end($_allEvs)['slug'] ?? null; }
+
+$resp   = $_activeSlug ? tuqio_api('/api/public/events/' . urlencode($_activeSlug) . '/gallery') : [];
 $photos = $resp['photos'] ?? [];
 ?>
 <!DOCTYPE html>
