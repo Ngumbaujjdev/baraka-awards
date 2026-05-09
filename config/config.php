@@ -25,7 +25,8 @@ define("OG_IMAGE", $isLocal
     : "https://barakaawards.tuqiohub.africa/assets/images/og/baraka-og.webp");
 
 // ─── API ────────────────────────────────────────────────────────────────────
-define("API_BASE", $isLocal ? "http://localhost:8000" : "https://platform.tuqiohub.africa");
+define("API_BASE",          $isLocal ? "http://localhost:8000" : "https://tuqio.hekimaconsult.co.ke");
+define("API_BASE_FALLBACK", $isLocal ? "http://localhost:8000" : "https://platform.tuqiohub.africa");
 define("API_STORAGE", API_BASE . "/storage/");
 
 // ─── Admin (organizer platform) ────────────────────────────────────────────
@@ -83,17 +84,23 @@ function tuqio_api(string $path, int $ttl = 60): array {
         if ($cached !== null) return $cached;
     }
 
-    $url = API_BASE . $path;
-    $ch  = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 6,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTPHEADER     => ['Accept: application/json'],
-    ]);
-    $body = curl_exec($ch);
-    curl_close($ch);
-    $data = json_decode($body ?: '[]', true) ?? [];
+    $data = [];
+    foreach ([API_BASE, API_BASE_FALLBACK] as $base) {
+        $ch = curl_init($base . $path);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 6,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTPHEADER     => ['Accept: application/json'],
+        ]);
+        $body   = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($body && $status >= 200 && $status < 500) {
+            $data = json_decode($body, true) ?? [];
+            break;
+        }
+    }
 
     if ($ttl > 0 && !empty($data)) {
         tuqio_api_cache_set($cacheKey, $data, $ttl);
@@ -104,18 +111,23 @@ function tuqio_api(string $path, int $ttl = 60): array {
 
 // ─── API helper (POST) ─────────────────────────────────────────────────────
 function tuqio_api_post(string $path, array $data): array {
-    $ch = curl_init(API_BASE . $path);
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 8,
-        CURLOPT_POST           => true,
-        CURLOPT_POSTFIELDS     => json_encode($data),
-        CURLOPT_HTTPHEADER     => ['Content-Type: application/json', 'Accept: application/json'],
-    ]);
-    $body   = curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    $result = json_decode($body ?: '{}', true) ?? [];
-    $result['_http_status'] = $status;
-    return $result;
+    foreach ([API_BASE, API_BASE_FALLBACK] as $base) {
+        $ch = curl_init($base . $path);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 8,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => json_encode($data),
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json', 'Accept: application/json'],
+        ]);
+        $body   = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($body && $status >= 200 && $status < 500) {
+            $result = json_decode($body, true) ?? [];
+            $result['_http_status'] = $status;
+            return $result;
+        }
+    }
+    return ['_http_status' => 0];
 }
