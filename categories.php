@@ -297,7 +297,7 @@ $eventName = $galaEvent['name'] ?? 'Baraka Awards Kenya Gala 2026';
                 <?php if ($voteOpens): ?>
                 <div class="info-row"><i class="fas fa-vote-yea"></i><div><strong>Voting opens</strong><br><?= date('d M Y', $voteOpens) ?><?= $voteCloses ? ' &ndash; '.date('d M Y', $voteCloses) : '' ?></div></div>
                 <?php endif; ?>
-                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>30th May 2026 &mdash; Villa Rosa Kempinski, Nairobi</div></div>
+                <div class="info-row"><i class="fas fa-star"></i><div><strong>Gala Night</strong><br>3rd Oct 2026 &mdash; Expressway Lounge, Nairobi</div></div>
             </div>
 
             <!-- Quick links -->

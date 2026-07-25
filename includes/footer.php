@@ -102,7 +102,7 @@
 
                         <!-- CTA block -->
                         <div style="margin-top:24px;background:rgba(191,158,68,0.15);border:1px solid rgba(191,158,68,0.3);border-radius:8px;padding:16px;text-align:center;">
-                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">30th May 2026 — Southfield Mall, Mombasa Road. Tickets from KES 500.</p>
+                            <p style="color:#fff;font-size:.85rem;margin-bottom:10px;">3rd Oct 2026 — Expressway Lounge, Nairobi. Tickets from KES 500.</p>
                             <a href="<?php echo SITE_URL; ?>/tickets"
                                class="theme-btn btn-style-one"
                                style="font-size:.8rem;padding:8px 18px;">
@@ -120,8 +120,8 @@
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
                                 <span style="color:#BF9E44;font-size:18px;margin-top:2px;min-width:20px;"><i class="flaticon-location"></i></span>
                                 <div>
-                                    <span style="color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.6;">Southfield Mall, Mombasa Road, Nairobi</span><br>
-                                    <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Gala Venue — 30th May 2026</span>
+                                    <span style="color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.6;">Expressway Lounge, Nairobi</span><br>
+                                    <span style="color:rgba(255,255,255,0.45);font-size:.8rem;">Gala Venue — 3rd Oct 2026</span>
                                 </div>
                             </li>
                             <li style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">

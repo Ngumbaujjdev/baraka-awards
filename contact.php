@@ -243,7 +243,7 @@ include 'libs/App.php';
                         <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <div class="ci-label">Location</div>
-                            <div class="ci-value">Southfield Mall, Mombasa Road<br>Nairobi, Kenya</div>
+                            <div class="ci-value">Expressway Lounge<br>Nairobi, Kenya</div>
                         </div>
                     </div>
                     <div class="ci-row">

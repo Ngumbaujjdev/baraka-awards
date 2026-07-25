@@ -36,7 +36,15 @@ if (!empty($response['groups'])) {
     }
 }
 if (!empty($response['ungrouped'])) {
-    $sidebarGroups['Other'] = $response['ungrouped'];
+    if (!empty($sidebarGroups)) {
+        // Real groups exist elsewhere — bucket the leftovers under "Other"
+        $sidebarGroups['Other'] = $response['ungrouped'];
+    } else {
+        // No real groups at all — treat as the flat fallback so the
+        // group filter auto-hides instead of showing a pointless
+        // single "Other" option
+        $sidebarGroups['__root__'] = $response['ungrouped'];
+    }
 }
 // Fallback: no groups — show flat list
 if (empty($sidebarGroups) && !empty($categories)) {
@@ -204,6 +212,9 @@ $globalIdx = 0;
                         </select>
                     </div>
                 </div>
+                <!-- Search list view (shown while typing, replaces tab grid) -->
+                <div id="nom-sr-list"></div>
+
                 <div id="nom-no-results">
                     <i class="fas fa-search" style="font-size:2.5rem;opacity:.2;display:block;margin-bottom:12px;"></i>
                     No nominees found matching your search.
@@ -228,7 +239,14 @@ $globalIdx = 0;
                             <h3 style="color:#0a0a0a;font-weight:700;font-size:1.4rem;margin-bottom:6px;">
                                 <?= htmlspecialchars($category['name']) ?>
                             </h3>
-                            <?php if (!empty($category['description'])): ?>
+                            <?php
+                            $_regClosed = $isVotingOpen
+                                || in_array($event['current_phase'] ?? '', ['on_sale','voting','event_day','results','ended'])
+                                || (!empty($event['registration_closes_at']) && strtotime($event['registration_closes_at']) < $now);
+                            ?>
+                            <?php if ($_regClosed): ?>
+                            <p style="color:#777;font-size:.9rem;margin:0;">Cast your vote today</p>
+                            <?php elseif (!empty($category['description'])): ?>
                             <p style="color:#777;font-size:.9rem;margin:0;"><?= htmlspecialchars($category['description']) ?></p>
                             <?php endif; ?>
                         </div>
@@ -251,7 +269,7 @@ $globalIdx = 0;
                                 $color   = $initialsColors[$globalIdx % 4];
                                 $globalIdx++;
                             ?>
-                            <div class="col-md-4 col-sm-6 col-12" style="margin-bottom:30px;">
+                            <div class="col-md-4 col-6" style="margin-bottom:30px;">
                                 <div class="nominee-card"
                                      data-name="<?= htmlspecialchars($cName) ?>"
                                      data-title="<?= htmlspecialchars($candidate['title'] ?? $candidate['subtitle'] ?? '') ?>"
@@ -273,8 +291,9 @@ $globalIdx = 0;
                                      data-contact-email="<?= htmlspecialchars($candidate['contact_email'] ?? '') ?>"
                                      data-contact-phone="<?= htmlspecialchars($candidate['contact_phone'] ?? '') ?>">
 
-                                    <?php if (!empty($candidate['is_winner'])): ?>
-                                    <div class="winner-badge"><i class="fas fa-crown" style="margin-right:4px;"></i>Winner</div>
+                                    <div class="nominee-photo-panel">
+                                    <?php if ($votes > 0 && $votes === $maxVotes): ?>
+                                    <div class="rank-badge">1</div>
                                     <?php endif; ?>
                                     <?php if ($cImage): ?>
                                     <img src="<?= htmlspecialchars($cImage) ?>"
@@ -285,45 +304,42 @@ $globalIdx = 0;
                                     <?php else: ?>
                                     <div class="nominee-initials" style="background:<?= $color ?>;"><?= $initials ?></div>
                                     <?php endif; ?>
+                                    </div>
 
+                                    <div class="nominee-body">
                                     <h4 class="nominee-name"><?= htmlspecialchars($cName) ?></h4>
                                     <?php if (!empty($candidate['subtitle'])): ?>
                                     <div class="nominee-title"><?= htmlspecialchars($candidate['subtitle']) ?></div>
+                                    <?php else: ?>
+                                    <div class="nominee-title-spacer"></div>
                                     <?php endif; ?>
-                                    <?php if (!empty($candidate['description'])): ?>
-                                    <div class="nominee-location">
-                                        <i class="fa fa-info-circle"></i>
-                                        <?= htmlspecialchars(mb_strimwidth($candidate['description'], 0, 60, '…')) ?>
+                                    <div class="vote-stats">
+                                        <span class="vote-count-wrap"><i class="fas fa-heart"></i> <span class="vote-count" data-candidate-id="<?= (int)($candidate['id'] ?? 0) ?>"><?= number_format($votes) ?></span></span>
+                                        <span class="vote-pct"><?= $pct ?>% of top</span>
                                     </div>
-                                    <?php endif; ?>
-
                                     <div class="vote-bar-container">
                                         <div class="vote-bar-fill" style="width:<?= $pct ?>%;"
                                              data-candidate-id="<?= (int)($candidate['id'] ?? 0) ?>-bar"></div>
                                     </div>
-                                    <div class="vote-stats">
-                                        <span>Votes</span>
-                                        <span class="vote-count" data-candidate-id="<?= (int)($candidate['id'] ?? 0) ?>">
-                                            <?= number_format($votes) ?>
-                                        </span>
-                                    </div>
 
                                     <div class="nominee-card-footer">
                                         <?php if ($isVotingOpen): ?>
-                                        <a class="theme-btn btn-style-one"
-                                           style="font-size:.8rem;padding:8px 20px;display:inline-block;"
-                                           href="<?= htmlspecialchars($voteBundleUrl . '&nominee=' . (int)($candidate['id'] ?? 0)) ?>"
+                                        <div class="nom-vote-btn-wrap">
+                                        <a class="nom-vote-btn"
+                                           href="<?= htmlspecialchars($voteBundleUrl . '&nominee=' . (int)($candidate['id'] ?? 0) . '&nominee_slug=' . urlencode($candidate['slug'] ?? '')) ?>"
                                            onclick="event.stopPropagation();">
-                                            <span class="btn-title"><i class="fas fa-vote-yea me-1"></i> Vote Now</span>
+                                            <i class="fas fa-bolt"></i> Vote Now
                                         </a>
+                                        </div>
                                         <?php else: ?>
-                                        <span style="font-size:.8rem;color:#aaa;font-style:italic;">Voting not open</span>
+                                        <span style="font-size:.78rem;color:#ccc;font-style:italic;display:block;text-align:center;padding:8px 0;">Voting not open</span>
                                         <?php endif; ?>
                                         <a href="<?= SITE_URL ?>/nominee?slug=<?= urlencode($candidate['slug'] ?? '') ?>&event=<?= urlencode($activeSlug) ?>"
                                            onclick="event.stopPropagation();"
                                            style="font-size:.76rem;color:#be9b3f;font-weight:600;text-decoration:none;display:block;text-align:center;margin-top:6px;">
                                             View Profile &rarr;
                                         </a>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -747,21 +763,18 @@ $_nomConfigJson = htmlspecialchars(json_encode([
             var votes  = parseInt(c.votes_count || 0, 10);
             var pct    = Math.min(100, Math.round(votes / maxV * 100));
             var img    = c.image || '';
-            var badge  = c.is_winner ? '<div class="winner-badge"><i class="fas fa-crown" style="margin-right:4px;"></i>Winner</div>' : '';
+            var badge  = (votes > 0 && votes === maxV) ? '<div class="rank-badge">1</div>' : '';
             var photo  = img
                 ? '<img src="' + esc(img) + '" alt="' + esc(name) + '" class="nominee-photo" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
                   + '<div class="nominee-initials" style="display:none;background:' + color + ';">' + esc(ini) + '</div>'
                 : '<div class="nominee-initials" style="background:' + color + ';">' + esc(ini) + '</div>';
             var subtitle = c.subtitle ? '<div class="nominee-title">' + esc(c.subtitle) + '</div>' : '';
-            var desc     = c.description || '';
-            var descT    = desc.length > 60 ? desc.substring(0, 60) + '…' : desc;
-            var descHtml = descT ? '<div class="nominee-location"><i class="fa fa-info-circle"></i> ' + esc(descT) + '</div>' : '';
             var profileLink = '<a href="' + esc(NOMINEE_PROFILE_URL + '?slug=' + encodeURIComponent(c.slug || '') + '&event=' + encodeURIComponent(EVENT_SLUG)) + '" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:600;text-decoration:none;display:block;text-align:center;margin-top:6px;">View Profile &rarr;</a>';
             var voteHtml = IS_VOTING_OPEN
-                ? '<a class="theme-btn btn-style-one" style="font-size:.8rem;padding:8px 20px;display:inline-block;" href="' + esc(VOTE_BUNDLE_URL + '&nominee=' + (c.id || 0)) + '" onclick="event.stopPropagation();"><span class="btn-title"><i class="fas fa-vote-yea me-1"></i> Vote Now</span></a>'
-                : '<span style="font-size:.8rem;color:#aaa;font-style:italic;">Voting not open</span>';
+                ? '<div class="nom-vote-btn-wrap"><a class="nom-vote-btn" href="' + esc(VOTE_BUNDLE_URL + '&nominee=' + (c.id || 0) + '&nominee_slug=' + encodeURIComponent(c.slug || '')) + '" onclick="event.stopPropagation();"><i class="fas fa-bolt"></i> Vote Now</a></div>'
+                : '<span style="font-size:.78rem;color:#ccc;font-style:italic;display:block;text-align:center;padding:8px 0;">Voting not open</span>';
             var socials = JSON.stringify(c.social_links || []);
-            html += '<div class="col-md-4 col-sm-6 col-12" style="margin-bottom:30px;">'
+            html += '<div class="col-md-4 col-6" style="margin-bottom:30px;">'
                   + '<div class="nominee-card"'
                   + ' data-name="'           + escA(name) + '"'
                   + ' data-title="'          + escA(c.subtitle || '') + '"'
@@ -782,13 +795,14 @@ $_nomConfigJson = htmlspecialchars(json_encode([
                   + ' data-socials="'        + escA(socials) + '"'
                   + ' data-contact-email="'  + escA(c.contact_email || '') + '"'
                   + ' data-contact-phone="'  + escA(c.contact_phone || '') + '">'
-                  + badge + photo
+                  + '<div class="nominee-photo-panel">' + badge + photo + '</div>'
+                  + '<div class="nominee-body">'
                   + '<h4 class="nominee-name">' + esc(name) + '</h4>'
-                  + subtitle + descHtml
+                  + (subtitle || '<div class="nominee-title-spacer"></div>')
+                  + '<div class="vote-stats"><span class="vote-count-wrap"><i class="fas fa-heart"></i> <span class="vote-count" data-candidate-id="' + (c.id||0) + '">' + votes.toLocaleString() + '</span></span><span class="vote-pct">' + pct + '% of top</span></div>'
                   + '<div class="vote-bar-container"><div class="vote-bar-fill" style="width:' + pct + '%;" data-candidate-id="' + (c.id||0) + '-bar"></div></div>'
-                  + '<div class="vote-stats"><span>Votes</span><span class="vote-count" data-candidate-id="' + (c.id||0) + '">' + votes.toLocaleString() + '</span></div>'
                   + '<div class="nominee-card-footer">' + voteHtml + profileLink + '</div>'
-                  + '</div></div>';
+                  + '</div></div></div>';
         });
         return html + '</div>';
     }
@@ -877,10 +891,14 @@ $_allCatOptsJson   = json_encode(array_values(array_map(fn($c) => [
 ], $categories)));
 ?>
 (function() {
-    var $input = document.getElementById('nom-search');
-    var $clear = document.getElementById('nom-search-clear');
-    var $icon  = document.getElementById('nom-search-icon');
-    var $noRes = document.getElementById('nom-no-results');
+    var $input  = document.getElementById('nom-search');
+    var $clear  = document.getElementById('nom-search-clear');
+    var $icon   = document.getElementById('nom-search-icon');
+    var $noRes  = document.getElementById('nom-no-results');
+    var $srList = document.getElementById('nom-sr-list');
+    var $tabCon = document.getElementById('nomineeTabContent');
+
+    var PERSON_SVG_SM = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#c1c9d2" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>';
 
     var GROUP_CATS      = <?= $_groupCatsJson ?>;
     var ALL_CAT_OPTIONS = <?= $_allCatOptsJson ?>;
@@ -992,32 +1010,65 @@ $_allCatOptsJson   = json_encode(array_values(array_map(fn($c) => [
         $icon.style.display  = q.length > 0 ? 'none'  : 'block';
 
         if (q) {
-            // ── Global search: show ALL panes, filter cards across every category ──
-            if (tc) tc.classList.add('search-all');
-            var totalVisible = 0;
-            document.querySelectorAll('.tab-pane').forEach(function(pane) {
-                var paneHits = 0;
-                pane.querySelectorAll('.nominee-card').forEach(function(card) {
-                    var name = (card.getAttribute('data-name') || '').toLowerCase();
-                    var show = name.indexOf(q) !== -1;
-                    card.parentElement.style.display = show ? '' : 'none';
-                    if (show) paneHits++;
+            // ── Search list view — hide grid, show compact rows ──
+            if ($tabCon) $tabCon.style.display = 'none';
+            if ($srList) $srList.classList.add('active');
+
+            var sourceList = window._nomSearchCache || [];
+            var matches = [];
+            if (sourceList.length) {
+                sourceList.forEach(function(m) {
+                    var name = (m.name || '').toLowerCase();
+                    if (name.indexOf(q) !== -1) matches.push(m);
                 });
-                pane.style.display = paneHits === 0 ? 'none' : '';
-                totalVisible += paneHits;
-            });
-            if ($noRes) $noRes.style.display = totalVisible === 0 ? 'block' : 'none';
+            } else {
+                document.querySelectorAll('.nominee-card').forEach(function(card) {
+                    var name = (card.getAttribute('data-name') || '').toLowerCase();
+                    if (name.indexOf(q) !== -1) {
+                        matches.push({
+                            name:    card.getAttribute('data-name')          || '',
+                            title:   card.getAttribute('data-title')         || '',
+                            slug:    card.getAttribute('data-slug')          || '',
+                            image:   card.getAttribute('data-image')         || '',
+                            id:      card.getAttribute('data-candidate-id')  || '',
+                            catName: card.getAttribute('data-category-name') || '',
+                            catSlug: card.getAttribute('data-category')      || '',
+                        });
+                    }
+                });
+            }
+
+            if ($noRes) $noRes.style.display = matches.length === 0 ? 'block' : 'none';
+            var cfg = (function() {
+                try { var el = document.getElementById('nom-page-data'); return el ? JSON.parse(el.getAttribute('data-config') || '{}') : {}; } catch(e) { return {}; }
+            }());
+            var isVot  = cfg.is_voting_open;
+            var vbUrl  = cfg.vote_bundle_url || '';
+            var evSlug = cfg.event_slug      || '';
+            var nomProfBase = '<?= SITE_URL ?>/nominee';
+
+            if ($srList) $srList.innerHTML = matches.map(function(m) {
+                var escapedName = (m.name||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                var avatar = m.image
+                    ? '<img src="'+m.image+'" alt="'+escapedName+'" class="nom-sr-avatar" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
+                      + '<div class="nom-sr-initials" style="display:none;">'+PERSON_SVG_SM+'</div>'
+                    : '<div class="nom-sr-initials">'+PERSON_SVG_SM+'</div>';
+                var voteBtn = isVot ? '<a href="'+vbUrl+'&nominee='+m.id+'&nominee_slug='+encodeURIComponent(m.slug||'')+'" class="nom-sr-vote">Vote Now</a>' : '';
+                var sub = (m.catName ? m.catName : '') + (m.title ? ' &middot; '+m.title : '');
+                var profileUrl = nomProfBase+'?slug='+encodeURIComponent(m.slug)+'&event='+encodeURIComponent(evSlug)+(m.catSlug ? '&category='+encodeURIComponent(m.catSlug) : '');
+                return '<div class="nom-sr-row">'
+                    + avatar
+                    + '<div class="nom-sr-info"><div class="nom-sr-name">'+escapedName+'</div><div class="nom-sr-cat">'+sub+'</div></div>'
+                    + '<div class="nom-sr-actions">'+voteBtn
+                    + '<a href="'+profileUrl+'" class="nom-sr-profile">View Profile &rarr;</a>'
+                    + '</div></div>';
+            }).join('') || '';
             return;
         }
 
-        // ── No query — restore single-pane tab mode ──
-        if (tc) tc.classList.remove('search-all');
-        document.querySelectorAll('.tab-pane').forEach(function(pane) {
-            pane.style.display = '';
-            pane.querySelectorAll('.nominee-card').forEach(function(card) {
-                card.parentElement.style.display = '';
-            });
-        });
+        // ── No query — restore tab grid ──
+        if ($tabCon) $tabCon.style.display = '';
+        if ($srList) { $srList.classList.remove('active'); $srList.innerHTML = ''; }
         if ($noRes) $noRes.style.display = 'none';
 
         // Tab navigation based on cat/group dropdown
@@ -1044,6 +1095,35 @@ $_allCatOptsJson   = json_encode(array_values(array_map(fn($c) => [
 
     $input.addEventListener('input', applyFilters);
     $clear.addEventListener('click', function() { $input.value = ''; applyFilters(); $input.focus(); });
+
+    // Pre-fetch ALL nominees in the background so search finds page 2+ nominees
+    window._nomSearchCache = null;
+    (function() {
+        var API_BASE_S   = '<?= API_BASE ?>';
+        var EVENT_SLUG_S = <?= json_encode($activeSlug ?: '') ?>;
+        if (!EVENT_SLUG_S || !window.jQuery) return;
+        $.get(API_BASE_S + '/api/public/events/' + encodeURIComponent(EVENT_SLUG_S) + '/nominees', { per_page: 500 })
+            .done(function(data) {
+                var all = [];
+                (data.categories || []).forEach(function(cat) {
+                    (cat.nominees || cat.candidates || []).forEach(function(n) {
+                        all.push({
+                            name    : n.name     || '',
+                            title   : n.subtitle || '',
+                            image   : n.image    || '',
+                            catName : cat.name   || '',
+                            catSlug : cat.slug   || '',
+                            slug    : n.slug     || '',
+                            id      : String(n.id || ''),
+                            votes   : n.votes_count || 0
+                        });
+                    });
+                });
+                window._nomSearchCache = all;
+                var $inp = document.getElementById('nom-search');
+                if ($inp && $inp.value.trim()) applyFilters();
+            });
+    }());
 }());
 
 // ── AJAX event switcher ──────────────────────────────────────────────────
@@ -1128,6 +1208,24 @@ window.switchNomEvent = function(slug) {
 
             // Update browser URL without page reload
             history.pushState({ event: slug }, '', 'nominees?event=' + encodeURIComponent(slug));
+
+            // Refresh the search cache for the new event so search finds its nominees
+            window._nomSearchCache = null;
+            var API_BASE_S = '<?= API_BASE ?>';
+            if (window.jQuery && API_BASE_S) {
+                $.get(API_BASE_S + '/api/public/events/' + encodeURIComponent(slug) + '/nominees', { per_page: 500 })
+                    .done(function(data) {
+                        var all = [];
+                        (data.categories || []).forEach(function(cat) {
+                            (cat.nominees || cat.candidates || []).forEach(function(n) {
+                                all.push({ name: n.name||'', title: n.subtitle||'', image: n.image||'',
+                                    catName: cat.name||'', catSlug: cat.slug||'', slug: n.slug||'',
+                                    id: String(n.id||''), votes: n.votes_count||0 });
+                            });
+                        });
+                        window._nomSearchCache = all;
+                    });
+            }
         })
         .catch(function() {
             // Fallback to full page load on any error

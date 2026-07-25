@@ -287,7 +287,7 @@ $aboutSponsors = $galaAbout['sponsors'] ?? [];
                 <div class="step-wrap">
                     <div class="step-num">3</div>
                     <h5>Gala Night</h5>
-                    <p>Winners are announced live on 30th May 2026 at Southfield Mall, Mombasa Road — a night of glam, music, and celebration of Kenya's finest talent.</p>
+                    <p>Winners are announced live on 3rd Oct 2026 at Expressway Lounge, Nairobi — a night of glam, music, and celebration of Kenya's finest talent.</p>
                 </div>
             </div>
         </div>

@@ -195,7 +195,7 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
                     <div class="content-box">
 
-                        <span class="title animate-1">Baraka Awards Kenya 2026 — Southfield Mall, Mombasa Road</span>
+                        <span class="title animate-1">Baraka Awards Kenya 2nd Edition — Expressway Lounge, Nairobi</span>
 
                         <h2 class="animate-2">Celebrating Talent, <br>Culture &amp; Excellence</h2>
 
@@ -249,7 +249,7 @@ $_vC         = !empty($galaEvent['voting_closes_at']) ? strtotime($galaEvent['vo
 
                         <h2 class="animate-2">The Stage is Set. <br>The Vote is Yours.</h2>
 
-                        <div class="text animate-3">30th May 2026 — Baraka Awards Kenya Gala Night at Southfield Mall, Mombasa Road. Tickets from KES 500. Book yours now</div>
+                        <div class="text animate-3">3rd Oct 2026 — Baraka Awards Kenya Gala Night at Expressway Lounge, Nairobi. Tickets from KES 500. Book yours now</div>
 
                         <div class="btn-box animate-5">
                             <a href="<?= SITE_URL ?>/nominees" class="theme-btn btn-style-two"><span class="btn-title">Vote Now</span></a>
@@ -989,7 +989,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                         <div class="icon"><span class="flaticon-trophy-1"></span></div>
                     </div>
                     <h4>3. Celebrate the Winners</h4>
-                    <p>Join us at the Baraka Awards Kenya Gala on 30th May 2026 at the Southfield Mall, Mombasa Road — a landmark celebration of innovation, creativity, and cultural and entertainment excellence in Kenya.</p>
+                    <p>Join us at the Baraka Awards Kenya Gala on 3rd Oct 2026 at Expressway Lounge, Nairobi — a landmark celebration of innovation, creativity, and cultural and entertainment excellence in Kenya.</p>
                     <a href="<?= SITE_URL ?>/tickets" class="read-more">Get Tickets <span class="fa fa-arrow-right"></span></a>
                 </div>
             </div>
@@ -1005,7 +1005,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
 <section class="schedule-section" style="background:#f9fafb;padding:80px 0;">
     <div class="auto-container">
         <div class="sec-title text-center">
-            <span class="sub-title">30th May 2026 &mdash; Southfield Mall, Mombasa Road, Nairobi</span>
+            <span class="sub-title">3rd Oct 2026 &mdash; Expressway Lounge, Nairobi</span>
             <h2>Gala Evening Programme</h2>
             <span class="divider"></span>
         </div>
