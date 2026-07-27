@@ -50,7 +50,7 @@
     flex-direction: column; align-items: center;
 }
 .nominee-photo {
-    width: 76px; height: 76px; border-radius: 14px; object-fit: contain;
+    width: 76px; height: 76px; border-radius: 14px; object-fit: cover; object-position: top center;
     background: #fff; border: 1px solid #f0ebe0;
     box-shadow: 0 4px 14px rgba(0,0,0,0.12); display: block;
 }

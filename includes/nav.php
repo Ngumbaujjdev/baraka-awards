@@ -10,6 +10,11 @@ if (!isset($_SESSION[$_navCacheKey])) {
     }
 }
 $_navEvents  = array_values($_SESSION[$_navCacheKey]);
+// The events API is shared across all Tuqio Hub tenants and carries no organizer field,
+// so keep only events that belong to Baraka Awards.
+$_navEvents  = array_values(array_filter($_navEvents, fn($e) =>
+    stripos($e['slug'] ?? '', 'baraka') !== false || stripos($e['name'] ?? '', 'baraka') !== false
+));
 $_navToday   = date('Y-m-d');
 $_navFeatured = array_filter($_navEvents, fn($e) => !empty($e['is_featured']) && ($e['start_date'] ?? '') >= $_navToday);
 $_navUpcoming = array_filter($_navEvents, fn($e) => ($e['start_date'] ?? '') >= $_navToday && empty($e['is_featured']));

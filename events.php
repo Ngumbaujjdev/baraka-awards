@@ -6,7 +6,11 @@ $resp      = tuqio_api('/api/public/events');
 $allEvents = $resp['data'] ?? [];
 $today     = date('Y-m-d');
 
-// All events from this API are Baraka events — no filtering needed
+// The events API is shared across all Tuqio Hub tenants and carries no organizer field,
+// so keep only events that belong to Baraka Awards.
+$allEvents = array_values(array_filter($allEvents, fn($e) =>
+    stripos($e['slug'] ?? '', 'baraka') !== false || stripos($e['name'] ?? '', 'baraka') !== false
+));
 
 $upcoming = [];
 $past     = [];
