@@ -22,7 +22,9 @@ $categories = $response['categories'] ?? [];
 
 $now          = time();
 $votingCloses = !empty($event['voting_closes_at']) ? strtotime($event['voting_closes_at']) : 0;
+$votingOpens  = !empty($event['voting_opens_at'])  ? strtotime($event['voting_opens_at'])  : 0;
 $isVotingOpen = !empty($event['voting_is_open']); // use backend-calculated flag
+$daysToVotingOpen = ($votingOpens && $votingOpens > $now) ? (int)ceil(($votingOpens - $now) / 86400) : 0;
 $voteUrl      = API_BASE . '/events/' . ($event['slug'] ?? $activeSlug);
 $eventName    = $event['name'] ?? 'Baraka Awards Kenya';
 
@@ -331,6 +333,11 @@ $globalIdx = 0;
                                             <i class="fas fa-bolt"></i> Vote Now
                                         </a>
                                         </div>
+                                        <?php elseif ($daysToVotingOpen > 0): ?>
+                                        <div class="vote-opens-badge">
+                                            <i class="fas fa-hourglass-half"></i>
+                                            Voting opens in <?= $daysToVotingOpen ?> day<?= $daysToVotingOpen === 1 ? '' : 's' ?>
+                                        </div>
                                         <?php else: ?>
                                         <span style="font-size:.78rem;color:#ccc;font-style:italic;display:block;text-align:center;padding:8px 0;">Voting not open</span>
                                         <?php endif; ?>
@@ -447,6 +454,14 @@ $globalIdx = 0;
                         <?php elseif ($votingCloses && $now > $votingCloses): ?>
                         <h6>Voting Status</h6>
                         <p class="countdown-closed"><i class="fas fa-check-circle me-1"></i> Voting has closed. Results will be announced at the event.</p>
+                        <?php elseif ($votingOpens && $votingOpens > $now): ?>
+                        <h6><i class="fas fa-hourglass-half me-1"></i> Voting Opens In</h6>
+                        <div class="countdown-boxes" id="open-countdown-boxes">
+                            <div class="countdown-box"><span class="num" id="ocd-days">--</span><span class="lbl">Days</span></div>
+                            <div class="countdown-box"><span class="num" id="ocd-hours">--</span><span class="lbl">Hrs</span></div>
+                            <div class="countdown-box"><span class="num" id="ocd-mins">--</span><span class="lbl">Min</span></div>
+                            <div class="countdown-box"><span class="num" id="ocd-secs">--</span><span class="lbl">Sec</span></div>
+                        </div>
                         <?php else: ?>
                         <h6>Public Voting</h6>
                         <p class="countdown-closed">Voting will be announced soon. Stay tuned!</p>
@@ -640,6 +655,24 @@ $_nomConfigJson = htmlspecialchars(json_encode([
     }
     if (votingClosesAt) { updateCountdown(); setInterval(updateCountdown, 1000); }
 
+    // ── Voting-opens countdown (shown before voting starts) ─────────────────
+    var votingOpensAt = <?= ($votingOpens && $votingOpens > $now) ? $votingOpens : 'null' ?>;
+    function updateOpenCountdown() {
+        if (!votingOpensAt) return;
+        var remaining = votingOpensAt - Math.floor(Date.now() / 1000);
+        if (remaining <= 0) { window.location.reload(); return; }
+        var d = Math.floor(remaining / 86400);
+        var h = Math.floor((remaining % 86400) / 3600);
+        var m = Math.floor((remaining % 3600) / 60);
+        var s = remaining % 60;
+        var el;
+        if ((el = document.getElementById('ocd-days')))  el.textContent = String(d).padStart(2,'0');
+        if ((el = document.getElementById('ocd-hours'))) el.textContent = String(h).padStart(2,'0');
+        if ((el = document.getElementById('ocd-mins')))  el.textContent = String(m).padStart(2,'0');
+        if ((el = document.getElementById('ocd-secs')))  el.textContent = String(s).padStart(2,'0');
+    }
+    if (votingOpensAt) { updateOpenCountdown(); setInterval(updateOpenCountdown, 1000); }
+
     // ── Animated number counter helper ────────────────────────────────────────
     function animateCount(el, fromVal, toVal, duration) {
         if (fromVal === toVal) return;
@@ -735,6 +768,7 @@ $_nomConfigJson = htmlspecialchars(json_encode([
     var API_BASE        = '<?= API_BASE ?>';
     var EVENT_SLUG         = <?= json_encode($activeSlug ?: '') ?>;
     var IS_VOTING_OPEN     = <?= $isVotingOpen ? 'true' : 'false' ?>;
+    var DAYS_TO_VOTING_OPEN = <?= $daysToVotingOpen ?>;
     var VOTE_BUNDLE_URL    = '<?= htmlspecialchars($voteBundleUrl) ?>';
     var NOMINEE_PROFILE_URL = '<?= SITE_URL ?>/nominee';
     var COLORS          = ['#be9b3f', '#0a0a0a', '#1a1a1a', '#6c757d'];
@@ -772,7 +806,9 @@ $_nomConfigJson = htmlspecialchars(json_encode([
             var profileLink = '<a href="' + esc(NOMINEE_PROFILE_URL + '?slug=' + encodeURIComponent(c.slug || '') + '&event=' + encodeURIComponent(EVENT_SLUG)) + '" onclick="event.stopPropagation();" style="font-size:.76rem;color:#be9b3f;font-weight:600;text-decoration:none;display:block;text-align:center;margin-top:6px;">View Profile &rarr;</a>';
             var voteHtml = IS_VOTING_OPEN
                 ? '<div class="nom-vote-btn-wrap"><a class="nom-vote-btn" href="' + esc(VOTE_BUNDLE_URL + '&nominee=' + (c.id || 0) + '&nominee_slug=' + encodeURIComponent(c.slug || '')) + '" onclick="event.stopPropagation();"><i class="fas fa-bolt"></i> Vote Now</a></div>'
-                : '<span style="font-size:.78rem;color:#ccc;font-style:italic;display:block;text-align:center;padding:8px 0;">Voting not open</span>';
+                : (DAYS_TO_VOTING_OPEN > 0
+                    ? '<div class="vote-opens-badge"><i class="fas fa-hourglass-half"></i> Voting opens in ' + DAYS_TO_VOTING_OPEN + ' day' + (DAYS_TO_VOTING_OPEN === 1 ? '' : 's') + '</div>'
+                    : '<span style="font-size:.78rem;color:#ccc;font-style:italic;display:block;text-align:center;padding:8px 0;">Voting not open</span>');
             var socials = JSON.stringify(c.social_links || []);
             html += '<div class="col-md-4 col-6" style="margin-bottom:30px;">'
                   + '<div class="nominee-card"'
@@ -1447,10 +1483,17 @@ window.showAllSidebarCats = function() {
     }
 })();
 
-// Sidebar pill click: scroll to the matching category pane
+// Sidebar pill click: force the pane switch ourselves (don't rely on Bootstrap's
+// native tab click, which no-ops if the clicked pill still has a stale "active"
+// class — that's what made clicking back to a previous category do nothing),
+// then scroll to the matching category pane.
 $(document).on('click', '[data-toggle="pill"]', function() {
     var target = $(this).data('target');
     if (!target) return;
+    var slug = target.replace('#cat-pane-', '');
+    if (window._nomActivatePane) window._nomActivatePane(slug);
+    var $sel = $('#nom-cat-select');
+    if ($sel.length) $sel.val(slug).trigger('change.select2');
     setTimeout(function() {
         var $pane = $(target);
         if ($pane.length) {
