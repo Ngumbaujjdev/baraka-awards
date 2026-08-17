@@ -129,16 +129,6 @@ function ticket_status($t) {
         $tixVenue = implode(', ', array_filter([$galaEvent['venue_name'] ?? '', $galaEvent['venue_city'] ?? ''])) ?: 'To be announced';
         $tixCity  = $galaEvent['venue_city'] ?? 'Kenya';
         ?>
-        <!-- Event Intro Banner -->
-        <div class="tix-intro">
-            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Baraka Awards Kenya Gala') ?> &mdash; Join the Celebration</h2>
-            <p><?= htmlspecialchars($galaEvent['description'] ?? "Experience Kenya's premier entertainment and cultural awards night.") ?></p>
-            <div class="tix-meta">
-                <span><i class="flaticon-calendar"></i> <?= htmlspecialchars($tixDateStr) ?></span>
-                <span><i class="flaticon-clock-1"></i> <?= htmlspecialchars($tixVenue) ?></span>
-                <span><i class="flaticon-location"></i> <?= htmlspecialchars($tixCity) ?></span>
-            </div>
-        </div>
 
         <?php if (empty($tickets)): ?>
         <div class="text-center" style="padding:60px 0;color:#aaa;">
@@ -259,6 +249,17 @@ function ticket_status($t) {
         <?php endif; ?>
 
         <?php endif; ?>
+
+        <!-- Event Intro Banner -->
+        <div class="tix-intro">
+            <h2><?= htmlspecialchars($galaEvent['name'] ?? 'Baraka Awards Kenya Gala') ?> &mdash; Join the Celebration</h2>
+            <p><?= htmlspecialchars($galaEvent['description'] ?? "Experience Kenya's premier entertainment and cultural awards night.") ?></p>
+            <div class="tix-meta">
+                <span><i class="flaticon-calendar"></i> <?= htmlspecialchars($tixDateStr) ?></span>
+                <span><i class="flaticon-clock-1"></i> <?= htmlspecialchars($tixVenue) ?></span>
+                <span><i class="flaticon-location"></i> <?= htmlspecialchars($tixCity) ?></span>
+            </div>
+        </div>
 
         <!-- CTA -->
         <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:16px;padding:48px;text-align:center;color:#fff;margin-top:10px;">

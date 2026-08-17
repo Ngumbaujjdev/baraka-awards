@@ -890,6 +890,32 @@ window.Checkout = (function () {
     return { incQty, decQty, applyPromo, pay, closeConfirm, confirmPay };
 })();
 
+// ── Auto-scroll to payment once buyer details are filled in (mobile: the
+// M-Pesa/Card buttons sit below the fold, so nudge the visitor down instead
+// of making them hunt for the Pay button) ─────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    var _scrolledToPay = false;
+    var nameEl  = document.getElementById('buyer_name');
+    var emailEl = document.getElementById('buyer_email');
+    var phoneEl2 = document.getElementById('buyer_phone');
+
+    function maybeScrollToPay() {
+        if (_scrolledToPay) return;
+        var name  = nameEl.value.trim();
+        var email = emailEl.value.trim();
+        var validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (name && validEmail) {
+            _scrolledToPay = true;
+            var payWrap = document.getElementById('payMethodWrap');
+            if (payWrap) payWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    [nameEl, emailEl, phoneEl2].forEach(function(el) {
+        if (el) el.addEventListener('blur', maybeScrollToPay);
+    });
+});
+
 // ── intl-tel-input on phone field ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
     var phoneEl = document.getElementById('buyer_phone');

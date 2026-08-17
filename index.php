@@ -926,7 +926,7 @@ $_oeSlice    = array_slice($otherEvents, ($_oePage-1)*$_oePerPage, $_oePerPage);
                     <div style="font-size:.75rem;color:#999;margin-bottom:12px;">Offer ends: <strong style="color:#be9b3f;"><?= $tSaleEnd ?></strong></div>
                     <?php endif; ?>
                     <?php if ($tStatus === 'available'): ?>
-                    <a href="<?= SITE_URL ?>/tickets"
+                    <a href="<?= SITE_URL ?>/checkout?slug=<?= urlencode($galaEvent['slug'] ?? '') ?>&ticket_id=<?= $tkt['id'] ?>"
                        style="display:block;text-align:center;background:<?= $tHeaderBg ?>;color:#fff;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;">
                         <?= $tIsTable ? 'Book Table' : 'Buy Ticket' ?> &rarr;
                     </a>
