@@ -907,7 +907,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (name && validEmail) {
             _scrolledToPay = true;
             var payWrap = document.getElementById('payMethodWrap');
-            if (payWrap) payWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (payWrap) {
+                var top = payWrap.getBoundingClientRect().top + window.pageYOffset - 90;
+                window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+            }
         }
     }
 
