@@ -194,7 +194,7 @@ function ticket_status($t) {
                             <div class="tc-sale-info">Offer ends: <span><?= $saleEnd ?></span></div>
                             <?php endif; ?>
                             <?php if ($status === 'available'): ?>
-                            <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>" class="btn-buy">Buy Ticket →</a>
+                            <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>&ticket_id=<?= $t['id'] ?>" class="btn-buy">Buy Ticket →</a>
                             <?php elseif ($status === 'sold_out'): ?>
                             <span class="btn-buy btn-sold">Sold Out</span>
                             <?php else: ?>
@@ -243,7 +243,7 @@ function ticket_status($t) {
                             <div class="per">per table</div>
                             <div style="margin-top:12px;">
                                 <?php if ($status === 'available'): ?>
-                                <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
+                                <a href="<?= SITE_URL ?>/checkout?slug=<?= htmlspecialchars($_featSlug ?? '') ?>&ticket_id=<?= $t['id'] ?>" class="btn-buy" style="white-space:nowrap;display:inline-block;padding:10px 20px;">Book Table →</a>
                                 <?php elseif ($status === 'sold_out'): ?>
                                 <span class="btn-buy btn-sold" style="display:inline-block;padding:10px 20px;">Sold Out</span>
                                 <?php else: ?>

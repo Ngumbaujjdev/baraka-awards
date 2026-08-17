@@ -17,6 +17,17 @@ if (empty($event['has_ticketing'])) {
     exit;
 }
 
+// If arriving with a specific ticket_id (e.g. from the tickets page or the
+// welcome modal's per-ticket "Buy" button), show only that ticket instead of
+// the full list — the visitor already chose one.
+$preselectedTicketId = trim($_GET['ticket_id'] ?? '');
+if ($preselectedTicketId !== '') {
+    $filtered = array_values(array_filter($ticketTypes, fn($t) => (string)($t['id'] ?? '') === $preselectedTicketId));
+    if (!empty($filtered)) {
+        $ticketTypes = $filtered;
+    }
+}
+
 $banner    = !empty($event['banner_image'])    ? API_STORAGE . $event['banner_image']    : (SITE_URL . '/assets/slides/event.webp');
 $thumbnail = !empty($event['thumbnail_image']) ? API_STORAGE . $event['thumbnail_image'] : $banner;
 $dateStr   = !empty($event['start_date']) ? date('d M Y', strtotime($event['start_date'])) : 'TBD';
